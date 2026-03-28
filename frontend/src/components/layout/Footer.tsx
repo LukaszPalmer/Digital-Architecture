@@ -8,6 +8,7 @@ import Link from "next/link";
 const FOOTER_NAV = [
     { label: "Infrastruktur", href: "/infrastructure" },
     { label: "Engineering", href: "/engineering" },
+    { label: "Blog", href: "/blog" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Strategie", href: "/strategy" },
     { label: "Karriere", href: "/careers" },
