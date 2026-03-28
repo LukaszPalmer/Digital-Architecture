@@ -1,98 +1,150 @@
-import Image from "next/image";
-import { Project } from "@/types/project";
-import { cn } from "@/lib/utils";
+// src/components/sections/FeaturedProjects.tsx
+// Server Component — RSC-First, 0 TBT.
+// Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
 
-const PROJECTS: Project[] = [
+import Image from "next/image";
+import { SolutionAsset } from "@/types/project";
+
+const ASSETS: SolutionAsset[] = [
     {
         id: "01",
-        title: "Global Fintech Backbone",
-        category: "Infrastruktur / Payments",
-        metrics: "TBT 0ms | 99.99% Uptime",
-        year: "2024",
-        imageUrl: "/projects/project-01.jpg", // Platzhalter
+        title: "NEXT.JS ELITE CORE",
+        category: "Frontend Architecture",
+        metrics: "LCP < 0.8s | TBT 0ms",
+        imageUrl: "/infra/nextjs-blueprint.jpg",
+        specs: ["React 19 Server Components", "Partial Prerendering", "Edge-Runtime Optimization"],
     },
     {
         id: "02",
-        title: "Enterprise SaaS Core",
-        category: "Fullstack Engineering",
-        metrics: "LCP 0.5s | SEO 100",
-        year: "2024",
-        imageUrl: "/projects/project-02.jpg",
+        title: "CLOUD BACKBONE",
+        category: "Infrastructure / Database",
+        metrics: "99.99% Uptime | Global Sharding",
+        imageUrl: "/media/Cluster.png",
+        specs: ["MongoDB Atlas Cluster", "Railway Orchestration", "Auto-Scaling Nodes"],
+    },
+    {
+        id: "03",
+        title: "FINTECH PIPELINES",
+        category: "Payment Engineering",
+        metrics: "PCI-DSS Compliant | Real-time Webhooks",
+        imageUrl: "/infra/stripe-flow.jpg",
+        specs: ["Stripe Custom Flow", "Idempotency Logic", "Automated Reconciliation"],
+    },
+    {
+        id: "04",
+        title: "DESIGN OPS SYSTEM",
+        category: "UI/UX Governance",
+        metrics: "Atomic Design | WCAG AAA",
+        imageUrl: "/infra/design-system.jpg",
+        specs: ["0px Border-Radius Dogma", "Tailwind Logic", "Component Governance"],
     },
 ];
 
 export default function FeaturedProjects() {
     return (
-        <section className="bg-[#000000] text-[#FFFFFF] py-20 md:py-32 lg:py-44 px-4 md:px-8">
-            <div className="max-w-[1440px] mx-auto">
-                {/* Header mit technischer Präzision */}
-                <div className="flex flex-col md:flex-row justify-between items-end mb-16 md:mb-24 gap-8">
-                    <div className="max-w-2xl">
-                        <span className="text-[#FFFFFF]/50 text-[12px] font-bold tracking-[0.3em] uppercase block mb-4">
-                            [ Selected Assets ]
+        <section
+            id="solutions"
+            aria-labelledby="projects-heading"
+            className="bg-[#FFFFFF] text-[#000000] py-20 md:py-32 lg:py-44 border-t border-[#000000]"
+        >
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
+
+                {/* ── HEADER ── */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-10">
+                    <div>
+                        <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
+                            [ System Portfolio ]
                         </span>
-                        <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold tracking-tighter leading-none italic uppercase">
+                        <h2
+                            id="projects-heading"
+                            className="text-[clamp(2.6rem,6vw,5rem)] font-black text-[#000000] tracking-[-0.025em] uppercase leading-[0.92]"
+                        >
                             Konstruierte
                             <br />
-                            Referenz-Systeme
+                            <span className="italic font-normal text-[#001F3F]">
+                                Infrastrukturen.
+                            </span>
                         </h2>
                     </div>
-                    <p className="text-[#FFFFFF]/70 max-w-sm text-[14px] leading-relaxed border-l border-[#FFFFFF]/20 pl-6">
-                        Jedes Projekt ist eine maßgeschneiderte Architektur,
-                        optimiert für maximale Skalierbarkeit und kompromisslose
-                        Performance unter Last.
+                    <p className="text-[15px] text-[#000000]/55 leading-[1.75] max-w-xs border-l-2 border-[#001F3F] pl-6">
+                        Keine Webseiten. Blaupausen digitaler Marktführerschaft — jedes Asset ein Beweis für technologische Präzision.
                     </p>
                 </div>
 
-                {/* Projekt-Grid */}
-                <div className="grid grid-cols-1 gap-y-24 md:gap-y-32">
-                    {PROJECTS.map((project, index) => (
+                {/* ── SOLUTION GRID ── */}
+                <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-[#000000]/10">
+                    {ASSETS.map((asset) => (
                         <div
-                            key={project.id}
-                            className={cn(
-                                "group flex flex-col gap-8",
-                                index % 2 !== 0
-                                    ? "md:items-end"
-                                    : "md:items-start"
-                            )}
+                            key={asset.id}
+                            className="group relative border-r border-b border-[#000000]/10 p-8 lg:p-12 overflow-hidden transition-colors duration-300 hover:bg-[#001F3F]"
                         >
-                            {/* Image Container - 0px Border Radius Asset */}
-                            <div className="relative w-full md:w-[85%] aspect-[16/9] bg-[#1a1a1a] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 ease-in-out border border-[#FFFFFF]/10 group-hover:border-[#FFFFFF]/40">
-                                {/* Overlay für Tech-Metriken */}
-                                <div className="absolute top-6 right-6 z-10 bg-[#001F3F] px-4 py-2 text-[11px] font-mono tracking-widest border border-[#FFFFFF]/20">
-                                    {project.metrics}
-                                </div>
-                                {/* Hier käme das Image-Tag rein, sobald Assets vorhanden sind */}
-                                <div className="w-full h-full flex items-center justify-center text-[#FFFFFF]/10 text-[120px] font-bold tracking-tighter select-none">
-                                    {project.id}
+                            {/* Ghost ID */}
+                            <span
+                                className="absolute -right-3 -bottom-3 text-[120px] font-black text-[#000000]/4 group-hover:text-[#FFFFFF]/6 transition-colors leading-none select-none"
+                                aria-hidden="true"
+                            >
+                                {asset.id}
+                            </span>
+
+                            {/* Visual Area */}
+                            <div className="relative w-full aspect-video mb-10 overflow-hidden bg-[#000000]/4 group-hover:bg-[#000000]/20 border border-[#000000]/8 group-hover:border-[#FFFFFF]/10 transition-colors duration-300">
+
+                                {asset.id === "02" ? (
+                                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                                        <Image
+                                            src={asset.imageUrl}
+                                            alt={asset.title}
+                                            fill
+                                            priority
+                                            unoptimized
+                                            className="object-cover opacity-30 group-hover:opacity-60 transition-opacity duration-500"
+                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                        />
+                                    </div>
+                                ) : (
+                                    <div className="absolute inset-0 flex items-center justify-center">
+                                        <span className="text-[10px] font-mono font-bold tracking-[0.4em] text-[#000000]/20 group-hover:text-[#FFFFFF]/20 uppercase transition-colors">
+                                            {asset.category}
+                                        </span>
+                                    </div>
+                                )}
+
+                                {/* Metrics Badge */}
+                                <div className="absolute bottom-0 right-0 bg-[#001F3F] group-hover:bg-[#FFFFFF] px-4 py-2 text-[10px] font-bold font-mono tracking-widest text-[#FFFFFF] group-hover:text-[#001F3F] uppercase transition-colors duration-300">
+                                    {asset.metrics}
                                 </div>
                             </div>
 
-                            {/* Projekt-Info */}
-                            <div
-                                className={cn(
-                                    "flex flex-col md:w-[85%] px-2",
-                                    index % 2 !== 0
-                                        ? "md:text-right md:items-end"
-                                        : "md:text-left md:items-start"
-                                )}
-                            >
-                                <div className="flex items-center gap-4 mb-2">
-                                    <span className="text-[14px] font-bold text-[#FFFFFF]">
-                                        {project.title}
+                            {/* Content */}
+                            <div className="relative z-10 space-y-6">
+                                <div>
+                                    <span className="text-[10.5px] font-mono uppercase tracking-[0.3em] text-[#000000]/40 group-hover:text-[#FFFFFF]/45 transition-colors block mb-2">
+                                        {asset.category}
                                     </span>
-                                    <span className="w-8 h-[1px] bg-[#FFFFFF]/30" />
-                                    <span className="text-[12px] text-[#FFFFFF]/50 uppercase tracking-widest">
-                                        {project.year}
-                                    </span>
+                                    <h3 className="text-[clamp(1.3rem,3vw,2rem)] font-black tracking-tighter uppercase leading-none text-[#000000] group-hover:text-[#FFFFFF] transition-colors">
+                                        {asset.title}
+                                    </h3>
                                 </div>
-                                <span className="text-[12px] text-[#FFFFFF]/40 font-light tracking-[0.2em] uppercase">
-                                    {project.category}
-                                </span>
+
+                                <ul
+                                    className="grid grid-cols-1 gap-2.5 pt-6 border-t border-[#000000]/10 group-hover:border-[#FFFFFF]/15 transition-colors"
+                                    role="list"
+                                >
+                                    {asset.specs.map((spec) => (
+                                        <li
+                                            key={spec}
+                                            className="flex items-center gap-3 text-[11px] font-mono uppercase tracking-widest text-[#000000]/55 group-hover:text-[#FFFFFF]/75 transition-colors"
+                                        >
+                                            <div className="w-1.5 h-1.5 bg-[#001F3F] group-hover:bg-[#FFFFFF] shrink-0 transition-colors" />
+                                            {spec}
+                                        </li>
+                                    ))}
+                                </ul>
                             </div>
                         </div>
                     ))}
                 </div>
+
             </div>
         </section>
     );

@@ -1,55 +1,153 @@
 @import "tailwindcss";
 
-/* 1. Definierung der Marken-Architektur (CSS Variablen) */
 :root {
-  --background: #FFFFFF;
-  --foreground: #000000;
-  --navy: #001F3F;
+    --background: #ffffff;
+    --foreground: #000000;
+    --navy: #001f3f;
 }
 
-/* 2. Tailwind Theme Erweiterung (Modern v4 Syntax) */
 @theme {
-  --color-navy: var(--navy);
-  --color-brand-white: var(--background);
-  --color-brand-black: var(--foreground);
-  
-  /* Wir entfernen unnötige Standard-Animationen für maximale TBT-Performance */
+    --color-navy: var(--navy);
+    --color-brand-white: var(--background);
+    --color-brand-black: var(--foreground);
 }
 
-/* 3. Base Styles - Die "Statik" der Seite */
 @layer base {
-  *, ::after, ::before {
-    box-sizing: border-box;
-    border-color: var(--navy); /* Standard-Border ist dezent Navy */
-  }
-
-  html {
-    scroll-behavior: smooth;
-    /* Verhindert Layout-Shift beim Laden von Scrollbars */
-    scrollbar-gutter: stable;
-  }
-
-  body {
-    background: var(--background);
-    color: var(--foreground);
-    /* Nutze System-Fonts für 0ms Font-Loading-Latency (LCP Optimierung) */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* Barrierefreie Fokus-Zustände (WCAG AAA) */
-  :focus-visible {
-    outline: 2px solid var(--navy);
-    outline-offset: 4px;
-  }
+    *,
+    ::after,
+    ::before {
+        box-sizing: border-box;
+        border-color: var(--navy);
+    }
+    body {
+        background: var(--background);
+        color: var(--foreground);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+            Helvetica, Arial, sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
 }
 
-/* 4. Utility für Weißraum-Architektur */
 @layer utilities {
-  .section-padding {
-    @apply py-20 md:py-32 lg:py-44;
-  }
+    /* Y-Achse: Top to Bottom Scan */
+    @keyframes scan-vertical {
+        0% {
+            transform: translateY(-100vh);
+            opacity: 0;
+        }
+        15% {
+            opacity: 1;
+        }
+        85% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(100vh);
+            opacity: 0;
+        }
+    }
+
+    /* X-Achse: Left to Right Scan */
+    @keyframes scan-horizontal {
+        0% {
+            transform: translateX(-100vw);
+            opacity: 0;
+        }
+        15% {
+            opacity: 1;
+        }
+        85% {
+            opacity: 1;
+        }
+        100% {
+            transform: translateX(100vw);
+            opacity: 0;
+        }
+    }
+
+    .animate-scan-vertical {
+        animation: scan-vertical 12s linear infinite;
+    }
+
+    .animate-scan-horizontal {
+        animation: scan-horizontal 18s linear infinite;
+        animation-delay: 2s; /* Phasenverschiebung für organischen Tech-Look */
+    }
+
+    @keyframes dropdown-enter {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-dropdown {
+        animation: dropdown-enter 0.22s ease forwards;
+    }
+
+    @keyframes fade-up {
+        from { opacity: 0; transform: translateY(10px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .animate-fade-up {
+        animation: fade-up 0.4s ease forwards;
+    }
+
+    /* ── SCROLL REVEAL SYSTEM ── */
+    .reveal-item {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-item.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .reveal-block {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                    transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-block.in-view {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ── HOVER MICRO ANIMATIONS ── */
+    @keyframes arrow-slide {
+        0%   { transform: translateX(0); }
+        50%  { transform: translateX(5px); }
+        100% { transform: translateX(0); }
+    }
+
+    .arrow-hover:hover .arrow-icon {
+        animation: arrow-slide 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ── STAT NUMBER HIGHLIGHT ── */
+    @keyframes stat-pulse {
+        0%   { opacity: 0; transform: translateY(12px) scale(0.95); }
+        100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .stat-reveal {
+        animation: stat-pulse 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    /* Respect prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+        .reveal-item,
+        .reveal-block {
+            opacity: 1;
+            transform: none;
+            transition: none;
+        }
+        .stat-reveal {
+            animation: none;
+        }
+    }
 }

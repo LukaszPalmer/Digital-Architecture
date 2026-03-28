@@ -1,55 +1,152 @@
+// src/components/layout/Navbar.tsx
+// Server Component — keine Client-Logik hier.
+// Scroll-State wird in NavScrollShell (Client-Insel) isoliert.
+
 import Link from "next/link";
 import { NavLink } from "@/types/navigation";
 import { MobileMenu } from "./MobileMenu";
-import { cn } from "@/lib/utils";
+import { NavDropdown } from "./NavDropdown";
+import { NavScrollShell } from "./NavScrollShell";
+import SearchInput from "@/components/ui/SearchInput";
+import StatusBadge from "@/components/ui/StatusBadge";
 
 const NAV_LINKS: NavLink[] = [
-    { label: "INFRASTRUKTUR", href: "/infrastructure" },
-    { label: "SERVICES", href: "/engineering" },
-    { label: "CARRER", href: "/portfolio" },
-    { label: "BLOG", href: "/strategy" },
+    {
+        label: "SERVICES",
+        subLinks: [
+            {
+                label: "Next.js Elite Core",
+                href: "/services/nextjs-elite-core",
+                description: "Server-First Applikations-Architektur",
+                iconPath: "/media/Next.js.svg",
+            },
+            {
+                label: "Tailwind Design Ops",
+                href: "/services/design-ops-system",
+                description: "Atomic CSS Design Frameworks",
+                iconPath: "/media/Tailwind CSS.svg",
+            },
+            {
+                label: "Stripe Fintech Pipelines",
+                href: "/services/fintech-pipelines",
+                description: "Automatisierte Zahlungsströme",
+                iconPath: "/media/Railway.svg",
+            },
+            {
+                label: "Material UI Logic",
+                href: "/services/material-ui",
+                description: "Enterprise Dashboard Komponenten",
+                iconPath: "/media/MaterialUI.svg",
+            },
+            {
+                label: "UX/UI Design",
+                href: "/services/ux-ui-design",
+                description: "Minimalist Interface Construction",
+                iconPath: "/media/Figma.svg",
+            },
+            {
+                label: "Node.js Core",
+                href: "/services/nodejs-core",
+                description: "Skalierbare Backend Infrastruktur",
+                iconPath: "/media/Node.js.svg",
+            },
+        ],
+    },
+    {
+        label: "INFRASTRUKTUR",
+        subLinks: [
+            {
+                label: "MongoDB Cloud Backbone",
+                href: "/services/cloud-infrastructure",
+                description: "Data Pipeline & Cluster Ops",
+                iconPath: "/media/MongoDB.svg",
+            },
+            {
+                label: "Vercel Edge",
+                href: "/vercel",
+                description: "Global High-Speed Deployment",
+                iconPath: "/media/Vercel.svg",
+            },
+            {
+                label: "Railway Cloud",
+                href: "/railway",
+                description: "Scalable Microservice Hosting",
+                iconPath: "/media/Railway.svg",
+            },
+        ],
+    },
+    { label: "CAREERS", href: "/careers" },
 ];
 
 export default function Navbar() {
     return (
-        <nav className="fixed top-0 left-0 w-full z-50 bg-[#FFFFFF] border-b border-[#000000] h-[70px] md:h-[90px]">
+        <NavScrollShell>
             <div className="max-w-[1440px] mx-auto h-full flex items-center justify-between px-4 md:px-8 lg:px-12">
-                {/* LOGO: PALMER DIGITAL ARCHITECTURE */}
+
+                {/* ── LOGO ── */}
                 <Link
                     href="/"
-                    className="text-[#001F3F] font-bold text-[18px] md:text-[22px] tracking-tighter leading-none"
+                    className="group flex flex-col flex-shrink-0"
+                    aria-label="Palmer Digital Architecture — Startseite"
                 >
-                    PALMER
-                    <span className="block text-[10px] tracking-[0.2em] font-light">
-                        DIGITAL ARCHITECTURE
+                    <span className="text-[#001F3F] font-black text-[17px] md:text-[20px] tracking-[-0.04em] leading-none uppercase group-hover:text-[#000000] transition-colors duration-200">
+                        PALMER
+                    </span>
+                    <span className="text-[8.5px] tracking-[0.28em] font-medium text-[#001F3F]/50 uppercase mt-[3px] group-hover:text-[#000000]/50 transition-colors duration-200">
+                        Digital Architecture
                     </span>
                 </Link>
 
-                {/* DESKTOP NAVIGATION */}
-                <div className="hidden lg:flex items-center gap-x-12">
-                    {NAV_LINKS.map((link) => (
+                {/* ── DESKTOP NAV ── */}
+                <div className="hidden lg:flex items-center h-full gap-x-6 xl:gap-x-10">
+
+                    {/* Nav Links + Dropdowns */}
+                    <div className="flex items-center gap-x-6 xl:gap-x-10 h-full pr-6 xl:pr-10 border-r border-[#000000]/8">
+                        {NAV_LINKS.map((link) =>
+                            link.subLinks ? (
+                                <NavDropdown key={link.label} link={link} />
+                            ) : (
+                                <Link
+                                    key={link.label}
+                                    href={link.href!}
+                                    className="text-[#001F3F] text-[12px] font-bold tracking-[0.2em] hover:text-[#000000] transition-colors duration-200 uppercase h-full flex items-center"
+                                >
+                                    {link.label}
+                                </Link>
+                            )
+                        )}
+                    </div>
+
+                    {/* Status Badge — nur auf XL sichtbar */}
+                    <div className="hidden xl:flex items-center">
+                        <StatusBadge status="PDA_STATUS" availability="AVAILABLE Q2" />
+                    </div>
+
+                    {/* Search + CTA */}
+                    <div className="flex items-center gap-x-4 xl:gap-x-6">
+                        <SearchInput />
                         <Link
-                            key={link.href}
-                            href={link.href}
-                            className="text-[#001F3F] text-[13px] font-medium tracking-[0.1em] hover:text-[#000000] transition-colors duration-300 relative group"
+                            href="/contact"
+                            className="flex items-center gap-2 bg-[#001F3F] text-[#FFFFFF] px-6 py-2.5 text-[11.5px] font-bold tracking-[0.2em] uppercase hover:bg-[#000000] transition-colors duration-200"
                         >
-                            {link.label}
-                            <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-[#001F3F] transition-all duration-300 group-hover:w-full" />
+                            Anfrage
+                            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                                <path d="M5 12h14M12 5l7 7-7 7" />
+                            </svg>
                         </Link>
-                    ))}
-                    <Link
-                        href="/contact"
-                        className="bg-[#001F3F] text-[#FFFFFF] px-8 py-3 text-[13px] font-bold tracking-[0.1em] hover:bg-[#000000] transition-all duration-300"
-                    >
-                        JETZT ANFRAGEN
-                    </Link>
+                    </div>
                 </div>
 
-                {/* MOBILE INTERACTION ISLAND */}
-                <div className="lg:hidden">
+                {/* ── MOBILE / TABLET RIGHT ── */}
+                <div className="lg:hidden flex items-center gap-3">
+                    <div className="hidden md:block">
+                        <StatusBadge status="CAPACITY" availability="Q2_READY" className="scale-[0.8] origin-right" />
+                    </div>
+                    <SearchInput />
                     <MobileMenu links={NAV_LINKS} />
                 </div>
+
             </div>
-        </nav>
+        </NavScrollShell>
     );
 }

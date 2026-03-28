@@ -1,33 +1,104 @@
+// src/components/sections/Contact.tsx
+// Server Component — RSC-First, 0 TBT.
+// Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
+// Architektur: Zwei Zonen — Info-Spalte (Prozess + Trust) · Form-Spalte.
+
 import { ContactForm } from "./ContactForm";
+
+const PROCESS = [
+    {
+        step: "01",
+        title: "Anfrage",
+        body: "Formular ausfüllen. Wir antworten innerhalb von 24 Stunden.",
+    },
+    {
+        step: "02",
+        title: "Discovery Call",
+        body: "Kostenloses 30-minütiges Erstgespräch zu Ihrem Vorhaben.",
+    },
+    {
+        step: "03",
+        title: "Angebot",
+        body: "Individuelles Angebot inklusive Zeitplan innerhalb von 48h.",
+    },
+];
 
 export default function Contact() {
     return (
         <section
             id="contact"
-            className="bg-[#000000] text-[#FFFFFF] py-20 md:py-32 lg:py-44 px-4 md:px-8"
+            aria-labelledby="contact-heading"
+            className="bg-[#FFFFFF] text-[#000000] border-t border-[#000000]"
         >
-            <div className="max-w-[1440px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
-                <div>
-                    <span className="text-[#FFFFFF]/50 text-[12px] font-bold tracking-[0.4em] uppercase block mb-6">
-                        [ Request Architecture ]
-                    </span>
-                    <h2 className="text-[clamp(2.5rem,6vw,4.5rem)] font-bold tracking-tighter leading-none uppercase mb-8 italic">
-                        Bereit für die <br /> Skalierung?
-                    </h2>
-                    <p className="text-[#FFFFFF]/70 text-[18px] leading-relaxed max-w-md mb-12">
-                        Hinterlassen Sie die Details Ihres Vorhabens. Wir
-                        evaluieren die technologische Machbarkeit und melden uns
-                        innerhalb von 24h.
-                    </p>
-                    <div className="space-y-4 font-mono text-[14px]">
-                        <p className="text-[#FFFFFF]/40 underline italic">
-                            hq@palmer-architecture.com
+            <div className="max-w-360 mx-auto grid grid-cols-1 lg:grid-cols-2">
+
+                {/* ── LEFT: Info Column ── */}
+                <div className="px-4 md:px-8 lg:px-12 py-20 md:py-32 lg:py-44 lg:border-r border-[#000000] flex flex-col gap-14">
+
+                    {/* Header */}
+                    <div>
+                        <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
+                            [ Projekt anfragen ]
+                        </span>
+                        <h2
+                            id="contact-heading"
+                            className="text-[clamp(2.6rem,5.5vw,4.8rem)] font-black text-[#000000] leading-[0.95] tracking-[-0.025em] uppercase mb-8"
+                        >
+                            Bereit für
+                            <br />
+                            <span className="italic font-normal text-[#001F3F]">
+                                Ihr Projekt?
+                            </span>
+                        </h2>
+                        <p className="text-[15px] md:text-[17px] text-[#000000]/70 leading-[1.75] max-w-[400px] border-l-2 border-[#001F3F] pl-6">
+                            Schildern Sie uns Ihr Vorhaben. Wir evaluieren die
+                            technologische Machbarkeit und melden uns innerhalb
+                            von 24 Stunden.
                         </p>
                     </div>
+
+                    {/* Process Steps */}
+                    <div className="border-t border-[#000000]/15">
+                        {PROCESS.map((item) => (
+                            <div
+                                key={item.step}
+                                className="flex items-start gap-7 py-7 border-b border-[#000000]/15"
+                            >
+                                <span className="text-[11px] font-mono font-bold text-[#001F3F] shrink-0 mt-0.5 tracking-wider">
+                                    {item.step}
+                                </span>
+                                <div>
+                                    <p className="text-[12.5px] font-black uppercase tracking-wide text-[#000000] mb-1.5">
+                                        {item.title}
+                                    </p>
+                                    <p className="text-[13.5px] text-[#000000]/70 leading-relaxed">
+                                        {item.body}
+                                    </p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+                    {/* Direct Contact */}
+                    <div>
+                        <span className="block text-[9px] font-mono font-bold tracking-[0.45em] text-[#000000]/65 uppercase mb-3">
+                            Direkt schreiben
+                        </span>
+                        <a
+                            href="mailto:hello@palmer.digital"
+                            className="text-[16px] md:text-[18px] font-bold text-[#001F3F] hover:text-[#000000] transition-colors duration-200 underline underline-offset-4"
+                            aria-label="E-Mail an Palmer Digital Architecture"
+                        >
+                            hello@palmer.digital
+                        </a>
+                    </div>
                 </div>
-                <div className="bg-[#FFFFFF] p-8 md:p-12 border-0">
+
+                {/* ── RIGHT: Form Column ── */}
+                <div className="px-4 md:px-8 lg:px-12 py-20 md:py-32 lg:py-44">
                     <ContactForm />
                 </div>
+
             </div>
         </section>
     );

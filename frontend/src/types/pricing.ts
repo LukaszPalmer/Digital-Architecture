@@ -4,6 +4,6 @@ export interface PricingPackage {
     label: string;
     description: string;
     features: string[];
-    investment: string;
+    cta: string;
     highlighted?: boolean;
 }

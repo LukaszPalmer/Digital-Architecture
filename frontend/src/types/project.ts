@@ -1,8 +1,8 @@
-export interface Project {
+export interface SolutionAsset {
     id: string;
     title: string;
     category: string;
-    metrics: string; // z.B. "LCP 0.6s" oder "100k Req/min"
-    year: string;
+    metrics: string;
     imageUrl: string;
+    specs: string[];
 }
