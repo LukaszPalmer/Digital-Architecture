@@ -18,6 +18,7 @@ const FOOTER_SERVICES = [
     { label: "Software-Entwicklung", href: "/services/nextjs-elite-core" },
     { label: "E-Commerce Systeme", href: "/services/fintech-pipelines" },
     { label: "Cloud-Infrastruktur", href: "/services/cloud-infrastructure" },
+    { label: "PostgreSQL Core", href: "/services/postgresql" },
     { label: "UI/UX & Branding", href: "/services/ux-ui-design" },
 ];
 
@@ -87,7 +88,7 @@ export default function Footer() {
 
                         {/* CTA Block */}
                         <div className="flex flex-col items-start lg:items-end gap-5 pb-1">
-                            <p className="text-[13px] text-[#000000]/65 max-w-[240px] lg:text-right leading-relaxed">
+                            <p className="text-[13px] text-[#000000]/65 max-w-60 lg:text-right leading-relaxed">
                                 Bereit für ein Projekt auf Elite-Niveau?
                             </p>
                             <Link

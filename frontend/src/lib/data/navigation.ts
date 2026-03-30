@@ -63,6 +63,12 @@ export const NAV_LINKS: NavLink[] = [
                 description: "Scalable Microservice Hosting",
                 iconPath: "/media/Railway.svg",
             },
+            {
+                label: "PostgreSQL Core",
+                href: "/services/postgresql",
+                description: "Relationale Datenbankarchitektur",
+                iconPath: "/media/PostgreSQL.svg",
+            },
         ],
     },
     { label: "CAREERS", href: "/careers" },
