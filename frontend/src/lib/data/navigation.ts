@@ -20,7 +20,7 @@ export const NAV_LINKS: NavLink[] = [
                 label: "Stripe Fintech Pipelines",
                 href: "/services/fintech-pipelines",
                 description: "Automatisierte Zahlungsströme",
-                iconPath: "/media/Railway.svg",
+                iconPath: "/media/Stripe-Blurple.svg",
             },
             {
                 label: "Material UI Logic",
