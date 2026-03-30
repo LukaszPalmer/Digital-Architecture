@@ -59,10 +59,10 @@ const SERVICE_ITEMS = [
 ];
 
 const STATS = [
-    { value: "50+",  label: "Projekte geliefert" },
-    { value: "4",    label: "Leistungsbereiche" },
-    { value: "<1s",  label: "Ø Ladezeit (LCP)" },
-    { value: "100%", label: "Remote-first" },
+    { value: "< 24h", label: "Antwortgarantie" },
+    { value: "4",     label: "Leistungsbereiche" },
+    { value: "< 1s",  label: "Ø Ladezeit (LCP)" },
+    { value: "DSGVO", label: "Konform & sicher" },
 ];
 
 function ArrowRight() {
@@ -132,7 +132,7 @@ export default function Hero() {
                             {/* CTAs */}
                             <div className="flex flex-wrap gap-3">
                                 <Link
-                                    href="/contact"
+                                    href="#contact"
                                     className="inline-flex items-center gap-2.5 bg-[#001F3F] text-[#FFFFFF] px-8 py-3.5 text-[11.5px] font-bold tracking-[0.2em] uppercase hover:bg-[#000000] transition-colors duration-200"
                                 >
                                     Projekt starten

@@ -181,7 +181,7 @@ export default function Pricing() {
 
                                 {/* CTA */}
                                 <Link
-                                    href="/contact"
+                                    href="#contact"
                                     className={cn(
                                         "w-full py-5 text-[11px] font-black tracking-[0.3em] uppercase transition-colors duration-300 min-h-14 flex items-center justify-center",
                                         pkg.highlighted
@@ -202,7 +202,7 @@ export default function Pricing() {
                         Alle Pakete — individuell anpassbar auf Ihr Vorhaben
                     </p>
                     <Link
-                        href="/contact"
+                        href="#contact"
                         className="text-[11px] font-mono font-bold text-[#001F3F] hover:text-[#000000] transition-colors duration-200 tracking-wide underline underline-offset-4"
                     >
                         Individuelle Lösung anfragen →

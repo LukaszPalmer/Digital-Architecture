@@ -6,8 +6,8 @@
 import Link from "next/link";
 
 const FOOTER_NAV = [
-    { label: "Infrastruktur", href: "/infrastructure" },
-    { label: "Engineering", href: "/engineering" },
+    { label: "Infrastruktur", href: "/services/cloud-infrastructure" },
+    { label: "Engineering", href: "/services/nextjs-elite-core" },
     { label: "Blog", href: "/blog" },
     { label: "Portfolio", href: "/portfolio" },
     { label: "Strategie", href: "/strategy" },
@@ -15,9 +15,9 @@ const FOOTER_NAV = [
 ];
 
 const FOOTER_SERVICES = [
-    { label: "Software-Entwicklung", href: "/services/software" },
-    { label: "E-Commerce Systeme", href: "/services/ecommerce" },
-    { label: "Cloud-Infrastruktur", href: "/services/cloud" },
+    { label: "Software-Entwicklung", href: "/services/nextjs-elite-core" },
+    { label: "E-Commerce Systeme", href: "/services/fintech-pipelines" },
+    { label: "Cloud-Infrastruktur", href: "/services/cloud-infrastructure" },
     { label: "UI/UX & Branding", href: "/services/ux-ui-design" },
 ];
 
@@ -27,18 +27,6 @@ const FOOTER_LEGAL = [
     { label: "AGB", href: "/agb" },
 ];
 
-const SOCIALS = [
-    {
-        label: "LinkedIn",
-        href: "https://linkedin.com/company/palmer-digital",
-        ariaLabel: "Palmer Digital Architecture auf LinkedIn",
-    },
-    {
-        label: "GitHub",
-        href: "https://github.com/palmer-digital",
-        ariaLabel: "Palmer Digital Architecture auf GitHub",
-    },
-];
 
 function ArrowRight() {
     return (
@@ -103,26 +91,12 @@ export default function Footer() {
                                 Bereit für ein Projekt auf Elite-Niveau?
                             </p>
                             <Link
-                                href="/contact"
+                                href="/#contact"
                                 className="inline-flex items-center gap-3 bg-[#001F3F] text-[#FFFFFF] px-8 py-4 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-[#000000] transition-colors duration-300 min-h-13"
                             >
                                 Projekt starten
                                 <ArrowRight />
                             </Link>
-                            <div className="flex items-center gap-6">
-                                {SOCIALS.map((s) => (
-                                    <Link
-                                        key={s.label}
-                                        href={s.href}
-                                        aria-label={s.ariaLabel}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-[10px] font-bold text-[#000000]/55 hover:text-[#001F3F] tracking-[0.35em] uppercase transition-colors duration-200"
-                                    >
-                                        {s.label}
-                                    </Link>
-                                ))}
-                            </div>
                         </div>
 
                     </div>

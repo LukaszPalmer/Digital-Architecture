@@ -66,7 +66,7 @@ export function NavDropdown({ link }: { link: NavLink }) {
                     aria-label={`${link.label} Navigation`}
                     className="animate-dropdown absolute top-[70px] md:top-[90px] left-1/2 -translate-x-1/2 w-[min(860px,92vw)] bg-[#FFFFFF] border border-[#000000]/10 shadow-[0_8px_48px_rgba(0,0,0,0.10)] z-[100]"
                 >
-                    <div className="grid grid-cols-[200px_1fr]">
+                    <div className="grid grid-cols-[240px_1fr]">
 
                         {/* LEFT: Kontext-Panel — Navy */}
                         <div className="bg-[#001F3F] p-8 flex flex-col justify-between min-h-[260px]">

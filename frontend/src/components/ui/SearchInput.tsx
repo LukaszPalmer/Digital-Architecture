@@ -174,7 +174,7 @@ export default function SearchInput() {
                     aria-controls="search-results"
                     aria-activedescendant={activeIndex >= 0 ? `search-item-${activeIndex}` : undefined}
                     className={cn(
-                        "w-full bg-transparent text-[12px] font-bold tracking-widest text-[#000000] outline-none placeholder:text-[#000000]/30 transition-opacity duration-300",
+                        "w-full bg-transparent text-[16px] lg:text-[12px] font-bold tracking-widest text-[#000000] outline-none placeholder:text-[#000000]/30 transition-opacity duration-300",
                         isExpanded ? "opacity-100" : "opacity-0 pointer-events-none"
                     )}
                 />

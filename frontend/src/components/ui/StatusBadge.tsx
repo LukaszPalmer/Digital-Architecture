@@ -29,8 +29,8 @@ export default function StatusBadge({
             <div className="flex items-center gap-2.5">
                 {/* Pulsing square — 0px border-radius per Design-Dogma */}
                 <div className="relative w-2 h-2 shrink-0" aria-hidden="true">
-                    <span className="animate-ping absolute inset-0 bg-[#001F3F] opacity-50" />
-                    <span className="relative block w-full h-full bg-[#001F3F]" />
+                    <span className="animate-ping absolute inset-0 bg-[#22C55E] opacity-50" />
+                    <span className="relative block w-full h-full bg-[#22C55E]" />
                 </div>
 
                 <span className="text-[13px] font-black tracking-tight text-[#000000] uppercase leading-none">
