@@ -1,0 +1,66 @@
+{
+  "kind": "collectionType",
+  "collectionName": "blog_posts",
+  "info": {
+    "singularName": "blog-post",
+    "pluralName": "blog-posts",
+    "displayName": "Blog Post",
+    "description": "Palmer Digital Architecture Blog Articles"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
+    },
+    "logNumber": {
+      "type": "string"
+    },
+    "excerpt": {
+      "type": "text",
+      "required": true
+    },
+    "category": {
+      "type": "enumeration",
+      "enum": [
+        "ARCHITECTURE",
+        "DATABASE",
+        "FINTECH",
+        "DESIGN",
+        "INFRASTRUCTURE",
+        "ENGINEERING"
+      ],
+      "required": true
+    },
+    "date": {
+      "type": "date",
+      "required": true
+    },
+    "readTime": {
+      "type": "string"
+    },
+    "content": {
+      "type": "blocks"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "relatedSlugs": {
+      "type": "json"
+    },
+    "authorName": {
+      "type": "string",
+      "default": "Palmer Digital"
+    },
+    "authorRole": {
+      "type": "string"
+    }
+  }
+}
