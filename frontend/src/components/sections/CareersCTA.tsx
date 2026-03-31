@@ -53,11 +53,11 @@ export default function CareersCTA() {
 
                             {/* Primary: Initiativbewerbung */}
                             <a
-                                href="mailto:jobs@palmer.digital"
+                                href="mailto:kontakt@palmer-digital.de"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#001F3F] hover:text-[#FFFFFF] transition-colors duration-300 group"
                                 aria-label="Initiativbewerbung per E-Mail senden"
                             >
-                                <span>jobs@palmer.digital</span>
+                                <span>kontakt@palmer-digital.de</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </a>
 

@@ -108,7 +108,7 @@ export default function Careers() {
                         Team wächst — weitere Positionen folgen
                     </p>
                     <a
-                        href="mailto:jobs@palmer.digital"
+                        href="mailto:kontakt@palmer-digital.de"
                         className="text-[11px] font-mono font-bold text-[#001F3F] hover:text-[#000000] transition-colors duration-200 tracking-wide underline underline-offset-4"
                         aria-label="Initiativbewerbung an Palmer Digital Architecture"
                     >

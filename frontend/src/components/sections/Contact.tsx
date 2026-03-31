@@ -85,11 +85,11 @@ export default function Contact() {
                             Direkt schreiben
                         </span>
                         <a
-                            href="mailto:hello@palmer.digital"
+                            href="mailto:kontakt@palmer-digital.de"
                             className="text-[16px] md:text-[18px] font-bold text-[#001F3F] hover:text-[#000000] transition-colors duration-200 underline underline-offset-4"
                             aria-label="E-Mail an Palmer Digital Architecture"
                         >
-                            hello@palmer.digital
+                            kontakt@palmer-digital.de
                         </a>
                     </div>
                 </div>

@@ -180,11 +180,11 @@ export default function Footer() {
                         </div>
                         <div className="space-y-4">
                             <a
-                                href="mailto:hello@palmer.digital"
+                                href="mailto:kontakt@palmer-digital.de"
                                 className="block text-[12.5px] font-bold text-[#000000]/65 hover:text-[#001F3F] transition-colors duration-200 tracking-wide"
                                 aria-label="E-Mail an Palmer Digital Architecture"
                             >
-                                hello@palmer.digital
+                                kontakt@palmer-digital.de
                             </a>
                             <p className="text-[11px] text-[#000000]/55 leading-relaxed font-mono tracking-wide uppercase">
                                 Remote-First

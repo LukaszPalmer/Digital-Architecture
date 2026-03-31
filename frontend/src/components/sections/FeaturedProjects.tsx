@@ -24,6 +24,14 @@ const ASSETS: SolutionAsset[] = [
     },
     {
         id: "03",
+        title: "RELATIONAL DATA LAYER",
+        category: "Database Engineering",
+        metrics: "ACID Compliant | Row-Level Security",
+        imageUrl: "",
+        specs: ["PostgreSQL 16 + JSONB", "Window Functions & Indexing", "Connection Pooling (PgBouncer)"],
+    },
+    {
+        id: "04",
         title: "FINTECH PIPELINES",
         category: "Payment Engineering",
         metrics: "PCI-DSS Compliant | Real-time Webhooks",
@@ -31,12 +39,20 @@ const ASSETS: SolutionAsset[] = [
         specs: ["Stripe Custom Flow", "Idempotency Logic", "Automated Reconciliation"],
     },
     {
-        id: "04",
+        id: "05",
         title: "DESIGN OPS SYSTEM",
         category: "UI/UX Governance",
         metrics: "Atomic Design | WCAG AAA",
         imageUrl: "/infra/design-system.jpg",
         specs: ["0px Border-Radius Dogma", "Tailwind Logic", "Component Governance"],
+    },
+    {
+        id: "06",
+        title: "DASHBOARD INFRASTRUCTURE",
+        category: "Admin / Data Visualization",
+        metrics: "MUI X DataGrid | Real-time Ready",
+        imageUrl: "",
+        specs: ["Material UI v6 Component System", "Custom Theme Engine", "Enterprise Dashboard Layouts"],
     },
 ];
 
@@ -87,27 +103,104 @@ export default function FeaturedProjects() {
                             </span>
 
                             {/* Visual Area */}
-                            <div className="relative w-full aspect-video mb-10 overflow-hidden bg-[#000000]/4 group-hover:bg-[#000000]/20 border border-[#000000]/8 group-hover:border-[#FFFFFF]/10 transition-colors duration-300">
+                            <div className="relative w-full aspect-video mb-10 overflow-hidden bg-[#000000]/4 group-hover:bg-[#001F3F]/60 border border-[#000000]/8 group-hover:border-[#FFFFFF]/10 transition-colors duration-500">
 
-                                {asset.id === "02" ? (
-                                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                                {/* Logo Composite */}
+                                <div className="absolute inset-0 flex items-center justify-center gap-10">
+                                    {asset.id === "01" && (
+                                        <>
+                                            <Image
+                                                src="/media/Next.js.svg"
+                                                alt=""
+                                                width={96}
+                                                height={96}
+                                                aria-hidden
+                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            />
+                                            <div className="w-px h-10 bg-[#000000]/15 group-hover:bg-[#FFFFFF]/20 transition-colors" />
+                                            <Image
+                                                src="/media/Vercel.svg"
+                                                alt=""
+                                                width={80}
+                                                height={80}
+                                                aria-hidden
+                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            />
+                                        </>
+                                    )}
+                                    {asset.id === "02" && (
+                                        <>
+                                            <Image
+                                                src="/media/MongoDB.svg"
+                                                alt=""
+                                                width={80}
+                                                height={80}
+                                                aria-hidden
+                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            />
+                                            <div className="w-px h-10 bg-[#000000]/15 group-hover:bg-[#FFFFFF]/20 transition-colors" />
+                                            <Image
+                                                src="/media/Railway.svg"
+                                                alt=""
+                                                width={72}
+                                                height={72}
+                                                aria-hidden
+                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            />
+                                        </>
+                                    )}
+                                    {asset.id === "03" && (
                                         <Image
-                                            src={asset.imageUrl}
-                                            alt={asset.title}
-                                            fill
-                                            priority
-                                            unoptimized
-                                            className="object-cover opacity-30 group-hover:opacity-60 transition-opacity duration-500"
-                                            sizes="(max-width: 768px) 100vw, 50vw"
+                                            src="/media/PostgreSQL.svg"
+                                            alt=""
+                                            width={80}
+                                            height={80}
+                                            aria-hidden
+                                            className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
                                         />
-                                    </div>
-                                ) : (
-                                    <div className="absolute inset-0 flex items-center justify-center">
-                                        <span className="text-[10px] font-mono font-bold tracking-[0.4em] text-[#000000]/20 group-hover:text-[#FFFFFF]/20 uppercase transition-colors">
-                                            {asset.category}
-                                        </span>
-                                    </div>
-                                )}
+                                    )}
+                                    {asset.id === "04" && (
+                                        <Image
+                                            src="/media/Stripe-Blurple.svg"
+                                            alt=""
+                                            width={120}
+                                            height={50}
+                                            aria-hidden
+                                            className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                        />
+                                    )}
+                                    {asset.id === "06" && (
+                                        <Image
+                                            src="/media/MaterialUI.svg"
+                                            alt=""
+                                            width={80}
+                                            height={80}
+                                            aria-hidden
+                                            className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                        />
+                                    )}
+                                    {asset.id === "05" && (
+                                        <>
+                                            <Image
+                                                src="/media/Tailwind CSS.svg"
+                                                alt=""
+                                                width={80}
+                                                height={80}
+                                                aria-hidden
+                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            />
+                                            <div className="w-px h-10 bg-[#000000]/15 group-hover:bg-[#FFFFFF]/20 transition-colors" />
+                                            <Image
+                                                src="/media/Figma.svg"
+                                                alt=""
+                                                width={56}
+                                                height={80}
+                                                aria-hidden
+                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            />
+                                        </>
+                                    )}
+                                </div>
 
                                 {/* Metrics Badge */}
                                 <div className="absolute bottom-0 right-0 bg-[#001F3F] group-hover:bg-[#FFFFFF] px-4 py-2 text-[10px] font-bold font-mono tracking-widest text-[#FFFFFF] group-hover:text-[#001F3F] uppercase transition-colors duration-300">
