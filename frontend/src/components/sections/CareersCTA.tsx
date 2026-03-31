@@ -2,7 +2,6 @@
 // Server Component — RSC-First, 0 TBT.
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
 
-import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function CareersCTA() {
@@ -34,17 +33,17 @@ export default function CareersCTA() {
                                 id="careers-cta-heading"
                                 className="text-[clamp(2.8rem,7vw,6rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase text-[#FFFFFF] mb-10"
                             >
-                                Keine passende
+                                Überzeuge uns,
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/40">
-                                    Position?
+                                    eine Stelle zu schaffen.
                                 </span>
                             </h2>
                             <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wenn du der Überzeugung bist, dass du das Team
-                                besser machst — dann schreib uns. Wir lesen jede
-                                Initiativbewerbung und antworten innerhalb von 48
-                                Stunden.
+                                Herausragende Profile schaffen manchmal Stellen,
+                                die es vorher nicht gab. Wenn du überzeugt bist,
+                                dass du unser Team besser machst — schreib uns.
+                                Wir lesen jede Initiativbewerbung.
                             </p>
                         </div>
 
@@ -53,22 +52,22 @@ export default function CareersCTA() {
 
                             {/* Primary: Initiativbewerbung */}
                             <a
-                                href="mailto:kontakt@palmer-digital.de"
+                                href="mailto:kontakt@palmer-digital.de?subject=Initiativbewerbung"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#001F3F] hover:text-[#FFFFFF] transition-colors duration-300 group"
                                 aria-label="Initiativbewerbung per E-Mail senden"
                             >
-                                <span>kontakt@palmer-digital.de</span>
+                                <span>Initiativbewerbung senden</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </a>
 
-                            {/* Secondary: Alle Positionen */}
-                            <Link
+                            {/* Secondary: Newsletter */}
+                            <a
                                 href="#positions"
                                 className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/60 transition-colors duration-300"
                             >
-                                <span>Alle Positionen</span>
+                                <span>Career Newsletter abonnieren</span>
                                 <span aria-hidden="true">↑</span>
-                            </Link>
+                            </a>
 
                             <span className="text-[10px] font-mono text-[#FFFFFF]/35 tracking-[0.25em] uppercase text-center pt-1">
                                 Antwort garantiert innerhalb von 48h

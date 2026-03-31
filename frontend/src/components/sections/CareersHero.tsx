@@ -7,7 +7,7 @@ import RevealGrid from "@/components/ui/RevealGrid";
 
 const HERO_STATS = [
     { value: "100%", label: "Remote-First" },
-    { value: "3", label: "Offene Positionen" },
+    { value: "BESETZT", label: "Alle Positionen" },
     { value: "48H", label: "Response-Garantie" },
     { value: "AAA", label: "Engineering Standard" },
 ];
@@ -55,9 +55,9 @@ export default function CareersHero() {
                                 dem Niveau globaler Marktführer konstruieren.
                             </p>
                             <div className="flex items-center gap-3 shrink-0">
-                                <span className="w-2 h-2 bg-[#001F3F]" aria-hidden="true" />
-                                <span className="text-[11px] font-mono font-bold tracking-[0.3em] text-[#001F3F] uppercase">
-                                    3 Positionen offen — Q2 2026
+                                <span className="w-2 h-2 bg-[#000000]" aria-hidden="true" />
+                                <span className="text-[11px] font-mono font-bold tracking-[0.3em] text-[#000000]/60 uppercase">
+                                    Aktuell keine offenen Stellen — Newsletter für Updates
                                 </span>
                             </div>
                         </div>
