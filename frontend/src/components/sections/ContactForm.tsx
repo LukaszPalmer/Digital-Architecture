@@ -5,8 +5,9 @@
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
 // A11y: WCAG 2.1 AAA — jedes Label ist via htmlFor/id korrekt verknüpft.
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { cn } from "@/lib/utils";
+import { sendContactEmail } from "@/lib/actions/sendContactEmail";
 
 type FieldId = "name" | "email" | "service" | "phone" | "message";
 
@@ -77,6 +78,8 @@ function LockIcon() {
 export function ContactForm() {
     const [focused, setFocused] = useState<FieldId | null>(null);
     const [callbackWanted, setCallbackWanted] = useState(false);
+    const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+    const [isPending, startTransition] = useTransition();
 
     const labelCn = (id: FieldId) =>
         cn(
@@ -95,11 +98,22 @@ export function ContactForm() {
     const onFocus = (id: FieldId) => () => setFocused(id);
     const onBlur = () => setFocused(null);
 
+    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        if (callbackWanted) formData.set("callback", "on");
+        startTransition(async () => {
+            const result = await sendContactEmail(formData);
+            setStatus(result.success ? "success" : "error");
+        });
+    }
+
     return (
         <form
             className="flex flex-col gap-10"
             aria-label="Kontaktformular Palmer Digital Architecture"
             noValidate
+            onSubmit={handleSubmit}
         >
             {/* Eyebrow + Pflichtfelder-Hinweis */}
             <div className="flex items-end justify-between">
@@ -261,13 +275,27 @@ export function ContactForm() {
 
             {/* Submit */}
             <div className="flex flex-col gap-3 pt-2">
-                <button
-                    type="submit"
-                    className="group w-full bg-[#000000] text-[#FFFFFF] py-5 text-[11.5px] font-black tracking-[0.35em] uppercase hover:bg-[#001F3F] transition-colors duration-300 min-h-15 flex items-center justify-center gap-3"
-                >
-                    Anfrage absenden
-                    <ArrowRight />
-                </button>
+                {status === "success" ? (
+                    <div className="w-full bg-[#001F3F] text-[#FFFFFF] py-5 text-[11.5px] font-black tracking-[0.35em] uppercase flex items-center justify-center">
+                        Anfrage eingegangen — Wir melden uns innerhalb von 24h
+                    </div>
+                ) : (
+                    <button
+                        type="submit"
+                        disabled={isPending}
+                        className="group w-full bg-[#000000] text-[#FFFFFF] py-5 text-[11.5px] font-black tracking-[0.35em] uppercase hover:bg-[#001F3F] transition-colors duration-300 min-h-15 flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {isPending ? "Wird gesendet …" : "Anfrage absenden"}
+                        {!isPending && <ArrowRight />}
+                    </button>
+                )}
+
+                {status === "error" && (
+                    <p className="text-[10.5px] font-mono text-red-600 tracking-wide text-center">
+                        Fehler beim Senden. Bitte versuche es erneut oder schreib direkt an kontakt@palmer-digital.de
+                    </p>
+                )}
+
                 <p className="text-[10.5px] text-[#000000]/65 font-mono tracking-wide text-center leading-relaxed">
                     Kostenlos &amp; unverbindlich — Antwort innerhalb von 24h
                 </p>
