@@ -100,11 +100,19 @@ export function ContactForm() {
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const formData = new FormData(e.currentTarget);
+        const form = e.currentTarget;
+        const formData = new FormData(form);
         if (callbackWanted) formData.set("callback", "on");
         startTransition(async () => {
             const result = await sendContactEmail(formData);
-            setStatus(result.success ? "success" : "error");
+            if (result.success) {
+                form.reset();
+                setCallbackWanted(false);
+                setStatus("success");
+                setTimeout(() => setStatus("idle"), 4000);
+            } else {
+                setStatus("error");
+            }
         });
     }
 
@@ -276,9 +284,20 @@ export function ContactForm() {
             {/* Submit */}
             <div className="flex flex-col gap-3 pt-2">
                 {status === "success" ? (
-                    <div className="w-full bg-[#166534] text-[#FFFFFF] py-5 text-[11.5px] font-black tracking-[0.35em] uppercase flex items-center justify-center gap-3">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-                        Anfrage eingegangen — Wir melden uns innerhalb von 24h
+                    <div className="w-full bg-[#001F3F] px-6 py-6 flex items-center gap-5">
+                        <div className="w-11 h-11 border border-[#FFFFFF]/25 flex items-center justify-center shrink-0">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="square" aria-hidden="true">
+                                <polyline points="20 6 9 17 4 12" />
+                            </svg>
+                        </div>
+                        <div className="flex flex-col gap-1.5">
+                            <span className="text-[11.5px] font-black tracking-[0.3em] uppercase text-[#FFFFFF]">
+                                Anfrage eingegangen
+                            </span>
+                            <span className="text-[9.5px] font-mono tracking-[0.25em] uppercase text-[#FFFFFF]/55">
+                                Wir melden uns innerhalb von 24 Stunden
+                            </span>
+                        </div>
                     </div>
                 ) : (
                     <button
