@@ -5,11 +5,27 @@
 
 import Link from "next/link";
 import { blogPosts } from "@/lib/data/blog";
+import { getStrapiBlogPosts } from "@/lib/strapi";
 import { BlogPost } from "@/types/blog";
 
-const PREVIEW_POSTS = blogPosts.slice(0, 3);
-
-export default function BlogTeaser() {
+export default async function BlogTeaser() {
+    const strapiPosts = await getStrapiBlogPosts();
+    const PREVIEW_POSTS: BlogPost[] = strapiPosts.length > 0
+        ? strapiPosts.slice(0, 3).map((p: Record<string, unknown>) => ({
+            id: String(p.id),
+            slug: p.slug as string,
+            logNumber: (p.logNumber as string) ?? "",
+            title: p.title as string,
+            category: p.category as string,
+            date: p.date as string,
+            readTime: (p.readTime as string) ?? "",
+            excerpt: p.excerpt as string,
+            author: { name: (p.authorName as string) ?? "Palmer Digital", role: (p.authorRole as string) ?? "" },
+            tags: (p.tags as string[]) ?? [],
+            relatedSlugs: (p.relatedSlugs as string[]) ?? [],
+            content: [],
+        }))
+        : blogPosts.slice(0, 3);
     return (
         <section className="bg-[#FFFFFF] py-20 md:py-32 lg:py-44 border-t border-[#000000] overflow-hidden">
             <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
@@ -46,7 +62,7 @@ export default function BlogTeaser() {
 
                 {/* GRID */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-[#000000]">
-                    {PREVIEW_POSTS.map((post, index) => (
+                    {PREVIEW_POSTS.map((post: BlogPost, index: number) => (
                         <BlogTeaserCard key={post.id} post={post} index={index} />
                     ))}
                 </div>

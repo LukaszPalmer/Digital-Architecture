@@ -7,40 +7,70 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Link from "next/link";
 import { blogPosts, getBlogPost, getRelatedPosts } from "@/lib/data/blog";
+import { getStrapiBlogPost, getStrapiBlogSlugs } from "@/lib/strapi";
 import { ContentBlock, BlogPost } from "@/types/blog";
 
-// 1. STATIC GENERATION
+// 1. STATIC GENERATION — beides: Strapi + statische Slugs
 export async function generateStaticParams() {
-    return blogPosts.map((post) => ({ slug: post.slug }));
+    const strapiSlugs = await getStrapiBlogSlugs();
+    const staticSlugs = blogPosts.map((p) => p.slug);
+    const allSlugs = [...new Set([...strapiSlugs, ...staticSlugs])];
+    return allSlugs.map((slug) => ({ slug }));
 }
 
-// 2. DYNAMIC METADATA — Next.js 15 Dogma: params als Promise
+// 2. DYNAMIC METADATA
 export async function generateMetadata({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
     const { slug } = await params;
-    const post = getBlogPost(slug);
+    const strapiPost = await getStrapiBlogPost(slug);
+    const post = strapiPost ?? getBlogPost(slug);
 
     if (!post) {
         return { title: "Log Not Found | Palmer Digital Architecture" };
     }
 
+    const title = strapiPost ? strapiPost.title : (post as BlogPost).title;
+    const excerpt = strapiPost ? strapiPost.excerpt : (post as BlogPost).excerpt;
+    const logNumber = strapiPost ? strapiPost.logNumber : (post as BlogPost).logNumber;
+
     return {
-        title: `${post.logNumber}: ${post.title}`,
-        description: post.excerpt,
+        title: `${logNumber}: ${title}`,
+        description: excerpt,
     };
 }
 
-// 3. PAGE — Next.js 15 Dogma: params als Promise
+// 3. PAGE
 export default async function BlogArticlePage({
     params,
 }: {
     params: Promise<{ slug: string }>;
 }) {
     const { slug } = await params;
-    const post = getBlogPost(slug);
+    const strapiRaw = await getStrapiBlogPost(slug);
+
+    let post: BlogPost | undefined;
+
+    if (strapiRaw) {
+        post = {
+            id: String(strapiRaw.id),
+            slug: strapiRaw.slug,
+            logNumber: strapiRaw.logNumber ?? "",
+            title: strapiRaw.title,
+            category: strapiRaw.category,
+            date: strapiRaw.date,
+            readTime: strapiRaw.readTime ?? "",
+            excerpt: strapiRaw.excerpt,
+            author: { name: strapiRaw.authorName ?? "Palmer Digital", role: strapiRaw.authorRole ?? "" },
+            tags: strapiRaw.tags ?? [],
+            relatedSlugs: strapiRaw.relatedSlugs ?? [],
+            content: [],
+        };
+    } else {
+        post = getBlogPost(slug);
+    }
 
     if (!post) notFound();
 

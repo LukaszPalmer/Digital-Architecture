@@ -6,7 +6,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
-import { getBlogPostsByCategory, blogPosts } from "@/lib/data/blog";
+import { getStrapiBlogPosts } from "@/lib/strapi";
+import { getBlogPostsByCategory, blogPosts as staticPosts } from "@/lib/data/blog";
 import BlogFilterBar from "@/components/sections/BlogFilterBar";
 import { BlogPost } from "@/types/blog";
 
@@ -23,8 +24,30 @@ export default async function BlogPage({
     searchParams: Promise<{ category?: string }>;
 }) {
     const { category } = await searchParams;
-    const posts = getBlogPostsByCategory(category ?? "ALL");
+    const strapiPosts = await getStrapiBlogPosts();
+
+    // Strapi-Daten in BlogPost-Format mappen, fallback auf statische Daten
+    const allPosts: BlogPost[] = strapiPosts.length > 0
+        ? strapiPosts.map((p: Record<string, unknown>) => ({
+            id: String(p.id),
+            slug: p.slug as string,
+            logNumber: (p.logNumber as string) ?? "",
+            title: p.title as string,
+            category: p.category as string,
+            date: p.date as string,
+            readTime: (p.readTime as string) ?? "",
+            excerpt: p.excerpt as string,
+            author: { name: (p.authorName as string) ?? "Palmer Digital", role: (p.authorRole as string) ?? "" },
+            tags: (p.tags as string[]) ?? [],
+            relatedSlugs: (p.relatedSlugs as string[]) ?? [],
+            content: [],
+        }))
+        : staticPosts;
+
     const activeCategory = category?.toUpperCase() ?? "ALL";
+    const posts = activeCategory === "ALL"
+        ? allPosts
+        : allPosts.filter(p => p.category.toUpperCase() === activeCategory);
 
     return (
         <div className="bg-[#FFFFFF] min-h-screen">
@@ -56,7 +79,7 @@ export default async function BlogPage({
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[13px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
-                                    {blogPosts.length} Logs publiziert
+                                    {allPosts.length} Logs publiziert
                                 </span>
                             </div>
                         </div>
@@ -90,7 +113,7 @@ export default async function BlogPage({
                 {/* Count Label */}
                 <div className="flex items-center gap-4 mb-12">
                     <span className="text-[10px] font-mono font-bold tracking-[0.4em] text-[#000000]/35 uppercase">
-                        {posts.length === blogPosts.length
+                        {posts.length === allPosts.length
                             ? `Alle ${posts.length} Logs`
                             : `${posts.length} Log${posts.length !== 1 ? "s" : ""} in ${activeCategory}`}
                     </span>
