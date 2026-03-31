@@ -276,7 +276,8 @@ export function ContactForm() {
             {/* Submit */}
             <div className="flex flex-col gap-3 pt-2">
                 {status === "success" ? (
-                    <div className="w-full bg-[#001F3F] text-[#FFFFFF] py-5 text-[11.5px] font-black tracking-[0.35em] uppercase flex items-center justify-center">
+                    <div className="w-full bg-[#166534] text-[#FFFFFF] py-5 text-[11.5px] font-black tracking-[0.35em] uppercase flex items-center justify-center gap-3">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="square" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
                         Anfrage eingegangen — Wir melden uns innerhalb von 24h
                     </div>
                 ) : (

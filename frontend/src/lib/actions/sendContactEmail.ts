@@ -18,7 +18,7 @@ export async function sendContactEmail(formData: FormData) {
 
     try {
         await resend.emails.send({
-            from: `Palmer Digital <${process.env.RESEND_FROM_ADDRESS}>`,
+            from: "Palmer Digital <kontakt@palmer-digital.de>",
             to: "kontakt@palmer-digital.de",
             replyTo: email,
             subject: `Neue Projektanfrage: ${service} — ${name}`,
