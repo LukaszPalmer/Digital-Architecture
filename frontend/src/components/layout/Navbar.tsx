@@ -3,7 +3,6 @@
 // Scroll-State wird in NavScrollShell (Client-Insel) isoliert.
 
 import Link from "next/link";
-import Image from "next/image";
 import { MobileMenu } from "./MobileMenu";
 import { NavDropdown } from "./NavDropdown";
 import { NavScrollShell } from "./NavScrollShell";
@@ -20,23 +19,13 @@ export default function Navbar() {
                 <Link
                     href="/"
                     className="group flex flex-col flex-shrink-0"
-                    aria-label="Palmer Digital Architecture — Startseite"
+                    aria-label="Palmer Digital — Startseite"
                 >
-                    {/* Mobile: SVG-Logo */}
-                    <Image
-                        src="/media/Logo-mobile.svg"
-                        alt="Palmer Digital Architecture"
-                        width={120}
-                        height={40}
-                        className="block lg:hidden"
-                        priority
-                    />
-                    {/* Desktop: Text-Logo */}
-                    <span className="hidden lg:block text-[#001F3F] font-black text-[20px] tracking-[-0.04em] leading-none uppercase group-hover:text-[#000000] transition-colors duration-200">
+                    <span className="text-[#001F3F] font-black text-[20px] tracking-[-0.04em] leading-none uppercase group-hover:text-[#000000] transition-colors duration-200">
                         PALMER
                     </span>
-                    <span className="hidden lg:block text-[8.5px] tracking-[0.28em] font-medium text-[#001F3F]/50 uppercase mt-0.75 group-hover:text-[#000000]/50 transition-colors duration-200">
-                        Digital Architecture
+                    <span className="text-[8.5px] tracking-[0.28em] font-medium text-[#001F3F]/50 uppercase mt-0.75 group-hover:text-[#000000]/50 transition-colors duration-200">
+                        Digital
                     </span>
                 </Link>
 

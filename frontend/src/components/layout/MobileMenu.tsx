@@ -101,14 +101,14 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                     <Link
                         href="/"
                         onClick={close}
-                        aria-label="Palmer Digital Architecture — Startseite"
+                        aria-label="Palmer Digital — Startseite"
                         className="group flex flex-col"
                     >
                         <span className="text-[#001F3F] font-black text-[17px] tracking-[-0.04em] uppercase leading-none group-hover:text-[#000000] transition-colors">
                             PALMER
                         </span>
                         <span className="text-[8.5px] tracking-[0.28em] font-medium text-[#001F3F]/50 uppercase mt-[3px]">
-                            Digital Architecture
+                            Digital
                         </span>
                     </Link>
                 </div>
