@@ -26,23 +26,27 @@ export default async function BlogPage({
     const { category } = await searchParams;
     const strapiPosts = await getStrapiBlogPosts();
 
-    // Strapi-Daten in BlogPost-Format mappen, fallback auf statische Daten
-    const allPosts: BlogPost[] = strapiPosts.length > 0
-        ? strapiPosts.map((p: Record<string, unknown>) => ({
-            id: String(p.id),
-            slug: p.slug as string,
-            logNumber: (p.logNumber as string) ?? "",
-            title: p.title as string,
-            category: p.category as string,
-            date: p.date as string,
-            readTime: (p.readTime as string) ?? "",
-            excerpt: p.excerpt as string,
-            author: { name: (p.authorName as string) ?? "Palmer Digital", role: (p.authorRole as string) ?? "" },
-            tags: (p.tags as string[]) ?? [],
-            relatedSlugs: (p.relatedSlugs as string[]) ?? [],
-            content: [],
-        }))
-        : staticPosts;
+    // Strapi-Posts mappen und mit statischen Posts zusammenführen.
+    // Strapi hat Priorität: statische Posts mit gleichem Slug werden überschrieben.
+    const mappedStrapi: BlogPost[] = strapiPosts.map((p: Record<string, unknown>) => ({
+        id: String(p.id),
+        slug: p.slug as string,
+        logNumber: (p.logNumber as string) ?? "",
+        title: p.title as string,
+        category: p.category as string,
+        date: p.date as string,
+        readTime: (p.readTime as string) ?? "",
+        excerpt: p.excerpt as string,
+        author: { name: (p.authorName as string) ?? "Palmer Digital", role: (p.authorRole as string) ?? "" },
+        tags: (p.tags as string[]) ?? [],
+        relatedSlugs: (p.relatedSlugs as string[]) ?? [],
+        content: [],
+    }));
+    const strapiSlugs = new Set(mappedStrapi.map(p => p.slug));
+    const allPosts: BlogPost[] = [
+        ...mappedStrapi,
+        ...staticPosts.filter(p => !strapiSlugs.has(p.slug)),
+    ];
 
     const activeCategory = category?.toUpperCase() ?? "ALL";
     const posts = activeCategory === "ALL"
