@@ -6,4 +6,5 @@ export interface PricingPackage {
     features: string[];
     cta: string;
     highlighted?: boolean;
+    paket: string;
 }

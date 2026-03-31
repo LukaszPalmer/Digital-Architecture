@@ -6,12 +6,20 @@
 // A11y: WCAG 2.1 AAA — jedes Label ist via htmlFor/id korrekt verknüpft.
 
 import { useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { sendContactEmail } from "@/lib/actions/sendContactEmail";
 
 type FieldId = "name" | "email" | "service" | "phone" | "message";
 
-const SERVICES = [
+const PACKAGES = [
+    "Foundation Paket",
+    "Performance Paket",
+    "Authority Paket",
+    "Custom Paket",
+];
+
+const INDIVIDUAL_SERVICES = [
     "Software-Entwicklung",
     "E-Commerce System",
     "Cloud-Infrastruktur",
@@ -19,6 +27,13 @@ const SERVICES = [
     "Strategie & Beratung",
     "Mehrere Leistungen",
 ];
+
+const PAKET_MAP: Record<string, string> = {
+    foundation: "Foundation Paket",
+    performance: "Performance Paket",
+    authority: "Authority Paket",
+    custom: "Custom Paket",
+};
 
 function ChevronDown() {
     return (
@@ -76,6 +91,9 @@ function LockIcon() {
 }
 
 export function ContactForm() {
+    const searchParams = useSearchParams();
+    const paketParam = searchParams.get("paket")?.toLowerCase() ?? "";
+    const [selectedService, setSelectedService] = useState(PAKET_MAP[paketParam] ?? "");
     const [focused, setFocused] = useState<FieldId | null>(null);
     const [callbackWanted, setCallbackWanted] = useState(false);
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -108,6 +126,7 @@ export function ContactForm() {
             if (result.success) {
                 form.reset();
                 setCallbackWanted(false);
+                setSelectedService("");
                 setStatus("success");
                 setTimeout(() => setStatus("idle"), 4000);
             } else {
@@ -181,23 +200,29 @@ export function ContactForm() {
                     <select
                         id="contact-service"
                         name="service"
-                        defaultValue=""
+                        value={selectedService}
                         required
                         className={cn(
                             inputCn("service"),
                             "appearance-none cursor-pointer pr-7"
                         )}
+                        onChange={(e) => setSelectedService(e.target.value)}
                         onFocus={onFocus("service")}
                         onBlur={onBlur}
                     >
                         <option value="" disabled>
                             Bitte wählen …
                         </option>
-                        {SERVICES.map((s) => (
-                            <option key={s} value={s}>
-                                {s}
-                            </option>
-                        ))}
+                        <optgroup label="── Pakete ──">
+                            {PACKAGES.map((s) => (
+                                <option key={s} value={s}>{s}</option>
+                            ))}
+                        </optgroup>
+                        <optgroup label="── Einzelleistungen ──">
+                            {INDIVIDUAL_SERVICES.map((s) => (
+                                <option key={s} value={s}>{s}</option>
+                            ))}
+                        </optgroup>
                     </select>
                     <div className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-[#000000]/65">
                         <ChevronDown />

@@ -3,6 +3,7 @@
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
 // Architektur: Zwei Zonen — Info-Spalte (Prozess + Trust) · Form-Spalte.
 
+import { Suspense } from "react";
 import { ContactForm } from "./ContactForm";
 
 const PROCESS = [
@@ -96,7 +97,9 @@ export default function Contact() {
 
                 {/* ── RIGHT: Form Column ── */}
                 <div className="px-4 md:px-8 lg:px-12 py-20 md:py-32 lg:py-44">
-                    <ContactForm />
+                    <Suspense fallback={null}>
+                        <ContactForm />
+                    </Suspense>
                 </div>
 
             </div>
