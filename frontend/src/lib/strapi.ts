@@ -12,21 +12,21 @@ async function strapiGet(path: string) {
 
 export async function getStrapiBlogPosts() {
     const data = await strapiGet(
-        "/blog-posts?populate=*&sort=date:desc&pagination[pageSize]=50&publicationState=live"
+        "/blog-posts?populate=*&sort=date:desc&pagination[pageSize]=50&status=published"
     );
     return data?.data ?? [];
 }
 
 export async function getStrapiBlogPost(slug: string) {
     const data = await strapiGet(
-        `/blog-posts?filters[slug][$eq]=${slug}&populate=*&publicationState=live`
+        `/blog-posts?filters[slug][$eq]=${slug}&populate=*&status=published`
     );
     return data?.data?.[0] ?? null;
 }
 
 export async function getStrapiBlogSlugs(): Promise<string[]> {
     const data = await strapiGet(
-        "/blog-posts?fields[0]=slug&publicationState=live&pagination[pageSize]=100"
+        "/blog-posts?fields[0]=slug&status=published&pagination[pageSize]=100"
     );
     return (data?.data ?? []).map((p: { slug: string }) => p.slug);
 }
