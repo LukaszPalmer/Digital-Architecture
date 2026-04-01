@@ -41,7 +41,7 @@ export function PieChartWidget({ title, data }: Props) {
                     cornerRadius: 0,
                 }]}
                 height={220}
-                slotProps={{ legend: { position: { vertical: "middle", horizontal: "right" }, itemMarkWidth: 10, itemMarkHeight: 10, labelStyle: { fontSize: 11 } } }}
+                slotProps={{ legend: { position: { vertical: "middle", horizontal: "end" }, itemMarkWidth: 10, itemMarkHeight: 10, labelStyle: { fontSize: 11 } } }}
             />
         </Paper>
     );
