@@ -135,16 +135,16 @@ export default function DashboardPage() {
 
                         {/* ── KPI CARDS ── */}
                         <Grid container spacing={2}>
-                            <Grid item xs={12} sm={6} md={3}>
+                            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                 <StatCard label="Pageviews" value={data.overview.totalPageviews.toLocaleString("de-DE")} sub="Gesamt im Zeitraum" accent />
                             </Grid>
-                            <Grid item xs={12} sm={6} md={3}>
+                            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                 <StatCard label="Unique Sessions" value={data.overview.uniqueSessions.toLocaleString("de-DE")} sub="Individuelle Besucher" />
                             </Grid>
-                            <Grid item xs={12} sm={6} md={3}>
+                            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                 <StatCard label="Ø Verweildauer" value={formatDuration(data.overview.avgDuration)} sub="Pro Session" />
                             </Grid>
-                            <Grid item xs={12} sm={6} md={3}>
+                            <Grid size={{ xs: 12, sm: 6, md: 3 }}>
                                 <StatCard label="Top Event" value={data.events[0]?.name ?? "—"} sub={`${data.events[0]?.count ?? 0} mal`} />
                             </Grid>
                         </Grid>
@@ -166,13 +166,13 @@ export default function DashboardPage() {
                             <Divider sx={{ flex: 1 }} />
                         </Box>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} md={4}>
+                            <Grid size={{ xs: 12, md: 4 }}>
                                 <PieChartWidget title="Gerätetyp" data={data.devices} />
                             </Grid>
-                            <Grid item xs={12} md={4}>
+                            <Grid size={{ xs: 12, md: 4 }}>
                                 <PieChartWidget title="Browser" data={data.browsers} />
                             </Grid>
-                            <Grid item xs={12} md={4}>
+                            <Grid size={{ xs: 12, md: 4 }}>
                                 <PieChartWidget title="Betriebssystem" data={data.os} />
                             </Grid>
                         </Grid>
@@ -185,10 +185,10 @@ export default function DashboardPage() {
                             <Divider sx={{ flex: 1 }} />
                         </Box>
                         <Grid container spacing={2}>
-                            <Grid item xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <BarChartWidget title="Traffic-Quellen" data={data.referrers} color="#001F3F" />
                             </Grid>
-                            <Grid item xs={12} md={6}>
+                            <Grid size={{ xs: 12, md: 6 }}>
                                 <BarChartWidget title="Länder" data={data.countries} color="#003d7a" />
                             </Grid>
                         </Grid>
@@ -202,7 +202,7 @@ export default function DashboardPage() {
                         </Box>
                         <Grid container spacing={2}>
                             {/* Top Pages Table */}
-                            <Grid item xs={12} md={7}>
+                            <Grid size={{ xs: 12, md: 7 }}>
                                 <Paper elevation={0} sx={{ border: "1px solid rgba(0,0,0,0.10)", borderRadius: 0 }}>
                                     <Box px={3} pt={2.5} pb={1}>
                                         <Typography sx={{ fontSize: "9px", fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(0,0,0,0.45)" }}>
@@ -237,7 +237,7 @@ export default function DashboardPage() {
                             </Grid>
 
                             {/* Events Table */}
-                            <Grid item xs={12} md={5}>
+                            <Grid size={{ xs: 12, md: 5 }}>
                                 <Paper elevation={0} sx={{ border: "1px solid rgba(0,0,0,0.10)", borderRadius: 0 }}>
                                     <Box px={3} pt={2.5} pb={1}>
                                         <Typography sx={{ fontSize: "9px", fontFamily: "monospace", fontWeight: 700, letterSpacing: "0.4em", textTransform: "uppercase", color: "rgba(0,0,0,0.45)" }}>
