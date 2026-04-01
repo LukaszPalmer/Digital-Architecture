@@ -3,11 +3,7 @@
 
 import mongoose from "mongoose";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
-
-if (!MONGODB_URI) {
-    throw new Error("MONGODB_URI environment variable is not defined");
-}
+const MONGODB_URI = process.env.MONGODB_URI;
 
 // Global cache — verhindert mehrfache Verbindungen in Next.js Dev-Mode
 declare global {
@@ -19,6 +15,7 @@ const cache = global._mongooseCache ?? { conn: null, promise: null };
 global._mongooseCache = cache;
 
 export async function connectDB(): Promise<typeof mongoose> {
+    if (!MONGODB_URI) throw new Error("MONGODB_URI environment variable is not defined");
     if (cache.conn) return cache.conn;
 
     if (!cache.promise) {
