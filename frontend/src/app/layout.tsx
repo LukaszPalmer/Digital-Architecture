@@ -1,9 +1,12 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/cookie/CookieBanner";
+
+const GA_ID = "G-01TCGPSE78";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -45,6 +48,27 @@ export default function RootLayout({
             lang="de"
             className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
         >
+            <head>
+                {/* GA4 Consent Mode v2 — Default: alles denied bis Nutzer zustimmt */}
+                <Script id="ga4-consent-init" strategy="beforeInteractive">{`
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('consent', 'default', {
+                        analytics_storage: 'denied',
+                        ad_storage: 'denied',
+                        ad_user_data: 'denied',
+                        ad_personalization: 'denied',
+                        wait_for_update: 500
+                    });
+                    gtag('js', new Date());
+                    gtag('config', '${GA_ID}', { anonymize_ip: true });
+                `}</Script>
+                {/* GA4 Script */}
+                <Script
+                    src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+                    strategy="afterInteractive"
+                />
+            </head>
             {/* 'flex-col min-h-screen' sorgt dafür, dass der Footer am Boden bleibt */}
             <body className="min-h-screen flex flex-col bg-white text-black selection:bg-[#001F3F] selection:text-white">
                 {/* Globales Navigations-Asset */}
