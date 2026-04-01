@@ -48,20 +48,6 @@ export function PieChartWidget({ title, data, tooltip }: Props) {
                         `${item.value.toLocaleString("de-DE")}`,
                 }]}
                 height={220}
-                slotProps={{
-                    legend: {
-                        position: { vertical: "middle", horizontal: "end" },
-                        itemMarkWidth:  10,
-                        itemMarkHeight: 10,
-                        markGap:        6,
-                        itemGap:        8,
-                        labelStyle: {
-                            fontSize: 10,
-                            fontFamily: "monospace",
-                            fill: "rgba(0,0,0,0.55)",
-                        },
-                    },
-                }}
             />
         </Paper>
     );
