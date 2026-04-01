@@ -2,8 +2,9 @@
 // Analytics Tracking Endpunkt — nur aufgerufen wenn Nutzer Analytics-Consent gegeben hat.
 
 import { NextRequest, NextResponse } from "next/server";
-import { connectDB } from "@/lib/db/mongodb";
-import PageView from "@/lib/db/models/PageView";
+import { connectDB }  from "@/lib/db/mongodb";
+import PageView       from "@/lib/db/models/PageView";
+import DeletionLog    from "@/lib/db/models/DeletionLog";
 
 function parseBrowser(ua: string): string {
     if (ua.includes("Edg/"))     return "Edge";
@@ -89,15 +90,27 @@ export async function POST(req: NextRequest) {
 }
 
 // Session löschen auf Nutzer-Anfrage (Consent-Entzug)
+// Schreibt gleichzeitig einen DSGVO-Audit-Eintrag in DeletionLog.
 export async function DELETE(req: NextRequest) {
     try {
         const { sessionId } = await req.json();
         if (!sessionId) return NextResponse.json({ ok: false }, { status: 400 });
 
         await connectDB();
+
+        // Erst zählen, dann löschen — für den Audit-Log
+        const deletedCount = await PageView.countDocuments({ sessionId });
         await PageView.deleteMany({ sessionId });
 
-        return NextResponse.json({ ok: true, deleted: true });
+        // DSGVO Audit-Trail: lückenlose Dokumentation der Löschung
+        await DeletionLog.create({
+            sessionId,
+            reason:       "consent_withdrawn",
+            deletedCount,
+            note:         "Nutzer hat Analytics-Consent widerrufen. Alle zugehörigen Rohdaten wurden sofort gelöscht (Art. 7 Abs. 3 DSGVO).",
+        });
+
+        return NextResponse.json({ ok: true, deleted: true, deletedCount });
     } catch (err) {
         console.error("[track/delete]", err);
         return NextResponse.json({ ok: false }, { status: 500 });

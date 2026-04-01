@@ -47,8 +47,10 @@ const PageViewSchema = new Schema<IPageView>(
     { collection: "pageviews" }
 );
 
-// TTL-Index: automatische Löschung nach 90 Tagen
-PageViewSchema.index({ timestamp: 1 }, { expireAfterSeconds: 90 * 24 * 60 * 60 });
+// TTL-Index: automatische Löschung nach 30 Tagen.
+// Aggregierte DailySummaries werden vom Cron Job täglich erstellt
+// und bleiben 2 Jahre erhalten (DailySummary Collection).
+PageViewSchema.index({ timestamp: 1 }, { expireAfterSeconds: 30 * 24 * 60 * 60 });
 
 const PageView: Model<IPageView> =
     mongoose.models.PageView ?? mongoose.model<IPageView>("PageView", PageViewSchema);
