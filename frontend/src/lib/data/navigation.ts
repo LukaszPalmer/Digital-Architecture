@@ -40,6 +40,18 @@ export const NAV_LINKS: NavLink[] = [
                 description: "Skalierbare Backend Infrastruktur",
                 iconPath: "/media/Node.js.svg",
             },
+            {
+                label: "Socket.IO Real-Time",
+                href: "/services/socketio-realtime",
+                description: "Echtzeit-Kommunikationssysteme",
+                iconPath: "/media/Socket.IO.svg",
+            },
+            {
+                label: "Chatbot & KI-Assistent",
+                href: "/services/chatbot-assistant",
+                description: "Intelligente Konversations-Interfaces",
+                iconPath: "/media/Chatbot.svg",
+            },
         ],
     },
     {
@@ -68,6 +80,18 @@ export const NAV_LINKS: NavLink[] = [
                 href: "/services/postgresql",
                 description: "Relationale Datenbankarchitektur",
                 iconPath: "/media/PostgreSQL.svg",
+            },
+            {
+                label: "Google Analytics",
+                href: "/services/google-analytics",
+                description: "Data-Driven Analytics Architecture",
+                iconPath: "/media/GoogleAnalytics.svg",
+            },
+            {
+                label: "Google Indexierung",
+                href: "/services/google-indexing",
+                description: "Technische SEO & Search Visibility",
+                iconPath: "/media/GoogleSearch.svg",
             },
         ],
     },

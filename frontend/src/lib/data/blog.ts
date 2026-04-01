@@ -1177,6 +1177,573 @@ if (process.env.NODE_ENV !== "production") {
             },
         ],
     },
+    {
+        id: "8",
+        slug: "socketio-realtime-websocket-architecture",
+        logNumber: "PDA-LOG-008",
+        title: "Socket.IO & WebSockets: Real-Time Systeme für Production",
+        category: "ARCHITECTURE",
+        date: "01.04.2026",
+        readTime: "07:00 MIN",
+        excerpt: "Echtzeit-Kommunikation ist kein Nice-to-have mehr — sie ist Kerninfrastruktur. Socket.IO und WebSockets richtig zu architektonieren bedeutet: skalierbar, ausfallsicher und messbar.",
+        author: { name: "Palmer Digital", role: "Architecture Division" },
+        tags: ["Socket.IO", "WebSockets", "Real-Time", "Node.js", "Skalierung"],
+        relatedSlugs: [
+            "nodejs-core-backend-architecture",
+            "nextjs-15-react-19-infrastructure-standard",
+        ],
+        content: [
+            {
+                type: "paragraph",
+                text: "Die Erwartung an moderne Web-Applikationen hat sich fundamental verschoben. Nutzer erwarten Live-Updates, Kollaboration in Echtzeit und sofortige System-Reaktionen — nicht nach einem Browser-Refresh, sondern unmittelbar. Socket.IO ist die produktionserprobte Antwort auf diese Anforderung: eine Abstraktion über WebSockets mit automatischem Fallback, strukturiertem Event-System und horizontaler Skalierbarkeit.",
+            },
+            {
+                type: "heading",
+                text: "WebSocket vs. HTTP: Der fundamentale Unterschied",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "HTTP ist ein Request-Response-Protokoll — der Client fragt, der Server antwortet, die Verbindung wird geschlossen. Für statische Inhalte ist das optimal. Für Echtzeit-Daten ist es ein Architektur-Antipattern. WebSockets etablieren eine persistente, bidirektionale Verbindung. Einmal geöffnet, können Server und Client jederzeit Nachrichten senden — ohne den Overhead eines neuen HTTP-Handshakes.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "Socket.IO Server-Setup mit Express und Namespace-Architektur",
+                code: `import { createServer } from "http";
+import { Server } from "socket.io";
+import express from "express";
+
+const app = express();
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+    cors: { origin: process.env.CLIENT_URL, credentials: true },
+    transports: ["websocket", "polling"], // WebSocket first, polling als Fallback
+});
+
+// Namespace: isolierter Kommunikationskanal pro Feature-Bereich
+const dashboardNS = io.of("/dashboard");
+
+dashboardNS.on("connection", (socket) => {
+    console.log(\`Client connected: \${socket.id}\`);
+
+    // Room: Nutzer-spezifische Gruppe innerhalb des Namespace
+    socket.on("join:project", (projectId: string) => {
+        socket.join(\`project:\${projectId}\`);
+        socket.emit("joined", { projectId, timestamp: Date.now() });
+    });
+
+    // Broadcast an alle im Room — exkl. Sender
+    socket.on("data:update", (payload) => {
+        socket.to(\`project:\${payload.projectId}\`).emit("data:changed", payload);
+    });
+
+    socket.on("disconnect", (reason) => {
+        console.log(\`Client disconnected: \${reason}\`);
+    });
+});
+
+httpServer.listen(3001);`,
+            },
+            {
+                type: "heading",
+                text: "Horizontale Skalierung mit Redis Adapter",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Ein einzelner Socket.IO Server ist limitiert auf die Verbindungen, die ein Node.js-Prozess verwalten kann. Sobald mehrere Server-Instanzen betrieben werden — sei es für Hochverfügbarkeit oder Last-Verteilung — entsteht das Problem: Client A ist mit Server 1 verbunden, Client B mit Server 2. Ein Event von Client A erreicht Client B nicht ohne gemeinsamen Message-Bus. Die Lösung: der Redis Adapter.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "Redis Adapter für Multi-Instance Socket.IO Deployment",
+                code: `import { createAdapter } from "@socket.io/redis-adapter";
+import { createClient } from "redis";
+
+const pubClient = createClient({ url: process.env.REDIS_URL });
+const subClient = pubClient.duplicate();
+
+await Promise.all([pubClient.connect(), subClient.connect()]);
+
+// Alle Server-Instanzen teilen denselben Redis-Pub/Sub-Channel
+io.adapter(createAdapter(pubClient, subClient));
+
+// Ab jetzt: io.to(room).emit() funktioniert über alle Instanzen hinweg
+// Server 1 kann Clients auf Server 2 erreichen — transparent`,
+            },
+            {
+                type: "callout",
+                variant: "info",
+                text: "Der Redis Adapter ist die produktionserprobte Standardlösung für horizontale Socket.IO-Skalierung. Für Deployments auf Railway oder Vercel Edge Functions empfiehlt sich zusätzlich eine Sticky-Session-Konfiguration am Load Balancer, um den WebSocket-Upgrade-Handshake zu stabilisieren.",
+            },
+            {
+                type: "heading",
+                text: "Reconnection & State Recovery",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Netzwerkunterbrechungen sind unvermeidlich. Eine robuste Echtzeit-Architektur behandelt Reconnection nicht als Ausnahme, sondern als regulären Betriebszustand. Socket.IO bietet eingebaute Reconnection-Logik — entscheidend ist jedoch, was nach dem Wiederverbinden passiert: Welcher State wurde verpasst? Welche Events müssen nachgeliefert werden?",
+            },
+            {
+                type: "list",
+                items: [
+                    "Socket.IO reconnectionAttempts und reconnectionDelay konfigurieren — kein blindes Reconnect-Flooding",
+                    "Server-seitig: offlineQueue pattern — Events während Disconnect im Redis buffern und bei Reconnect flushen",
+                    "Client-seitig: lastEventId mitsenden — Server liefert alle Events seit letztem bekannten Stand nach",
+                    "Für kritische Systeme: Acknowledgements (ACK) als Delivery-Garantie nutzen, nicht Fire-and-Forget",
+                ],
+            },
+            {
+                type: "callout",
+                variant: "tip",
+                text: "Socket.IO ist nicht das richtige Werkzeug für jeden Echtzeit-Use-Case. Für rein server-to-client Push-Notifications (ohne Client→Server-Events) sind Server-Sent Events (SSE) oft die einfachere und ressourcenschonendere Alternative — insbesondere auf Vercel Edge Functions mit ihrem connectionless Deployment-Modell.",
+            },
+        ],
+    },
+    {
+        id: "9",
+        slug: "chatbot-ki-assistent-llm-integration",
+        logNumber: "PDA-LOG-009",
+        title: "Chatbots & KI-Assistenten: LLM-Integration für moderne Web-Apps",
+        category: "ARCHITECTURE",
+        date: "01.04.2026",
+        readTime: "08:00 MIN",
+        excerpt: "LLMs sind Infrastruktur — kein Feature-Gimmick. Wer Chatbots professionell baut, denkt in Prompt-Architektur, Context-Management und Production-Grade API-Integration.",
+        author: { name: "Palmer Digital", role: "Architecture Division" },
+        tags: ["Chatbot", "LLM", "KI", "OpenAI", "Anthropic", "Prompt Engineering"],
+        relatedSlugs: [
+            "socketio-realtime-websocket-architecture",
+            "nodejs-core-backend-architecture",
+        ],
+        content: [
+            {
+                type: "paragraph",
+                text: "Der Hype um Chatbots hat sich in einen echten Infrastruktur-Shift verwandelt. Unternehmen, die LLM-basierte Assistenten heute richtig architektonieren, gewinnen messbare Vorteile: reduzierte Support-Kosten, höhere Conversion-Raten und skalierbare Wissens-Distribution ohne lineares Personalwachstum. Der Unterschied zwischen einem Demo-Chatbot und einem Production-System liegt nicht im Modell — er liegt in der Architektur drumherum.",
+            },
+            {
+                type: "heading",
+                text: "Prompt-Architektur: Die Basis jedes LLM-Systems",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Ein LLM ist so gut wie die Anweisungen, die es erhält. System-Prompts sind nicht optional — sie sind die Architektur des Bot-Verhaltens. Ein produktionsreifer System-Prompt definiert: Persona und Tonalität, den genauen Aufgabenbereich (was der Bot NICHT tun soll ist ebenso wichtig), Ausgabeformat und die Eskalationsregeln für unbekannte Anfragen.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "Strukturierter System-Prompt mit Persona, Scope und Eskalationsregeln",
+                code: `const SYSTEM_PROMPT = \`Du bist der Support-Assistent von [Unternehmensname].
+
+## Deine Aufgaben
+- Beantworte Fragen zu Bestellungen, Versand und Retouren
+- Erkläre Produkteigenschaften anhand des bereitgestellten Produktkatalogs
+- Erstelle Support-Tickets für technische Probleme
+
+## Verhaltensregeln
+- Antworte ausschließlich auf Deutsch, präzise und freundlich
+- Erfinde KEINE Informationen. Wenn du etwas nicht weißt: sage es klar
+- Gib KEINE Rabattcodes oder Preisnachlässe ohne explizite Genehmigung
+- Eskaliere an einen menschlichen Agenten bei: Beschwerden, rechtlichen Fragen, Zahlungsstreitigkeiten
+
+## Ausgabeformat
+- Maximal 3 Absätze pro Antwort
+- Nutze Aufzählungen für Schritte oder Listen
+- Schließe IMMER mit einer Rückfrage oder einem konkreten nächsten Schritt ab
+\`;
+
+// Anthropic Claude API Call mit strukturiertem Kontext
+const response = await anthropic.messages.create({
+    model: "claude-opus-4-6",
+    max_tokens: 1024,
+    system: SYSTEM_PROMPT,
+    messages: conversationHistory, // Multi-Turn: gesamte Gesprächshistorie
+});`,
+            },
+            {
+                type: "heading",
+                text: "Context-Management: Multi-Turn Conversations",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "LLMs sind zustandslos — jeder API-Call ist isoliert. Multi-Turn-Konversationen entstehen dadurch, dass die gesamte Gesprächshistorie mit jedem Request mitgesendet wird. Das ist elegant, hat aber eine direkte Kostenimplikation: mehr Gesprächsverlauf = mehr Input-Tokens = höhere Kosten. Produktionsreife Systeme implementieren deshalb Context-Window-Management: Sliding Window (nur die letzten N Nachrichten), Summarization (ältere Nachrichten werden komprimiert) oder RAG (Retrieval-Augmented Generation für große Wissensbasen).",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "Context-Management mit Sliding Window und Token-Schätzung",
+                code: `interface Message {
+    role: "user" | "assistant";
+    content: string;
+}
+
+const MAX_CONTEXT_TOKENS = 4000;
+const AVG_TOKENS_PER_CHAR = 0.25; // Grobe Schätzung für Deutsch
+
+function trimContext(messages: Message[]): Message[] {
+    let totalChars = 0;
+    const trimmed: Message[] = [];
+
+    // Neueste Nachrichten zuerst behalten
+    for (let i = messages.length - 1; i >= 0; i--) {
+        const msgChars = messages[i].content.length;
+        const estimatedTokens = msgChars * AVG_TOKENS_PER_CHAR;
+
+        if (totalChars + estimatedTokens > MAX_CONTEXT_TOKENS) break;
+
+        trimmed.unshift(messages[i]);
+        totalChars += estimatedTokens;
+    }
+
+    return trimmed;
+}
+
+// Route Handler (Next.js App Router Server Action)
+export async function POST(request: Request) {
+    const { message, history } = await request.json();
+    const trimmedHistory = trimContext(history);
+
+    const response = await anthropic.messages.create({
+        model: "claude-opus-4-6",
+        max_tokens: 1024,
+        system: SYSTEM_PROMPT,
+        messages: [...trimmedHistory, { role: "user", content: message }],
+    });
+
+    return Response.json({ reply: response.content[0].text });
+}`,
+            },
+            {
+                type: "callout",
+                variant: "warning",
+                text: "Rate-Limiting ist in Production-Chatbots nicht optional. Ohne Request-Throttling riskierst du sowohl unkontrollierte API-Kosten als auch Missbrauch durch automatisierte Anfragen. Implementiere Rate-Limiting pro Session-ID oder IP — idealerweise mit Redis-backed Token Bucket Algorithmus.",
+            },
+            {
+                type: "heading",
+                text: "CRM & Backend Integration",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Ein Chatbot ohne Systemanbindung ist ein FAQ-Ersatz. Der echte Wert entsteht, wenn der Assistent auf Live-Daten zugreifen kann: Bestellstatus aus dem Shop-System, offene Tickets aus dem CRM, Produktverfügbarkeit aus der Datenbank. Function Calling ist der strukturierte Weg, LLMs sicher mit externen APIs zu verbinden — das Modell entscheidet, welche Funktion aufgerufen werden soll, dein Code führt sie aus.",
+            },
+            {
+                type: "list",
+                items: [
+                    "Function Calling (OpenAI) / Tool Use (Anthropic): LLM ruft strukturiert externe Funktionen auf",
+                    "Datenbank-Queries immer gefiltert und readonly — niemals schreibende Operationen ohne explizite Nutzerbestätigung",
+                    "Sensible Daten (Zahlungsinfo, Passwörter) niemals in den LLM-Context — nur anonymisierte Referenz-IDs",
+                    "Logging aller Bot-Interaktionen für Qualitätssicherung und Compliance — DSGVO-konform anonymisiert",
+                ],
+            },
+        ],
+    },
+    {
+        id: "10",
+        slug: "google-analytics-4-ga4-implementation",
+        logNumber: "PDA-LOG-010",
+        title: "Google Analytics 4: Die neue Daten-Architektur für Web-Properties",
+        category: "ANALYTICS",
+        date: "01.04.2026",
+        readTime: "06:00 MIN",
+        excerpt: "GA4 ist kein Upgrade von Universal Analytics — es ist ein anderes Produkt mit anderen Konzepten. Wer saubere Daten will, muss die Event-Architektur von Grund auf neu denken.",
+        author: { name: "Palmer Digital", role: "Architecture Division" },
+        tags: ["Google Analytics", "GA4", "GTM", "Tracking", "Conversion"],
+        relatedSlugs: [
+            "google-indexierung-technical-seo-architektur",
+            "nextjs-15-react-19-infrastructure-standard",
+        ],
+        content: [
+            {
+                type: "paragraph",
+                text: "Universal Analytics ist tot. GA4 ist sein Nachfolger — und wer noch glaubt, es handle sich um ein einfaches Upgrade, kämpft täglich mit inkonsistenten Daten, fehlenden Conversions und Berichten, die nichts aussagen. GA4 denkt in Events, nicht in Sessions und Pageviews. Dieser konzeptuelle Shift ist der Schlüssel zu einer sauberen Analytics-Implementierung.",
+            },
+            {
+                type: "heading",
+                text: "Das Event-Modell von GA4",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "In Universal Analytics war alles eine Session mit Pageviews. In GA4 ist alles ein Event. Ein Seitenaufruf ist das Event page_view, ein Kauf ist purchase, ein Klick auf einen Button ist ein custom_event. Diese Vereinheitlichung klingt simpel — hat aber fundamentale Auswirkungen auf die Datenstruktur. Jedes Event kann bis zu 25 Custom Parameters tragen, die frei definiert werden können. Das ist die Stärke von GA4: maximale Flexibilität bei der Datenerfassung.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "GA4 Custom Events via gtag.js — strukturierter Measurement Plan",
+                code: `// Typisierte Event-Helper für konsistentes Tracking
+type GA4Event = {
+    event_category?: string;
+    event_label?: string;
+    value?: number;
+    currency?: string;
+    item_id?: string;
+    item_name?: string;
+    [key: string]: string | number | undefined;
+};
+
+function trackEvent(eventName: string, params: GA4Event = {}) {
+    if (typeof window === "undefined" || !window.gtag) return;
+    window.gtag("event", eventName, params);
+}
+
+// E-Commerce: Produkt in den Warenkorb
+export function trackAddToCart(product: {
+    id: string;
+    name: string;
+    price: number;
+    quantity: number;
+}) {
+    trackEvent("add_to_cart", {
+        currency: "EUR",
+        value: product.price * product.quantity,
+        items: [{
+            item_id: product.id,
+            item_name: product.name,
+            price: product.price,
+            quantity: product.quantity,
+        }],
+    });
+}
+
+// Custom: Formular-Abschluss mit Segment-Info
+export function trackFormSubmit(formType: string, segment: string) {
+    trackEvent("form_submit", {
+        event_category: "lead_generation",
+        form_type: formType,
+        user_segment: segment,
+    });
+}`,
+            },
+            {
+                type: "heading",
+                text: "Google Tag Manager: Die Architektur-Schicht",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "GTM entkoppelt das Tracking vom Code-Deployment. Statt jedes neue Event durch einen Developer und ein Release-Cycle zu schleusen, verwalten Marketing und Analytics-Teams ihre Tags eigenständig. Das setzt aber voraus, dass die GTM-Architektur sauber aufgebaut ist: ein Data Layer als Kommunikationsschicht zwischen Website und GTM, strukturierte Trigger-Logik und eine klare Namenskonvention für alle Tags, Trigger und Variablen.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "Data Layer Push — strukturiertes Interface zwischen Next.js und GTM",
+                code: `// Typisierter Data Layer für GTM
+declare global {
+    interface Window {
+        dataLayer: Record<string, unknown>[];
+    }
+}
+
+function pushDataLayer(event: string, data: Record<string, unknown> = {}) {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event, ...data });
+}
+
+// Next.js: Route Change Tracking mit App Router
+// In layout.tsx — client component
+"use client";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+
+export function AnalyticsTracker() {
+    const pathname = usePathname();
+    const searchParams = useSearchParams();
+
+    useEffect(() => {
+        pushDataLayer("page_view", {
+            page_path: pathname,
+            page_search: searchParams.toString(),
+        });
+    }, [pathname, searchParams]);
+
+    return null;
+}`,
+            },
+            {
+                type: "callout",
+                variant: "info",
+                text: "Server-Side Tagging ist der nächste Evolutionsschritt: anstatt Tags im Browser des Nutzers auszuführen, läuft ein GTM-Server-Container auf deiner eigenen Infrastruktur. Vorteile: bessere Datenqualität (Ad-Blocker umgehen), reduzierte Browser-Latenz und vollständige Kontrolle über gesendete Daten — DSGVO-konform und performant.",
+            },
+            {
+                type: "heading",
+                text: "Looker Studio: Dashboards die aussagen",
+                level: 2,
+            },
+            {
+                type: "list",
+                items: [
+                    "GA4 als Datenquelle direkt in Looker Studio verbinden — kein CSV-Export, Live-Daten",
+                    "Blended Data Sources: GA4 + Search Console + Google Ads in einem Dashboard",
+                    "Custom Calculated Metrics: Conversion Rate, Revenue per Session, Customer Acquisition Cost",
+                    "Automatische E-Mail-Distribution: Reports landen wöchentlich im Postfach der Stakeholder",
+                    "Brand-konforme Templates: Farben, Schriften und Layout nach Corporate Design-Standard",
+                ],
+            },
+        ],
+    },
+    {
+        id: "11",
+        slug: "google-indexierung-technical-seo-architektur",
+        logNumber: "PDA-LOG-011",
+        title: "Google Indexierung: Technische SEO-Architektur für maximale Sichtbarkeit",
+        category: "SEO",
+        date: "01.04.2026",
+        readTime: "07:00 MIN",
+        excerpt: "Google kann nur indexieren, was es versteht. Technische SEO ist keine Magie — es ist strukturierte Architektur: Sitemap, Schema.org, Core Web Vitals und Search Console als Monitoring-Fundament.",
+        author: { name: "Palmer Digital", role: "Architecture Division" },
+        tags: ["SEO", "Google", "Indexierung", "Schema.org", "Core Web Vitals", "Search Console"],
+        relatedSlugs: [
+            "google-analytics-4-ga4-implementation",
+            "nextjs-15-react-19-infrastructure-standard",
+        ],
+        content: [
+            {
+                type: "paragraph",
+                text: "Technische SEO ist die Infrastruktur, auf der Content-Sichtbarkeit aufbaut. Ohne saubere Indexierbarkeit ist der beste Content unsichtbar. Google indexiert heute Milliarden von Seiten — und jene, die Google schnell versteht, vollständig crawlen kann und als strukturiert-relevant erkennt, werden bevorzugt behandelt. Das ist kein Algorithmus-Mythos, das ist dokumentiertes Googlebot-Verhalten.",
+            },
+            {
+                type: "heading",
+                text: "Sitemap-Architektur und Crawl-Budget",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Das Crawl-Budget ist die Anzahl an Seiten, die Googlebot pro Tag auf deiner Website crawlt. Bei kleinen Sites (unter 1.000 Seiten) ist das selten ein Problem. Bei E-Commerce-Shops mit 50.000 Produktseiten, dynamischen Filterseiten und Paginations-URLs ist Crawl-Budget-Management eine kritische Architekturentscheidung. Eine XML-Sitemap ist dein direktes Kommunikationsmittel mit Google: sie sagt dem Googlebot, was es crawlen soll — und implizit, was nicht.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "Dynamische XML-Sitemap in Next.js App Router",
+                code: `// app/sitemap.ts — Next.js generiert sitemap.xml automatisch
+import { MetadataRoute } from "next";
+import { getAllProducts } from "@/lib/data/products";
+import { getAllBlogPosts } from "@/lib/data/blog";
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+    const baseUrl = "https://example.com";
+
+    // Statische Hauptseiten — höchste Priorität
+    const staticRoutes: MetadataRoute.Sitemap = [
+        { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1.0 },
+        { url: \`\${baseUrl}/services\`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+        { url: \`\${baseUrl}/blog\`, lastModified: new Date(), changeFrequency: "daily", priority: 0.8 },
+    ];
+
+    // Dynamische Produktseiten
+    const products = await getAllProducts();
+    const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
+        url: \`\${baseUrl}/products/\${product.slug}\`,
+        lastModified: product.updatedAt,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+    }));
+
+    // Blog-Artikel
+    const posts = await getAllBlogPosts();
+    const blogRoutes: MetadataRoute.Sitemap = posts.map((post) => ({
+        url: \`\${baseUrl}/blog/\${post.slug}\`,
+        lastModified: post.date,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+    }));
+
+    return [...staticRoutes, ...productRoutes, ...blogRoutes];
+}`,
+            },
+            {
+                type: "heading",
+                text: "Structured Data: Schema.org für Rich Results",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Schema.org Markup ist die Sprache, in der du Google erklärst, was dein Content bedeutet — nicht nur, was er enthält. Ein Produktpreis ist für Google nur eine Zahl, bis du ihn als schema:price markierst. Eine Bewertung ist nur Text, bis du sie als schema:AggregateRating kennzeichnest. Rich Results — Sterne, Preise, FAQs direkt in den Google-Suchergebnissen — entstehen aus sauberem Schema.org Markup.",
+            },
+            {
+                type: "code",
+                language: "typescript",
+                caption: "JSON-LD Schema.org Markup für Artikel — Next.js Metadata API",
+                code: `// Wiederverwendbare Helper-Funktion für Article Schema
+export function generateArticleSchema(post: {
+    title: string;
+    excerpt: string;
+    date: string;
+    slug: string;
+    author: { name: string; role: string };
+}) {
+    return {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: post.title,
+        description: post.excerpt,
+        datePublished: post.date,
+        dateModified: post.date,
+        author: {
+            "@type": "Organization",
+            name: post.author.name,
+            url: "https://palmer-digital.com",
+        },
+        publisher: {
+            "@type": "Organization",
+            name: "Palmer Digital Architecture",
+            logo: {
+                "@type": "ImageObject",
+                url: "https://palmer-digital.com/media/Logo-mobile.svg",
+            },
+        },
+        mainEntityOfPage: {
+            "@type": "WebPage",
+            "@id": \`https://palmer-digital.com/blog/\${post.slug}\`,
+        },
+    };
+}
+
+// In der Blog-Article-Page
+export default async function BlogArticlePage({ params }) {
+    const post = getBlogPost(await params.slug);
+    const schema = generateArticleSchema(post);
+
+    return (
+        <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+            />
+            <article>{/* Content */}</article>
+        </>
+    );
+}`,
+            },
+            {
+                type: "callout",
+                variant: "info",
+                text: "Google Search Console ist das wichtigste SEO-Monitoring-Tool — und es ist kostenlos. Die Coverage-Reports zeigen exakt, welche Seiten indexiert sind, welche ausgeschlossen wurden und warum. Die Performance-Reports zeigen Impressionen, Klicks und durchschnittliche Position für jeden Query. Wer kein GSC aufgesetzt hat, fliegt blind.",
+            },
+            {
+                type: "heading",
+                text: "Core Web Vitals als Ranking-Faktor",
+                level: 2,
+            },
+            {
+                type: "paragraph",
+                text: "Seit dem Page Experience Update sind Core Web Vitals offizieller Ranking-Faktor. LCP (Largest Contentful Paint), INP (Interaction to Next Paint) und CLS (Cumulative Layout Shift) messen reale Nutzererfahrung — und Google bewertet sie. Der direkte Zusammenhang zwischen CWV-Scores und Rankings ist in der Praxis messbar: Seiten, die von 'Needs Improvement' auf 'Good' verbessert werden, sehen im Median eine 5-15% höhere Click-Through-Rate aus den Suchergebnissen.",
+            },
+            {
+                type: "list",
+                items: [
+                    "LCP < 2.5s: Größtes sichtbares Element muss schnell laden — Bilder optimieren, Server Response Time reduzieren",
+                    "INP < 200ms: Interaction to Next Paint ersetzt FID seit März 2024 — JavaScript-Blocking eliminieren",
+                    "CLS < 0.1: Layout Shifts vermeiden — Bild-Dimensionen definieren, Font-Loading optimieren, keine nachträglichen DOM-Injektionen",
+                    "Next.js + Vercel = struktureller Vorteil: Automatic Image Optimization, Edge Network und PPR lösen die meisten CWV-Probleme architektonisch",
+                ],
+            },
+        ],
+    },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {

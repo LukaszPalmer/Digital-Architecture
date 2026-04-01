@@ -378,6 +378,186 @@ export const servicesData: ServiceDetailData[] = [
             { segment: "ENTERPRISE", title: "Backend Integration", description: "Für Unternehmen, die bestehende Systeme via Node.js-Middleware-Schicht verbinden und modernisieren." },
         ],
     },
+    {
+        slug: "socketio-realtime",
+        systemId: "SYS_08_REALTIME",
+        title: "Socket.IO Real-Time",
+        tagline: "Echtzeit-Kommunikationsarchitektur für skalierbare Web-Applikationen — Events in Millisekunden, global zuverlässig.",
+        metrics: "< 1MS LATENCY // 1M+ CONCURRENT",
+        stats: [
+            { value: "< 1ms", label: "Event-Latenz" },
+            { value: "1M+", label: "Concurrent Connections" },
+            { value: "99.99%", label: "Delivery Guarantee" },
+        ],
+        capabilities: [
+            {
+                id: "RT-01",
+                title: "WebSocket Architecture",
+                description: "Persistente bidirektionale Verbindungen über Socket.IO mit automatischem Long-Polling Fallback für maximale Kompatibilität.",
+            },
+            {
+                id: "RT-02",
+                title: "Room & Namespace Management",
+                description: "Strukturierte Echtzeit-Kanäle für isolierte Kommunikationsräume — skalierbar von 10 auf 10.000 simultane Nutzer.",
+            },
+            {
+                id: "RT-03",
+                title: "Event Broadcasting",
+                description: "Selektive und globale Event-Verteilung mit garantierter Zustellungsreihenfolge und Idempotenz-Protokoll.",
+            },
+            {
+                id: "RT-04",
+                title: "Reconnection & State Sync",
+                description: "Automatische Wiederverbindungslogik mit State-Recovery — kein Datenverlust bei Netzwerkunterbrechungen.",
+            },
+        ],
+        process: [
+            { step: "01", title: "Architecture Design", description: "Analyse der Echtzeit-Anforderungen und Definition der Event-Taxonomie, Room-Struktur und Skalierungsstrategie." },
+            { step: "02", title: "Server Integration", description: "Node.js Socket.IO Server-Setup mit Redis Adapter für horizontale Skalierung über mehrere Instanzen." },
+            { step: "03", title: "Client Implementation", description: "Frontend-Integration mit optimiertem Event-Handling, State-Management und Connection-Lifecycle-Kontrolle." },
+            { step: "04", title: "Load Testing", description: "Lasttests mit simulierten Concurrent-Connections zur Verifikation der Latenz-SLAs und Reconnection-Stabilität." },
+        ],
+        useCases: [
+            { segment: "LIVE PLATFORMS", title: "Echtzeit-Dashboards", description: "Für Analytics-Plattformen und Operations-Systeme mit Live-Datenupdates und Multi-User-Synchronisation." },
+            { segment: "COLLABORATION", title: "Kollaborative Applikationen", description: "Für Tools mit gleichzeitiger Bearbeitung durch mehrere Nutzer — Dokumente, Whiteboards, Projektmanagement." },
+            { segment: "TRADING/GAMING", title: "Low-Latency Systeme", description: "Für Anwendungen, bei denen jede Millisekunde zählt — Handelssysteme, Echtzeit-Auktionen, Multiplayer-Logik." },
+        ],
+    },
+    {
+        slug: "chatbot-assistant",
+        systemId: "SYS_09_AI",
+        title: "Chatbot & KI-Assistent",
+        tagline: "Intelligente Konversations-Interfaces — von FAQ-Automation bis zur tiefen Enterprise KI-Integration.",
+        metrics: "< 200MS RESPONSE // 24/7 AVAILABILITY",
+        stats: [
+            { value: "< 200ms", label: "Response-Zeit" },
+            { value: "24/7", label: "Verfügbarkeit" },
+            { value: "95%+", label: "Intent-Erkennungsrate" },
+        ],
+        capabilities: [
+            {
+                id: "AI-01",
+                title: "LLM API Integration",
+                description: "Anbindung führender Sprachmodelle (OpenAI, Anthropic, Mistral) via strukturierter Prompt-Architektur und Context-Management.",
+            },
+            {
+                id: "AI-02",
+                title: "Multi-Turn Conversations",
+                description: "Session-basiertes Gesprächsgedächtnis für kohärente, kontextbewusste Dialoge ohne Informationsverlust über mehrere Nachrichten.",
+            },
+            {
+                id: "AI-03",
+                title: "CRM & Backend Integration",
+                description: "Nahtlose Anbindung an bestehende Systeme — Bestellstatus, Kundendaten, Support-Tickets direkt im Chat-Interface abrufbar.",
+            },
+            {
+                id: "AI-04",
+                title: "Escalation & Handoff Logic",
+                description: "Intelligente Eskalationsregeln für den Übergang vom Bot zum menschlichen Agenten — mit vollem Gesprächskontext-Transfer.",
+            },
+        ],
+        process: [
+            { step: "01", title: "Use Case Analysis", description: "Definition der Bot-Personas, Conversation Flows und Integrationspunkte mit bestehenden Systemen." },
+            { step: "02", title: "Conversation Design", description: "Strukturierung der Dialog-Trees, Intent-Mapping und Fallback-Strategien für robuste Nutzererfahrungen." },
+            { step: "03", title: "AI Integration", description: "LLM-Anbindung mit optimierter Prompt-Architektur, Rate-Limiting und Cost-Management für Production-Betrieb." },
+            { step: "04", title: "Training & Optimization", description: "Analyse der Chat-Logs, Intent-Kalibrierung und kontinuierliche Performance-Verbesserung nach Go-Live." },
+        ],
+        useCases: [
+            { segment: "CUSTOMER SERVICE", title: "Support-Automation", description: "Für Unternehmen mit hohem Support-Volumen — FAQ-Beantwortung, Ticket-Erstellung und Statusabfragen automatisiert." },
+            { segment: "E-COMMERCE", title: "Sales & Bestellassistenz", description: "Für Shops mit komplexem Produktkatalog — Produktberatung, Bestellverfolgung und Retouren-Management im Chat." },
+            { segment: "ENTERPRISE", title: "Interne Knowledge Bots", description: "Für Unternehmen mit großem internen Wissensbestand — HR-FAQs, IT-Helpdesk und Onboarding-Assistenten." },
+        ],
+    },
+    {
+        slug: "google-analytics",
+        systemId: "SYS_10_ANALYTICS",
+        title: "Google Analytics",
+        tagline: "Daten-getriebene Entscheidungen durch präzise GA4-Implementierung, Custom Reporting und vollständige Tracking-Architektur.",
+        metrics: "GA4 // GTM // 100% DATA ACCURACY",
+        stats: [
+            { value: "100%", label: "Tracking-Genauigkeit" },
+            { value: "GA4", label: "Analytics Standard" },
+            { value: "< 24h", label: "Implementierungszeit" },
+        ],
+        capabilities: [
+            {
+                id: "AN-01",
+                title: "GA4 Implementation",
+                description: "Vollständige Google Analytics 4 Konfiguration mit Event-Taxonomie, User-Properties und Conversion-Tracking nach Measurement-Plan.",
+            },
+            {
+                id: "AN-02",
+                title: "Google Tag Manager Architecture",
+                description: "Strukturierte GTM Container-Architektur für skalierbare Tag-Verwaltung ohne Code-Deployments bei jeder Tracking-Änderung.",
+            },
+            {
+                id: "AN-03",
+                title: "Conversion Tracking",
+                description: "Präzises E-Commerce und Conversion-Tracking — Funnels, Micro-Conversions und Revenue-Attribution für datenbasierte Budgetentscheidungen.",
+            },
+            {
+                id: "AN-04",
+                title: "Looker Studio Dashboards",
+                description: "Custom Reporting-Dashboards in Google Looker Studio — automatisierte Berichte für Stakeholder, täglich aktuell und brandkonform.",
+            },
+        ],
+        process: [
+            { step: "01", title: "Analytics Audit", description: "Bestandsaufnahme bestehender Tracking-Implementierung und Identifikation von Datenlücken und Fehlkonfigurationen." },
+            { step: "02", title: "Measurement Plan", description: "Definition aller zu trackenden Events, Conversions und KPIs — dokumentiert als Single-Source-of-Truth vor Implementierungsbeginn." },
+            { step: "03", title: "GTM & GA4 Setup", description: "Implementierung des vollständigen Tag-Stacks inklusive Enhanced E-Commerce, Custom Dimensions und Server-Side Tagging." },
+            { step: "04", title: "Reporting & Validierung", description: "QA-Testing aller Events, Dashboard-Aufbau und Übergabe mit Dokumentation für eigenständige Nutzung." },
+        ],
+        useCases: [
+            { segment: "E-COMMERCE", title: "Revenue-Tracking", description: "Für Online-Shops mit komplexen Funnels — vollständige Transaktionsdaten, Abbruch-Analyse und Kanal-Attribution." },
+            { segment: "MARKETING", title: "Campaign Analytics", description: "Für Marketing-Teams, die Kanal-Performance, UTM-Tracking und Budget-ROI präzise messen und optimieren wollen." },
+            { segment: "ENTERPRISE", title: "Multi-Property Reporting", description: "Für Unternehmen mit mehreren Web-Properties — konsolidierte Dashboards und standardisierte Tracking-Governance." },
+        ],
+    },
+    {
+        slug: "google-indexing",
+        systemId: "SYS_11_SEO",
+        title: "Google Indexierung",
+        tagline: "Technische SEO-Architektur für maximale Sichtbarkeit — strukturiert, messbar und nachhaltig indexierbar.",
+        metrics: "CORE WEB VITALS // SCHEMA.ORG // GSC",
+        stats: [
+            { value: "100", label: "Core Web Vitals Score" },
+            { value: "100%", label: "Indexierungsrate" },
+            { value: "< 24h", label: "Indexierungs-Latenz" },
+        ],
+        capabilities: [
+            {
+                id: "SEO-01",
+                title: "Technical SEO Audit",
+                description: "Vollständige Analyse von Crawlability, Indexierbarkeit, Duplicate-Content und technischen SEO-Fehlern via Search Console und Screaming Frog.",
+            },
+            {
+                id: "SEO-02",
+                title: "Sitemap & Robots Architecture",
+                description: "Strukturierte XML-Sitemap-Architektur mit Priority-Steuerung und robots.txt-Konfiguration für präzise Crawl-Budget-Allokation.",
+            },
+            {
+                id: "SEO-03",
+                title: "Structured Data & Schema.org",
+                description: "JSON-LD Markup für Rich Results — Organization, Product, Article, FAQ und LocalBusiness für maximale SERP-Präsenz.",
+            },
+            {
+                id: "SEO-04",
+                title: "Google Search Console Setup",
+                description: "GSC-Konfiguration, Property-Verifikation, Indexierungs-Monitoring und Instant Indexing API für sofortige Crawl-Anfragen bei Content-Updates.",
+            },
+        ],
+        process: [
+            { step: "01", title: "SEO Audit", description: "Technische Analyse des gesamten Web-Auftritts — Crawl-Fehler, Indexierungs-Probleme, Core Web Vitals und Structured Data Gaps." },
+            { step: "02", title: "Architektur-Optimierung", description: "URL-Struktur, interne Verlinkung, Canonical-Tags und Hreflang für internationale Projekte — fundament vor Content." },
+            { step: "03", title: "Structured Data Implementation", description: "JSON-LD Markup für alle relevanten Seitentypen mit Validierung via Google Rich Results Test und Search Console." },
+            { step: "04", title: "Monitoring & Reporting", description: "GSC-Dashboard, Ranking-Tracking und monatliche SEO-Reports mit Fortschrittsmessung gegen definierte KPIs." },
+        ],
+        useCases: [
+            { segment: "E-COMMERCE", title: "Produkt-Sichtbarkeit", description: "Für Shops mit tausenden Produktseiten — strukturierte Indexierungsstrategie, Product-Schema und Merchant Center Integration." },
+            { segment: "CORPORATE", title: "Lokale & nationale Präsenz", description: "Für Unternehmen, die in regionalen oder nationalen Suchergebnissen systematisch sichtbar werden wollen." },
+            { segment: "CONTENT", title: "News & Blog-Indexierung", description: "Für Content-Publisher mit regelmäßigen Veröffentlichungen — Instant Indexing, News-Sitemap und AMP-Integration." },
+        ],
+    },
 ];
 
 export function getServiceBySlug(slug: string) {
