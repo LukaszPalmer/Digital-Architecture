@@ -23,32 +23,67 @@ function getUTM() {
     };
 }
 
+// Erkennt ob Besucher zum ersten Mal kommt (über alle Sessions)
+function checkNewVisitor(): boolean {
+    try {
+        const KEY = "pda_returning";
+        if (localStorage.getItem(KEY)) return false;
+        localStorage.setItem(KEY, "1");
+        return true;
+    } catch {
+        return false;
+    }
+}
+
 export async function track(event: string, target: string = "", duration: number = 0) {
     const consent = loadConsent();
     if (!consent?.state.analytics) return; // Kein Consent → kein Tracking
 
     const payload = {
-        sessionId:   getSessionId(),
-        page:        window.location.pathname,
-        referrer:    document.referrer ?? "",
-        language:    navigator.language ?? "",
-        screenWidth: window.innerWidth,
+        sessionId:    getSessionId(),
+        page:         window.location.pathname,
+        referrer:     document.referrer ?? "",
+        language:     navigator.language ?? "",
+        screenWidth:  window.innerWidth,
         event,
-        eventTarget: target,
+        eventTarget:  target,
         duration,
+        isNewVisitor: event === "pageview" ? checkNewVisitor() : false,
         ...getUTM(),
     };
 
     try {
         await fetch("/api/track", {
-            method:  "POST",
-            headers: { "Content-Type": "application/json" },
-            body:    JSON.stringify(payload),
+            method:    "POST",
+            headers:   { "Content-Type": "application/json" },
+            body:      JSON.stringify(payload),
             keepalive: true, // funktioniert auch beim Seitenverlassen
         });
     } catch {
         // Tracking-Fehler niemals dem Nutzer zeigen
     }
+}
+
+// Scroll-Tiefe Tracking — feuert bei 25%, 50%, 75%, 100%
+export function initScrollTracking(): () => void {
+    const milestones = [25, 50, 75, 100];
+    const reached = new Set<number>();
+
+    function onScroll() {
+        const scrolled = window.scrollY + window.innerHeight;
+        const total    = document.documentElement.scrollHeight;
+        const pct      = Math.round((scrolled / total) * 100);
+
+        for (const m of milestones) {
+            if (pct >= m && !reached.has(m)) {
+                reached.add(m);
+                track("scroll_depth", `${m}%`);
+            }
+        }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
 }
 
 export async function deleteSessionData() {

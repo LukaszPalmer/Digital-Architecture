@@ -5,10 +5,11 @@
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
 // A11y: WCAG 2.1 AAA — jedes Label ist via htmlFor/id korrekt verknüpft.
 
-import { useState, useTransition } from "react";
+import { useState, useTransition, useRef } from "react";
 import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { sendContactEmail } from "@/lib/actions/sendContactEmail";
+import { track } from "@/lib/tracker";
 
 type FieldId = "name" | "email" | "service" | "phone" | "message";
 
@@ -94,7 +95,8 @@ export function ContactForm() {
     const searchParams = useSearchParams();
     const paketParam = searchParams.get("paket")?.toLowerCase() ?? "";
     const [selectedService, setSelectedService] = useState(PAKET_MAP[paketParam] ?? "");
-    const [focused, setFocused] = useState<FieldId | null>(null);
+    const [focused, setFocused]     = useState<FieldId | null>(null);
+    const formStartedRef            = useRef(false);
     const [callbackWanted, setCallbackWanted] = useState(false);
     const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
     const [isPending, startTransition] = useTransition();
@@ -113,7 +115,13 @@ export function ContactForm() {
                 : "border-b border-[#000000]/30"
         );
 
-    const onFocus = (id: FieldId) => () => setFocused(id);
+    const onFocus = (id: FieldId) => () => {
+        setFocused(id);
+        if (!formStartedRef.current) {
+            formStartedRef.current = true;
+            track("form_start", "contact");
+        }
+    };
     const onBlur = () => setFocused(null);
 
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -124,9 +132,11 @@ export function ContactForm() {
         startTransition(async () => {
             const result = await sendContactEmail(formData);
             if (result.success) {
+                track("form_submit", selectedService || "unknown");
                 form.reset();
                 setCallbackWanted(false);
                 setSelectedService("");
+                formStartedRef.current = false;
                 setStatus("success");
                 setTimeout(() => setStatus("idle"), 4000);
             } else {

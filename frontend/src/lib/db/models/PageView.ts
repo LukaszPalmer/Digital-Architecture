@@ -17,6 +17,7 @@ export interface IPageView extends Document {
     event: string;              // pageview | cta_click | form_submit | blog_read | outbound_click
     eventTarget: string;        // z.B. "Projekt starten" | "/blog/nextjs" | ""
     duration: number;           // Verweildauer in Sekunden (0 bei pageview, wird später gepatcht)
+    isNewVisitor: boolean;      // true wenn erster Besuch (localStorage-Flag)
     utmSource: string;
     utmMedium: string;
     utmCampaign: string;
@@ -36,8 +37,9 @@ const PageViewSchema = new Schema<IPageView>(
         screenWidth: { type: Number, default: 0 },
         event:       { type: String, required: true, default: "pageview" },
         eventTarget: { type: String, default: "" },
-        duration:    { type: Number, default: 0 },
-        utmSource:   { type: String, default: "" },
+        duration:     { type: Number,  default: 0 },
+        isNewVisitor: { type: Boolean, default: false },
+        utmSource:    { type: String, default: "" },
         utmMedium:   { type: String, default: "" },
         utmCampaign: { type: String, default: "" },
         timestamp:   { type: Date, default: Date.now, index: true },

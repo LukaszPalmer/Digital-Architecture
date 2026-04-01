@@ -1,30 +1,46 @@
 "use client";
 
 // src/components/providers/TrackingProvider.tsx
-// Fires a pageview track event on every SPA navigation.
-// tracker.ts guards the call — only runs when analytics consent is given.
+// Feuert pageview + pageleave + scroll_depth + cta_click auf jeder Seite.
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
-import { track } from "@/lib/tracker";
+import { track, initScrollTracking } from "@/lib/tracker";
 
 export function TrackingProvider() {
     const pathname  = usePathname();
     const startTime = useRef<number>(Date.now());
 
+    // Pageview + Verweildauer
     useEffect(() => {
-        // Track pageview for this route
         track("pageview");
         startTime.current = Date.now();
 
         return () => {
-            // Track time spent on the page when navigating away
             const duration = Math.round((Date.now() - startTime.current) / 1000);
             if (duration > 2) {
                 track("pageleave", pathname, duration);
             }
         };
     }, [pathname]);
+
+    // Scroll-Tiefe tracking (wird bei jedem Seitenwechsel neu initialisiert)
+    useEffect(() => {
+        return initScrollTracking();
+    }, [pathname]);
+
+    // Globales CTA-Click-Tracking via data-track-cta Attribut
+    // So bleiben Server Components unberührt — einfach data-track-cta="name" hinzufügen
+    useEffect(() => {
+        function handleClick(e: MouseEvent) {
+            const el = (e.target as HTMLElement).closest("[data-track-cta]") as HTMLElement | null;
+            if (el) {
+                track("cta_click", el.getAttribute("data-track-cta") ?? "unknown");
+            }
+        }
+        document.addEventListener("click", handleClick);
+        return () => document.removeEventListener("click", handleClick);
+    }, []);
 
     return null;
 }
