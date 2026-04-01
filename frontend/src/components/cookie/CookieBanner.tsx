@@ -6,6 +6,7 @@
 
 import { useState, useEffect } from "react";
 import { saveConsent, loadConsent, type ConsentState } from "@/lib/cookie-consent";
+import { track, deleteSessionData } from "@/lib/tracker";
 
 export function CookieBanner() {
     const [visible, setVisible] = useState(false);
@@ -36,15 +37,26 @@ export function CookieBanner() {
 
     function apply(state: ConsentState) {
         saveConsent(state);
-        // GA4 Consent Mode v2 — wird in Phase 2 mit gtag verdrahtet
+
+        // GA4 Consent Mode v2
         if (typeof window !== "undefined" && typeof (window as Window & { gtag?: Function }).gtag === "function") {
             (window as Window & { gtag?: Function }).gtag!("consent", "update", {
-                analytics_storage: state.analytics ? "granted" : "denied",
-                ad_storage: state.marketing ? "granted" : "denied",
-                ad_user_data: state.marketing ? "granted" : "denied",
+                analytics_storage:  state.analytics ? "granted" : "denied",
+                ad_storage:         state.marketing ? "granted" : "denied",
+                ad_user_data:       state.marketing ? "granted" : "denied",
                 ad_personalization: state.marketing ? "granted" : "denied",
             });
         }
+
+        // Eigenes Tracking
+        if (state.analytics) {
+            // Ersten Pageview direkt nach Zustimmung tracken
+            track("pageview");
+        } else {
+            // Session-Daten löschen wenn abgelehnt
+            deleteSessionData();
+        }
+
         setVisible(false);
     }
 
