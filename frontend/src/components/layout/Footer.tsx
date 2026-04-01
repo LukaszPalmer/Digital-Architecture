@@ -20,6 +20,10 @@ const FOOTER_SERVICES = [
     { label: "Cloud-Infrastruktur", href: "/services/cloud-infrastructure" },
     { label: "PostgreSQL Core", href: "/services/postgresql" },
     { label: "UI/UX & Branding", href: "/services/ux-ui-design" },
+    { label: "Chatbot KI-Assistent", href: "/services/chatbot-assistant" },
+    { label: "Socket.IO Real-Time", href: "/services/socketio-realtime" },
+    { label: "Google Analytics", href: "/services/google-analytics" },
+    { label: "Google Indexierung", href: "/services/google-indexing" },
 ];
 
 const FOOTER_LEGAL = [
