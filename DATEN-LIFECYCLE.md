@@ -1,3 +1,29 @@
+# Admin-Zugänge & Daten-Lifecycle
+
+---
+
+## Zugänge & URLs
+
+### Analytics Dashboard
+```
+https://palmer-digital.de/admin/login
+```
+Login: `kontakt@palmer-digital.de` + dein Admin-Passwort
+
+### Strapi CMS (Blog & Inhalte bearbeiten)
+```
+https://digital-architecture-production.up.railway.app/admin
+```
+Login: dein Strapi-Account (beim ersten Mal selbst angelegt)
+
+### MongoDB Atlas (Datenbank direkt einsehen)
+```
+https://cloud.mongodb.com
+```
+Cluster: `palmer-digital` → Database: `pda_analytics`
+
+---
+
 # Daten-Lifecycle & DSGVO Nachweis
 
 ---
