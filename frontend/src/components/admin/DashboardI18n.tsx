@@ -168,7 +168,7 @@ export type TKeys = keyof typeof T.de;
 interface I18nCtx {
     locale:    Locale;
     setLocale: (l: Locale) => void;
-    t:         typeof T.de;
+    t:         Record<TKeys, string>;
 }
 
 const DashboardI18nContext = createContext<I18nCtx>({
