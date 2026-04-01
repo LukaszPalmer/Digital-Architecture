@@ -50,7 +50,8 @@ export function CookieBanner() {
 
         // Eigenes Tracking
         if (state.analytics) {
-            // Ersten Pageview direkt nach Zustimmung tracken
+            // Consent-Seite tracken: welche Seite + woher der Nutzer kam → MongoDB
+            track("consent_accept", window.location.pathname);
             track("pageview");
         } else {
             // Session-Daten löschen wenn abgelehnt

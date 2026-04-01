@@ -2,10 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import { CookieBanner } from "@/components/cookie/CookieBanner";
-import { TrackingProvider } from "@/components/providers/TrackingProvider";
+import { SiteLayout } from "@/components/layout/SiteLayout";
 
 const GA_ID = "G-01TCGPSE78";
 
@@ -50,7 +47,7 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
         >
             <head>
-                {/* GA4 Consent Mode v2 — Default: alles denied bis Nutzer zustimmt */}
+                {/* GA4 Consent Mode v2 */}
                 <Script id="ga4-consent-init" strategy="beforeInteractive">{`
                     window.dataLayer = window.dataLayer || [];
                     function gtag(){dataLayer.push(arguments);}
@@ -64,36 +61,15 @@ export default function RootLayout({
                     gtag('js', new Date());
                     gtag('config', '${GA_ID}', { anonymize_ip: true });
                 `}</Script>
-                {/* GA4 Script */}
                 <Script
                     src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
                     strategy="afterInteractive"
                 />
             </head>
-            {/* 'flex-col min-h-screen' sorgt dafür, dass der Footer am Boden bleibt */}
             <body className="min-h-screen flex flex-col bg-white text-black selection:bg-[#001F3F] selection:text-white">
-                {/* Globales Navigations-Asset */}
-                <Navbar />
-
-                {/* Main Content Area: 
-                   'flex-grow' füllt den Raum zwischen Nav und Footer.
-                   Padding-Top korrespondiert exakt mit der Navbar-Höhe.
-                */}
-                <main
-                    id="main-content"
-                    className="flex-grow pt-[70px] md:pt-[90px]"
-                >
+                <SiteLayout>
                     {children}
-                </main>
-
-                {/* Globales Footer-Asset */}
-                <Footer />
-
-                {/* Cookie Consent Banner */}
-                <CookieBanner />
-
-                {/* Pageview Tracker — fires on every SPA navigation */}
-                <TrackingProvider />
+                </SiteLayout>
             </body>
         </html>
     );
