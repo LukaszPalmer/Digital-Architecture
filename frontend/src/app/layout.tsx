@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { CookieBanner } from "@/components/cookie/CookieBanner";
+import { TrackingProvider } from "@/components/providers/TrackingProvider";
 
 const GA_ID = "G-01TCGPSE78";
 
@@ -90,6 +91,9 @@ export default function RootLayout({
 
                 {/* Cookie Consent Banner */}
                 <CookieBanner />
+
+                {/* Pageview Tracker — fires on every SPA navigation */}
+                <TrackingProvider />
             </body>
         </html>
     );
