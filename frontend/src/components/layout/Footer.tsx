@@ -207,15 +207,23 @@ export default function Footer() {
                     <span className="text-[10.5px] font-mono text-[#000000]/55 tracking-[0.35em] uppercase">
                         © {year} Palmer Digital Architecture
                     </span>
-                    <div className="flex items-center gap-2 text-[10px] font-mono text-[#000000]/50 tracking-[0.25em] uppercase">
-                        <span>Built with</span>
-                        <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-1.5 py-0.5">
-                            Next.js
-                        </span>
-                        <span>&</span>
-                        <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-1.5 py-0.5">
-                            Vercel
-                        </span>
+                    <div className="flex items-center gap-4 text-[10px] font-mono text-[#000000]/50 tracking-[0.25em] uppercase">
+                        <Link href="/impressum" className="hover:text-[#001F3F] transition-colors duration-200">
+                            Impressum
+                        </Link>
+                        <Link href="/datenschutz" className="hover:text-[#001F3F] transition-colors duration-200">
+                            Datenschutz
+                        </Link>
+                        <div className="flex items-center gap-2">
+                            <span>Built with</span>
+                            <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-1.5 py-0.5">
+                                Next.js
+                            </span>
+                            <span>&</span>
+                            <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-1.5 py-0.5">
+                                Vercel
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -64,12 +64,12 @@ export function NavDropdown({ link }: { link: NavLink }) {
                 <div
                     role="menu"
                     aria-label={`${link.label} Navigation`}
-                    className="animate-dropdown absolute top-[70px] md:top-[90px] left-1/2 -translate-x-1/2 w-[min(860px,92vw)] bg-[#FFFFFF] border border-[#000000]/10 shadow-[0_8px_48px_rgba(0,0,0,0.10)] z-[100]"
+                    className="animate-dropdown absolute top-17.5 md:top-22.5 left-1/2 -translate-x-1/2 w-[min(860px,92vw)] bg-[#FFFFFF] border border-[#000000]/10 shadow-[0_8px_48px_rgba(0,0,0,0.10)] z-100"
                 >
                     <div className="grid grid-cols-[240px_1fr]">
 
                         {/* LEFT: Kontext-Panel — Navy */}
-                        <div className="bg-[#001F3F] p-8 flex flex-col justify-between min-h-[260px]">
+                        <div className="bg-[#001F3F] p-8 flex flex-col justify-between min-h-65">
                             <div>
                                 <span className="block text-[9px] font-mono tracking-[0.45em] text-[#FFFFFF]/35 uppercase mb-3">
                                     Bereich
@@ -104,7 +104,7 @@ export function NavDropdown({ link }: { link: NavLink }) {
                                     className="group/item flex items-start gap-4 p-4 hover:bg-[#001F3F] transition-colors duration-250"
                                 >
                                     {/* Icon Container — 0px border-radius */}
-                                    <div className="w-10 h-10 flex-shrink-0 bg-[#000000]/5 group-hover/item:bg-[#FFFFFF]/12 flex items-center justify-center p-2 transition-colors duration-250">
+                                    <div className="w-10 h-10 shrink-0 bg-[#000000]/5 group-hover/item:bg-[#FFFFFF]/12 flex items-center justify-center p-2 transition-colors duration-250">
                                         {sub.iconPath && (
                                             <Image
                                                 src={sub.iconPath}

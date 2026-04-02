@@ -51,7 +51,7 @@ export default function Contact() {
                                 Ihr Projekt?
                             </span>
                         </h2>
-                        <p className="text-[15px] md:text-[17px] text-[#000000]/70 leading-[1.75] max-w-[400px] border-l-2 border-[#001F3F] pl-6">
+                        <p className="text-[15px] md:text-[17px] text-[#000000]/70 leading-[1.75] max-w-100 border-l-2 border-[#001F3F] pl-6">
                             Schildern Sie uns Ihr Vorhaben. Wir evaluieren die
                             technologische Machbarkeit und melden uns innerhalb
                             von 24 Stunden.

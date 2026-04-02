@@ -47,20 +47,12 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
         >
             <head>
-                {/* GA4 Consent Mode v2 */}
-                <Script id="ga4-consent-init" strategy="beforeInteractive">{`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('consent', 'default', {
-                        analytics_storage: 'denied',
-                        ad_storage: 'denied',
-                        ad_user_data: 'denied',
-                        ad_personalization: 'denied',
-                        wait_for_update: 500
-                    });
-                    gtag('js', new Date());
-                    gtag('config', '${GA_ID}', { anonymize_ip: true });
-                `}</Script>
+                {/* GA4 Consent Mode v2 — inline avoided to prevent React hydration warning */}
+                <Script
+                    id="ga4-consent-init"
+                    strategy="beforeInteractive"
+                    src="/scripts/ga-consent-init.js"
+                />
                 <Script
                     src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
                     strategy="afterInteractive"

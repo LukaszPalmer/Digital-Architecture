@@ -58,7 +58,7 @@ export default async function BlogPage({
 
             {/* ── HERO ── */}
             <section className="border-b border-[#000000] pt-16 pb-16 md:pt-24 md:pb-20">
-                <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+                <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
                     <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-end gap-12 lg:gap-24">
 
                         <div>
@@ -101,10 +101,10 @@ export default async function BlogPage({
             </section>
 
             {/* ── FILTER BAR ── */}
-            <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
                 <Suspense
                     fallback={
-                        <div className="h-[50px] border-b border-[#000000] bg-[#000000]/5 animate-pulse" />
+                        <div className="h-12.5 border-b border-[#000000] bg-[#000000]/5 animate-pulse" />
                     }
                 >
                     <BlogFilterBar />
@@ -112,7 +112,7 @@ export default async function BlogPage({
             </div>
 
             {/* ── POSTS GRID ── */}
-            <section className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
+            <section className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
 
                 {/* Count Label */}
                 <div className="flex items-center gap-4 mb-12">
@@ -141,7 +141,7 @@ export default async function BlogPage({
 
             {/* ── BOTTOM CTA ── */}
             <section className="border-t border-[#000000] bg-[#001F3F]">
-                <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
+                <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
                     <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/40 uppercase block mb-4">
@@ -176,14 +176,14 @@ function BlogCard({ post, index }: { post: BlogPost; index: number }) {
     return (
         <Link
             href={`/blog/${post.slug}`}
-            className="group relative flex flex-col justify-between p-8 md:p-10 min-h-[420px] border-r border-b border-[#000000] transition-all duration-500 overflow-hidden"
+            className="group relative flex flex-col justify-between p-8 md:p-10 min-h-105 border-r border-b border-[#000000] transition-all duration-500 overflow-hidden"
         >
             {/* HOVER REVEAL: Rising Navy Block */}
             <div className="absolute bottom-0 left-0 w-full h-0 bg-[#001F3F] group-hover:h-full transition-all duration-500 ease-in-out z-0" />
 
             {/* GHOST INDEX */}
             <span
-                className="absolute -right-3 -bottom-3 text-[110px] font-bold text-[#000000]/[0.03] group-hover:text-[#FFFFFF]/5 transition-all duration-500 z-10 select-none leading-none"
+                className="absolute -right-3 -bottom-3 text-[110px] font-bold text-[#000000]/3 group-hover:text-[#FFFFFF]/5 transition-all duration-500 z-10 select-none leading-none"
                 aria-hidden="true"
             >
                 {String(index + 1).padStart(2, "0")}

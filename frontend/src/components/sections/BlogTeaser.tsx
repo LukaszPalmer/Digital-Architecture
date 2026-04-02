@@ -32,7 +32,7 @@ export default async function BlogTeaser() {
     const PREVIEW_POSTS = allPosts.slice(0, 3);
     return (
         <section className="bg-[#FFFFFF] py-20 md:py-32 lg:py-44 border-t border-[#000000] overflow-hidden">
-            <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
 
                 {/* HEADER */}
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-8">
@@ -80,14 +80,14 @@ function BlogTeaserCard({ post, index }: { post: BlogPost; index: number }) {
     return (
         <Link
             href={`/blog/${post.slug}`}
-            className="group relative flex flex-col justify-between p-8 md:p-12 min-h-[450px] border-r border-b border-[#000000] transition-all duration-500 overflow-hidden"
+            className="group relative flex flex-col justify-between p-8 md:p-12 min-h-112.5 border-r border-b border-[#000000] transition-all duration-500 overflow-hidden"
         >
             {/* HOVER REVEAL LAYER */}
             <div className="absolute bottom-0 left-0 w-full h-0 bg-[#001F3F] group-hover:h-full transition-all duration-500 ease-in-out z-0" />
 
             {/* GHOST INDEX */}
             <span
-                className="absolute -right-4 -bottom-4 text-[120px] font-bold text-[#000000]/[0.03] group-hover:text-[#FFFFFF]/5 transition-all duration-500 z-10 select-none"
+                className="absolute -right-4 -bottom-4 text-[120px] font-bold text-[#000000]/3 group-hover:text-[#FFFFFF]/5 transition-all duration-500 z-10 select-none"
                 aria-hidden="true"
             >
                 0{index + 1}

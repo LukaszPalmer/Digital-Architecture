@@ -49,14 +49,14 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
     return (
         <>
             {/* ── Hamburger / X Toggle ──
-                z-[60] stellt sicher, dass der Button über dem Overlay (z-50) bleibt.
+                z-60 stellt sicher, dass der Button über dem Overlay (z-50) bleibt.
                 Dieser Button ist der EINZIGE Close-Trigger — kein redundantes X im Overlay. */}
             <button
                 onClick={() => setIsOpen((v) => !v)}
                 aria-label={isOpen ? "Menü schließen" : "Menü öffnen"}
                 aria-expanded={isOpen}
                 aria-controls="mobile-nav"
-                className="relative z-[60] w-11 h-11 flex items-center justify-center"
+                className="relative z-60 w-11 h-11 flex items-center justify-center"
             >
                 {/*
                     Wrapper: w-5 (20px) × h-3.5 (14px).
@@ -107,7 +107,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                         <span className="text-[#001F3F] font-black text-[17px] tracking-[-0.04em] uppercase leading-none group-hover:text-[#000000] transition-colors">
                             PALMER
                         </span>
-                        <span className="text-[8.5px] tracking-[0.28em] font-medium text-[#001F3F]/50 uppercase mt-[3px]">
+                        <span className="text-[8.5px] tracking-[0.28em] font-medium text-[#001F3F]/50 uppercase mt-0.75">
                             Digital
                         </span>
                     </Link>

@@ -83,7 +83,7 @@ export default async function BlogArticlePage({
             <ArticleHero post={post} />
 
             {/* ── ARTIKEL CONTENT ── */}
-            <section className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+            <section className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
                 <div className="grid grid-cols-1 lg:grid-cols-[1fr_280px] gap-0 border-b border-[#000000]">
 
                     {/* CONTENT COLUMN */}
@@ -102,7 +102,7 @@ export default async function BlogArticlePage({
             )}
 
             {/* ── BACK NAVIGATION ── */}
-            <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16 border-t border-[#000000]/10">
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-12 md:py-16 border-t border-[#000000]/10">
                 <Link
                     href="/blog"
                     className="group inline-flex items-center gap-3 text-[11px] font-mono font-bold tracking-[0.35em] uppercase text-[#000000]/55 hover:text-[#001F3F] transition-colors"
@@ -131,7 +131,7 @@ export default async function BlogArticlePage({
 function ArticleHero({ post }: { post: BlogPost }) {
     return (
         <header className="border-b border-[#000000] pt-12 pb-16 md:pt-20 md:pb-24">
-            <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12">
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
 
                 {/* Eyebrow */}
                 <div className="flex items-center gap-4 mb-10">
@@ -368,7 +368,7 @@ function ContentRenderer({ blocks }: { blocks: ContentBlock[] }) {
                                         className="flex items-start gap-4 text-[15px] leading-[1.7] text-[#000000]/70"
                                     >
                                         <span
-                                            className="mt-[7px] w-1.5 h-1.5 bg-[#001F3F] shrink-0"
+                                            className="mt-1.75 w-1.5 h-1.5 bg-[#001F3F] shrink-0"
                                             aria-hidden="true"
                                         />
                                         {item}
@@ -388,8 +388,8 @@ function ContentRenderer({ blocks }: { blocks: ContentBlock[] }) {
 // ── RELATED LOGS ──
 function RelatedLogs({ posts }: { posts: BlogPost[] }) {
     return (
-        <section className="border-t border-[#000000] bg-[#000000]/[0.02]">
-            <div className="max-w-[1440px] mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
+        <section className="border-t border-[#000000] bg-[#000000]/2">
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24">
 
                 <div className="flex items-center gap-4 mb-12">
                     <div className="h-px w-8 bg-[#001F3F]" />
@@ -403,12 +403,12 @@ function RelatedLogs({ posts }: { posts: BlogPost[] }) {
                         <Link
                             key={post.id}
                             href={`/blog/${post.slug}`}
-                            className="group relative flex flex-col justify-between p-8 md:p-10 min-h-[280px] border-r border-b border-[#000000] overflow-hidden transition-all duration-500"
+                            className="group relative flex flex-col justify-between p-8 md:p-10 min-h-70 border-r border-b border-[#000000] overflow-hidden transition-all duration-500"
                         >
                             <div className="absolute bottom-0 left-0 w-full h-0 bg-[#001F3F] group-hover:h-full transition-all duration-500 ease-in-out z-0" />
 
                             <span
-                                className="absolute -right-3 -bottom-3 text-[90px] font-bold text-[#000000]/[0.03] group-hover:text-[#FFFFFF]/5 transition-all duration-500 z-10 select-none leading-none"
+                                className="absolute -right-3 -bottom-3 text-[90px] font-bold text-[#000000]/3 group-hover:text-[#FFFFFF]/5 transition-all duration-500 z-10 select-none leading-none"
                                 aria-hidden="true"
                             >
                                 {String(index + 1).padStart(2, "0")}

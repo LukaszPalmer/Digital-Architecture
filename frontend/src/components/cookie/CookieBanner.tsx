@@ -68,7 +68,7 @@ export function CookieBanner() {
             {/* Backdrop — nur wenn Details offen */}
             {showDetails && (
                 <div
-                    className="fixed inset-0 bg-[#000000]/40 z-[998] backdrop-blur-[2px]"
+                    className="fixed inset-0 bg-[#000000]/40 z-998 backdrop-blur-[2px]"
                     onClick={() => setShowDetails(false)}
                     aria-hidden="true"
                 />
@@ -79,7 +79,7 @@ export function CookieBanner() {
                 aria-modal="true"
                 aria-labelledby="cookie-banner-heading"
                 className={`
-                    fixed z-[999] transition-all duration-500 ease-in-out
+                    fixed z-999 transition-all duration-500 ease-in-out
                     ${showDetails
                         ? "inset-4 md:inset-auto md:left-1/2 md:-translate-x-1/2 md:top-1/2 md:-translate-y-1/2 md:w-full md:max-w-xl"
                         : "bottom-4 left-4 right-4 md:left-auto md:right-6 md:bottom-6 md:w-full md:max-w-sm"

@@ -13,12 +13,12 @@ import { NAV_LINKS } from "@/lib/data/navigation";
 export default function Navbar() {
     return (
         <NavScrollShell>
-            <div className="max-w-[1440px] mx-auto h-full flex items-center justify-between px-4 md:px-8 lg:px-12">
+            <div className="max-w-360 mx-auto h-full flex items-center justify-between px-4 md:px-8 lg:px-12">
 
                 {/* ── LOGO ── */}
                 <Link
                     href="/"
-                    className="group flex flex-col flex-shrink-0"
+                    className="group flex flex-col shrink-0"
                     aria-label="Palmer Digital — Startseite"
                 >
                     <span className="text-[#001F3F] font-black text-[20px] tracking-[-0.04em] leading-none uppercase group-hover:text-[#000000] transition-colors duration-200">
