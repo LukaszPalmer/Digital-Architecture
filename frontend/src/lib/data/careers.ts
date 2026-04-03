@@ -57,7 +57,7 @@ export const COMPANY_VALUES: CompanyValue[] = [
         id: "02",
         title: "Ownership & Precision",
         description:
-            "Jedes Teammitglied trägt vollständige Verantwortung für seinen Bereich. Keine halben Lösungen, keine Kompromisse.",
+            "Jedes Teammitglied übernimmt Verantwortung für seinen Bereich — und stimmt sich aktiv mit dem Team ab. Wir vergleichen Ansätze, teilen Erkenntnisse und sprechen offen miteinander. Kommunikation ist das Ziel.",
     },
     {
         id: "03",
@@ -84,9 +84,9 @@ export const BENEFITS: Benefit[] = [
     {
         id: "02",
         category: "EQUIPMENT",
-        title: "Hardware-Budget",
+        title: "Hardware-Setup",
         description:
-            "Bis zu 3.000 € für dein persönliches Setup. MacBook, externes Display, peripherals — du entscheidest.",
+            "Du solltest bereits über passendes Equipment und das richtige Betriebssystem verfügen. Professionelle Arbeit setzt professionelle Werkzeuge voraus.",
     },
     {
         id: "03",
