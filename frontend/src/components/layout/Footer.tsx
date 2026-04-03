@@ -76,7 +76,7 @@ export default function Footer() {
                         {/* Headline */}
                         <div>
                             <span className="block text-[9.5px] font-mono font-bold tracking-[0.5em] text-[#000000]/55 uppercase mb-10">
-                                Palmer Digital — Est. 2024
+                                Palmer Digital — Est. 2026
                             </span>
                             <h2 className="text-[clamp(2.4rem,6vw,5.5rem)] font-black text-[#000000] leading-[0.96] tracking-[-0.025em] uppercase">
                                 Wir konstruieren
