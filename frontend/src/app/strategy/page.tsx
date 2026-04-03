@@ -6,9 +6,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Strategie — Palmer Digital",
+    title: "Digitale Strategie & IT-Beratung für Unternehmen",
     description:
-        "Unser strategischer Ansatz: Wie wir denken, planen und uns individuell auf jeden Kunden einlassen.",
+        "Strategische IT-Beratung und Webprojekt-Planung von Palmer Digital: Discovery, Architektur, agile Entwicklung und vollständige Übergabe. Individuelle Digitalisierungsstrategie für Startups, Mittelstand und Enterprise.",
+    keywords: [
+        "IT-Beratung Deutschland",
+        "Digitale Strategie",
+        "Webprojekt Beratung",
+        "Softwareentwicklung Strategie",
+        "Digitalisierung Unternehmen",
+        "IT-Consulting",
+        "Webprojekt Planung",
+        "digitale Transformation",
+        "Software Architektur Beratung",
+        "Agile Entwicklung",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/strategy" },
+    openGraph: {
+        title: "Digitale Strategie & IT-Beratung | Palmer Digital",
+        description:
+            "Individuelle IT-Strategie für Startups, Mittelstand und Enterprise — Discovery, Architektur und agile Umsetzung.",
+        url: "https://palmer-digital.de/strategy",
+    },
 };
 
 const PHASES = [

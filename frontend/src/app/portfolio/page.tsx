@@ -6,9 +6,28 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Portfolio — Palmer Digital",
+    title: "Portfolio — Webentwicklung Referenzen & Projekte",
     description:
-        "Echte Projekte. Echte Architekturen. Keine Templates, keine Demos — vollständig engineerte Monorepos mit messbaren Ergebnissen, die in Produktion laufen.",
+        "Referenzprojekte von Palmer Digital: Next.js E-Commerce Architekturen, globale Cloud-Infrastrukturen, Stripe Payment Pipelines und Enterprise Design Systems — vollständig engineert, produktionsbereit, mit messbaren Ergebnissen.",
+    keywords: [
+        "Webentwicklung Portfolio",
+        "Referenzprojekte Webentwicklung",
+        "Next.js Projekte",
+        "Webentwicklung Referenzen Deutschland",
+        "E-Commerce Projekte",
+        "Cloud-Infrastruktur Projekte",
+        "Software-Entwicklung Portfolio",
+        "Webdesign Referenzen",
+        "Fullstack Projekte",
+        "Agentur Portfolio",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/portfolio" },
+    openGraph: {
+        title: "Portfolio — Referenzprojekte | Palmer Digital",
+        description:
+            "Echte Projekte, echte Architekturen — Next.js, Cloud, Stripe und Design Systems in Produktion.",
+        url: "https://palmer-digital.de/portfolio",
+    },
 };
 
 const PROJECTS = [

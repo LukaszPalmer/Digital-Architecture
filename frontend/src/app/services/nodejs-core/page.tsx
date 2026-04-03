@@ -11,9 +11,28 @@ import NodeUseCases from "@/components/sections/NodeUseCases";
 import NodeCTA from "@/components/sections/NodeCTA";
 
 export const metadata: Metadata = {
-    title: "Node.js Core | Palmer Digital",
+    title: "Node.js Entwicklung — Backend & REST API Entwicklung",
     description:
-        "Skalierbare Backend-Infrastruktur auf Node.js-Basis — REST APIs, GraphQL, Microservices, Authentication und Background-Jobs für produktionskritische Systeme.",
+        "Professionelle Node.js Backend-Entwicklung für Unternehmen: REST APIs, GraphQL, Microservices, Authentication und Background-Jobs. Backend-Entwicklung für skalierbare und produktionskritische Systeme in Deutschland.",
+    keywords: [
+        "Node.js Entwicklung",
+        "Node.js Entwickler Deutschland",
+        "REST API Entwicklung",
+        "Backend-Entwicklung",
+        "GraphQL API",
+        "Microservices Entwicklung",
+        "Node.js Backend",
+        "API Entwicklung",
+        "Express.js",
+        "Backend-Architektur",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/nodejs-core" },
+    openGraph: {
+        title: "Node.js Backend-Entwicklung | Palmer Digital",
+        description:
+            "REST APIs, GraphQL, Microservices und Authentication — skalierbare Node.js Backend-Infrastruktur für produktionskritische Systeme.",
+        url: "https://palmer-digital.de/services/nodejs-core",
+    },
 };
 
 export default function NodejsCorePage() {

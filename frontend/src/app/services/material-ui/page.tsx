@@ -11,9 +11,28 @@ import DashUseCases from "@/components/sections/DashUseCases";
 import DashCTA from "@/components/sections/DashCTA";
 
 export const metadata: Metadata = {
-    title: "Material UI Logic | Palmer Digital",
+    title: "Enterprise Dashboard Entwicklung — Material UI & React",
     description:
-        "Enterprise Dashboard-Systeme auf MUI-Basis — Datentabellen, Analytics, RBAC und Echtzeit-Visualisierungen für kritische Geschäftsprozesse.",
+        "Professionelle Enterprise Dashboard Entwicklung mit Material UI und React: Datentabellen, Analytics-Dashboards, RBAC und Echtzeit-Visualisierungen für kritische Geschäftsprozesse. Dashboard-Entwicklung für Unternehmen in Deutschland.",
+    keywords: [
+        "Dashboard Entwicklung",
+        "Enterprise Dashboard",
+        "Material UI Entwickler",
+        "React Dashboard",
+        "Admin Panel Entwicklung",
+        "Datenvisualisierung",
+        "Analytics Dashboard",
+        "RBAC Dashboard",
+        "Business Intelligence Dashboard",
+        "React Entwickler Deutschland",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/material-ui" },
+    openGraph: {
+        title: "Enterprise Dashboard Entwicklung | Palmer Digital",
+        description:
+            "Material UI Dashboards — Datentabellen, Analytics, RBAC und Echtzeit-Visualisierungen für kritische Geschäftsprozesse.",
+        url: "https://palmer-digital.de/services/material-ui",
+    },
 };
 
 export default function MaterialUIPage() {

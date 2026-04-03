@@ -10,9 +10,28 @@ import CareersHiringProcess from "@/components/sections/CareersHiringProcess";
 import CareersCTA from "@/components/sections/CareersCTA";
 
 export const metadata: Metadata = {
-    title: "Careers — Palmer Digital",
+    title: "Jobs & Karriere — Webentwickler & Designer gesucht",
     description:
-        "Werde Teil von Palmer Digital. Wir suchen Engineers und Designer, die digitale Infrastruktur auf dem Niveau der Marktführer konstruieren.",
+        "Offene Stellen bei Palmer Digital: Wir suchen Fullstack-Entwickler, Next.js Engineers und UX/UI Designer. Remote-Jobs in der Webentwicklung — bewirb dich jetzt und werde Teil eines Engineering-Teams auf Elite-Niveau.",
+    keywords: [
+        "Jobs Webentwicklung",
+        "Next.js Entwickler Jobs",
+        "Remote Jobs Entwickler",
+        "Fullstack Developer Jobs Deutschland",
+        "Frontend Entwickler Job",
+        "TypeScript Jobs",
+        "UX Designer Jobs",
+        "Software Engineer Jobs",
+        "Remote Entwickler Job",
+        "IT Jobs Deutschland",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/careers" },
+    openGraph: {
+        title: "Jobs & Karriere | Palmer Digital",
+        description:
+            "Fullstack-Entwickler, Next.js Engineers und Designer gesucht. Remote-First, Engineering auf Elite-Niveau.",
+        url: "https://palmer-digital.de/careers",
+    },
 };
 
 export default function CareersPage() {

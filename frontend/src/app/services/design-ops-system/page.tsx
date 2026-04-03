@@ -11,9 +11,28 @@ import DesignUseCases from "@/components/sections/DesignUseCases";
 import DesignCTA from "@/components/sections/DesignCTA";
 
 export const metadata: Metadata = {
-    title: "Tailwind Design Ops | Palmer Digital",
+    title: "Design System Entwicklung — Tailwind CSS & Atomic Design",
     description:
-        "Atomic CSS Design Systems auf Tailwind-Basis — Token-Architektur, Komponentenbibliotheken und WCAG AAA-konforme Interface-Systeme für skalierbare Produkte.",
+        "Professionelle Design System Entwicklung mit Tailwind CSS: Token-Architektur, Komponentenbibliotheken und WCAG AAA-konforme Interface-Systeme für skalierbare digitale Produkte in Deutschland.",
+    keywords: [
+        "Design System Entwicklung",
+        "Tailwind CSS Agentur",
+        "Atomic Design System",
+        "Komponentenbibliothek",
+        "WCAG AAA",
+        "CSS Design System",
+        "Frontend Design System",
+        "UI Komponentenbibliothek",
+        "Tailwind CSS Entwickler",
+        "Webdesign System",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/design-ops-system" },
+    openGraph: {
+        title: "Design System Entwicklung | Palmer Digital",
+        description:
+            "Tailwind CSS Design Systems — Token-Architektur, Komponentenbibliotheken und WCAG AAA-konforme Interfaces für skalierbare Produkte.",
+        url: "https://palmer-digital.de/services/design-ops-system",
+    },
 };
 
 export default function DesignOpsPage() {

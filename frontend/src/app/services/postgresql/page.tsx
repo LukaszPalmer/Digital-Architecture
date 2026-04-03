@@ -11,9 +11,28 @@ import PostgreUseCases from "@/components/sections/PostgreUseCases";
 import PostgreCTA from "@/components/sections/PostgreCTA";
 
 export const metadata: Metadata = {
-    title: "PostgreSQL Core — Palmer Digital",
+    title: "PostgreSQL Entwicklung — Relationale Datenbankarchitektur",
     description:
-        "ACID-konforme relationale Datenbankarchitektur auf PostgreSQL-Basis — MVCC, Row-Level Security, Advanced Indexing und Point-in-Time-Recovery für produktionskritische Systeme.",
+        "Professionelle PostgreSQL Entwicklung für Unternehmen: ACID-konforme Datenbankarchitektur, Row-Level Security, Advanced Indexing und Point-in-Time-Recovery. SQL-Datenbankentwicklung für produktionskritische Systeme.",
+    keywords: [
+        "PostgreSQL Entwicklung",
+        "PostgreSQL Entwickler Deutschland",
+        "relationale Datenbank",
+        "SQL Datenbankentwicklung",
+        "PostgreSQL Architektur",
+        "Datenbankentwicklung",
+        "ACID Datenbank",
+        "PostgreSQL Optimierung",
+        "Datenbankdesign",
+        "Backend-Entwicklung",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/postgresql" },
+    openGraph: {
+        title: "PostgreSQL Datenbankentwicklung | Palmer Digital",
+        description:
+            "ACID-konforme PostgreSQL Architektur — Row-Level Security, Advanced Indexing und Point-in-Time-Recovery für produktionskritische Systeme.",
+        url: "https://palmer-digital.de/services/postgresql",
+    },
 };
 
 export default function PostgreSQLPage() {

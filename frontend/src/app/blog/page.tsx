@@ -12,9 +12,28 @@ import BlogFilterBar from "@/components/sections/BlogFilterBar";
 import { BlogPost } from "@/types/blog";
 
 export const metadata: Metadata = {
-    title: "Engineering Ledger | Blog",
+    title: "Blog — Webentwicklung, Next.js & Cloud Architektur",
     description:
-        "Technische Einblicke, Architektur-Briefings und Engineering-Perspektiven von Palmer Digital.",
+        "Technische Artikel, Architektur-Briefings und praxisnahe Engineering-Perspektiven zu Next.js, TypeScript, MongoDB, PostgreSQL und Cloud-Infrastruktur. Webentwicklung Deep-Dives von Palmer Digital.",
+    keywords: [
+        "Webentwicklung Blog",
+        "Next.js Tutorial",
+        "TypeScript Blog",
+        "Cloud-Infrastruktur Blog",
+        "MongoDB Tutorial",
+        "PostgreSQL Artikel",
+        "React Blog Deutschland",
+        "Software-Architektur Blog",
+        "Web-Engineering",
+        "JavaScript Architektur",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/blog" },
+    openGraph: {
+        title: "Blog — Webentwicklung & Cloud Architektur | Palmer Digital",
+        description:
+            "Next.js, TypeScript, MongoDB, Cloud — technische Deep-Dives und Architektur-Briefings aus der Praxis.",
+        url: "https://palmer-digital.de/blog",
+    },
 };
 
 // Next.js 15 Dogma: searchParams als Promise

@@ -7,9 +7,28 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "Alle Leistungen — Palmer Digital",
+    title: "Leistungen — Webentwicklung, Cloud & Design",
     description:
-        "Vollständige Übersicht aller digitalen Dienstleistungen: Next.js Engineering, Cloud-Infrastruktur, UI/UX Design, KI-Assistenten, Echtzeitsysteme und mehr.",
+        "Alle digitalen Leistungen von Palmer Digital: Next.js Entwicklung, Cloud-Infrastruktur, UI/UX Design, Node.js Backend, Stripe Integration, KI-Assistenten, Google Analytics und technische SEO. Individuell kalkuliert für Ihr Vorhaben.",
+    keywords: [
+        "Webentwicklung Leistungen",
+        "Next.js Entwicklung",
+        "Cloud-Infrastruktur",
+        "UI UX Design Agentur",
+        "Node.js Entwicklung",
+        "Stripe Integration",
+        "KI Chatbot Entwicklung",
+        "Google Analytics Einrichtung",
+        "SEO Optimierung",
+        "Software-Entwicklung Leistungen",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services" },
+    openGraph: {
+        title: "Alle Leistungen — Palmer Digital",
+        description:
+            "Next.js, Cloud, Design, KI und SEO — alle digitalen Leistungen individuell für Ihr Projekt.",
+        url: "https://palmer-digital.de/services",
+    },
 };
 
 const ENGINEERING_SERVICES = [

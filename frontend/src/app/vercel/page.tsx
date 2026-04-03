@@ -10,9 +10,28 @@ import VercelUseCases from "@/components/sections/VercelUseCases";
 import VercelCTA from "@/components/sections/VercelCTA";
 
 export const metadata: Metadata = {
-    title: "Vercel Edge Infrastructure — Palmer Digital",
+    title: "Vercel Deployment & Hosting — Next.js Edge Infrastruktur",
     description:
-        "Global High-Speed Deployment auf der Vercel Edge. LCP unter 0.8s, Partial Prerendering, Zero-Config TLS und weltweite CDN-Präsenz für Next.js 15 Applikationen.",
+        "Professionelles Vercel Deployment für Next.js Anwendungen: globales Edge Network, LCP unter 0.8s, Partial Prerendering und Zero-Config TLS. High-Speed Hosting für performante Webanwendungen.",
+    keywords: [
+        "Vercel Deployment",
+        "Next.js Hosting",
+        "Edge Deployment",
+        "Vercel CDN",
+        "Next.js Vercel",
+        "Web-Hosting professionell",
+        "Edge Computing",
+        "CDN Deutschland",
+        "Vercel Entwickler",
+        "Next.js Deployment",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/vercel" },
+    openGraph: {
+        title: "Vercel Edge Deployment | Palmer Digital",
+        description:
+            "Globales Edge Network für Next.js — LCP unter 0.8s, Partial Prerendering, Zero-Config TLS.",
+        url: "https://palmer-digital.de/vercel",
+    },
 };
 
 export default function VercelPage() {

@@ -11,9 +11,28 @@ import StripeUseCases from "@/components/sections/StripeUseCases";
 import StripeCTA from "@/components/sections/StripeCTA";
 
 export const metadata: Metadata = {
-    title: "Stripe Fintech Pipelines | Palmer Digital",
+    title: "Stripe Integration & E-Commerce Zahlungssysteme",
     description:
-        "Automatisierte Zahlungsinfrastruktur auf Stripe-Basis — Payment Intents, Subscriptions, Webhooks und Stripe Connect für Fintech-Grade Zahlungsströme.",
+        "Professionelle Stripe Integration für Onlineshops und SaaS-Produkte: Payment Intents, Subscriptions, Stripe Connect und automatisierte Webhooks. E-Commerce Zahlungssysteme für Unternehmen in Deutschland — DSGVO-konform und PCI-DSS zertifiziert.",
+    keywords: [
+        "Stripe Integration",
+        "Stripe Entwickler Deutschland",
+        "E-Commerce Zahlungssystem",
+        "Online Bezahlsystem",
+        "Stripe Connect",
+        "Payment Integration",
+        "Subscription System",
+        "E-Commerce Entwicklung",
+        "Zahlungsabwicklung",
+        "Stripe API Entwicklung",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/fintech-pipelines" },
+    openGraph: {
+        title: "Stripe Integration & Zahlungssysteme | Palmer Digital",
+        description:
+            "Payment Intents, Subscriptions, Stripe Connect — automatisierte Zahlungsinfrastruktur für Onlineshops und SaaS.",
+        url: "https://palmer-digital.de/services/fintech-pipelines",
+    },
 };
 
 export default function FintechPipelinesPage() {

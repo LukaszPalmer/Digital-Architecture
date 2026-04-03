@@ -11,9 +11,28 @@ import UXUseCases from "@/components/sections/UXUseCases";
 import UXCTA from "@/components/sections/UXCTA";
 
 export const metadata: Metadata = {
-    title: "UX/UI Design | Palmer Digital",
+    title: "UX/UI Design & Webdesign — Professionelles Interface Design",
     description:
-        "Minimalist Interface Construction — von der Informationsarchitektur über Prototyping bis zum Developer-Handoff. WCAG AAA, datengetriebenes UX-Design.",
+        "Professionelles UX/UI Design für Unternehmen in Deutschland: Informationsarchitektur, Figma-Prototyping, Developer-Handoff und WCAG AAA-konformes Webdesign. Datengetriebenes Interface Design für digitale Produkte.",
+    keywords: [
+        "UX Design Deutschland",
+        "UI Design Agentur",
+        "Webdesign professionell",
+        "Figma Design",
+        "Interface Design",
+        "UX/UI Designer Deutschland",
+        "Webdesign Agentur",
+        "User Experience Design",
+        "Prototyping",
+        "WCAG Accessibility",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/ux-ui-design" },
+    openGraph: {
+        title: "UX/UI Design & Webdesign | Palmer Digital",
+        description:
+            "Professionelles Interface Design — von der Informationsarchitektur bis zum Developer-Handoff. WCAG AAA, datengetrieben.",
+        url: "https://palmer-digital.de/services/ux-ui-design",
+    },
 };
 
 export default function UXUIDesignPage() {

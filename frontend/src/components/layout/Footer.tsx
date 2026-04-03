@@ -189,11 +189,6 @@ export default function Footer() {
                             >
                                 kontakt@palmer-digital.de
                             </a>
-                            <p className="text-[11px] text-[#000000]/55 leading-relaxed font-mono tracking-wide uppercase">
-                                Remote-First
-                                <br />
-                                Deutschland / EU
-                            </p>
                         </div>
                     </div>
 

@@ -20,11 +20,54 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: "Palmer Digital | Engineering Digital Leaders",
+        default: "Palmer Digital | Webentwicklung, Next.js & Cloud-Infrastruktur",
         template: "%s | Palmer Digital",
     },
     description:
-        "High-End Webapp-Entwicklung & Digitale Architektur für Marktführer.",
+        "Palmer Digital entwickelt hochperformante Webanwendungen, Cloud-Infrastrukturen und digitale Systeme für Unternehmen in Deutschland und Europa. Spezialisiert auf Next.js, TypeScript, MongoDB und skalierbare Backend-Architekturen.",
+    keywords: [
+        "Webentwicklung",
+        "Next.js Agentur",
+        "TypeScript Entwicklung",
+        "Cloud-Infrastruktur",
+        "Software-Entwicklung Deutschland",
+        "Full-Stack Entwicklung",
+        "React Entwicklung",
+        "Node.js Backend",
+        "MongoDB Atlas",
+        "Webdesign Agentur",
+        "UI UX Design",
+        "Palmer Digital",
+    ],
+    authors: [{ name: "Palmer Digital", url: "https://palmer-digital.de" }],
+    creator: "Palmer Digital",
+    metadataBase: new URL("https://palmer-digital.de"),
+    openGraph: {
+        type: "website",
+        locale: "de_DE",
+        siteName: "Palmer Digital",
+        title: "Palmer Digital | Webentwicklung, Next.js & Cloud-Infrastruktur",
+        description:
+            "Hochperformante Webanwendungen, Cloud-Infrastrukturen und digitale Systeme für Unternehmen in Deutschland und Europa.",
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: "Palmer Digital | Webentwicklung & Cloud-Infrastruktur",
+        description:
+            "Hochperformante Webanwendungen und digitale Systeme. Next.js, TypeScript, MongoDB — produktionsbereit.",
+        creator: "@palmerdigital",
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            "max-snippet": -1,
+            "max-image-preview": "large",
+            "max-video-preview": -1,
+        },
+    },
     icons: {
         icon: "/favicon.ico",
     },

@@ -11,9 +11,28 @@ import MongoUseCases from "@/components/sections/MongoUseCases";
 import MongoCTA from "@/components/sections/MongoCTA";
 
 export const metadata: Metadata = {
-    title: "MongoDB Cloud Backbone — Palmer Digital",
+    title: "MongoDB Entwicklung & Cloud-Datenbankarchitektur",
     description:
-        "Globale MongoDB Atlas Cluster-Architektur mit automatisiertem Sharding, ACID-konformen Transaktionen und 99.99% Uptime SLA. Die Datenschicht für Marktführer.",
+        "Professionelle MongoDB Atlas Entwicklung: globale Cluster-Architektur, automatisiertes Sharding, ACID-Transaktionen und 99.99% Uptime SLA. Datenbankentwicklung für skalierbare Webanwendungen in Deutschland und Europa.",
+    keywords: [
+        "MongoDB Entwicklung",
+        "MongoDB Atlas",
+        "Cloud-Datenbankarchitektur",
+        "NoSQL Datenbank Entwickler",
+        "MongoDB Entwickler Deutschland",
+        "Datenbankarchitektur",
+        "Cloud-Infrastruktur",
+        "MongoDB Sharding",
+        "skalierbare Datenbank",
+        "Datenbankentwicklung",
+    ],
+    alternates: { canonical: "https://palmer-digital.de/services/cloud-infrastructure" },
+    openGraph: {
+        title: "MongoDB Cloud-Datenbankarchitektur | Palmer Digital",
+        description:
+            "Globale MongoDB Atlas Cluster mit 99.99% Uptime SLA — skalierbar, ACID-konform, produktionsbereit.",
+        url: "https://palmer-digital.de/services/cloud-infrastructure",
+    },
 };
 
 export default function MongoDBPage() {
