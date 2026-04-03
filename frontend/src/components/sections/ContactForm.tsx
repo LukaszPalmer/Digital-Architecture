@@ -6,35 +6,24 @@
 // A11y: WCAG 2.1 AAA — jedes Label ist via htmlFor/id korrekt verknüpft.
 
 import { useState, useTransition, useRef } from "react";
-import { useSearchParams } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { sendContactEmail } from "@/lib/actions/sendContactEmail";
 import { track } from "@/lib/tracker";
 
 type FieldId = "name" | "email" | "service" | "phone" | "message";
 
-const PACKAGES = [
-    "Foundation Paket",
-    "Performance Paket",
-    "Authority Paket",
-    "Custom Paket",
-];
-
-const INDIVIDUAL_SERVICES = [
+const SERVICES = [
     "Software-Entwicklung",
     "E-Commerce System",
     "Cloud-Infrastruktur",
     "UI/UX & Branding",
+    "KI-Assistent / Chatbot",
+    "Socket.IO Real-Time",
+    "Google Analytics",
+    "Google Indexierung",
     "Strategie & Beratung",
     "Mehrere Leistungen",
 ];
-
-const PAKET_MAP: Record<string, string> = {
-    foundation: "Foundation Paket",
-    performance: "Performance Paket",
-    authority: "Authority Paket",
-    custom: "Custom Paket",
-};
 
 function ChevronDown() {
     return (
@@ -92,9 +81,7 @@ function LockIcon() {
 }
 
 export function ContactForm() {
-    const searchParams = useSearchParams();
-    const paketParam = searchParams.get("paket")?.toLowerCase() ?? "";
-    const [selectedService, setSelectedService] = useState(PAKET_MAP[paketParam] ?? "");
+    const [selectedService, setSelectedService] = useState("");
     const [focused, setFocused]     = useState<FieldId | null>(null);
     const formStartedRef            = useRef(false);
     const [callbackWanted, setCallbackWanted] = useState(false);
@@ -223,16 +210,9 @@ export function ContactForm() {
                         <option value="" disabled>
                             Bitte wählen …
                         </option>
-                        <optgroup label="── Pakete ──">
-                            {PACKAGES.map((s) => (
-                                <option key={s} value={s}>{s}</option>
-                            ))}
-                        </optgroup>
-                        <optgroup label="── Einzelleistungen ──">
-                            {INDIVIDUAL_SERVICES.map((s) => (
-                                <option key={s} value={s}>{s}</option>
-                            ))}
-                        </optgroup>
+                        {SERVICES.map((s) => (
+                            <option key={s} value={s}>{s}</option>
+                        ))}
                     </select>
                     <div className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-[#000000]/65">
                         <ChevronDown />
