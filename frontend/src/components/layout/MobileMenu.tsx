@@ -7,7 +7,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { NavLink } from "@/types/navigation";
 import { cn } from "@/lib/utils";
 
@@ -105,12 +104,12 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                         aria-label="Palmer Digital — Startseite"
                         className="group"
                     >
-                        <Image
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img
                             src="/media/logo.png"
                             alt="Palmer Digital Architecture"
-                            width={180}
-                            height={45}
-                            className="h-9 w-auto object-contain bg-transparent transition-opacity duration-200 group-hover:opacity-75"
+                            style={{ height: "32px", width: "auto" }}
+                            className="transition-opacity duration-200 group-hover:opacity-75"
                         />
                     </Link>
                 </div>
