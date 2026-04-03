@@ -106,7 +106,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                         className="group"
                     >
                         <Image
-                            src="/media/palmer-digital-logo.png"
+                            src="/media/palmer-new.svg"
                             alt="Palmer Digital Architecture"
                             width={160}
                             height={40}
