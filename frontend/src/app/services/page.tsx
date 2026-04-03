@@ -121,7 +121,7 @@ const INFRASTRUCTURE_SERVICES = [
         title: "PostgreSQL Core",
         description: "ACID-konforme relationale Datenbankarchitektur — MVCC, Row-Level Security, Advanced Indexing und Point-in-Time-Recovery.",
         href: "/services/postgresql",
-        iconPath: "/media/PostgreSQL.svg",
+        iconPath: "/media/postgresql.svg",
         invertOnHover: false,
     },
     {

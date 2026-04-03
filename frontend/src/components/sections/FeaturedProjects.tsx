@@ -151,7 +151,7 @@ export default function FeaturedProjects() {
                                     )}
                                     {asset.id === "03" && (
                                         <Image
-                                            src="/media/PostgreSQL.svg"
+                                            src="/media/postgresql.svg"
                                             alt=""
                                             width={80}
                                             height={80}

@@ -79,7 +79,7 @@ export const NAV_LINKS: NavLink[] = [
                 label: "PostgreSQL Core",
                 href: "/services/postgresql",
                 description: "Relationale Datenbankarchitektur",
-                iconPath: "/media/PostgreSQL.svg",
+                iconPath: "/media/postgresql.svg",
             },
             {
                 label: "Google Analytics",
