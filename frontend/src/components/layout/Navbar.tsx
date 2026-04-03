@@ -25,9 +25,7 @@ export default function Navbar() {
                     <img
                         src="/media/logo.png"
                         alt="Palmer Digital"
-                        height={36}
-                        style={{ height: "36px", width: "auto" }}
-                        className="transition-opacity duration-200 group-hover:opacity-75"
+                        className="h-8 lg:h-10 xl:h-12 w-auto transition-opacity duration-200 group-hover:opacity-75"
                     />
                 </Link>
 
