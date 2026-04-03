@@ -29,7 +29,6 @@ const FOOTER_SERVICES = [
 const FOOTER_LEGAL = [
     { label: "Impressum", href: "/impressum" },
     { label: "Datenschutz", href: "/datenschutz" },
-    { label: "AGB", href: "/agb" },
 ];
 
 
