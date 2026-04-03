@@ -42,7 +42,7 @@ const PageViewSchema = new Schema<IPageView>(
         utmSource:    { type: String, default: "" },
         utmMedium:   { type: String, default: "" },
         utmCampaign: { type: String, default: "" },
-        timestamp:   { type: Date, default: Date.now, index: true },
+        timestamp:   { type: Date, default: Date.now },
     },
     { collection: "pageviews" }
 );
