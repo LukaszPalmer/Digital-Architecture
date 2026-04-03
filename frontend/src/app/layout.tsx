@@ -20,8 +20,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
     title: {
-        default: "Palmer Digital Architecture | Engineering Digital Leaders",
-        template: "%s | Palmer Digital Architecture",
+        default: "Palmer Digital | Engineering Digital Leaders",
+        template: "%s | Palmer Digital",
     },
     description:
         "High-End Webapp-Entwicklung & Digitale Architektur für Marktführer.",

@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Strategie — Palmer Digital Architecture",
+    title: "Strategie — Palmer Digital",
     description:
         "Unser strategischer Ansatz: Wie wir denken, planen und uns individuell auf jeden Kunden einlassen.",
 };
@@ -100,7 +100,7 @@ export default function StrategyPage() {
                     <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] items-end gap-16">
                         <div>
                             <span className="block text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase mb-8">
-                                [ Strategie — Palmer Digital Architecture ]
+                                [ Strategie — Palmer Digital ]
                             </span>
                             <h1 className="text-[clamp(2.8rem,6vw,5.5rem)] font-black text-[#000000] leading-[0.96] tracking-[-0.025em] uppercase mb-10">
                                 Keine Lösungen

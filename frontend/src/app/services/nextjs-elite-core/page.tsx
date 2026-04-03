@@ -11,7 +11,7 @@ import NextUseCases from "@/components/sections/NextUseCases";
 import NextCTA from "@/components/sections/NextCTA";
 
 export const metadata: Metadata = {
-    title: "Next.js Elite Core | Palmer Digital Architecture",
+    title: "Next.js Elite Core | Palmer Digital",
     description:
         "Server-First Applikations-Architektur auf Next.js 15 — RSC, PPR, Server Actions und 0ms TBT. Lighthouse 100 ist der Standard, nicht das Ziel.",
 };

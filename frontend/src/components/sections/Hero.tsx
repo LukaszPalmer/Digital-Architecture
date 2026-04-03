@@ -90,7 +90,7 @@ export default function Hero() {
 
     return (
         <section
-            aria-label="Palmer Digital Architecture — Startseite"
+            aria-label="Palmer Digital — Startseite"
             className="relative flex flex-col min-h-[calc(100dvh-70px)] md:min-h-[calc(100dvh-90px)] bg-[#FFFFFF] overflow-hidden border-b border-[#000000]"
         >
             {/* ── MAIN CONTENT ── */}
@@ -105,7 +105,7 @@ export default function Hero() {
                             <div className="flex items-center gap-4 mb-10">
                                 <div className="h-px w-10 bg-[#001F3F]" />
                                 <span className="text-[10.5px] font-bold tracking-[0.45em] text-[#001F3F]/60 uppercase font-mono">
-                                    Palmer Digital Architecture
+                                    Palmer Digital
                                 </span>
                             </div>
 

@@ -26,11 +26,11 @@ export async function generateMetadata({
     const service = getServiceBySlug(slug);
 
     if (!service) {
-        return { title: "System Not Found | Palmer Digital Architecture" };
+        return { title: "System Not Found | Palmer Digital" };
     }
 
     return {
-        title: `${service.title} | Palmer Digital Architecture`,
+        title: `${service.title} | Palmer Digital`,
         description: service.tagline,
     };
 }

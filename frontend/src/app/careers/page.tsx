@@ -10,9 +10,9 @@ import CareersHiringProcess from "@/components/sections/CareersHiringProcess";
 import CareersCTA from "@/components/sections/CareersCTA";
 
 export const metadata: Metadata = {
-    title: "Careers — Palmer Digital Architecture",
+    title: "Careers — Palmer Digital",
     description:
-        "Werde Teil von Palmer Digital Architecture. Wir suchen Engineers und Designer, die digitale Infrastruktur auf dem Niveau der Marktführer konstruieren.",
+        "Werde Teil von Palmer Digital. Wir suchen Engineers und Designer, die digitale Infrastruktur auf dem Niveau der Marktführer konstruieren.",
 };
 
 export default function CareersPage() {

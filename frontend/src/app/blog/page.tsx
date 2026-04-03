@@ -14,7 +14,7 @@ import { BlogPost } from "@/types/blog";
 export const metadata: Metadata = {
     title: "Engineering Ledger | Blog",
     description:
-        "Technische Einblicke, Architektur-Briefings und Engineering-Perspektiven von Palmer Digital Architecture.",
+        "Technische Einblicke, Architektur-Briefings und Engineering-Perspektiven von Palmer Digital.",
 };
 
 // Next.js 15 Dogma: searchParams als Promise

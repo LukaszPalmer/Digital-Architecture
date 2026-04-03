@@ -11,7 +11,7 @@ import PostgreUseCases from "@/components/sections/PostgreUseCases";
 import PostgreCTA from "@/components/sections/PostgreCTA";
 
 export const metadata: Metadata = {
-    title: "PostgreSQL Core — Palmer Digital Architecture",
+    title: "PostgreSQL Core — Palmer Digital",
     description:
         "ACID-konforme relationale Datenbankarchitektur auf PostgreSQL-Basis — MVCC, Row-Level Security, Advanced Indexing und Point-in-Time-Recovery für produktionskritische Systeme.",
 };

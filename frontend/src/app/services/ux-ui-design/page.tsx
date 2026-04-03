@@ -11,7 +11,7 @@ import UXUseCases from "@/components/sections/UXUseCases";
 import UXCTA from "@/components/sections/UXCTA";
 
 export const metadata: Metadata = {
-    title: "UX/UI Design | Palmer Digital Architecture",
+    title: "UX/UI Design | Palmer Digital",
     description:
         "Minimalist Interface Construction — von der Informationsarchitektur über Prototyping bis zum Developer-Handoff. WCAG AAA, datengetriebenes UX-Design.",
 };

@@ -81,7 +81,7 @@ export default function CareersCTA() {
                 <ScrollReveal delay={160}>
                     <div className="mt-20 md:mt-28 pt-8 border-t border-[#FFFFFF]/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                         <p className="text-[11px] font-mono text-[#FFFFFF]/35 tracking-[0.35em] uppercase">
-                            Palmer Digital Architecture — Gebaut für Marktführer
+                            Palmer Digital — Gebaut für Marktführer
                         </p>
                         <div className="flex items-center gap-2">
                             <span className="w-1.5 h-1.5 bg-[#001F3F]" aria-hidden="true" />

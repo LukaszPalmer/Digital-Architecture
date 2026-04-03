@@ -107,7 +107,7 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
                             src="/media/logo.png"
-                            alt="Palmer Digital Architecture"
+                            alt="Palmer Digital"
                             style={{ height: "32px", width: "auto" }}
                             className="transition-opacity duration-200 group-hover:opacity-75"
                         />

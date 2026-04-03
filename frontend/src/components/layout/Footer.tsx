@@ -55,7 +55,7 @@ export default function Footer() {
 
     return (
         <footer
-            aria-label="Seitenabschluss Palmer Digital Architecture"
+            aria-label="Seitenabschluss Palmer Digital"
             className="bg-[#FFFFFF] text-[#000000] overflow-hidden border-t border-[#000000]"
         >
 
@@ -76,7 +76,7 @@ export default function Footer() {
                         {/* Headline */}
                         <div>
                             <span className="block text-[9.5px] font-mono font-bold tracking-[0.5em] text-[#000000]/55 uppercase mb-10">
-                                Palmer Digital Architecture — Est. 2024
+                                Palmer Digital — Est. 2024
                             </span>
                             <h2 className="text-[clamp(2.4rem,6vw,5.5rem)] font-black text-[#000000] leading-[0.96] tracking-[-0.025em] uppercase">
                                 Wir konstruieren
@@ -185,7 +185,7 @@ export default function Footer() {
                             <a
                                 href="mailto:kontakt@palmer-digital.de"
                                 className="block text-[12.5px] font-bold text-[#000000]/65 hover:text-[#001F3F] transition-colors duration-200 tracking-wide"
-                                aria-label="E-Mail an Palmer Digital Architecture"
+                                aria-label="E-Mail an Palmer Digital"
                             >
                                 kontakt@palmer-digital.de
                             </a>
@@ -204,7 +204,7 @@ export default function Footer() {
             <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-7">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                     <span className="text-[10.5px] font-mono text-[#000000]/55 tracking-[0.35em] uppercase">
-                        © {year} Palmer Digital Architecture
+                        © {year} Palmer Digital
                     </span>
                     <div className="flex items-center gap-4 text-[10px] font-mono text-[#000000]/50 tracking-[0.25em] uppercase">
                         <Link href="/impressum" className="hover:text-[#001F3F] transition-colors duration-200">

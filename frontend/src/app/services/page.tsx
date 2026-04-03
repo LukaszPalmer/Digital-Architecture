@@ -7,7 +7,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-    title: "Alle Leistungen — Palmer Digital Architecture",
+    title: "Alle Leistungen — Palmer Digital",
     description:
         "Vollständige Übersicht aller digitalen Dienstleistungen: Next.js Engineering, Cloud-Infrastruktur, UI/UX Design, KI-Assistenten, Echtzeitsysteme und mehr.",
 };

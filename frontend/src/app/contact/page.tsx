@@ -1,7 +1,7 @@
 import Contact from "@/components/sections/Contact";
 
 export const metadata = {
-    title: "Kontakt — Palmer Digital Architecture",
+    title: "Kontakt — Palmer Digital",
     description: "Projektanfrage stellen. Wir antworten innerhalb von 24 Stunden.",
 };
 

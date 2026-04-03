@@ -29,7 +29,7 @@ export async function generateMetadata({
     const post = strapiPost ?? getBlogPost(slug);
 
     if (!post) {
-        return { title: "Log Not Found | Palmer Digital Architecture" };
+        return { title: "Log Not Found | Palmer Digital" };
     }
 
     const title = strapiPost ? strapiPost.title : (post as BlogPost).title;

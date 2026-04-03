@@ -148,7 +148,7 @@ export function ContactForm() {
     return (
         <form
             className="flex flex-col gap-10"
-            aria-label="Kontaktformular Palmer Digital Architecture"
+            aria-label="Kontaktformular Palmer Digital"
             noValidate
             onSubmit={handleSubmit}
         >

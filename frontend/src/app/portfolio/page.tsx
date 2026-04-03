@@ -6,7 +6,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-    title: "Portfolio — Palmer Digital Architecture",
+    title: "Portfolio — Palmer Digital",
     description:
         "Echte Projekte. Echte Architekturen. Keine Templates, keine Demos — vollständig engineerte Monorepos mit messbaren Ergebnissen, die in Produktion laufen.",
 };

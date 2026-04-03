@@ -10,7 +10,7 @@ import RailwayUseCases from "@/components/sections/RailwayUseCases";
 import RailwayCTA from "@/components/sections/RailwayCTA";
 
 export const metadata: Metadata = {
-    title: "Railway Cloud Infrastructure — Palmer Digital Architecture",
+    title: "Railway Cloud Infrastructure — Palmer Digital",
     description:
         "Zero-Config Microservice Orchestration auf Railway. Automatisierte CI/CD-Pipelines, isolierte Service-Umgebungen und 99.99% Uptime für Enterprise-Backends.",
 };

@@ -34,7 +34,7 @@ export default function CareersHero() {
                 <ScrollReveal>
                     <div className="mb-16 md:mb-20">
                         <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                            [ Join Palmer Digital Architecture ]
+                            [ Join Palmer Digital ]
                         </span>
                         <h1
                             id="careers-hero-heading"

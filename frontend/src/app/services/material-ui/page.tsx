@@ -11,7 +11,7 @@ import DashUseCases from "@/components/sections/DashUseCases";
 import DashCTA from "@/components/sections/DashCTA";
 
 export const metadata: Metadata = {
-    title: "Material UI Logic | Palmer Digital Architecture",
+    title: "Material UI Logic | Palmer Digital",
     description:
         "Enterprise Dashboard-Systeme auf MUI-Basis — Datentabellen, Analytics, RBAC und Echtzeit-Visualisierungen für kritische Geschäftsprozesse.",
 };

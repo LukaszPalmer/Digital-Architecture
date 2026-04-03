@@ -11,7 +11,7 @@ import MongoUseCases from "@/components/sections/MongoUseCases";
 import MongoCTA from "@/components/sections/MongoCTA";
 
 export const metadata: Metadata = {
-    title: "MongoDB Cloud Backbone — Palmer Digital Architecture",
+    title: "MongoDB Cloud Backbone — Palmer Digital",
     description:
         "Globale MongoDB Atlas Cluster-Architektur mit automatisiertem Sharding, ACID-konformen Transaktionen und 99.99% Uptime SLA. Die Datenschicht für Marktführer.",
 };

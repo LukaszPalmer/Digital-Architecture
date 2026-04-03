@@ -11,7 +11,7 @@ import StripeUseCases from "@/components/sections/StripeUseCases";
 import StripeCTA from "@/components/sections/StripeCTA";
 
 export const metadata: Metadata = {
-    title: "Stripe Fintech Pipelines | Palmer Digital Architecture",
+    title: "Stripe Fintech Pipelines | Palmer Digital",
     description:
         "Automatisierte Zahlungsinfrastruktur auf Stripe-Basis — Payment Intents, Subscriptions, Webhooks und Stripe Connect für Fintech-Grade Zahlungsströme.",
 };

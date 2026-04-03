@@ -1690,7 +1690,7 @@ export function generateArticleSchema(post: {
         },
         publisher: {
             "@type": "Organization",
-            name: "Palmer Digital Architecture",
+            name: "Palmer Digital",
             logo: {
                 "@type": "ImageObject",
                 url: "https://palmer-digital.com/media/Logo-mobile.svg",

@@ -88,7 +88,7 @@ export default function Contact() {
                         <a
                             href="mailto:kontakt@palmer-digital.de"
                             className="text-[16px] md:text-[18px] font-bold text-[#001F3F] hover:text-[#000000] transition-colors duration-200 underline underline-offset-4"
-                            aria-label="E-Mail an Palmer Digital Architecture"
+                            aria-label="E-Mail an Palmer Digital"
                         >
                             kontakt@palmer-digital.de
                         </a>

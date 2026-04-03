@@ -11,7 +11,7 @@ import DesignUseCases from "@/components/sections/DesignUseCases";
 import DesignCTA from "@/components/sections/DesignCTA";
 
 export const metadata: Metadata = {
-    title: "Tailwind Design Ops | Palmer Digital Architecture",
+    title: "Tailwind Design Ops | Palmer Digital",
     description:
         "Atomic CSS Design Systems auf Tailwind-Basis — Token-Architektur, Komponentenbibliotheken und WCAG AAA-konforme Interface-Systeme für skalierbare Produkte.",
 };

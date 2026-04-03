@@ -25,7 +25,7 @@ export function NavScrollShell({ children }: NavScrollShellProps) {
     return (
         <nav
             role="navigation"
-            aria-label="Hauptnavigation Palmer Digital Architecture"
+            aria-label="Hauptnavigation Palmer Digital"
             className={cn(
                 "fixed top-0 left-0 w-full z-50 h-[70px] md:h-[90px] transition-all duration-300",
                 scrolled

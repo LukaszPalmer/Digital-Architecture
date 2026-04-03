@@ -11,7 +11,7 @@ import NodeUseCases from "@/components/sections/NodeUseCases";
 import NodeCTA from "@/components/sections/NodeCTA";
 
 export const metadata: Metadata = {
-    title: "Node.js Core | Palmer Digital Architecture",
+    title: "Node.js Core | Palmer Digital",
     description:
         "Skalierbare Backend-Infrastruktur auf Node.js-Basis — REST APIs, GraphQL, Microservices, Authentication und Background-Jobs für produktionskritische Systeme.",
 };

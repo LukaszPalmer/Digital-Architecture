@@ -10,7 +10,7 @@ import VercelUseCases from "@/components/sections/VercelUseCases";
 import VercelCTA from "@/components/sections/VercelCTA";
 
 export const metadata: Metadata = {
-    title: "Vercel Edge Infrastructure — Palmer Digital Architecture",
+    title: "Vercel Edge Infrastructure — Palmer Digital",
     description:
         "Global High-Speed Deployment auf der Vercel Edge. LCP unter 0.8s, Partial Prerendering, Zero-Config TLS und weltweite CDN-Präsenz für Next.js 15 Applikationen.",
 };

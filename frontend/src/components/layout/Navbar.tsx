@@ -24,7 +24,7 @@ export default function Navbar() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                         src="/media/logo.png"
-                        alt="Palmer Digital Architecture"
+                        alt="Palmer Digital"
                         height={36}
                         style={{ height: "36px", width: "auto" }}
                         className="transition-opacity duration-200 group-hover:opacity-75"
