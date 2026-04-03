@@ -106,11 +106,11 @@ export function MobileMenu({ links }: { links: NavLink[] }) {
                         className="group"
                     >
                         <Image
-                            src="/media/palmer-new.svg"
+                            src="/media/logo.png"
                             alt="Palmer Digital Architecture"
-                            width={160}
-                            height={40}
-                            className="h-7 w-auto object-contain transition-opacity duration-200 group-hover:opacity-75"
+                            width={180}
+                            height={45}
+                            className="h-9 w-auto object-contain bg-transparent transition-opacity duration-200 group-hover:opacity-75"
                         />
                     </Link>
                 </div>
