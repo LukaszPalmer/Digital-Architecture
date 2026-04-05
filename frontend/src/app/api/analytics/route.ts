@@ -1,5 +1,6 @@
 // src/app/api/analytics/route.ts
 // Dashboard-Daten API — nur für authentifizierte Admins.
+// Metriken sind user-zentriert (unique anonymousId), nicht visit-zentriert.
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
@@ -19,6 +20,7 @@ export async function GET(req: NextRequest) {
     const [
         totalPageviews,
         uniqueSessions,
+        uniqueUsersArr,
         topPages,
         deviceBreakdown,
         browserBreakdown,
@@ -28,7 +30,6 @@ export async function GET(req: NextRequest) {
         eventBreakdown,
         pageviewsOverTime,
         avgDuration,
-        // ── NEU ──
         bounceData,
         newVsReturningData,
         utmCampaignsData,
@@ -37,13 +38,16 @@ export async function GET(req: NextRequest) {
         formFunnelData,
     ] = await Promise.all([
 
-        // Gesamt-Pageviews
+        // Total Pageviews
         PageView.countDocuments({ timestamp: { $gte: since }, event: "pageview" }),
 
-        // Unique Sessions
+        // Unique Sessions (short-lived, per tab)
         PageView.distinct("sessionId", { timestamp: { $gte: since } }).then(r => r.length),
 
-        // Top Pages
+        // Unique Users (persistent anonymousId — same person returning = 1 user)
+        PageView.distinct("anonymousId", { timestamp: { $gte: since } }),
+
+        // Top Pages (by pageviews)
         PageView.aggregate([
             { $match: { timestamp: { $gte: since }, event: "pageview" } },
             { $group: { _id: "$page", count: { $sum: 1 } } },
@@ -51,51 +55,56 @@ export async function GET(req: NextRequest) {
             { $limit: 10 },
         ]),
 
-        // Geräte
+        // Devices — per unique user to avoid inflation
         PageView.aggregate([
-            { $match: { timestamp: { $gte: since } } },
+            { $match: { timestamp: { $gte: since }, event: "pageview" } },
+            { $group: { _id: "$anonymousId", device: { $first: "$device" } } },
             { $group: { _id: "$device", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
         ]),
 
-        // Browser
+        // Browsers — per unique user
         PageView.aggregate([
-            { $match: { timestamp: { $gte: since } } },
+            { $match: { timestamp: { $gte: since }, event: "pageview" } },
+            { $group: { _id: "$anonymousId", browser: { $first: "$browser" } } },
             { $group: { _id: "$browser", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
         ]),
 
-        // Betriebssystem
+        // OS — per unique user
         PageView.aggregate([
-            { $match: { timestamp: { $gte: since } } },
+            { $match: { timestamp: { $gte: since }, event: "pageview" } },
+            { $group: { _id: "$anonymousId", os: { $first: "$os" } } },
             { $group: { _id: "$os", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
         ]),
 
-        // Traffic-Quellen
+        // Traffic Sources — per unique user
         PageView.aggregate([
-            { $match: { timestamp: { $gte: since } } },
+            { $match: { timestamp: { $gte: since }, event: "pageview" } },
+            { $group: { _id: "$anonymousId", referrer: { $first: "$referrer" } } },
             { $group: { _id: "$referrer", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
             { $limit: 10 },
         ]),
 
-        // Länder
+        // Countries — per unique user
         PageView.aggregate([
-            { $match: { timestamp: { $gte: since } } },
+            { $match: { timestamp: { $gte: since }, event: "pageview" } },
+            { $group: { _id: "$anonymousId", country: { $first: "$country" } } },
             { $group: { _id: "$country", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
             { $limit: 10 },
         ]),
 
-        // Event-Typen
+        // Event counts (raw totals, not user-deduped — these are action counts)
         PageView.aggregate([
             { $match: { timestamp: { $gte: since } } },
             { $group: { _id: "$event", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
         ]),
 
-        // Pageviews pro Tag (Zeitreihe)
+        // Pageviews per day (trend)
         PageView.aggregate([
             { $match: { timestamp: { $gte: since }, event: "pageview" } },
             {
@@ -111,13 +120,14 @@ export async function GET(req: NextRequest) {
             { $sort: { "_id.year": 1, "_id.month": 1, "_id.day": 1 } },
         ]),
 
-        // Durchschnittliche Verweildauer
+        // Avg session duration (from pageleave events with duration > 0)
         PageView.aggregate([
-            { $match: { timestamp: { $gte: since }, duration: { $gt: 0 } } },
-            { $group: { _id: null, avg: { $avg: "$duration" } } },
+            { $match: { timestamp: { $gte: since }, event: "pageleave", duration: { $gt: 0 } } },
+            { $group: { _id: "$sessionId", sessionDuration: { $sum: "$duration" } } },
+            { $group: { _id: null, avg: { $avg: "$sessionDuration" } } },
         ]),
 
-        // ── Bounce Rate: Sessions mit nur 1 Pageview ──
+        // Bounce Rate: sessions with only 1 pageview
         PageView.aggregate([
             { $match: { timestamp: { $gte: since }, event: "pageview" } },
             { $group: { _id: "$sessionId", pvCount: { $sum: 1 } } },
@@ -130,14 +140,17 @@ export async function GET(req: NextRequest) {
             },
         ]),
 
-        // ── Neu vs. Wiederkehrend ──
+        // New vs. Returning Users — based on anonymousId + isNewVisitor flag
+        // A user is "new" if any pageview in the period has isNewVisitor = true.
+        // We take $first to deduplicate per user.
         PageView.aggregate([
             { $match: { timestamp: { $gte: since }, event: "pageview" } },
-            { $group: { _id: "$sessionId", isNew: { $first: "$isNewVisitor" } } },
+            { $sort: { timestamp: 1 } },
+            { $group: { _id: "$anonymousId", isNew: { $first: "$isNewVisitor" } } },
             { $group: { _id: "$isNew", count: { $sum: 1 } } },
         ]),
 
-        // ── UTM Kampagnen ──
+        // UTM Campaigns
         PageView.aggregate([
             {
                 $match: {
@@ -162,21 +175,21 @@ export async function GET(req: NextRequest) {
             { $limit: 20 },
         ]),
 
-        // ── Scroll-Tiefe Milestones ──
+        // Scroll Depth milestones
         PageView.aggregate([
             { $match: { timestamp: { $gte: since }, event: "scroll_depth" } },
             { $group: { _id: "$eventTarget", count: { $sum: 1 } } },
             { $sort: { _id: 1 } },
         ]),
 
-        // ── CTA Klicks ──
+        // CTA Clicks
         PageView.aggregate([
             { $match: { timestamp: { $gte: since }, event: "cta_click" } },
             { $group: { _id: "$eventTarget", count: { $sum: 1 } } },
             { $sort: { count: -1 } },
         ]),
 
-        // ── Form Funnel: form_start vs form_submit ──
+        // Form Funnel: form_start vs form_submit
         PageView.aggregate([
             {
                 $match: {
@@ -188,18 +201,29 @@ export async function GET(req: NextRequest) {
         ]),
     ]);
 
-    // Bounce-Rate berechnen
+    const uniqueUsers    = uniqueUsersArr.filter(id => id && id !== "user_unknown").length;
+
+    // Bounce Rate
     const bounceTotal   = bounceData[0]?.total   ?? 0;
     const bounceCount   = bounceData[0]?.bounced  ?? 0;
     const bounceRate    = bounceTotal > 0 ? Math.round((bounceCount / bounceTotal) * 100) : 0;
+
+    // Pages per Session
     const pagesPerSession = uniqueSessions > 0
         ? Math.round((totalPageviews / uniqueSessions) * 10) / 10
         : 0;
 
+    // New vs. Returning Users
+    const newUsersCount       = newVsReturningData.find((d: { _id: boolean }) => d._id === true)?.count  ?? 0;
+    const returningUsersCount = newVsReturningData.find((d: { _id: boolean }) => d._id === false)?.count ?? 0;
+
     return NextResponse.json({
         overview: {
             totalPageviews,
+            uniqueUsers,
             uniqueSessions,
+            newUsers:       newUsersCount,
+            returningUsers: returningUsersCount,
             avgDuration:    Math.round(avgDuration[0]?.avg ?? 0),
             period:         days,
             bounceRate,
@@ -216,11 +240,10 @@ export async function GET(req: NextRequest) {
             date:  `${p._id.year}-${String(p._id.month).padStart(2, "0")}-${String(p._id.day).padStart(2, "0")}`,
             count: p.count,
         })),
-        // Neu:
-        newVsReturning: newVsReturningData.map(d => ({
-            name:  d._id === true ? "Neu" : "Wiederkehrend",
-            value: d.count,
-        })),
+        newVsReturning: [
+            { name: "New Users",       value: newUsersCount },
+            { name: "Returning Users", value: returningUsersCount },
+        ],
         utmCampaigns: utmCampaignsData.map(u => ({
             source:   u._id.source   || "—",
             medium:   u._id.medium   || "—",
@@ -241,7 +264,7 @@ export async function GET(req: NextRequest) {
                 value: formFunnelData.find((d: { _id: string }) => d._id === "form_start")?.count ?? 0,
             },
             {
-                name:  "Abgesendet",
+                name:  "Form Submit",
                 value: formFunnelData.find((d: { _id: string }) => d._id === "form_submit")?.count ?? 0,
             },
         ],

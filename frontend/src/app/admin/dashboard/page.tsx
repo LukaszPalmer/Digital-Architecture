@@ -33,7 +33,10 @@ import {
 interface AnalyticsData {
     overview: {
         totalPageviews:  number;
+        uniqueUsers:     number;
         uniqueSessions:  number;
+        newUsers:        number;
+        returningUsers:  number;
         avgDuration:     number;
         period:          number;
         bounceRate:      number;
@@ -132,7 +135,7 @@ function FormFunnelPanel({
     tooltip?: string;
 }) {
     const starts  = data.find(d => d.name === "Form Start")?.value  ?? 0;
-    const submits = data.find(d => d.name === "Abgesendet")?.value  ?? 0;
+    const submits = data.find(d => d.name === "Form Submit")?.value ?? 0;
     const rate    = starts > 0 ? Math.round((submits / starts) * 100) : 0;
 
     return (
@@ -386,10 +389,19 @@ function DashboardContent() {
                         <SectionLabel label={`[ ${t.secOverview} — ${t.last30.replace("30", String(days))} ]`} />
                         <Grid container spacing={2}>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-                                <StatCard label={t.pageviews} value={data.overview.totalPageviews.toLocaleString("de-DE")} sub={t.subPageviews} icon={<TrendingUpIcon sx={{ fontSize: 16 }} />} tooltip={t.ttPageviews} accent />
+                                <StatCard label={t.users} value={data.overview.uniqueUsers.toLocaleString("de-DE")} sub={t.subUsers} icon={<PeopleAltIcon sx={{ fontSize: 16 }} />} tooltip={t.ttUsers} accent />
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
-                                <StatCard label={t.sessions} value={data.overview.uniqueSessions.toLocaleString("de-DE")} sub={t.subSessions} icon={<PeopleAltIcon sx={{ fontSize: 16 }} />} tooltip={t.ttSessions} />
+                                <StatCard label={t.newUsers} value={data.overview.newUsers.toLocaleString("de-DE")} sub={t.subNewUsers} icon={<TrendingUpIcon sx={{ fontSize: 16 }} />} tooltip={t.ttNewUsers} />
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <StatCard label={t.returningUsers} value={data.overview.returningUsers.toLocaleString("de-DE")} sub={t.subReturningUsers} icon={<LayersIcon sx={{ fontSize: 16 }} />} tooltip={t.ttReturningUsers} />
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <StatCard label={t.sessions} value={data.overview.uniqueSessions.toLocaleString("de-DE")} sub={t.subSessions} icon={<BoltIcon sx={{ fontSize: 16 }} />} tooltip={t.ttSessions} />
+                            </Grid>
+                            <Grid size={{ xs: 12, sm: 6, md: 4 }}>
+                                <StatCard label={t.pageviews} value={data.overview.totalPageviews.toLocaleString("de-DE")} sub={t.subPageviews} icon={<TrendingUpIcon sx={{ fontSize: 16 }} />} tooltip={t.ttPageviews} />
                             </Grid>
                             <Grid size={{ xs: 12, sm: 6, md: 4 }}>
                                 <StatCard label={t.avgDuration} value={formatDuration(data.overview.avgDuration)} sub={t.subDuration} icon={<TimerIcon sx={{ fontSize: 16 }} />} tooltip={t.ttDuration} />

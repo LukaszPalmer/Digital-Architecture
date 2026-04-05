@@ -61,6 +61,7 @@ export async function POST(req: NextRequest) {
 
         const doc = {
             sessionId:   body.sessionId   ?? "unknown",
+            anonymousId: body.anonymousId  ?? "user_unknown",
             page:        body.page         ?? "/",
             referrer:    parseReferrer(body.referrer ?? "", origin),
             device:      parseDevice(ua, body.screenWidth ?? 0),

@@ -4,14 +4,31 @@
 
 import { loadConsent } from "@/lib/cookie-consent";
 
+// Session-ID: neu pro Browser-Tab / Session (kurzlebig)
 function getSessionId(): string {
     const KEY = "pda_session_id";
     let id = sessionStorage.getItem(KEY);
     if (!id) {
-        id = "anon_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+        id = "sess_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
         sessionStorage.setItem(KEY, id);
     }
     return id;
+}
+
+// Anonymous User ID: persistent über alle Sessions (langlebig, in localStorage)
+// Identifiziert denselben Browser / dieselbe Person dauerhaft.
+function getAnonymousId(): string {
+    const KEY = "pda_anonymous_id";
+    try {
+        let id = localStorage.getItem(KEY);
+        if (!id) {
+            id = "user_" + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+            localStorage.setItem(KEY, id);
+        }
+        return id;
+    } catch {
+        return "user_unknown";
+    }
 }
 
 function getUTM() {
@@ -40,7 +57,8 @@ export async function track(event: string, target: string = "", duration: number
     if (!consent?.state.analytics) return; // Kein Consent → kein Tracking
 
     const payload = {
-        sessionId:    getSessionId(),
+        sessionId:   getSessionId(),
+        anonymousId: getAnonymousId(),
         page:         window.location.pathname,
         referrer:     document.referrer ?? "",
         language:     navigator.language ?? "",

@@ -5,7 +5,8 @@
 import mongoose, { Schema, Document, Model } from "mongoose";
 
 export interface IPageView extends Document {
-    sessionId: string;          // anonyme Session-ID (generiert im Browser)
+    sessionId: string;          // kurzlebige Session-ID (pro Tab / Session)
+    anonymousId: string;        // persistente User-ID (über alle Sessions, via localStorage)
     page: string;               // z.B. /blog/nextjs-15
     referrer: string;           // z.B. google.com | direct | internal
     device: string;             // mobile | tablet | desktop
@@ -27,6 +28,7 @@ export interface IPageView extends Document {
 const PageViewSchema = new Schema<IPageView>(
     {
         sessionId:   { type: String, required: true, index: true },
+        anonymousId: { type: String, default: "user_unknown", index: true },
         page:        { type: String, required: true },
         referrer:    { type: String, default: "direct" },
         device:      { type: String, default: "unknown" },
