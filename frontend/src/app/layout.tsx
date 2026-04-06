@@ -57,6 +57,9 @@ export const metadata: Metadata = {
             "Hochperformante Webanwendungen und digitale Systeme. Next.js, TypeScript, MongoDB — produktionsbereit.",
         creator: "@palmerdigital",
     },
+    verification: {
+        google: "nXru6wHTDorZxbA5lW3vJIoRIhINT0HWZFYYSbB8gh4",
+    },
     robots: {
         index: true,
         follow: true,
