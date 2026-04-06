@@ -66,7 +66,7 @@ export default function FeaturedProjects() {
             <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12">
 
                 {/* ── HEADER ── */}
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-10">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-24 gap-6 md:gap-10">
                     <div>
                         <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
                             [ System Portfolio ]
@@ -92,7 +92,7 @@ export default function FeaturedProjects() {
                     {ASSETS.map((asset) => (
                         <div
                             key={asset.id}
-                            className="group relative border-r border-b border-[#000000]/10 p-8 lg:p-12 overflow-hidden transition-colors duration-300 hover:bg-[#001F3F]"
+                            className="group relative border-r border-b border-[#000000]/10 p-6 md:p-8 lg:p-12 overflow-hidden transition-colors duration-300 hover:bg-[#001F3F]"
                         >
                             {/* Ghost ID */}
                             <span
@@ -103,7 +103,7 @@ export default function FeaturedProjects() {
                             </span>
 
                             {/* Visual Area */}
-                            <div className="relative w-full aspect-video mb-10 overflow-hidden bg-[#000000]/4 group-hover:bg-[#001F3F]/60 border border-[#000000]/8 group-hover:border-[#FFFFFF]/10 transition-colors duration-500">
+                            <div className="relative w-full aspect-4/3 sm:aspect-video mb-8 md:mb-10 overflow-hidden bg-[#000000]/4 group-hover:bg-[#001F3F]/60 border border-[#000000]/8 group-hover:border-[#FFFFFF]/10 transition-colors duration-500">
 
                                 {/* Logo Composite */}
                                 <div className="absolute inset-0 flex items-center justify-center gap-10">
@@ -115,7 +115,7 @@ export default function FeaturedProjects() {
                                                 width={96}
                                                 height={96}
                                                 aria-hidden
-                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                                className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                             />
                                             <div className="w-px h-10 bg-[#000000]/15 group-hover:bg-[#FFFFFF]/20 transition-colors" />
                                             <Image
@@ -124,7 +124,7 @@ export default function FeaturedProjects() {
                                                 width={80}
                                                 height={80}
                                                 aria-hidden
-                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                                className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                             />
                                         </>
                                     )}
@@ -136,7 +136,7 @@ export default function FeaturedProjects() {
                                                 width={80}
                                                 height={80}
                                                 aria-hidden
-                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                                className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                             />
                                             <div className="w-px h-10 bg-[#000000]/15 group-hover:bg-[#FFFFFF]/20 transition-colors" />
                                             <Image
@@ -145,7 +145,7 @@ export default function FeaturedProjects() {
                                                 width={72}
                                                 height={72}
                                                 aria-hidden
-                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                                className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                             />
                                         </>
                                     )}
@@ -156,7 +156,7 @@ export default function FeaturedProjects() {
                                             width={80}
                                             height={80}
                                             aria-hidden
-                                            className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                         />
                                     )}
                                     {asset.id === "04" && (
@@ -166,7 +166,7 @@ export default function FeaturedProjects() {
                                             width={120}
                                             height={50}
                                             aria-hidden
-                                            className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                         />
                                     )}
                                     {asset.id === "06" && (
@@ -176,7 +176,7 @@ export default function FeaturedProjects() {
                                             width={80}
                                             height={80}
                                             aria-hidden
-                                            className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                            className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                         />
                                     )}
                                     {asset.id === "05" && (
@@ -187,7 +187,7 @@ export default function FeaturedProjects() {
                                                 width={80}
                                                 height={80}
                                                 aria-hidden
-                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                                className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                             />
                                             <div className="w-px h-10 bg-[#000000]/15 group-hover:bg-[#FFFFFF]/20 transition-colors" />
                                             <Image
@@ -196,7 +196,7 @@ export default function FeaturedProjects() {
                                                 width={56}
                                                 height={80}
                                                 aria-hidden
-                                                className="opacity-10 group-hover:opacity-30 transition-opacity duration-500"
+                                                className="opacity-25 group-hover:opacity-55 transition-opacity duration-500"
                                             />
                                         </>
                                     )}

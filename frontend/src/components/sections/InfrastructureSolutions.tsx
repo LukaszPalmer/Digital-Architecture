@@ -72,7 +72,7 @@ export default function InfrastructureSolutions() {
 
                 {/* ── HEADER ── */}
                 <ScrollReveal>
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-10">
+                    <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-24 gap-6 md:gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
                                 [ Core Pillars // System Solutions ]
@@ -101,7 +101,7 @@ export default function InfrastructureSolutions() {
                     {SYSTEMS.map((system) => (
                         <div
                             key={system.id}
-                            className="group relative p-8 lg:p-12 border-r border-b border-[#000000] flex flex-col min-h-100 transition-colors duration-500 hover:bg-[#001F3F] cursor-crosshair"
+                            className="group relative p-6 md:p-8 lg:p-12 border-r border-b border-[#000000] flex flex-col min-h-80 md:min-h-100 transition-colors duration-500 hover:bg-[#001F3F] cursor-crosshair"
                         >
                             {/* ID + Category */}
                             <div className="flex justify-between items-start mb-10">
