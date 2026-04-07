@@ -17,6 +17,7 @@ import PhoneIcon      from "@mui/icons-material/Phone";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import { EmailPreview } from "./EmailPreview";
 
 interface Customer {
     _id: string;
@@ -171,32 +172,11 @@ export function ComposeEmailDialog({ open, onClose, customer }: Props) {
                         </Button>
 
                         <Collapse in={showPreview}>
-                            <Box sx={{
-                                p: 2.5, bgcolor: "#fff",
-                                border: "1px solid rgba(0,0,0,0.12)",
-                                fontFamily: "Arial, sans-serif", fontSize: "13px",
-                                color: "#1A202C",
-                            }}>
-                                <Typography sx={{ fontSize: "11px", color: "rgba(0,0,0,0.4)", mb: 0.5, fontFamily: "monospace" }}>
-                                    Von: Palmer Digital &lt;kontakt@palmer-digital.de&gt;
-                                </Typography>
-                                <Typography sx={{ fontSize: "11px", color: "rgba(0,0,0,0.4)", mb: 0.5, fontFamily: "monospace" }}>
-                                    An: {email || "—"}
-                                </Typography>
-                                <Typography sx={{ fontSize: "11px", color: "rgba(0,0,0,0.4)", mb: 2, fontFamily: "monospace" }}>
-                                    Betreff: {subject || "—"}
-                                </Typography>
-                                <Divider sx={{ mb: 2 }} />
-                                <Typography sx={{ fontFamily: "Arial, sans-serif", fontSize: "13px", whiteSpace: "pre-wrap", lineHeight: 1.6 }}>
-                                    {message}
-                                </Typography>
-                                <Divider sx={{ my: 2 }} />
-                                <Typography sx={{ fontSize: "11px", color: "#718096" }}>
-                                    Palmer Digital Architecture<br />
-                                    E-Mail: kontakt@palmer-digital.de<br />
-                                    Web: www.palmer-digital.de
-                                </Typography>
-                            </Box>
+                            <EmailPreview
+                                email={email}
+                                subject={subject}
+                                message={message}
+                            />
                         </Collapse>
                     </Box>
 

@@ -1,5 +1,6 @@
 // src/app/api/documents/docs/[id]/send/route.ts
 // Dokument per E-Mail versenden (PDF als Anhang).
+// Professionelles Template mit Logo, Firmendaten und §19 UStG Hinweis.
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
@@ -7,6 +8,7 @@ import { connectDB } from "@/lib/db/mongodb";
 import { Resend } from "resend";
 import DocModel, { IDocument, DOC_TYPE_LABELS } from "@/lib/db/models/Document";
 import { generatePDF } from "@/lib/pdf/generator";
+import { buildDocumentEmailHtml } from "@/lib/email/template";
 
 export const runtime = "nodejs";
 
@@ -37,33 +39,29 @@ export async function POST(req: NextRequest, { params }: Params) {
     const fileName = `${typeLabel}_${doc.docNumber}.pdf`.replace(/\s+/g, "_");
 
     const fromAddress = process.env.RESEND_FROM_ADDRESS || "kontakt@palmer-digital.de";
-
     const subject = customSubject || `${typeLabel} ${doc.docNumber} — Palmer Digital Architecture`;
 
-    // Build HTML from custom message or use default
     const messageText = customMessage
         || `Sehr geehrte/r ${doc.customerName || "Kunde/Kundin"},\n\nim Anhang finden Sie Ihre ${typeLabel} Nr. ${doc.docNumber}.\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital Architecture`;
 
-    const messageHtml = messageText
-        .split("\n")
-        .map((line: string) => line.trim() === "" ? "<br>" : `<p style="margin:0 0 4px 0;">${line}</p>`)
-        .join("");
+    const html = buildDocumentEmailHtml(
+        messageText,
+        {
+            docType: doc.docType,
+            docNumber: doc.docNumber,
+            customerName: doc.customerName,
+            customerCompany: doc.customerCompany,
+            issueDate: doc.issueDate,
+            total: doc.total,
+        },
+        fileName,
+    );
 
     const { error } = await resend.emails.send({
         from: `Palmer Digital <${fromAddress}>`,
         to: [recipientEmail],
         subject,
-        html: `
-            <div style="font-family: Arial, sans-serif; color: #1A202C; max-width: 600px;">
-                ${messageHtml}
-                <hr style="border: none; border-top: 1px solid #CBD5E0; margin: 24px 0;">
-                <p style="font-size: 11px; color: #718096;">
-                    Palmer Digital Architecture<br>
-                    E-Mail: kontakt@palmer-digital.de<br>
-                    Web: www.palmer-digital.de
-                </p>
-            </div>
-        `,
+        html,
         attachments: [
             {
                 filename: fileName,
@@ -76,7 +74,6 @@ export async function POST(req: NextRequest, { params }: Params) {
         return NextResponse.json({ error: "E-Mail konnte nicht gesendet werden", details: error }, { status: 500 });
     }
 
-    // Status und sentAt/sentTo aktualisieren
     await DocModel.findByIdAndUpdate(id, {
         status: "sent",
         sentAt: new Date(),
