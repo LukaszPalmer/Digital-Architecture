@@ -6,12 +6,12 @@
 // ── Firmendaten ────────────────────────────────────────────────────────────
 
 const COMPANY = {
-    name:     "Palmer Digital Architecture",
+    name:     "Palmer Digital",
     owner:    "Lukasz Palmer",
-    street:   "Musterstraße 1",
-    zip:      "12345",
-    city:     "Berlin",
-    phone:    "+49 123 4567890",
+    street:   "Lippestraße 1",
+    zip:      "40221",
+    city:     "Düsseldorf",
+    phone:    "+49 123 4567890 ",
     email:    "kontakt@palmer-digital.de",
     web:      "www.palmer-digital.de",
     bank:     "Musterbank",

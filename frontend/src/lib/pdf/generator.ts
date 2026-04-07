@@ -21,9 +21,9 @@ const BORDER     = "#CBD5E0";
 const COMPANY = {
     name:     "Palmer Digital Architecture",
     owner:    "Lukasz Palmer",
-    street:   "Musterstraße 1",          // TODO: Echte Adresse eintragen
-    zip:      "12345",
-    city:     "Berlin",
+    street:   "Lippestraße 1",          // TODO: Echte Adresse eintragen (bereits echt)
+    zip:      "40221",
+    city:     "Düsseldorf",
     phone:    "+49 123 4567890",
     email:    "kontakt@palmer-digital.de",
     web:      "www.palmer-digital.de",

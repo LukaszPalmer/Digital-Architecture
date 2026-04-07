@@ -2,7 +2,7 @@
 
 // Kunden-Tab: Liste mit E-Mail-Aktion, Erstellen, Bearbeiten, Detailansicht.
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, Fragment } from "react";
 import {
     Box, Typography, Paper, Table, TableBody, TableCell, TableHead, TableRow,
     IconButton, Tooltip, Button, TextField, Dialog, DialogTitle, DialogContent,
@@ -210,6 +210,20 @@ export function CustomersTab() {
     const cellSx = {
         borderColor: "rgba(0,0,0,0.06)", py: 1.2, px: 2,
         fontSize: "12px", fontFamily: "monospace",
+        whiteSpace: "nowrap" as const,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+    };
+
+    /* Fixed column widths for consistent alignment */
+    const colWidths = {
+        expand:  40,
+        kdNr:    100,
+        name:    "22%",
+        firma:   "22%",
+        email:   "24%",
+        city:    "14%",
+        actions: 120,
     };
 
     return (
@@ -262,11 +276,20 @@ export function CustomersTab() {
                     <CircularProgress sx={{ color: "#001F3F" }} />
                 </Box>
             ) : (
-                <Paper elevation={0} sx={{ border: "1px solid rgba(0,0,0,0.10)", borderRadius: 0 }}>
-                    <Table size="small">
+                <Paper elevation={0} sx={{ border: "1px solid rgba(0,0,0,0.10)", borderRadius: 0, overflowX: "auto" }}>
+                    <Table size="small" sx={{ tableLayout: "fixed", minWidth: 720 }}>
+                        <colgroup>
+                            <col style={{ width: colWidths.expand }} />
+                            <col style={{ width: colWidths.kdNr }} />
+                            <col style={{ width: colWidths.name }} />
+                            <col style={{ width: colWidths.firma }} />
+                            <col style={{ width: colWidths.email }} />
+                            <col style={{ width: colWidths.city }} />
+                            <col style={{ width: colWidths.actions }} />
+                        </colgroup>
                         <TableHead>
-                            <TableRow sx={{ "& th": { ...cellSx, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", fontSize: "10px" } }}>
-                                <TableCell sx={{ width: 40 }} />
+                            <TableRow sx={{ "& th": { ...cellSx, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", color: "rgba(0,0,0,0.4)", fontSize: "10px", bgcolor: "rgba(0,31,63,0.02)" } }}>
+                                <TableCell />
                                 <TableCell>KD-Nr.</TableCell>
                                 <TableCell>Name</TableCell>
                                 <TableCell>Firma</TableCell>
@@ -277,7 +300,7 @@ export function CustomersTab() {
                         </TableHead>
                         <TableBody>
                             {filtered.map(c => (
-                                <Box component="tbody" key={c._id}>
+                                <Fragment key={c._id}>
                                     <TableRow
                                         hover
                                         sx={{
@@ -288,7 +311,7 @@ export function CustomersTab() {
                                         }}
                                         onClick={() => toggleExpand(c._id)}
                                     >
-                                        <TableCell sx={{ width: 40, px: 1 }}>
+                                        <TableCell sx={{ px: 1, textAlign: "center" }}>
                                             <IconButton size="small" sx={{ p: 0.3 }}>
                                                 {expandedId === c._id
                                                     ? <KeyboardArrowUpIcon sx={{ fontSize: 16, color: "rgba(0,0,0,0.3)" }} />
@@ -304,15 +327,15 @@ export function CustomersTab() {
                                             />
                                         </TableCell>
                                         <TableCell sx={{ fontWeight: 600, color: "#001F3F" }}>{c.name}</TableCell>
-                                        <TableCell>{c.company || "—"}</TableCell>
+                                        <TableCell sx={{ color: "rgba(0,0,0,0.55)" }}>{c.company || "—"}</TableCell>
                                         <TableCell>
-                                            <Box display="flex" alignItems="center" gap={0.5}>
-                                                <EmailIcon sx={{ fontSize: 12, color: "rgba(0,0,0,0.25)" }} />
-                                                {c.email}
+                                            <Box display="flex" alignItems="center" gap={0.5} sx={{ overflow: "hidden", textOverflow: "ellipsis" }}>
+                                                <EmailIcon sx={{ fontSize: 12, color: "rgba(0,0,0,0.25)", flexShrink: 0 }} />
+                                                <Box component="span" sx={{ overflow: "hidden", textOverflow: "ellipsis" }}>{c.email}</Box>
                                             </Box>
                                         </TableCell>
                                         <TableCell>{c.city}</TableCell>
-                                        <TableCell align="right" onClick={e => e.stopPropagation()}>
+                                        <TableCell align="right" onClick={e => e.stopPropagation()} sx={{ whiteSpace: "nowrap" }}>
                                             <Tooltip title="E-Mail senden">
                                                 <IconButton size="small" onClick={() => openEmail(c)}>
                                                     <EmailIcon sx={{ fontSize: 16, color: "#001F3F" }} />
@@ -331,15 +354,21 @@ export function CustomersTab() {
                                         </TableCell>
                                     </TableRow>
 
-                                    {/* Expandable detail row */}
+                                    {/* Expandable detail — full-width row below */}
                                     <TableRow>
-                                        <TableCell colSpan={7} sx={{ py: 0, px: 2, borderColor: expandedId === c._id ? "rgba(0,0,0,0.06)" : "transparent" }}>
+                                        <TableCell
+                                            colSpan={7}
+                                            sx={{
+                                                py: 0, px: 0,
+                                                borderBottom: expandedId === c._id ? "1px solid rgba(0,0,0,0.06)" : "none",
+                                            }}
+                                        >
                                             <Collapse in={expandedId === c._id} timeout="auto" unmountOnExit>
                                                 <Box sx={{
-                                                    py: 2, px: 2,
+                                                    py: 2, px: 3,
                                                     bgcolor: "rgba(0,31,63,0.015)",
                                                     borderLeft: "3px solid #001F3F",
-                                                    my: 1,
+                                                    mx: 2, my: 1,
                                                 }}>
                                                     <CustomerDetailRow customer={c} />
 
@@ -376,7 +405,7 @@ export function CustomersTab() {
                                             </Collapse>
                                         </TableCell>
                                     </TableRow>
-                                </Box>
+                                </Fragment>
                             ))}
                             {filtered.length === 0 && (
                                 <TableRow>
