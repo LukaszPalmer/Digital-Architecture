@@ -17,6 +17,11 @@ import SendIcon         from "@mui/icons-material/Send";
 import { DocumentFormDialog } from "./DocumentFormDialog";
 import { SendEmailDialog }    from "./SendEmailDialog";
 
+interface CustomerRef {
+    _id: string;
+    email: string;
+}
+
 export type DocType = "invoice" | "quote" | "confirmation";
 
 interface DocItem {
@@ -94,6 +99,7 @@ export function DocumentsTab({ docType, title }: Props) {
     const [editing, setEditing]     = useState<DocRecord | null>(null);
     const [sendOpen, setSendOpen]   = useState(false);
     const [sendDoc, setSendDoc]     = useState<DocRecord | null>(null);
+    const [customerEmails, setCustomerEmails] = useState<Record<string, string>>({});
 
     const fetchDocs = useCallback(async () => {
         setLoading(true);
@@ -102,7 +108,18 @@ export function DocumentsTab({ docType, title }: Props) {
         setLoading(false);
     }, [docType]);
 
-    useEffect(() => { fetchDocs(); }, [fetchDocs]);
+    // Fetch customer emails for auto-fill
+    const fetchCustomerEmails = useCallback(async () => {
+        const res = await fetch("/api/documents/customers");
+        if (res.ok) {
+            const customers: CustomerRef[] = await res.json();
+            const emailMap: Record<string, string> = {};
+            for (const c of customers) emailMap[c._id] = c.email;
+            setCustomerEmails(emailMap);
+        }
+    }, []);
+
+    useEffect(() => { fetchDocs(); fetchCustomerEmails(); }, [fetchDocs, fetchCustomerEmails]);
 
     const openNew = () => {
         setEditing(null);
@@ -265,6 +282,7 @@ export function DocumentsTab({ docType, title }: Props) {
                     onClose={() => { setSendOpen(false); setSendDoc(null); }}
                     onSent={fetchDocs}
                     doc={sendDoc}
+                    customerEmail={customerEmails[sendDoc.customerId] || ""}
                 />
             )}
         </Box>

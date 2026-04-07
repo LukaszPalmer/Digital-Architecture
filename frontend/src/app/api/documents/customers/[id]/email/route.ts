@@ -1,12 +1,11 @@
-// src/app/api/documents/docs/[id]/send/route.ts
-// Dokument per E-Mail versenden (PDF als Anhang).
+// src/app/api/documents/customers/[id]/email/route.ts
+// Direkte E-Mail an einen Kunden senden (ohne Dokumentanhang).
 
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { connectDB } from "@/lib/db/mongodb";
 import { Resend } from "resend";
-import DocModel, { IDocument, DOC_TYPE_LABELS } from "@/lib/db/models/Document";
-import { generatePDF } from "@/lib/pdf/generator";
+import Customer from "@/lib/db/models/Customer";
 
 export const runtime = "nodejs";
 
@@ -20,38 +19,36 @@ export async function POST(req: NextRequest, { params }: Params) {
 
     const { id } = await params;
     const body = await req.json();
-    const recipientEmail = body.email as string;
-    const customSubject = body.subject as string | undefined;
-    const customMessage = body.message as string | undefined;
+    const { email, subject, message } = body as {
+        email: string;
+        subject: string;
+        message: string;
+    };
 
-    if (!recipientEmail) {
+    if (!email) {
         return NextResponse.json({ error: "E-Mail-Adresse fehlt" }, { status: 400 });
+    }
+    if (!subject) {
+        return NextResponse.json({ error: "Betreff fehlt" }, { status: 400 });
+    }
+    if (!message) {
+        return NextResponse.json({ error: "Nachricht fehlt" }, { status: 400 });
     }
 
     await connectDB();
-    const doc = await DocModel.findById(id) as IDocument | null;
-    if (!doc) return NextResponse.json({ error: "Not found" }, { status: 404 });
-
-    const pdfBuffer = await generatePDF(doc);
-    const typeLabel = DOC_TYPE_LABELS[doc.docType];
-    const fileName = `${typeLabel}_${doc.docNumber}.pdf`.replace(/\s+/g, "_");
+    const customer = await Customer.findById(id);
+    if (!customer) return NextResponse.json({ error: "Kunde nicht gefunden" }, { status: 404 });
 
     const fromAddress = process.env.RESEND_FROM_ADDRESS || "kontakt@palmer-digital.de";
 
-    const subject = customSubject || `${typeLabel} ${doc.docNumber} — Palmer Digital Architecture`;
-
-    // Build HTML from custom message or use default
-    const messageText = customMessage
-        || `Sehr geehrte/r ${doc.customerName || "Kunde/Kundin"},\n\nim Anhang finden Sie Ihre ${typeLabel} Nr. ${doc.docNumber}.\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital Architecture`;
-
-    const messageHtml = messageText
+    const messageHtml = message
         .split("\n")
         .map((line: string) => line.trim() === "" ? "<br>" : `<p style="margin:0 0 4px 0;">${line}</p>`)
         .join("");
 
     const { error } = await resend.emails.send({
         from: `Palmer Digital <${fromAddress}>`,
-        to: [recipientEmail],
+        to: [email],
         subject,
         html: `
             <div style="font-family: Arial, sans-serif; color: #1A202C; max-width: 600px;">
@@ -64,24 +61,11 @@ export async function POST(req: NextRequest, { params }: Params) {
                 </p>
             </div>
         `,
-        attachments: [
-            {
-                filename: fileName,
-                content: pdfBuffer,
-            },
-        ],
     });
 
     if (error) {
         return NextResponse.json({ error: "E-Mail konnte nicht gesendet werden", details: error }, { status: 500 });
     }
 
-    // Status und sentAt/sentTo aktualisieren
-    await DocModel.findByIdAndUpdate(id, {
-        status: "sent",
-        sentAt: new Date(),
-        sentTo: recipientEmail,
-    });
-
-    return NextResponse.json({ success: true, sentTo: recipientEmail });
+    return NextResponse.json({ success: true, sentTo: email });
 }
