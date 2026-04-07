@@ -249,7 +249,7 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
                                     fullWidth size="small" label="Preis (€)" type="number"
                                     value={item.unitPrice ? item.unitPrice / 100 : ""}
                                     onChange={e => updateItem(i, "unitPrice", Math.round(parseFloat(e.target.value || "0") * 100))}
-                                    inputProps={{ step: "0.01", min: "0" }}
+                                    slotProps={{ htmlInput: { step: "0.01", min: "0" } }}
                                     sx={inputSx}
                                 />
                             </Box>
