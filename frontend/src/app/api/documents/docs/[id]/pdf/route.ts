@@ -7,6 +7,8 @@ import { connectDB } from "@/lib/db/mongodb";
 import DocModel, { IDocument, DOC_TYPE_LABELS } from "@/lib/db/models/Document";
 import { generatePDF } from "@/lib/pdf/generator";
 
+export const runtime = "nodejs";
+
 type Params = { params: Promise<{ id: string }> };
 
 export async function GET(_req: NextRequest, { params }: Params) {

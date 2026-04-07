@@ -247,8 +247,9 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
                             <Box flex={1}>
                                 <TextField
                                     fullWidth size="small" label="Preis (€)" type="number"
-                                    value={item.unitPrice ? (item.unitPrice / 100).toFixed(2) : ""}
+                                    value={item.unitPrice ? item.unitPrice / 100 : ""}
                                     onChange={e => updateItem(i, "unitPrice", Math.round(parseFloat(e.target.value || "0") * 100))}
+                                    inputProps={{ step: "0.01", min: "0" }}
                                     sx={inputSx}
                                 />
                             </Box>

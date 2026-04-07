@@ -8,6 +8,8 @@ import { Resend } from "resend";
 import DocModel, { IDocument, DOC_TYPE_LABELS } from "@/lib/db/models/Document";
 import { generatePDF } from "@/lib/pdf/generator";
 
+export const runtime = "nodejs";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 type Params = { params: Promise<{ id: string }> };
@@ -57,7 +59,7 @@ export async function POST(req: NextRequest, { params }: Params) {
         attachments: [
             {
                 filename: fileName,
-                content: pdfBuffer.toString("base64"),
+                content: pdfBuffer,
             },
         ],
     });
