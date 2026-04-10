@@ -53,7 +53,9 @@ export async function generatePDF(doc: IDocument): Promise<Buffer> {
     return new Promise((resolve, reject) => {
         const pdf = new PDFDocument({
             size: "A4",
-            margins: { top: 40, bottom: 40, left: 50, right: 50 },
+            // bottom: 0 verhindert, dass pdfkit beim Footer automatisch eine
+            // neue Seite anlegt. Wir positionieren den Footer selbst absolut.
+            margins: { top: 40, bottom: 0, left: 50, right: 50 },
             info: {
                 Title: `${DOC_TYPE_LABELS[doc.docType]} ${doc.docNumber}`,
                 Author: COMPANY.name,
@@ -269,7 +271,10 @@ export async function generatePDF(doc: IDocument): Promise<Buffer> {
         pdf.text(COMPANY.owner, leftMargin, outroY + 35);
 
         // ── Footer ──────────────────────────────────────────────────────
-        const footerY = 770;
+        // Absolute Positionierung, damit alle 4 Spalten garantiert auf Seite 1
+        // nebeneinander stehen. Mit bottom-margin:0 kann pdfkit nicht mehr
+        // automatisch umbrechen.
+        const footerY = 760;
 
         // Trennlinie
         pdf.moveTo(leftMargin, footerY)
@@ -277,34 +282,46 @@ export async function generatePDF(doc: IDocument): Promise<Buffer> {
            .strokeColor(NAVY).lineWidth(1.5).stroke();
 
         const footerColW = contentWidth / 4;
-        const footerFontSize = 6.5;
+        const fs = 6;               // Footer-Fontgröße
+        const lineH = 9;            // Zeilenabstand
+        const lineOpts = { width: footerColW, lineBreak: false, height: 10 } as const;
 
-        // Spalte 1: Firma
-        pdf.font("Helvetica-Bold").fontSize(footerFontSize).fillColor(TEXT_DARK);
-        pdf.text(COMPANY.name, leftMargin, footerY + 8, { width: footerColW });
-        pdf.font("Helvetica").fontSize(footerFontSize).fillColor(TEXT_GRAY);
-        pdf.text(COMPANY.street, leftMargin, footerY + 18);
-        pdf.text(`${COMPANY.zip} ${COMPANY.city}`, leftMargin, footerY + 28);
+        const drawCol = (x: number, title: string, lines: string[]) => {
+            pdf.font("Helvetica-Bold").fontSize(fs).fillColor(TEXT_DARK);
+            pdf.text(title, x, footerY + 8, lineOpts);
+            pdf.font("Helvetica").fontSize(fs).fillColor(TEXT_GRAY);
+            lines.forEach((l, i) => {
+                pdf.text(l, x, footerY + 8 + lineH * (i + 1), lineOpts);
+            });
+        };
+
+        // Spalte 1: Firma & Adresse
+        drawCol(leftMargin, COMPANY.name, [
+            `Inh. ${COMPANY.owner}`,
+            COMPANY.street,
+            `${COMPANY.zip} ${COMPANY.city}`,
+        ]);
 
         // Spalte 2: Kontakt
-        const col2X = leftMargin + footerColW;
-        pdf.font("Helvetica").fontSize(footerFontSize).fillColor(TEXT_GRAY);
-        pdf.text(`Tel.: ${COMPANY.phone}`, col2X, footerY + 8, { width: footerColW });
-        pdf.text(`E-Mail: ${COMPANY.email}`, col2X, footerY + 18);
-        pdf.text(`Internet: ${COMPANY.web}`, col2X, footerY + 28);
+        drawCol(leftMargin + footerColW, "Kontakt", [
+            `Tel.: ${COMPANY.phone}`,
+            `E-Mail: ${COMPANY.email}`,
+            `Web: ${COMPANY.web}`,
+        ]);
 
-        // Spalte 3: Bank
-        const col3X = leftMargin + footerColW * 2;
-        pdf.font("Helvetica").fontSize(footerFontSize).fillColor(TEXT_GRAY);
-        pdf.text(COMPANY.bank, col3X, footerY + 8, { width: footerColW });
-        pdf.text(`IBAN: ${COMPANY.iban}`, col3X, footerY + 18);
-        pdf.text(`BIC: ${COMPANY.bic}`, col3X, footerY + 28);
+        // Spalte 3: Geschäftskonto
+        drawCol(leftMargin + footerColW * 2, "Geschäftskonto", [
+            COMPANY.bank,
+            `IBAN: ${COMPANY.iban}`,
+            `BIC: ${COMPANY.bic}`,
+        ]);
 
-        // Spalte 4: Geschäftsführer
-        const col4X = leftMargin + footerColW * 3;
-        pdf.font("Helvetica").fontSize(footerFontSize).fillColor(TEXT_GRAY);
-        pdf.text(`Geschäftsführer: ${COMPANY.owner}`, col4X, footerY + 8, { width: footerColW });
-        pdf.text(`St.-Nr.: ${COMPANY.taxId}`, col4X, footerY + 18);
+        // Spalte 4: Steuerliches
+        drawCol(leftMargin + footerColW * 3, "Steuerliches", [
+            `St.-Nr.: ${COMPANY.taxId}`,
+            "Kleinunternehmer",
+            "gem. § 19 UStG",
+        ]);
 
         pdf.end();
     });
