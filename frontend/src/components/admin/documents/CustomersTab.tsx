@@ -25,6 +25,8 @@ import DescriptionIcon from "@mui/icons-material/Description";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import SendIcon       from "@mui/icons-material/Send";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import EuroIcon       from "@mui/icons-material/Euro";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -129,13 +131,14 @@ function StatCard({ label, value, sub, icon: Icon, color }: {
 
 // ── Customer Profile Panel ─────────────────────────────────────────────────
 
-function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc }: {
+function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, onTogglePaid }: {
     customer: Customer;
     docs: DocRecord[];
     onEmail: () => void;
     onEdit: () => void;
     onClose: () => void;
     onSendDoc: (doc: DocRecord) => void;
+    onTogglePaid: (doc: DocRecord) => void;
 }) {
     const invoices = docs.filter(d => d.docType === "invoice");
     const quotes = docs.filter(d => d.docType === "quote");
@@ -367,6 +370,17 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc }
                                         />
 
                                         <Box display="flex" gap={0.3}>
+                                            {doc.docType === "invoice" && (
+                                                <Tooltip title={doc.status === "paid" ? "Als offen markieren" : "Als bezahlt markieren"}>
+                                                    <IconButton size="small" onClick={() => onTogglePaid(doc)}>
+                                                        {doc.status === "paid" ? (
+                                                            <CheckCircleIcon sx={{ fontSize: 14, color: "#009600" }} />
+                                                        ) : (
+                                                            <RadioButtonUncheckedIcon sx={{ fontSize: 14, color: "rgba(0,0,0,0.35)" }} />
+                                                        )}
+                                                    </IconButton>
+                                                </Tooltip>
+                                            )}
                                             <Tooltip title="PDF">
                                                 <IconButton size="small" onClick={() => window.open(`/api/documents/docs/${doc._id}/pdf`, "_blank")}>
                                                     <PictureAsPdfIcon sx={{ fontSize: 14, color: "#c53030" }} />
@@ -474,6 +488,18 @@ export function CustomersTab() {
         setEmailOpen(true);
     };
 
+    const handleTogglePaid = async (doc: DocRecord) => {
+        const newStatus = doc.status === "paid" ? "sent" : "paid";
+        const res = await fetch(`/api/documents/docs/${doc._id}`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status: newStatus }),
+        });
+        if (res.ok && selectedCustomer) {
+            fetchCustomerDocs(selectedCustomer._id);
+        }
+    };
+
     const filtered = customers.filter(c => {
         if (!search) return true;
         const q = search.toLowerCase();
@@ -577,6 +603,7 @@ export function CustomersTab() {
                             onEdit={() => openEdit(selectedCustomer)}
                             onClose={() => setSelectedCustomer(null)}
                             onSendDoc={(doc) => { setSendDoc(doc); setSendOpen(true); }}
+                            onTogglePaid={handleTogglePaid}
                         />
                     )}
                 </Box>
