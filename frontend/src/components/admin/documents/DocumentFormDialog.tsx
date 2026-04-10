@@ -36,6 +36,25 @@ const TYPE_LABELS: Record<DocType, string> = {
     confirmation: "Auftragsbestätigung",
 };
 
+// Feste Default-Einleitungstexte je Dokumenttyp.
+// Werden beim Öffnen des Dialogs automatisch gesetzt, können aber überschrieben werden.
+const DEFAULT_INTRO: Record<DocType, string> = {
+    quote:
+        "vielen Dank für Ihre Anfrage und Ihr Interesse an Palmer Digital Architecture. "
+        + "Gerne unterbreiten wir Ihnen auf Basis unseres Gesprächs das folgende unverbindliche Angebot "
+        + "für die gewünschten Leistungen:",
+    invoice:
+        "vielen Dank für Ihr Vertrauen in Palmer Digital Architecture. "
+        + "Wir stellen Ihnen hiermit folgende Leistungen in Rechnung:",
+    confirmation:
+        "vielen Dank für Ihren Auftrag. Hiermit bestätigen wir Ihnen verbindlich die Beauftragung "
+        + "der folgenden Leistungen:",
+};
+
+const DEFAULT_PAYMENT_TERMS =
+    "Die Rechnung ist sofort fällig. Bitte überweisen Sie innerhalb von 14 Tagen "
+    + "den Gesamtbetrag auf das unten angegebene Konto.";
+
 interface Props {
     open: boolean;
     onClose: () => void;
@@ -54,9 +73,7 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
     const [validUntil, setValidUntil]     = useState("");
     const [introText, setIntroText]       = useState("");
     const [outroText, setOutroText]       = useState("Freundliche Grüße");
-    const [paymentTerms, setPaymentTerms] = useState(
-        "Die Rechnung ist sofort fällig. Bitte überweisen Sie innerhalb von 14 Tagen den Gesamtbetrag auf das unten angegebene Konto."
-    );
+    const [paymentTerms, setPaymentTerms] = useState(DEFAULT_PAYMENT_TERMS);
     const [notes, setNotes] = useState("");
     const [items, setItems] = useState<LineItem[]>([
         { title: "", description: "", unitPrice: 0, quantity: 1 },
@@ -92,18 +109,24 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
             if (cust) setSelectedCustomer(cust);
         } else if (!editing && open) {
             // Reset
-            setIssueDate(new Date().toISOString().slice(0, 10));
-            setDeliveryDate(new Date().toISOString().slice(0, 10));
+            const today = new Date();
+            const in14Days = new Date(today);
+            in14Days.setDate(in14Days.getDate() + 14);
+
+            setIssueDate(today.toISOString().slice(0, 10));
+            setDeliveryDate(today.toISOString().slice(0, 10));
             setDueDate("");
-            setValidUntil("");
-            setIntroText("");
+            // Für Angebote: Gültigkeit standardmäßig 14 Tage (§ 145 BGB Bindungsfrist)
+            setValidUntil(docType === "quote" ? in14Days.toISOString().slice(0, 10) : "");
+            setIntroText(DEFAULT_INTRO[docType]);
             setOutroText("Freundliche Grüße");
-            setPaymentTerms("Die Rechnung ist sofort fällig. Bitte überweisen Sie innerhalb von 14 Tagen den Gesamtbetrag auf das unten angegebene Konto.");
+            // Zahlungsbedingungen nur für Rechnungen relevant
+            setPaymentTerms(docType === "invoice" ? DEFAULT_PAYMENT_TERMS : "");
             setNotes("");
             setItems([{ title: "", description: "", unitPrice: 0, quantity: 1 }]);
             setSelectedCustomer(null);
         }
-    }, [editing, open, customers]);
+    }, [editing, open, customers, docType]);
 
     const addItem = () => setItems(prev => [...prev, { title: "", description: "", unitPrice: 0, quantity: 1 }]);
 
@@ -213,11 +236,11 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
                         )}
                     </Box>
 
-                    {/* Intro-Text */}
+                    {/* Intro-Text — wird automatisch je Dokumenttyp vorbelegt,
+                        kann aber individuell überschrieben werden. */}
                     <TextField
-                        fullWidth size="small" label="Einleitungstext" multiline rows={2}
+                        fullWidth size="small" label="Einleitungstext" multiline rows={3}
                         value={introText} onChange={e => setIntroText(e.target.value)}
-                        placeholder="Vielen Dank für Ihr Vertrauen..."
                         sx={inputSx}
                     />
 
@@ -295,12 +318,15 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
 
                     <Divider />
 
-                    {/* Zahlungsbedingungen */}
-                    <TextField
-                        fullWidth size="small" label="Zahlungsbedingungen" multiline rows={2}
-                        value={paymentTerms} onChange={e => setPaymentTerms(e.target.value)}
-                        sx={inputSx}
-                    />
+                    {/* Zahlungsbedingungen — nur bei Rechnungen.
+                        Angebote und Auftragsbestätigungen brauchen keine Überweisungs-Infos. */}
+                    {docType === "invoice" && (
+                        <TextField
+                            fullWidth size="small" label="Zahlungsbedingungen" multiline rows={2}
+                            value={paymentTerms} onChange={e => setPaymentTerms(e.target.value)}
+                            sx={inputSx}
+                        />
+                    )}
 
                     {/* Outro */}
                     <TextField
