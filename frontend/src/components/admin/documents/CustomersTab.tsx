@@ -26,7 +26,6 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import SendIcon       from "@mui/icons-material/Send";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import EuroIcon       from "@mui/icons-material/Euro";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -95,16 +94,20 @@ function formatDate(dateStr: string): string {
 
 // ── Stat Card ──────────────────────────────────────────────────────────────
 
-function StatCard({ label, value, sub, icon: Icon, color }: {
+function StatCard({ label, value, sub, icon: Icon, color, onClick }: {
     label: string; value: string; sub?: string;
     icon: typeof EuroIcon; color: string;
+    onClick?: () => void;
 }) {
     return (
-        <Paper elevation={0} sx={{
+        <Paper elevation={0} onClick={onClick} sx={{
             border: "1px solid rgba(0,0,0,0.08)", borderRadius: 0,
             p: 2, display: "flex", alignItems: "flex-start", gap: 1.5,
-            transition: "border-color 0.2s",
-            "&:hover": { borderColor: "rgba(0,31,63,0.2)" },
+            transition: "all 0.2s",
+            cursor: onClick ? "pointer" : "default",
+            "&:hover": onClick
+                ? { borderColor: color, bgcolor: `${color}08`, transform: "translateY(-1px)" }
+                : { borderColor: "rgba(0,31,63,0.2)" },
         }}>
             <Box sx={{
                 width: 36, height: 36, bgcolor: `${color}15`,
@@ -140,6 +143,8 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
     onSendDoc: (doc: DocRecord) => void;
     onTogglePaid: (doc: DocRecord) => void;
 }) {
+    const [openInvoicesDialog, setOpenInvoicesDialog] = useState(false);
+
     const invoices = docs.filter(d => d.docType === "invoice");
     const quotes = docs.filter(d => d.docType === "quote");
     const confirmations = docs.filter(d => d.docType === "confirmation");
@@ -148,9 +153,8 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
         .filter(d => d.status === "paid")
         .reduce((sum, d) => sum + d.total, 0);
 
-    const totalOpen = invoices
-        .filter(d => d.status === "sent" || d.status === "overdue")
-        .reduce((sum, d) => sum + d.total, 0);
+    const openInvoices = invoices.filter(d => d.status === "sent" || d.status === "overdue");
+    const totalOpen = openInvoices.reduce((sum, d) => sum + d.total, 0);
 
     const totalAll = docs.reduce((sum, d) => sum + d.total, 0);
 
@@ -191,7 +195,14 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
                         <StatCard label="Umsatz (bezahlt)" value={formatCurrency(totalRevenue)} icon={EuroIcon} color="#009600" />
                     </Grid>
                     <Grid size={{ xs: 6, md: 3 }}>
-                        <StatCard label="Offen" value={formatCurrency(totalOpen)} icon={TrendingUpIcon} color="#C83200" />
+                        <StatCard
+                            label="Offen"
+                            value={formatCurrency(totalOpen)}
+                            sub={openInvoices.length > 0 ? `${openInvoices.length} offen — Klicken zum Markieren` : undefined}
+                            icon={TrendingUpIcon}
+                            color="#C83200"
+                            onClick={openInvoices.length > 0 ? () => setOpenInvoicesDialog(true) : undefined}
+                        />
                     </Grid>
                     <Grid size={{ xs: 6, md: 3 }}>
                         <StatCard label="Dokumente" value={String(docs.length)} sub={`${invoices.length} RE / ${quotes.length} AN / ${confirmations.length} AB`} icon={DescriptionIcon} color={NAVY} />
@@ -370,17 +381,6 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
                                         />
 
                                         <Box display="flex" gap={0.3}>
-                                            {doc.docType === "invoice" && (
-                                                <Tooltip title={doc.status === "paid" ? "Als offen markieren" : "Als bezahlt markieren"}>
-                                                    <IconButton size="small" onClick={() => onTogglePaid(doc)}>
-                                                        {doc.status === "paid" ? (
-                                                            <CheckCircleIcon sx={{ fontSize: 14, color: "#009600" }} />
-                                                        ) : (
-                                                            <RadioButtonUncheckedIcon sx={{ fontSize: 14, color: "rgba(0,0,0,0.35)" }} />
-                                                        )}
-                                                    </IconButton>
-                                                </Tooltip>
-                                            )}
                                             <Tooltip title="PDF">
                                                 <IconButton size="small" onClick={() => window.open(`/api/documents/docs/${doc._id}/pdf`, "_blank")}>
                                                     <PictureAsPdfIcon sx={{ fontSize: 14, color: "#c53030" }} />
@@ -399,6 +399,87 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
                     )}
                 </Box>
             </Box>
+
+            {/* Dialog: Offene Rechnungen als bezahlt markieren */}
+            <Dialog
+                open={openInvoicesDialog}
+                onClose={() => setOpenInvoicesDialog(false)}
+                maxWidth="sm"
+                fullWidth
+                slotProps={{ paper: { sx: { borderRadius: 0 } } }}
+            >
+                <DialogTitle sx={{
+                    fontFamily: "monospace", fontSize: "12px", fontWeight: 800,
+                    letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY,
+                    borderBottom: "1px solid rgba(0,0,0,0.08)",
+                }}>
+                    Offene Rechnungen ({openInvoices.length})
+                </DialogTitle>
+                <DialogContent sx={{ p: 0 }}>
+                    {openInvoices.length === 0 ? (
+                        <Box sx={{ py: 5, textAlign: "center" }}>
+                            <CheckCircleIcon sx={{ fontSize: 40, color: "#009600", mb: 1 }} />
+                            <Typography sx={{ fontFamily: "monospace", fontSize: "12px", color: "rgba(0,0,0,0.5)" }}>
+                                Alle Rechnungen sind bezahlt!
+                            </Typography>
+                        </Box>
+                    ) : (
+                        <Box>
+                            {openInvoices.map((doc) => (
+                                <Box
+                                    key={doc._id}
+                                    sx={{
+                                        px: 3, py: 2, display: "flex", alignItems: "center", gap: 2,
+                                        borderBottom: "1px solid rgba(0,0,0,0.06)",
+                                        "&:last-child": { borderBottom: "none" },
+                                    }}
+                                >
+                                    <Box flex={1} minWidth={0}>
+                                        <Box display="flex" alignItems="center" gap={1}>
+                                            <Chip label={doc.docNumber} size="small" sx={{
+                                                bgcolor: "rgba(0,31,63,0.06)", color: NAVY,
+                                                fontFamily: "monospace", fontSize: "9px", fontWeight: 700,
+                                                borderRadius: 0, height: 18,
+                                            }} />
+                                            <Typography sx={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(0,0,0,0.4)" }}>
+                                                {formatDate(doc.issueDate)}
+                                            </Typography>
+                                        </Box>
+                                        <Typography sx={{ fontFamily: "monospace", fontSize: "14px", fontWeight: 700, color: NAVY, mt: 0.5 }}>
+                                            {formatCurrency(doc.total)}
+                                        </Typography>
+                                    </Box>
+                                    <Button
+                                        size="small"
+                                        startIcon={<CheckCircleIcon sx={{ fontSize: 16 }} />}
+                                        onClick={() => onTogglePaid(doc)}
+                                        sx={{
+                                            borderRadius: 0, bgcolor: "#009600", color: "#fff",
+                                            fontFamily: "monospace", fontSize: "10px", fontWeight: 700,
+                                            letterSpacing: "0.05em", textTransform: "uppercase", px: 2,
+                                            "&:hover": { bgcolor: "#007a00" },
+                                        }}
+                                    >
+                                        Bezahlt
+                                    </Button>
+                                </Box>
+                            ))}
+                        </Box>
+                    )}
+                </DialogContent>
+                <DialogActions sx={{ borderTop: "1px solid rgba(0,0,0,0.08)", px: 2, py: 1.5 }}>
+                    <Button
+                        onClick={() => setOpenInvoicesDialog(false)}
+                        sx={{
+                            borderRadius: 0, fontFamily: "monospace", fontSize: "10px",
+                            fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase",
+                            color: "rgba(0,0,0,0.6)",
+                        }}
+                    >
+                        Schließen
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Paper>
     );
 }
