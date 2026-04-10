@@ -26,6 +26,7 @@ import AssignmentIcon from "@mui/icons-material/Assignment";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import SendIcon       from "@mui/icons-material/Send";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import UndoIcon from "@mui/icons-material/Undo";
 import EuroIcon       from "@mui/icons-material/Euro";
 import TrendingUpIcon from "@mui/icons-material/TrendingUp";
 import CalendarTodayIcon from "@mui/icons-material/CalendarToday";
@@ -144,14 +145,14 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
     onTogglePaid: (doc: DocRecord) => void;
 }) {
     const [openInvoicesDialog, setOpenInvoicesDialog] = useState(false);
+    const [paidInvoicesDialog, setPaidInvoicesDialog] = useState(false);
 
     const invoices = docs.filter(d => d.docType === "invoice");
     const quotes = docs.filter(d => d.docType === "quote");
     const confirmations = docs.filter(d => d.docType === "confirmation");
 
-    const totalRevenue = invoices
-        .filter(d => d.status === "paid")
-        .reduce((sum, d) => sum + d.total, 0);
+    const paidInvoices = invoices.filter(d => d.status === "paid");
+    const totalRevenue = paidInvoices.reduce((sum, d) => sum + d.total, 0);
 
     const openInvoices = invoices.filter(d => d.status === "sent" || d.status === "overdue");
     const totalOpen = openInvoices.reduce((sum, d) => sum + d.total, 0);
@@ -192,7 +193,14 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
             <Box sx={{ px: 3, py: 2, bgcolor: "rgba(0,31,63,0.02)", borderBottom: "1px solid rgba(0,0,0,0.06)" }}>
                 <Grid container spacing={2}>
                     <Grid size={{ xs: 6, md: 3 }}>
-                        <StatCard label="Umsatz (bezahlt)" value={formatCurrency(totalRevenue)} icon={EuroIcon} color="#009600" />
+                        <StatCard
+                            label="Umsatz (bezahlt)"
+                            value={formatCurrency(totalRevenue)}
+                            sub={paidInvoices.length > 0 ? `${paidInvoices.length} bezahlt — Klicken zum Rückgängig` : undefined}
+                            icon={EuroIcon}
+                            color="#009600"
+                            onClick={paidInvoices.length > 0 ? () => setPaidInvoicesDialog(true) : undefined}
+                        />
                     </Grid>
                     <Grid size={{ xs: 6, md: 3 }}>
                         <StatCard
@@ -470,6 +478,86 @@ function CustomerProfile({ customer, docs, onEmail, onEdit, onClose, onSendDoc, 
                 <DialogActions sx={{ borderTop: "1px solid rgba(0,0,0,0.08)", px: 2, py: 1.5 }}>
                     <Button
                         onClick={() => setOpenInvoicesDialog(false)}
+                        sx={{
+                            borderRadius: 0, fontFamily: "monospace", fontSize: "10px",
+                            fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase",
+                            color: "rgba(0,0,0,0.6)",
+                        }}
+                    >
+                        Schließen
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Dialog: Bezahlte Rechnungen zurück auf offen setzen */}
+            <Dialog
+                open={paidInvoicesDialog}
+                onClose={() => setPaidInvoicesDialog(false)}
+                maxWidth="sm"
+                fullWidth
+                slotProps={{ paper: { sx: { borderRadius: 0 } } }}
+            >
+                <DialogTitle sx={{
+                    fontFamily: "monospace", fontSize: "12px", fontWeight: 800,
+                    letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY,
+                    borderBottom: "1px solid rgba(0,0,0,0.08)",
+                }}>
+                    Bezahlte Rechnungen ({paidInvoices.length})
+                </DialogTitle>
+                <DialogContent sx={{ p: 0 }}>
+                    {paidInvoices.length === 0 ? (
+                        <Box sx={{ py: 5, textAlign: "center" }}>
+                            <Typography sx={{ fontFamily: "monospace", fontSize: "12px", color: "rgba(0,0,0,0.5)" }}>
+                                Keine bezahlten Rechnungen vorhanden.
+                            </Typography>
+                        </Box>
+                    ) : (
+                        <Box>
+                            {paidInvoices.map((doc) => (
+                                <Box
+                                    key={doc._id}
+                                    sx={{
+                                        px: 3, py: 2, display: "flex", alignItems: "center", gap: 2,
+                                        borderBottom: "1px solid rgba(0,0,0,0.06)",
+                                        "&:last-child": { borderBottom: "none" },
+                                    }}
+                                >
+                                    <Box flex={1} minWidth={0}>
+                                        <Box display="flex" alignItems="center" gap={1}>
+                                            <Chip label={doc.docNumber} size="small" sx={{
+                                                bgcolor: "rgba(0,31,63,0.06)", color: NAVY,
+                                                fontFamily: "monospace", fontSize: "9px", fontWeight: 700,
+                                                borderRadius: 0, height: 18,
+                                            }} />
+                                            <Typography sx={{ fontFamily: "monospace", fontSize: "10px", color: "rgba(0,0,0,0.4)" }}>
+                                                {formatDate(doc.issueDate)}
+                                            </Typography>
+                                        </Box>
+                                        <Typography sx={{ fontFamily: "monospace", fontSize: "14px", fontWeight: 700, color: NAVY, mt: 0.5 }}>
+                                            {formatCurrency(doc.total)}
+                                        </Typography>
+                                    </Box>
+                                    <Button
+                                        size="small"
+                                        startIcon={<UndoIcon sx={{ fontSize: 16 }} />}
+                                        onClick={() => onTogglePaid(doc)}
+                                        sx={{
+                                            borderRadius: 0, bgcolor: "#C83200", color: "#fff",
+                                            fontFamily: "monospace", fontSize: "10px", fontWeight: 700,
+                                            letterSpacing: "0.05em", textTransform: "uppercase", px: 2,
+                                            "&:hover": { bgcolor: "#a02800" },
+                                        }}
+                                    >
+                                        Offen
+                                    </Button>
+                                </Box>
+                            ))}
+                        </Box>
+                    )}
+                </DialogContent>
+                <DialogActions sx={{ borderTop: "1px solid rgba(0,0,0,0.08)", px: 2, py: 1.5 }}>
+                    <Button
+                        onClick={() => setPaidInvoicesDialog(false)}
                         sx={{
                             borderRadius: 0, fontFamily: "monospace", fontSize: "10px",
                             fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase",
