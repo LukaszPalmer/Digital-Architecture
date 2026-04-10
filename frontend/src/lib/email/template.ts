@@ -452,7 +452,7 @@ export function buildEmailHtml(options: EmailTemplateOptions): string {
 export function buildDocumentEmailHtml(
     message: string,
     doc: DocumentInfo,
-    attachmentFileName: string,
+    attachmentFileName?: string,
 ): string {
     return buildEmailHtml({
         messageHtml: textToHtml(message),
