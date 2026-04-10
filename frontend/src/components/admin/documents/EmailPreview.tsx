@@ -25,6 +25,15 @@ const COMPANY = {
     taxId: "000/000/00000",
 };
 
+interface LineItem {
+    position: number;
+    title: string;
+    description: string;
+    unitPrice: number;
+    quantity: number;
+    totalPrice: number;
+}
+
 interface DocumentInfo {
     docType: string;
     docNumber: string;
@@ -32,6 +41,8 @@ interface DocumentInfo {
     customerCompany: string;
     issueDate: string;
     total: number;
+    items?: LineItem[];
+    subtotal?: number;
 }
 
 interface Props {
@@ -158,6 +169,71 @@ export function EmailPreview({ email, subject, message, documentInfo, attachment
                             <Typography sx={{ fontSize: "8px", color: TEXT_GRAY, fontStyle: "italic" }}>
                                 Gemäß § 19 UStG (Kleinunternehmerregelung) wird keine Umsatzsteuer berechnet.
                             </Typography>
+                        </Box>
+                    </Box>
+                )}
+
+                {/* Line Items (Positionen) */}
+                {documentInfo && documentInfo.items && documentInfo.items.length > 0 && (
+                    <Box sx={{ px: 2.5, pb: 2 }}>
+                        <Typography sx={{
+                            fontFamily: "monospace", fontSize: "8px",
+                            letterSpacing: "1.5px", textTransform: "uppercase",
+                            color: TEXT_GRAY, mb: 0.8,
+                        }}>
+                            POSITIONEN
+                        </Typography>
+                        <Box sx={{ border: `1px solid ${BORDER}` }}>
+                            {/* Header */}
+                            <Box sx={{
+                                display: "grid",
+                                gridTemplateColumns: "20px 1fr 28px 52px 56px",
+                                bgcolor: NAVY,
+                                px: 0.8, py: 0.6, gap: 0.5,
+                            }}>
+                                {["#", "Beschreibung", "Menge", "Einzel", "Gesamt"].map((h, i) => (
+                                    <Typography key={h} sx={{
+                                        fontSize: "7px", fontWeight: 700, color: "#fff",
+                                        letterSpacing: "0.5px", textTransform: "uppercase",
+                                        textAlign: i === 0 ? "center" : i === 1 ? "left" : "right",
+                                    }}>
+                                        {h}
+                                    </Typography>
+                                ))}
+                            </Box>
+                            {/* Rows */}
+                            {documentInfo.items.map((item, idx) => (
+                                <Box key={idx} sx={{
+                                    display: "grid",
+                                    gridTemplateColumns: "20px 1fr 28px 52px 56px",
+                                    bgcolor: idx % 2 === 0 ? "#fff" : LIGHT_BG,
+                                    px: 0.8, py: 0.6, gap: 0.5,
+                                    borderTop: `1px solid ${BORDER}`,
+                                }}>
+                                    <Typography sx={{ fontSize: "9px", color: TEXT_GRAY, textAlign: "center" }}>
+                                        {item.position}
+                                    </Typography>
+                                    <Box>
+                                        <Typography sx={{ fontSize: "9px", fontWeight: 700, color: "#1A202C" }}>
+                                            {item.title}
+                                        </Typography>
+                                        {item.description && (
+                                            <Typography sx={{ fontSize: "8px", color: TEXT_GRAY, whiteSpace: "pre-wrap", lineHeight: 1.4 }}>
+                                                {item.description}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                    <Typography sx={{ fontSize: "9px", color: TEXT_GRAY, textAlign: "right" }}>
+                                        {item.quantity}
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "9px", color: TEXT_GRAY, textAlign: "right" }}>
+                                        {(item.unitPrice / 100).toLocaleString("de-DE", { minimumFractionDigits: 2 })} €
+                                    </Typography>
+                                    <Typography sx={{ fontSize: "9px", fontWeight: 700, color: NAVY, textAlign: "right" }}>
+                                        {(item.totalPrice / 100).toLocaleString("de-DE", { minimumFractionDigits: 2 })} €
+                                    </Typography>
+                                </Box>
+                            ))}
                         </Box>
                     </Box>
                 )}

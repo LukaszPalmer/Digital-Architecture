@@ -68,6 +68,15 @@ function formatDate(date: Date | string): string {
 
 // ── Dokument-Info Block (für Dokument-Emails) ──────────────────────────────
 
+interface LineItem {
+    position: number;
+    title: string;
+    description: string;
+    unitPrice: number;
+    quantity: number;
+    totalPrice: number;
+}
+
 interface DocumentInfo {
     docType: string;
     docNumber: string;
@@ -75,6 +84,59 @@ interface DocumentInfo {
     customerCompany: string;
     issueDate: Date | string;
     total: number;
+    items?: LineItem[];
+    subtotal?: number;
+}
+
+function buildLineItemsBlock(items: LineItem[]): string {
+    const rows = items.map((item, idx) => {
+        const descHtml = item.description
+            ? `<br><span style="font-family:Arial,sans-serif;font-size:11px;color:${TEXT_GRAY};line-height:1.5;">${escapeHtml(item.description).replace(/\n/g, "<br>")}</span>`
+            : "";
+        const rowBg = idx % 2 === 0 ? WHITE : LIGHT_BG;
+        return `
+            <tr>
+                <td style="font-family:Arial,sans-serif;font-size:12px;color:${TEXT_GRAY};padding:10px 8px;border-bottom:1px solid ${BORDER};background-color:${rowBg};vertical-align:top;text-align:center;width:32px;">${item.position}</td>
+                <td style="font-family:Arial,sans-serif;font-size:12px;color:${TEXT_DARK};padding:10px 8px;border-bottom:1px solid ${BORDER};background-color:${rowBg};vertical-align:top;">
+                    <span style="font-weight:bold;">${escapeHtml(item.title)}</span>${descHtml}
+                </td>
+                <td style="font-family:Arial,sans-serif;font-size:12px;color:${TEXT_GRAY};padding:10px 8px;border-bottom:1px solid ${BORDER};background-color:${rowBg};vertical-align:top;text-align:right;white-space:nowrap;">${item.quantity}</td>
+                <td style="font-family:Arial,sans-serif;font-size:12px;color:${TEXT_GRAY};padding:10px 8px;border-bottom:1px solid ${BORDER};background-color:${rowBg};vertical-align:top;text-align:right;white-space:nowrap;">${formatCurrency(item.unitPrice)}</td>
+                <td style="font-family:Arial,sans-serif;font-size:12px;color:${NAVY};font-weight:bold;padding:10px 8px;border-bottom:1px solid ${BORDER};background-color:${rowBg};vertical-align:top;text-align:right;white-space:nowrap;">${formatCurrency(item.totalPrice)}</td>
+            </tr>
+        `;
+    }).join("");
+
+    return `
+        <!-- Positionen -->
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom:24px;">
+            <tr>
+                <td style="padding-bottom:10px;">
+                    <span style="font-family:'Courier New',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:${TEXT_GRAY};">
+                        POSITIONEN
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid ${BORDER};">
+                        <thead>
+                            <tr style="background-color:${NAVY};">
+                                <th style="font-family:Arial,sans-serif;font-size:10px;color:${WHITE};font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:10px 8px;text-align:center;width:32px;">#</th>
+                                <th style="font-family:Arial,sans-serif;font-size:10px;color:${WHITE};font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:10px 8px;text-align:left;">Beschreibung</th>
+                                <th style="font-family:Arial,sans-serif;font-size:10px;color:${WHITE};font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:10px 8px;text-align:right;">Menge</th>
+                                <th style="font-family:Arial,sans-serif;font-size:10px;color:${WHITE};font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:10px 8px;text-align:right;">Einzelpreis</th>
+                                <th style="font-family:Arial,sans-serif;font-size:10px;color:${WHITE};font-weight:bold;text-transform:uppercase;letter-spacing:1px;padding:10px 8px;text-align:right;">Gesamt</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rows}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    `;
 }
 
 function buildDocumentInfoBlock(doc: DocumentInfo): string {
@@ -262,6 +324,15 @@ export function buildEmailHtml(options: EmailTemplateOptions): string {
                     </tr>
                     ` : ""}
 
+                    ${documentInfo && documentInfo.items && documentInfo.items.length > 0 ? `
+                    <!-- Line Items Section -->
+                    <tr>
+                        <td style="padding:0 36px 8px 36px;">
+                            ${buildLineItemsBlock(documentInfo.items)}
+                        </td>
+                    </tr>
+                    ` : ""}
+
                     ${attachmentFileName ? `
                     <!-- Attachment Section -->
                     <tr>
@@ -389,6 +460,8 @@ export function buildDocumentEmailHtml(
         attachmentFileName,
     });
 }
+
+export type { LineItem as EmailLineItem, DocumentInfo as EmailDocumentInfo };
 
 // ── Convenience: Direct Customer Email ─────────────────────────────────────
 

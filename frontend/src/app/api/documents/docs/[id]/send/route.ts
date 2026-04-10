@@ -53,6 +53,15 @@ export async function POST(req: NextRequest, { params }: Params) {
             customerCompany: doc.customerCompany,
             issueDate: doc.issueDate,
             total: doc.total,
+            subtotal: doc.subtotal,
+            items: doc.items.map(i => ({
+                position: i.position,
+                title: i.title,
+                description: i.description,
+                unitPrice: i.unitPrice,
+                quantity: i.quantity,
+                totalPrice: i.totalPrice,
+            })),
         },
         fileName,
     );

@@ -238,6 +238,8 @@ export function SendEmailDialog({ open, onClose, onSent, doc, customerEmail }: P
                                 customerCompany: doc.customerCompany,
                                 issueDate: doc.issueDate,
                                 total: doc.total,
+                                subtotal: doc.subtotal,
+                                items: doc.items,
                             }}
                             attachmentFileName={`${typeLabel}_${doc.docNumber}.pdf`}
                         />
