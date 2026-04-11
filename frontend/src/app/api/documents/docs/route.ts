@@ -38,10 +38,16 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: "Invalid docType" }, { status: 400 });
     }
 
-    // Fortlaufende Nummer generieren (nicht für Templates)
+    // Fortlaufende Nummer generieren (nicht für Templates).
+    // Pro Kunde eigener Zähler → jede RE/AN/AB eines Kunden startet bei 0001.
     let docNumber = body.docNumber;
     if (!body.isTemplate && !docNumber) {
-        docNumber = await getNextNumber(docType, DOC_TYPE_PREFIX[docType]);
+        docNumber = await getNextNumber(
+            docType,
+            DOC_TYPE_PREFIX[docType],
+            new Date().getFullYear(),
+            body.customerNumber || body.customerId,
+        );
     }
     if (body.isTemplate && !docNumber) {
         docNumber = `TPL-${Date.now()}`;

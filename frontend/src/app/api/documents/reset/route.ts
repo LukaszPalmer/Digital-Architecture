@@ -31,8 +31,17 @@ export async function POST(req: NextRequest) {
     }
 
     if (scope === "all" || scope === "docs") {
-        const r = await DocModel.deleteMany({});
-        result.documents = r.deletedCount ?? 0;
+        // Collection komplett droppen, damit auch alte Indexe (z.B. der frühere
+        // globale unique-Index auf docNumber) entfernt werden. Beim nächsten
+        // Zugriff legt Mongoose die Collection mit dem aktuellen Schema neu an.
+        try {
+            await DocModel.collection.drop();
+        } catch {
+            // Collection existiert evtl. noch nicht — kein Problem.
+        }
+        // Indexe aus dem aktuellen Schema synchronisieren (Per-Kunde-Unique).
+        await DocModel.syncIndexes();
+        result.documents = -1;  // dropped
     }
 
     // Zähler immer zurücksetzen, damit die Nummerierung wieder bei 1 startet.

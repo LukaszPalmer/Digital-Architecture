@@ -96,7 +96,7 @@ export interface IDocument extends MongoDoc {
 const DocumentSchema = new Schema<IDocument>(
     {
         docType:   { type: String, enum: ["invoice", "quote", "confirmation"], required: true },
-        docNumber: { type: String, required: true, unique: true },
+        docNumber: { type: String, required: true },
         status:    { type: String, enum: ["draft", "sent", "paid", "overdue", "cancelled"], default: "draft" },
 
         customerId:      { type: Schema.Types.ObjectId, ref: "Customer" },
@@ -134,7 +134,9 @@ const DocumentSchema = new Schema<IDocument>(
 
 DocumentSchema.index({ docType: 1, status: 1 });
 DocumentSchema.index({ customerId: 1 });
-DocumentSchema.index({ docNumber: 1 }, { unique: true });
+// Per-Kunde-fortlaufende Nummer: (docNumber + customerId) ist eindeutig,
+// damit zwei Kunden jeweils RE-2026-0001 haben können.
+DocumentSchema.index({ docNumber: 1, customerId: 1 }, { unique: true });
 DocumentSchema.index({ isTemplate: 1, docType: 1 });
 
 const DocModel: Model<IDocument> =
