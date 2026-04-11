@@ -12,7 +12,9 @@ export interface IPageView extends Document {
     device: string;             // mobile | tablet | desktop
     browser: string;            // Chrome | Firefox | Safari | Edge | Other
     os: string;                 // Windows | macOS | Linux | iOS | Android
-    country: string;            // DE | US | AT ... (aus Accept-Language, nicht IP)
+    country: string;            // DE | US | AT ... (aus Vercel-Geo-Headern, mit Fallback auf Accept-Language)
+    city: string;               // Berlin | Vienna | ... (nur wenn Consent vorhanden und Header geliefert)
+    region: string;             // Bayern | California | ... (optional)
     language: string;           // de | en | fr ...
     screenWidth: number;        // Viewport-Breite in px
     event: string;              // pageview | cta_click | form_submit | blog_read | outbound_click
@@ -35,6 +37,8 @@ const PageViewSchema = new Schema<IPageView>(
         browser:     { type: String, default: "unknown" },
         os:          { type: String, default: "unknown" },
         country:     { type: String, default: "unknown" },
+        city:        { type: String, default: "" },
+        region:      { type: String, default: "" },
         language:    { type: String, default: "unknown" },
         screenWidth: { type: Number, default: 0 },
         event:       { type: String, required: true, default: "pageview" },
