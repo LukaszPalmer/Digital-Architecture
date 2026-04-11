@@ -54,7 +54,7 @@ export function CustomerProfile({
     const openInvoices = invoices.filter(d => d.status === "sent" || d.status === "overdue");
     const totalOpen = openInvoices.reduce((sum, d) => sum + d.total, 0);
 
-    const totalAll = docs.reduce((sum, d) => sum + d.total, 0);
+    const totalAll = invoices.reduce((sum, d) => sum + d.total, 0);
 
     return (
         <Paper elevation={0} sx={{ border: "1px solid rgba(0,0,0,0.08)", borderRadius: 0, overflow: "hidden" }}>
