@@ -67,6 +67,12 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
     const [customers, setCustomers] = useState<Customer[]>([]);
     const [selectedCustomer, setSelectedCustomer] = useState<Customer | null>(null);
 
+    // Vorhandene Angebote, aus denen man bei Rechnungen / Auftragsbestätigungen
+    // die Daten (Kunde + Positionen) direkt übernehmen kann, damit nichts doppelt
+    // eingegeben werden muss.
+    const [quotes, setQuotes] = useState<DocRecord[]>([]);
+    const [sourceQuote, setSourceQuote] = useState<DocRecord | null>(null);
+
     const [issueDate, setIssueDate]       = useState(new Date().toISOString().slice(0, 10));
     const [deliveryDate, setDeliveryDate] = useState(new Date().toISOString().slice(0, 10));
     const [dueDate, setDueDate]           = useState("");
@@ -89,6 +95,48 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
     useEffect(() => {
         if (open) fetchCustomers();
     }, [open, fetchCustomers]);
+
+    // Beim Öffnen (neue Rechnung / neue Auftragsbestätigung) vorhandene
+    // Angebote laden, damit man sie als Basis übernehmen kann.
+    useEffect(() => {
+        if (open && !editing && docType !== "quote") {
+            fetch("/api/documents/docs?type=quote&template=false")
+                .then(r => r.ok ? r.json() : [])
+                .then((data: DocRecord[]) => setQuotes(data))
+                .catch(() => setQuotes([]));
+        }
+    }, [open, editing, docType]);
+
+    // Übernimmt Kunde, Positionen und Notizen aus dem ausgewählten Angebot.
+    // Einleitungs- / Schluss- / Zahlungstexte bleiben die typ-spezifischen
+    // Defaults (z. B. "vielen Dank für Ihr Vertrauen ..." für Rechnungen).
+    const handlePickQuote = (q: DocRecord | null) => {
+        setSourceQuote(q);
+        if (!q) return;
+
+        const custFromList = customers.find(c => c._id === q.customerId);
+        setSelectedCustomer(custFromList ?? {
+            _id:            q.customerId,
+            name:           q.customerName,
+            company:        q.customerCompany,
+            street:         q.customerStreet,
+            zip:            q.customerZip,
+            city:           q.customerCity,
+            email:          "",
+            customerNumber: q.customerNumber,
+        });
+
+        setItems(q.items.length > 0
+            ? q.items.map(it => ({
+                title:       it.title,
+                description: it.description,
+                unitPrice:   it.unitPrice,
+                quantity:    it.quantity,
+            }))
+            : [{ title: "", description: "", unitPrice: 0, quantity: 1 }]
+        );
+        setNotes(q.notes || "");
+    };
 
     // Editing mode: populate form
     useEffect(() => {
@@ -125,6 +173,7 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
             setNotes("");
             setItems([{ title: "", description: "", unitPrice: 0, quantity: 1 }]);
             setSelectedCustomer(null);
+            setSourceQuote(null);
         }
     }, [editing, open, customers, docType]);
 
@@ -194,11 +243,36 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
             <DialogContent>
                 <Box display="flex" flexDirection="column" gap={2.5} mt={1}>
 
+                    {/* Aus Angebot übernehmen — nur bei neuer Rechnung / AB.
+                        Übernimmt Kunde, Positionen und Notizen aus dem gewählten Angebot,
+                        damit man nichts zweimal eingeben muss. */}
+                    {!editing && docType !== "quote" && quotes.length > 0 && (
+                        <Autocomplete
+                            options={quotes}
+                            value={sourceQuote}
+                            onChange={(_, val) => handlePickQuote(val)}
+                            isOptionEqualToValue={(a, b) => a._id === b._id}
+                            getOptionLabel={(q) =>
+                                `${q.docNumber} — ${q.customerCompany || q.customerName || "—"} — ${formatEuro(q.total)}`
+                            }
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    label="Aus Angebot übernehmen (optional)"
+                                    size="small"
+                                    sx={inputSx}
+                                />
+                            )}
+                            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 0 } }}
+                        />
+                    )}
+
                     {/* Kunde auswählen */}
                     <Autocomplete
                         options={customers}
                         value={selectedCustomer}
                         onChange={(_, val) => setSelectedCustomer(val)}
+                        isOptionEqualToValue={(a, b) => a._id === b._id}
                         getOptionLabel={(c) => `${c.customerNumber} — ${c.company ? c.company + " | " : ""}${c.name}`}
                         renderInput={(params) => (
                             <TextField {...params} label="Kunde auswählen *" size="small" sx={inputSx} />
