@@ -84,7 +84,10 @@ export function SendEmailDialog({ open, onClose, onSent, doc, customerEmail }: P
         setSending(false);
     };
 
-    const inputSx = { "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" } };
+    const inputSx = {
+        "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" },
+        "& .MuiInputLabel-root": { fontFamily: "monospace", fontSize: "13px" },
+    };
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth slotProps={{ paper: { sx: { borderRadius: 0 } } }}>

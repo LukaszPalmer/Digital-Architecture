@@ -36,7 +36,10 @@ export function CustomerFormDialog({ open, editing, form, onChange, onClose, onS
             placeholder={options?.placeholder}
             value={form[key]}
             onChange={e => setField(key, e.target.value)}
-            sx={{ "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" } }}
+            sx={{
+                "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" },
+                "& .MuiInputLabel-root": { fontFamily: "monospace", fontSize: "13px" },
+            }}
         />
     );
 

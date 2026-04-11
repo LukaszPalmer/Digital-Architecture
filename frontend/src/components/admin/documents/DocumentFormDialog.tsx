@@ -233,7 +233,10 @@ export function DocumentFormDialog({ open, onClose, onSaved, docType, editing }:
     const formatEuro = (cents: number) =>
         (cents / 100).toLocaleString("de-DE", { minimumFractionDigits: 2 }) + " €";
 
-    const inputSx = { "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" } };
+    const inputSx = {
+        "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" },
+        "& .MuiInputLabel-root": { fontFamily: "monospace", fontSize: "13px" },
+    };
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth PaperProps={{ sx: { borderRadius: 0 } }}>

@@ -84,7 +84,10 @@ export function ComposeEmailDialog({ open, onClose, customer }: Props) {
         setSending(false);
     };
 
-    const inputSx = { "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" } };
+    const inputSx = {
+        "& .MuiOutlinedInput-root": { borderRadius: 0, fontFamily: "monospace", fontSize: "13px" },
+        "& .MuiInputLabel-root": { fontFamily: "monospace", fontSize: "13px" },
+    };
 
     return (
         <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth slotProps={{ paper: { sx: { borderRadius: 0 } } }}>
