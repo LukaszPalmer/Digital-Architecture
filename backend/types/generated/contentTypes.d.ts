@@ -433,7 +433,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiBlogPostBlogPost extends Struct.CollectionTypeSchema {
   collectionName: 'blog_posts';
   info: {
-    description: 'Palmer Digital Architecture Blog Articles';
+    description: 'Palmer Digital Blog Articles';
     displayName: 'Blog Post';
     pluralName: 'blog-posts';
     singularName: 'blog-post';

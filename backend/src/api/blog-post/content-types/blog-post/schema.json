@@ -5,7 +5,7 @@
     "singularName": "blog-post",
     "pluralName": "blog-posts",
     "displayName": "Blog Post",
-    "description": "Palmer Digital Architecture Blog Articles"
+    "description": "Palmer Digital Blog Articles"
   },
   "options": {
     "draftAndPublish": true

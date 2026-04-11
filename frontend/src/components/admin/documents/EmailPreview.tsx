@@ -11,7 +11,7 @@ const LIGHT_BG = "#F7F8FA";
 const BORDER = "#CBD5E0";
 
 const COMPANY = {
-    name: "Palmer Digital Architecture",
+    name: "Palmer Digital",
     owner: "Lukasz Palmer",
     street: "Musterstraße 1",
     zip: "12345",
@@ -83,11 +83,12 @@ export function EmailPreview({ email, subject, message, documentInfo, attachment
             {/* Email body */}
             <Box sx={{ bgcolor: "#fff", maxWidth: 520, mx: "auto" }}>
 
-                {/* Navy Header */}
+                {/* Heller Header — Logo bleibt sichtbar, Kontrast verbessert */}
                 <Box sx={{
-                    bgcolor: NAVY, px: 2.5, py: 2,
+                    bgcolor: "#F5F7FA", px: 2.5, py: 2,
                     display: "flex", alignItems: "center", justifyContent: "space-between",
-                    borderLeft: "4px solid #003366",
+                    borderLeft: `4px solid ${NAVY}`,
+                    borderBottom: `1px solid ${BORDER}`,
                 }}>
                     <Box
                         component="img"
@@ -98,7 +99,7 @@ export function EmailPreview({ email, subject, message, documentInfo, attachment
                     <Typography sx={{
                         fontFamily: "monospace", fontSize: "7px",
                         letterSpacing: "2px", textTransform: "uppercase",
-                        color: "rgba(255,255,255,0.4)",
+                        color: TEXT_GRAY,
                     }}>
                         GESCHÄFTSKORRESPONDENZ
                     </Typography>
@@ -318,15 +319,16 @@ export function EmailPreview({ email, subject, message, documentInfo, attachment
                     </Typography>
                 </Box>
 
-                {/* Bottom navy bar */}
+                {/* Bottom bar — hell mit kräftigem Text */}
                 <Box sx={{
-                    bgcolor: NAVY, px: 2.5, py: 1,
+                    bgcolor: "#F5F7FA", px: 2.5, py: 1,
+                    borderTop: `1px solid ${BORDER}`,
                     display: "flex", justifyContent: "space-between", alignItems: "center",
                 }}>
-                    <Typography sx={{ fontFamily: "monospace", fontSize: "7px", color: "rgba(255,255,255,0.4)" }}>
+                    <Typography sx={{ fontFamily: "monospace", fontSize: "7px", color: TEXT_GRAY }}>
                         © {new Date().getFullYear()} {COMPANY.name}
                     </Typography>
-                    <Typography sx={{ fontFamily: "monospace", fontSize: "7px", color: "rgba(255,255,255,0.4)" }}>
+                    <Typography sx={{ fontFamily: "monospace", fontSize: "7px", color: NAVY, fontWeight: 700 }}>
                         {COMPANY.web}
                     </Typography>
                 </Box>

@@ -1,5 +1,5 @@
 // src/lib/email/template.ts
-// Professionelles E-Mail-Template für Palmer Digital Architecture.
+// Professionelles E-Mail-Template für Palmer Digital.
 // Design angelehnt an das Rechnungs-PDF — rechtskonform mit Impressum.
 // Kleinunternehmerregelung §19 UStG — keine Umsatzsteuer.
 
@@ -31,6 +31,12 @@ const TEXT_GRAY  = "#4A5568";
 const LIGHT_BG   = "#F7F8FA";
 const BORDER     = "#CBD5E0";
 const WHITE      = "#FFFFFF";
+
+// Heller Hintergrund für Header & Footer — damit das (dunkle) Logo
+// sichtbar bleibt und der Kontrast zu Text/Links insgesamt besser ist.
+const HEADER_BG     = "#F5F7FA";
+const HEADER_ACCENT = "#E2E8F0";
+const HEADER_TEXT   = "#4A5568";
 
 // ── Helpers ────────────────────────────────────────────────────────────────
 
@@ -247,7 +253,7 @@ export function buildEmailHtml(options: EmailTemplateOptions): string {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Palmer Digital Architecture</title>
+    <title>Palmer Digital</title>
     <!--[if mso]>
     <noscript>
         <xml>
@@ -268,13 +274,13 @@ export function buildEmailHtml(options: EmailTemplateOptions): string {
                 <!-- Main container 600px -->
                 <table width="600" cellpadding="0" cellspacing="0" border="0" style="background-color:${WHITE};max-width:600px;width:100%;">
 
-                    <!-- Navy Header Bar -->
+                    <!-- Header Bar (heller Hintergrund — Logo gut sichtbar) -->
                     <tr>
-                        <td style="background-color:${NAVY};padding:0;">
+                        <td style="background-color:${HEADER_BG};padding:0;border-bottom:1px solid ${BORDER};">
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <!-- Left blue accent stripe -->
-                                    <td width="6" style="background-color:#003366;"></td>
+                                    <!-- Navy accent stripe links als subtile Markenfarbe -->
+                                    <td width="6" style="background-color:${NAVY};"></td>
                                     <td style="padding:24px 30px;">
                                         <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                             <tr>
@@ -284,7 +290,7 @@ export function buildEmailHtml(options: EmailTemplateOptions): string {
                                                          style="display:block;border:0;outline:none;max-width:120px;height:auto;" />
                                                 </td>
                                                 <td style="text-align:right;vertical-align:middle;">
-                                                    <span style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.5);">
+                                                    <span style="font-family:'Courier New',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:${HEADER_TEXT};">
                                                         GESCHÄFTSKORRESPONDENZ
                                                     </span>
                                                 </td>
@@ -417,16 +423,16 @@ export function buildEmailHtml(options: EmailTemplateOptions): string {
                         </td>
                     </tr>
 
-                    <!-- Bottom Navy Bar -->
+                    <!-- Bottom Bar (heller Hintergrund für besseren Kontrast) -->
                     <tr>
-                        <td style="background-color:${NAVY};padding:12px 36px;">
+                        <td style="background-color:${HEADER_BG};padding:12px 36px;border-top:1px solid ${HEADER_ACCENT};">
                             <table width="100%" cellpadding="0" cellspacing="0" border="0">
                                 <tr>
-                                    <td style="font-family:'Courier New',monospace;font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:1px;">
+                                    <td style="font-family:'Courier New',monospace;font-size:9px;color:${HEADER_TEXT};letter-spacing:1px;">
                                         &copy; ${new Date().getFullYear()} ${escapeHtml(COMPANY.name)}
                                     </td>
                                     <td style="text-align:right;">
-                                        <a href="${SITE_URL}" style="font-family:'Courier New',monospace;font-size:9px;color:rgba(255,255,255,0.5);text-decoration:none;letter-spacing:1px;">
+                                        <a href="${SITE_URL}" style="font-family:'Courier New',monospace;font-size:9px;color:${NAVY};font-weight:bold;text-decoration:none;letter-spacing:1px;">
                                             ${escapeHtml(COMPANY.web)}
                                         </a>
                                     </td>

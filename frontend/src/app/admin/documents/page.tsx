@@ -1,7 +1,7 @@
 "use client";
 
 // src/app/admin/documents/page.tsx
-// Hauptseite für Rechnungswesen — 5 Tabs.
+// Hauptseite für Rechnungswesen — 4 Tabs.
 
 import { useState } from "react";
 import { signOut } from "next-auth/react";
@@ -13,14 +13,12 @@ import DashboardIcon    from "@mui/icons-material/Dashboard";
 
 import { CustomersTab }      from "@/components/admin/documents/CustomersTab";
 import { DocumentsTab }      from "@/components/admin/documents/DocumentsTab";
-import { TemplatesTab }       from "@/components/admin/documents/TemplatesTab";
 
 const TABS = [
     { label: "Kunden",                 key: "customers" },
     { label: "Rechnungen",             key: "invoices" },
     { label: "Angebote",               key: "quotes" },
     { label: "Auftragsbestätigungen",  key: "confirmations" },
-    { label: "Vorlagen",               key: "templates" },
 ] as const;
 
 type TabKey = typeof TABS[number]["key"];
@@ -118,7 +116,6 @@ export default function DocumentsPage() {
                 {activeTab === "invoices"       && <DocumentsTab docType="invoice" title="Rechnungen" />}
                 {activeTab === "quotes"         && <DocumentsTab docType="quote" title="Angebote" />}
                 {activeTab === "confirmations"  && <DocumentsTab docType="confirmation" title="Auftragsbestätigungen" />}
-                {activeTab === "templates"      && <TemplatesTab />}
             </Box>
         </Box>
     );

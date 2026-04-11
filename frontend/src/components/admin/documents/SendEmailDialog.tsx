@@ -49,9 +49,9 @@ export function SendEmailDialog({ open, onClose, onSent, doc, customerEmail }: P
     useEffect(() => {
         if (open) {
             setEmail(doc.sentTo || customerEmail || "");
-            setSubject(`${typeLabel} ${doc.docNumber} — Palmer Digital Architecture`);
+            setSubject(`${typeLabel} ${doc.docNumber} — Palmer Digital`);
             setMessage(
-                `Sehr geehrte/r ${doc.customerName || "Kunde/Kundin"},\n\nim Anhang finden Sie Ihre ${typeLabel} Nr. ${doc.docNumber}.\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital Architecture`
+                `Sehr geehrte/r ${doc.customerName || "Kunde/Kundin"},\n\nim Anhang finden Sie Ihre ${typeLabel} Nr. ${doc.docNumber}.\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital`
             );
             setError("");
             setSuccess(false);

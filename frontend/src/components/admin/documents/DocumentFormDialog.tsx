@@ -40,11 +40,11 @@ const TYPE_LABELS: Record<DocType, string> = {
 // Werden beim Öffnen des Dialogs automatisch gesetzt, können aber überschrieben werden.
 const DEFAULT_INTRO: Record<DocType, string> = {
     quote:
-        "vielen Dank für Ihre Anfrage und Ihr Interesse an Palmer Digital Architecture. "
+        "vielen Dank für Ihre Anfrage und Ihr Interesse an Palmer Digital. "
         + "Gerne unterbreiten wir Ihnen auf Basis unseres Gesprächs das folgende unverbindliche Angebot "
         + "für die gewünschten Leistungen:",
     invoice:
-        "vielen Dank für Ihr Vertrauen in Palmer Digital Architecture. "
+        "vielen Dank für Ihr Vertrauen in Palmer Digital. "
         + "Wir stellen Ihnen hiermit folgende Leistungen in Rechnung:",
     confirmation:
         "vielen Dank für Ihren Auftrag. Hiermit bestätigen wir Ihnen verbindlich die Beauftragung "

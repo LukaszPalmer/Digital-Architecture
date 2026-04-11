@@ -53,7 +53,7 @@ export function ComposeEmailDialog({ open, onClose, customer }: Props) {
             setEmail(customer.email);
             setSubject("");
             setMessage(
-                `Sehr geehrte/r ${customer.name},\n\n\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital Architecture`
+                `Sehr geehrte/r ${customer.name},\n\n\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital`
             );
             setError("");
             setSuccess(false);

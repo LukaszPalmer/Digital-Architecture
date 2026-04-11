@@ -51,10 +51,10 @@ export async function POST(req: NextRequest, { params }: Params) {
         }
 
         const fromAddress = process.env.RESEND_FROM_ADDRESS || "kontakt@palmer-digital.de";
-        const subject = customSubject || `${typeLabel} ${doc.docNumber} — Palmer Digital Architecture`;
+        const subject = customSubject || `${typeLabel} ${doc.docNumber} — Palmer Digital`;
 
         const messageText = customMessage
-            || `Sehr geehrte/r ${doc.customerName || "Kunde/Kundin"},\n\nim Anhang finden Sie Ihre ${typeLabel} Nr. ${doc.docNumber}.\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital Architecture`;
+            || `Sehr geehrte/r ${doc.customerName || "Kunde/Kundin"},\n\nim Anhang finden Sie Ihre ${typeLabel} Nr. ${doc.docNumber}.\n\nBei Fragen stehen wir Ihnen gerne zur Verfügung.\n\nFreundliche Grüße\nLukasz Palmer\nPalmer Digital`;
 
         const html = buildDocumentEmailHtml(
             messageText,

@@ -19,7 +19,7 @@ const BORDER     = "#CBD5E0";
 // ── Firmen-Daten (Palmer Digital) ───────────────────────────────────────────
 
 const COMPANY = {
-    name:     "Palmer Digital Architecture",
+    name:     "Palmer Digital",
     owner:    "Lukasz Palmer",
     street:   "Lippestraße 1",          // TODO: Echte Adresse eintragen (bereits echt)
     zip:      "40221",
