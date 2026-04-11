@@ -8,7 +8,8 @@ import mongoose, { Schema, Document, Model } from "mongoose";
 export type DeletionReason =
     | "consent_withdrawn"  // Nutzer hat Cookies abgelehnt/widerrufen
     | "ttl_auto"           // MongoDB TTL-Index hat Daten automatisch gelöscht (täglich geloggt)
-    | "manual_request";    // Manuelle DSGVO-Löschanfrage
+    | "manual_request"     // Manuelle DSGVO-Löschanfrage
+    | "admin_reset";       // Admin hat das Analytics-Dashboard vollständig zurückgesetzt
 
 export interface IDeletionLog extends Document {
     sessionId:    string;          // Anonyme Session-ID — kein Personenbezug
@@ -21,7 +22,7 @@ export interface IDeletionLog extends Document {
 const DeletionLogSchema = new Schema<IDeletionLog>(
     {
         sessionId:    { type: String, required: true },
-        reason:       { type: String, required: true, enum: ["consent_withdrawn", "ttl_auto", "manual_request"] },
+        reason:       { type: String, required: true, enum: ["consent_withdrawn", "ttl_auto", "manual_request", "admin_reset"] },
         deletedCount: { type: Number, required: true, default: 0 },
         note:         { type: String, default: "" },
         deletedAt:    { type: Date,   default: Date.now, index: true },
