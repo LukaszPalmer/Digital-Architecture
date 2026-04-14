@@ -10,7 +10,7 @@ const TOKEN_LAYERS = [
     {
         level: "01",
         name: "Brand Primitives",
-        desc: "Rohe Werte: Hex-Farben, px-Größen, font-weights",
+        desc: "Rohe Werte — die atomaren Bausteine des gesamten Design Systems. Hex-Farben, px-Größen, font-weights und Breakpoint-Definitionen.",
         examples: ["#001F3F", "#FFFFFF", "16px", "700"],
         bg: "bg-[#001F3F]",
         textColor: "text-[#FFFFFF]",
@@ -19,7 +19,7 @@ const TOKEN_LAYERS = [
     {
         level: "02",
         name: "Semantic Tokens",
-        desc: "Bedeutungsgebundene Aliase auf Primitive",
+        desc: "Bedeutungsgebundene Aliase auf Primitive. Diese Schicht gibt rohen Werten eine Funktion: color.primary statt #001F3F.",
         examples: ["color.primary", "spacing.md", "text.heading"],
         bg: "bg-[#FFFFFF]",
         textColor: "text-[#000000]",
@@ -28,7 +28,7 @@ const TOKEN_LAYERS = [
     {
         level: "03",
         name: "Component Tokens",
-        desc: "Komponent-spezifische Token-Bindungen",
+        desc: "Komponentenspezifische Token-Bindungen. Jede UI-Komponente referenziert ausschließlich Component Tokens — nie Primitive direkt.",
         examples: ["btn.bg", "card.padding", "nav.height"],
         bg: "bg-[#000000]",
         textColor: "text-[#FFFFFF]",
@@ -37,7 +37,7 @@ const TOKEN_LAYERS = [
     {
         level: "04",
         name: "Tailwind Config",
-        desc: "Token-System als Tailwind-Erweiterung exportiert",
+        desc: "Das gesamte Token-System als Tailwind-Erweiterung exportiert. Jeder Token wird zu einer Utility-Klasse — nutzbar ohne eine Zeile CSS zu schreiben.",
         examples: ["extend.colors", "extend.spacing", "extend.fontFamily"],
         bg: "bg-[#001F3F]",
         textColor: "text-[#FFFFFF]",
@@ -48,7 +48,7 @@ const TOKEN_LAYERS = [
 const COMPONENT_LEVELS = [
     {
         level: "ATOMS",
-        desc: "Button, Input, Badge, Icon, Label",
+        desc: "Button, Input, Badge, Icon, Label — die kleinsten, nicht weiter zerlegbaren UI-Einheiten",
         count: "20–40 Komponenten",
         bg: "bg-[#FFFFFF]",
         border: "border-[#000000]",
@@ -57,7 +57,7 @@ const COMPONENT_LEVELS = [
     },
     {
         level: "MOLECULES",
-        desc: "SearchBar, FormField, Card, NavItem",
+        desc: "SearchBar, FormField, Card, NavItem — funktionale Kombinationen aus Atoms",
         count: "15–25 Komponenten",
         bg: "bg-[#001F3F]",
         border: "border-[#001F3F]",
@@ -66,7 +66,7 @@ const COMPONENT_LEVELS = [
     },
     {
         level: "ORGANISMS",
-        desc: "Navbar, Footer, Hero, Pricing, Forms",
+        desc: "Navbar, Footer, Hero, Pricing, Forms — komplexe Sektionen aus Molecules",
         count: "10–20 Sektionen",
         bg: "bg-[#000000]",
         border: "border-[#000000]",
@@ -80,21 +80,21 @@ const INTEGRATION_SPECS = [
         id: "DSN-INT-01",
         title: "Tailwind v4 Config",
         description:
-            "Token-System als `tailwind.config.ts` exportiert — alle Farben, Spacing-Werte und Typografie-Skalen direkt als Utility-Klassen verfügbar. Kein Inline-Styling, kein CSS-Chaos.",
+            "Das Token-System wird als Tailwind-Konfiguration exportiert — alle Farben, Spacing-Werte und Typografie-Skalen direkt als Utility-Klassen verfügbar. Kein Inline-Styling, kein CSS-Chaos. Für Webdesigner und Entwickler gleichermaßen: Professionelles Webdesign wird zur deklarativen Angelegenheit.",
         spec: "ZERO INLINE CSS",
     },
     {
         id: "DSN-INT-02",
         title: "TypeScript Token Types",
         description:
-            "Vollständig typisierte Token-Interfaces in TypeScript — Autocomplete für jeden Designwert im Editor. Falsche Token-Namen werden zur Compile-Zeit gefunden, nicht zur Runtime.",
+            "Vollständig typisierte Token-Interfaces in TypeScript — Autocomplete für jeden Designwert im Editor. Falsche Token-Namen werden zur Compile-Zeit gefunden, nicht erst im Browser. Das eliminiert eine ganze Kategorie von Design-Fehlern und senkt die Webseiten Design Kosten bei jeder Iteration.",
         spec: "TYPE-SAFE TOKENS",
     },
     {
         id: "DSN-INT-03",
         title: "A11y Automatisierung",
         description:
-            "Axe-Core in CI/CD-Pipeline integriert — WCAG-Verstöße blockieren den Deploy. Kontrastverhältnisse werden automatisch gegen >4.5:1 (AA) und >7:1 (AAA) geprüft.",
+            "Axe-Core in der CI/CD-Pipeline integriert — WCAG-Verstöße blockieren den Deploy. Kontrastverhältnisse werden automatisch gegen 4.5:1 (AA) und 7:1 (AAA) geprüft. Barrierefreies UI/UX Design als automatisierte Qualitätssicherung, nicht als manueller Audit nach dem Launch.",
         spec: "AUTO A11Y CHECK",
     },
 ];
@@ -112,7 +112,7 @@ export default function DesignArchitecture() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Token Cascade & Component Blueprint ]
+                                [ Token Cascade & Atomic Design Blueprint ]
                             </span>
                             <h2
                                 id="design-arch-heading"
@@ -126,9 +126,12 @@ export default function DesignArchitecture() {
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Die Token-Cascade von Brand-Primitiven bis
-                            zur Tailwind-Konfiguration — und die
-                            Atomic-Design-Hierarchie als Fundament.
+                            Die Token-Cascade von Brand-Primitiven bis zur
+                            Tailwind-Konfiguration — und die Atomic-Design-
+                            Hierarchie als Fundament. Jede Schicht baut auf
+                            der vorherigen auf, keine Schicht kann übersprungen
+                            werden. Das ist der Unterschied zwischen Webseite
+                            designen und Design Engineering.
                         </p>
                     </div>
                 </ScrollReveal>

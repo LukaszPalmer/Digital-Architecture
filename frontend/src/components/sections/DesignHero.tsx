@@ -1,6 +1,7 @@
 // src/components/sections/DesignHero.tsx
 // Server Component — RSC-First, 0 TBT.
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
+// PAS-Framework: PROBLEM — Inkonsistentes Design & steigende Kosten.
 
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RevealGrid from "@/components/ui/RevealGrid";
@@ -9,7 +10,7 @@ const METRICS = [
     { value: "0ms", label: "Runtime CSS-Overhead" },
     { value: "1", label: "Source of Truth" },
     { value: "AAA", label: "WCAG Konformität" },
-    { value: "∞", label: "Skalierbare Tokens" },
+    { value: "<10KB", label: "CSS nach PurgeCSS" },
 ];
 
 export default function DesignHero() {
@@ -24,7 +25,7 @@ export default function DesignHero() {
                 className="pointer-events-none absolute inset-0 flex items-center justify-center overflow-hidden"
             >
                 <span className="text-[clamp(4rem,14vw,14rem)] font-black uppercase tracking-[-0.04em] text-[#000000] opacity-[0.03] select-none whitespace-nowrap leading-none">
-                    SYSTEM
+                    DESIGN OPS
                 </span>
             </div>
 
@@ -42,16 +43,18 @@ export default function DesignHero() {
                     </div>
                 </ScrollReveal>
 
-                {/* ── HEADLINE ── */}
+                {/* ── HEADLINE (H1 — SEO Primary) ── */}
                 <ScrollReveal delay={100}>
                     <h1
                         id="design-hero-heading"
-                        className="text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-12 text-[#000000]"
+                        className="text-[clamp(2.6rem,8vw,7.5rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-12 text-[#000000]"
                     >
-                        Atomic CSS
+                        Professionelles
+                        <br />
+                        Webdesign &
                         <br />
                         <span className="italic font-normal text-[#001F3F]">
-                            Design System.
+                            UI/UX Design.
                         </span>
                     </h1>
                 </ScrollReveal>
@@ -60,21 +63,25 @@ export default function DesignHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Ein Design System ist kein Styleguide — es ist
-                            eine Produktionsinfrastruktur. Tailwind-Token-
-                            Architektur, die jeden Pixel aus einer einzigen
-                            Wahrheitsquelle ableitet. Konsistenz als
-                            technisches Artefakt, nicht als Konvention.
+                            <strong className="text-[#000000]/90">Inkonsistentes Design und steigende Webseiten Design Kosten?</strong>{" "}
+                            Ein Design System ist kein Styleguide — es ist eine Produktionsinfrastruktur.
+                            Unsere Tailwind Design Ops Architektur leitet jeden Pixel aus einer einzigen
+                            Wahrheitsquelle ab. Einmal definiert, überall perfekt. Für Unternehmen in
+                            Düsseldorf und ganz Deutschland, die ihre Webseite designen wollen, ohne
+                            bei jeder Änderung von vorne anzufangen.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
-                                Design Engineering Standard
+                                Webdesigner Düsseldorf
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[12px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
                                     TOKEN-FIRST // WCAG AAA
                                 </span>
                             </div>
+                            <span className="text-[9.5px] font-mono font-bold tracking-[0.3em] text-[#000000]/35 uppercase mt-1">
+                                Atomic Utility-First // PurgeCSS
+                            </span>
                         </div>
                     </div>
                 </ScrollReveal>

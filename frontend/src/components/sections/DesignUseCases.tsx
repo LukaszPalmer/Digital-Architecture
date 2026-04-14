@@ -11,48 +11,48 @@ const USE_CASES = [
         segment: "FINTECH",
         title: "Regulierte UI-Systeme",
         description:
-            "Strikte A11y-Konformität und konsistente Formular-Patterns für Zahlungs- und Banking-Interfaces. Token-System stellt sicher, dass Kontrastverhältnisse und Focus-States niemals verletzt werden.",
-        metrics: ["WCAG AAA", "Form Patterns", "Audit-Proof"],
+            "Strikte A11y-Konformität und konsistente Formular-Patterns für Zahlungs- und Banking-Interfaces. Das Token-System stellt sicher, dass Kontrastverhältnisse und Focus-States niemals verletzt werden — professionelles Webdesign, das Audits standhält.",
+        metrics: ["WCAG AAA", "Form Patterns", "Audit-Proof", "Compliance-Ready"],
     },
     {
         id: "UC-02",
         segment: "HEALTHCARE",
         title: "Medizinische Dashboards",
         description:
-            "Komplexe Datenhierarchien in zugängliche UI-Strukturen übersetzt. Farbkodierung für kritische Informationen nach WCAG — Barrierefreiheit ist hier keine Option, sondern gesetzliche Pflicht.",
-        metrics: ["WCAG 2.1 AAA", "Data Hierarchy", "Color Coding"],
+            "Komplexe Datenhierarchien in zugängliche UI-Strukturen übersetzt. Farbkodierung für kritische Informationen nach WCAG — Barrierefreiheit ist hier keine Option, sondern gesetzliche Pflicht. Design Tokens garantieren konsistentes UI/UX Design über hunderte Dashboard-Ansichten.",
+        metrics: ["WCAG 2.1 AAA", "Data Hierarchy", "Color Coding", "MDR-Ready"],
     },
     {
         id: "UC-03",
         segment: "E-COMMERCE",
         title: "Conversion-optimierte UI",
         description:
-            "Produktseiten, Checkout-Flows und PDP-Komponenten als konsistentes System. A/B-Test-Varianten über Token-Aliase — kein Code-Change für Farb-Experimente im Marketing.",
-        metrics: ["Token A/B Tests", "Checkout System", "+40% Conversion"],
+            "Produktseiten, Checkout-Flows und PDP-Komponenten als konsistentes System. A/B-Test-Varianten über Token-Aliase — kein Code-Change für Farb-Experimente im Marketing. Webseite designen für maximale Conversion, nicht für einmalige Kampagnen.",
+        metrics: ["Token A/B Tests", "Checkout System", "+40% Conversion", "Zero-Code Variants"],
     },
     {
         id: "UC-04",
         segment: "SAAS",
         title: "Skalierbare App-Systeme",
         description:
-            "Multi-Produkt-Unternehmen mit einem zentralen Token-System. Feature-Teams entwickeln autonom, bleiben aber visuell konsistent — eine Wahrheitsquelle für hunderte Entwickler.",
-        metrics: ["Multi-Team", "One Token System", "Visual Consistency"],
+            "Multi-Produkt-Unternehmen mit einem zentralen Token-System. Feature-Teams entwickeln autonom, bleiben aber visuell konsistent — eine Wahrheitsquelle für hunderte Entwickler. Die Webseiten Design Kosten sinken mit jeder neuen Komponente, weil sie aus bestehenden Atoms zusammengesetzt wird.",
+        metrics: ["Multi-Team", "One Token System", "Visual Consistency", "Auto-Scaling"],
     },
     {
         id: "UC-05",
-        segment: "MEDIA",
-        title: "Content-Plattformen",
+        segment: "AGENTUR",
+        title: "White-Label Design Systeme",
         description:
-            "Rich-Text-Rendering, Artikel-Layouts und Autor-Profile als konsistentes System. Dark Mode per CSS-Variable ohne JS — sofortiges Theme-Switching für maximalen Leserkomfort.",
-        metrics: ["Dark Mode", "Rich Typography", "CSS Variables"],
+            "Agenturen in Düsseldorf und deutschlandweit nutzen unser Design System als Grundlage für Kundenprojekte. Token-Layer ermöglicht Rebranding durch reine Config-Änderung — vom Webdesigner zum Design Engineer. Einmal gebaut, unendlich oft angepasst.",
+        metrics: ["White-Label Ready", "Config Rebranding", "Multi-Client", "Düsseldorf & NRW"],
     },
     {
         id: "UC-06",
         segment: "ENTERPRISE",
         title: "Interne Tool-Systeme",
         description:
-            "Admin-Panels, Ops-Dashboards und Mitarbeiter-Tools mit einheitlichem Design-Vokabular. Schulungsaufwand sinkt drastisch, wenn alle Oberflächen denselben Mustern folgen.",
-        metrics: ["Consistent UX", "Low Training", "Component Reuse"],
+            "Admin-Panels, Ops-Dashboards und Mitarbeiter-Tools mit einheitlichem Design-Vokabular. Schulungsaufwand sinkt drastisch, wenn alle Oberflächen denselben Mustern folgen. Professionelles Webdesign ist nicht nur für Kunden — es ist auch für die eigenen Teams.",
+        metrics: ["Consistent UX", "Low Training", "Component Reuse", "Design Governance"],
     },
 ];
 
@@ -85,7 +85,9 @@ export default function DesignUseCases() {
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
                             Sechs Produktionsszenarien, in denen ein
                             professionelles Design System den Unterschied
-                            zwischen Chaos und Skalierung definiert.
+                            zwischen Design-Chaos und skalierbarer
+                            Markenpräsenz definiert — von Fintech bis
+                            Agentur-White-Label in Düsseldorf.
                         </p>
                     </div>
                 </ScrollReveal>

@@ -9,7 +9,7 @@ const SYSTEM_SPECS = [
     { label: "Styling Engine", value: "Tailwind CSS v4" },
     { label: "Token Layer", value: "3-Level Hierarchy" },
     { label: "A11y Standard", value: "WCAG 2.1 AAA" },
-    { label: "TypeScript", value: "100% Typsicher" },
+    { label: "Standort", value: "Düsseldorf / Remote" },
 ];
 
 export default function DesignCTA() {
@@ -24,7 +24,7 @@ export default function DesignCTA() {
                 className="pointer-events-none absolute inset-0 flex items-center justify-start overflow-hidden pl-0"
             >
                 <span className="text-[clamp(5rem,16vw,16rem)] font-black uppercase tracking-[-0.04em] text-[#FFFFFF] opacity-[0.03] select-none whitespace-nowrap leading-none -translate-x-8">
-                    SYSTEM
+                    DESIGN OPS
                 </span>
             </div>
 
@@ -35,7 +35,7 @@ export default function DesignCTA() {
                         {/* LEFT: Copy */}
                         <div className="max-w-2xl">
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/40 uppercase block mb-8">
-                                [ Design System initiieren ]
+                                [ Design System initiieren — Düsseldorf & Remote ]
                             </span>
                             <h2
                                 id="design-cta-heading"
@@ -44,14 +44,22 @@ export default function DesignCTA() {
                                 Bereit für
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/40">
-                                    System-Architektur?
+                                    professionelles Webdesign?
                                 </span>
                             </h2>
-                            <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wir auditieren dein bestehendes UI, definieren
+                            <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5 mb-6">
+                                Wir auditieren Ihr bestehendes UI, definieren
                                 die Token-Architektur und liefern ein vollständig
                                 dokumentiertes Tailwind-Design-System — das
                                 Fundament für skalierbare Produktentwicklung.
+                                Unsere Architektur ist darauf ausgelegt, Ihre
+                                Webseiten Design Kosten langfristig zu senken.
+                            </p>
+                            <p className="text-[14px] text-[#FFFFFF]/50 leading-relaxed max-w-lg pl-5">
+                                Als Webdesigner in Düsseldorf arbeiten wir vor Ort
+                                und remote — für Unternehmen in NRW und ganz
+                                Deutschland, die ihre Webseite designen wollen,
+                                ohne Kompromisse bei Qualität und Skalierbarkeit.
                             </p>
                         </div>
 
@@ -63,7 +71,7 @@ export default function DesignCTA() {
                                 href="/contact"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#FFFFFF]/90 transition-colors duration-300"
                             >
-                                <span>System planen</span>
+                                <span>Design System planen</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </Link>
 

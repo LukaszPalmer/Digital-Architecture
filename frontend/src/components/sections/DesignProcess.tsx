@@ -10,7 +10,7 @@ const PROCESS_STEPS = [
         step: "01",
         title: "Design Audit",
         description:
-            "Vollständige Inventur der bestehenden UI-Elemente: Inkonsistente Abstände, redundante Farbwerte, fehlende Responsive-Breakpoints und A11y-Verstöße werden systematisch dokumentiert.",
+            "Vollständige Inventur der bestehenden UI-Elemente: Inkonsistente Abstände, redundante Farbwerte, fehlende Responsive-Breakpoints und A11y-Verstöße werden systematisch dokumentiert. Wir identifizieren die Design-Schulden, die Ihre Webseiten Design Kosten in die Höhe treiben — und priorisieren die Hebel mit dem größten Impact.",
         duration: "TAGE 1–2",
         tag: "ANALYSE",
     },
@@ -18,7 +18,7 @@ const PROCESS_STEPS = [
         step: "02",
         title: "Token Architecture",
         description:
-            "Definition der primitiven Werte, semantischen Aliase und Komponent-Tokens. Das Tailwind-Config-Schema wird als typisiertes TypeScript-Objekt ausgearbeitet — die Grundlage für alles Folgende.",
+            "Definition der primitiven Werte, semantischen Aliase und Komponent-Tokens. Das Tailwind-Config-Schema wird als typisiertes TypeScript-Objekt ausgearbeitet — die Grundlage für alles Folgende. Hier entscheidet sich, ob Ihr professionelles Webdesign langfristig skaliert oder bei der nächsten Iteration wieder zum Problem wird.",
         duration: "TAGE 3–4",
         tag: "ARCHITEKTUR",
     },
@@ -26,15 +26,15 @@ const PROCESS_STEPS = [
         step: "03",
         title: "Component Build",
         description:
-            "Systematischer Aufbau der Bibliothek: Atoms zuerst, dann Molecules, dann Organisms. Jede Komponente wird mit Variants, Sizes und States implementiert — vollständig regressionstestet.",
+            "Systematischer Aufbau der Bibliothek nach Atomic Design: Atoms zuerst, dann Molecules, dann Organisms. Jede Komponente wird mit Variants, Sizes und States implementiert — vollständig regressionstestet mit Visual Regression und Axe-Core A11y-Checks. Die Phase, in der aus Tokens echte UI/UX Design Komponenten werden.",
         duration: "TAGE 5–12",
         tag: "IMPLEMENTIERUNG",
     },
     {
         step: "04",
-        title: "Documentation & Handoff",
+        title: "Handoff & Düsseldorf",
         description:
-            "Storybook-kompatible Dokumentation jeder Komponente mit Props-Tabelle, Verwendungsbeispielen und A11y-Hinweisen. Developer-Handoff mit Tailwind-Cheatsheet und Token-Referenz.",
+            "Storybook-kompatible Dokumentation jeder Komponente mit Props-Tabelle, Verwendungsbeispielen und A11y-Hinweisen. Developer-Handoff mit Tailwind-Cheatsheet und Token-Referenz. Für Unternehmen in Düsseldorf und NRW bieten wir persönliche Workshops vor Ort — weil ein Design System nur so gut ist wie das Team, das es nutzt.",
         duration: "TAGE 13–14",
         tag: "DOKUMENTATION",
     },
@@ -68,8 +68,10 @@ export default function DesignProcess() {
                         </div>
                         <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-sm border-l-2 border-[#FFFFFF]/25 pl-6">
                             Vier Phasen vom UI-Audit bis zum vollständig
-                            dokumentierten, produktionsreifen Design System
-                            mit Token-Architektur und Komponenten-Bibliothek.
+                            dokumentierten, produktionsreifen Design System.
+                            Unser Webdesign-Prozess zielt auf maximale
+                            Effizienz ab — von der Token-Architektur
+                            bis zum Developer-Handoff in Düsseldorf.
                         </p>
                     </div>
                 </ScrollReveal>
