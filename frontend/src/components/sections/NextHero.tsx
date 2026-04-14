@@ -1,6 +1,7 @@
 // src/components/sections/NextHero.tsx
 // Server Component — RSC-First, 0 TBT.
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
+// PAS-Framework: Problem-Hook im Hero — "Ist Ihre Website zu langsam?"
 
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RevealGrid from "@/components/ui/RevealGrid";
@@ -42,29 +43,48 @@ export default function NextHero() {
                     </div>
                 </ScrollReveal>
 
-                {/* ── HEADLINE ── */}
+                {/* ── HEADLINE — Problem-Hook ── */}
                 <ScrollReveal delay={100}>
                     <h1
                         id="next-hero-heading"
-                        className="text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-12 text-[#000000]"
+                        className="text-[clamp(2.8rem,8vw,7.5rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-8 text-[#000000]"
                     >
-                        Server-First
+                        Ist Ihre Website
                         <br />
                         <span className="italic font-normal text-[#001F3F]">
-                            Architecture.
+                            zu langsam?
                         </span>
                     </h1>
+                </ScrollReveal>
+
+                {/* ── SUBHEADLINE — Solution Teaser ── */}
+                <ScrollReveal delay={150}>
+                    <p className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-black tracking-tight leading-tight uppercase text-[#000000]/80 mb-12 max-w-3xl">
+                        Professionelle Website erstellen lassen mit Next.js —
+                        blitzschnelle Ladezeiten, Lighthouse 100 und messbar mehr Umsatz.
+                    </p>
                 </ScrollReveal>
 
                 {/* ── TAGLINE + BADGE ── */}
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
-                        <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Next.js 15 App Router als Produktions-Standard.
-                            React Server Components eliminieren jedes überflüssige
-                            JavaScript-Byte — das Ergebnis: Lighthouse 100 ist
-                            keine Ausnahme, sondern der einzige akzeptable Zustand.
-                        </p>
+                        <div>
+                            <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg mb-6">
+                                Jede Sekunde Ladezeit kostet Sie Kunden. Studien zeigen:
+                                53&nbsp;% aller mobilen Nutzer verlassen eine Seite, die länger
+                                als 3&nbsp;Sekunden lädt. Mit <strong>Next.js Webentwicklung</strong> und
+                                React Server Components eliminieren wir jedes überflüssige
+                                JavaScript-Byte — das Ergebnis ist kein Kompromiss,
+                                sondern eine Architektur, in der Lighthouse&nbsp;100 der
+                                einzige akzeptable Zustand ist.
+                            </p>
+                            <p className="text-[15px] leading-relaxed text-[#000000]/55 pl-6 max-w-lg">
+                                Als spezialisierte <strong>Webagentur für Webdesign</strong> und
+                                moderne Webanwendungen vereinen wir technische Exzellenz
+                                mit messbarem Business-Impact — damit Ihre Investition
+                                in eine professionelle Website sich vom ersten Tag an rechnet.
+                            </p>
+                        </div>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
                                 Performance Engineering Standard
@@ -74,6 +94,9 @@ export default function NextHero() {
                                     0ms TBT // LCP &lt; 0.8s
                                 </span>
                             </div>
+                            <span className="text-[9.5px] font-mono font-bold tracking-[0.3em] text-[#000000]/35 uppercase mt-3">
+                                Ladezeit optimieren — messbar, garantiert
+                            </span>
                         </div>
                     </div>
                 </ScrollReveal>

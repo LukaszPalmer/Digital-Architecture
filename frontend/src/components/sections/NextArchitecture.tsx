@@ -1,7 +1,7 @@
 // src/components/sections/NextArchitecture.tsx
 // Server Component — RSC-First, 0 TBT.
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
-// Pure-CSS Diagramme: Request Lifecycle + Rendering Strategy Matrix.
+// Pure-CSS Diagramme + "Technologische Überlegenheit" Code-Snippet.
 
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RevealGrid from "@/components/ui/RevealGrid";
@@ -45,7 +45,7 @@ const REQUEST_LAYERS = [
     },
     {
         label: "DATA LAYER",
-        sublabel: "MongoDB Atlas / Cache",
+        sublabel: "Datenbank / Cache",
         desc: "Parallel Fetching",
         bg: "bg-[#FFFFFF]",
         border: "border-[#000000]",
@@ -55,7 +55,7 @@ const REQUEST_LAYERS = [
     {
         label: "STREAM",
         sublabel: "Suspense + PPR",
-        desc: "Progressive Hydration",
+        desc: "Progressive Delivery",
         bg: "bg-[#001F3F]",
         border: "border-[#001F3F]",
         textColor: "text-[#FFFFFF]",
@@ -67,7 +67,7 @@ const RENDERING_MODES = [
     {
         mode: "RSC",
         label: "Server Components",
-        desc: "Daten auf dem Server gefetcht, HTML gestreamt. Kein Client-JS-Bundle.",
+        desc: "Daten auf dem Server gefetcht, HTML gestreamt. Kein Client-JS-Bundle — das ist der Grund, warum Ihre Website nicht mehr zu langsam sein wird.",
         tag: "0 KB CLIENT",
         bg: "bg-[#001F3F]",
         textColor: "text-[#FFFFFF]",
@@ -77,7 +77,7 @@ const RENDERING_MODES = [
     {
         mode: "PPR",
         label: "Partial Pre-Rendering",
-        desc: "Statische Shell sofort + dynamische Islands gestreamt. Bestes aus beiden Welten.",
+        desc: "Statische Shell sofort vom CDN + dynamische Islands gestreamt. Das Beste aus Static Site Generation und Server-Side Rendering — für maximale Ladezeit-Optimierung.",
         tag: "< 0.8s LCP",
         bg: "bg-[#FFFFFF]",
         textColor: "text-[#000000]",
@@ -86,8 +86,8 @@ const RENDERING_MODES = [
     },
     {
         mode: "SSG",
-        label: "Static Generation",
-        desc: "Build-Time rendering, CDN-Auslieferung. Zero Server-Overhead für marketing pages.",
+        label: "Static Site Generation",
+        desc: "Build-Time Rendering, globale CDN-Auslieferung. Zero Server-Overhead für Marketing-Seiten. Perfekt, wenn Sie eine professionelle Website erstellen lassen möchten, die keine dynamischen Daten benötigt.",
         tag: "EDGE CDN",
         bg: "bg-[#000000]",
         textColor: "text-[#FFFFFF]",
@@ -101,24 +101,73 @@ const INTEGRATION_SPECS = [
         id: "NXT-INT-01",
         title: "Data Fetching & Caching",
         description:
-            "Fetch-API mit erweiterten Cache-Direktiven: `force-cache`, `no-store`, `revalidate`. Granulare ISR-Revalidierung per Tag oder Zeitintervall — kein Full-Rebuild.",
+            "Fetch-API mit erweiterten Cache-Direktiven: force-cache, no-store, revalidate. Granulare ISR-Revalidierung per Tag oder Zeitintervall — kein Full-Rebuild nötig. Incremental Static Regeneration hält Ihre Seiten aktuell, ohne die Performance zu opfern.",
         spec: "AUTO ISR",
     },
     {
         id: "NXT-INT-02",
         title: "Server Actions & Mutations",
         description:
-            "Formular-Submissions als direkte Server-Funktionen — kein `fetch('/api/...')` notwendig. Typsicher, progressiv enhanced und mit `useActionState` für Error-Handling.",
+            "Formular-Submissions als direkte Server-Funktionen — kein separater API-Layer, keine Round-Trips. Typsicher durch TypeScript, progressiv enhanced und mit Error-Handling. Das reduziert die Kosten für Ihre professionelle Website erheblich.",
         spec: "ZERO API LAYER",
     },
     {
         id: "NXT-INT-03",
         title: "Metadata & SEO Engine",
         description:
-            "Dynamische `generateMetadata` pro Route, OpenGraph-Images on-demand, JSON-LD Structured Data — vollständige SEO-Kontrolle ohne externe Libraries.",
+            "Dynamische generateMetadata pro Route, OpenGraph-Images on-demand, JSON-LD Structured Data — vollständige SEO-Kontrolle ohne externe Libraries. Damit Ihre Website nicht nur schnell ist, sondern auch von Google gefunden wird.",
         spec: "BUILT-IN SEO",
     },
 ];
+
+/* ── CODE SNIPPET (Sicherheit: nur Platzhalter, keine echten Secrets) ── */
+const CODE_SNIPPET = `// Next.js Edge Middleware — Globale Performance-Optimierung
+// Authentifizierung & Rate-Limiting am Edge, < 10ms Latenz
+
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+const RATE_LIMIT_WINDOW = 60_000; // 1 Minute
+const MAX_REQUESTS = 100;
+
+// In-Memory Store (Produktion: Redis/Upstash)
+const requestCounts = new Map<string, { count: number; resetAt: number }>();
+
+export function middleware(request: NextRequest) {
+  const ip = request.headers.get("x-forwarded-for") ?? "unknown";
+  const now = Date.now();
+
+  // ── Rate Limiting ──
+  const record = requestCounts.get(ip);
+  if (!record || now > record.resetAt) {
+    requestCounts.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW });
+  } else if (record.count >= MAX_REQUESTS) {
+    return NextResponse.json(
+      { error: "Rate limit exceeded" },
+      { status: 429 }
+    );
+  } else {
+    record.count++;
+  }
+
+  // ── Auth Check ──
+  const token = request.cookies.get("session_token")?.value;
+  if (request.nextUrl.pathname.startsWith("/dashboard") && !token) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  // ── Security Headers ──
+  const response = NextResponse.next();
+  response.headers.set("X-Frame-Options", "DENY");
+  response.headers.set("X-Content-Type-Options", "nosniff");
+  response.headers.set("Referrer-Policy", "strict-origin-when-cross-origin");
+
+  return response;
+}
+
+export const config = {
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+};`;
 
 export default function NextArchitecture() {
     return (
@@ -133,7 +182,7 @@ export default function NextArchitecture() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Request & Rendering Blueprint ]
+                                [ Request &amp; Rendering Blueprint ]
                             </span>
                             <h2
                                 id="next-arch-heading"
@@ -147,9 +196,31 @@ export default function NextArchitecture() {
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Der Request-Lifecycle von Next.js 15 — und die
+                            Der Request-Lifecycle von Next.js — und die
                             Rendering-Strategie-Matrix, die für jeden
-                            Use-Case die optimale Lösung bestimmt.
+                            Use-Case die optimale Lösung bestimmt. So
+                            funktioniert <strong>moderne Webanwendung programmieren</strong> auf
+                            dem höchsten technischen Niveau.
+                        </p>
+                    </div>
+                </ScrollReveal>
+
+                {/* ── ARCHITECTURE INTRO ── */}
+                <ScrollReveal delay={40}>
+                    <div className="mb-16 md:mb-20 max-w-4xl">
+                        <p className="text-[17px] leading-relaxed text-[#000000]/70 mb-6">
+                            Wenn wir Ihre <strong>Ladezeit optimieren</strong>, beginnen wir nicht bei der
+                            Oberfläche — wir beginnen bei der Architektur. Der Next.js Request-Lifecycle
+                            besteht aus sechs präzise orchestrierten Layern, die zusammen dafür sorgen,
+                            dass jeder Seitenaufruf in unter einer Sekunde beim Nutzer ankommt. Vom
+                            ersten DNS-Lookup bis zum letzten gestreamten Pixel ist jeder Schritt
+                            auf Performance optimiert.
+                        </p>
+                        <p className="text-[16px] leading-relaxed text-[#000000]/55">
+                            Das ist der technologische Vorsprung, den Sie erhalten, wenn Sie bei uns eine
+                            <strong> professionelle Website erstellen lassen</strong>: Keine Black-Box, sondern
+                            eine transparente, nachvollziehbare Architektur, die jede Millisekunde
+                            rechtfertigt.
                         </p>
                     </div>
                 </ScrollReveal>
@@ -166,7 +237,7 @@ export default function NextArchitecture() {
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 bg-[#FFFFFF]" aria-hidden="true" />
                                     <span className="text-[11px] font-black font-mono tracking-[0.25em] text-[#FFFFFF] uppercase">
-                                        Next.js 15 — App Router Request Pipeline
+                                        Next.js — App Router Request Pipeline
                                     </span>
                                 </div>
                                 <span className="text-[9px] font-mono text-[#FFFFFF]/40 tracking-widest uppercase">
@@ -296,6 +367,73 @@ export default function NextArchitecture() {
                         </div>
                     ))}
                 </RevealGrid>
+
+                {/* ── TECHNOLOGISCHE ÜBERLEGENHEIT — CODE SNIPPET ── */}
+                <ScrollReveal delay={140}>
+                    <div className="mt-20 md:mt-28">
+                        <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-4">
+                            [ Technologische Überlegenheit — Expert Insight ]
+                        </span>
+                        <h3 className="text-[clamp(1.6rem,4vw,2.8rem)] font-black text-[#000000] tracking-[-0.02em] uppercase leading-[0.92] mb-6">
+                            Professioneller Code
+                            <span className="italic font-normal text-[#001F3F]"> in Aktion.</span>
+                        </h3>
+                        <p className="text-[16px] leading-relaxed text-[#000000]/65 max-w-3xl mb-10">
+                            Wenn wir eine <strong>moderne Webanwendung programmieren</strong>, sieht das
+                            unter der Haube so aus: Eine Edge Middleware, die Authentifizierung,
+                            Rate-Limiting und Security Headers in unter 10 Millisekunden verarbeitet —
+                            global verteilt, bevor der Request überhaupt den Server erreicht. Das ist
+                            der Standard, den Sie von einer spezialisierten <strong>Webagentur für
+                            Next.js Webentwicklung</strong> erwarten können.
+                        </p>
+
+                        <div className="border border-[#000000]">
+                            {/* Code Header */}
+                            <div className="bg-[#000000] px-6 md:px-8 py-4 flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                    <div className="w-2 h-2 bg-[#FFFFFF]" aria-hidden="true" />
+                                    <span className="text-[11px] font-black font-mono tracking-[0.25em] text-[#FFFFFF] uppercase">
+                                        middleware.ts — Edge Runtime
+                                    </span>
+                                </div>
+                                <span className="text-[9px] font-mono text-[#FFFFFF]/40 tracking-widest uppercase">
+                                    TypeScript // Next.js
+                                </span>
+                            </div>
+
+                            {/* Code Block */}
+                            <div className="bg-[#000000] p-6 md:p-8 overflow-x-auto">
+                                <pre className="text-[12px] md:text-[13px] leading-relaxed font-mono text-[#FFFFFF]/80">
+                                    <code>{CODE_SNIPPET}</code>
+                                </pre>
+                            </div>
+
+                            {/* Code Footer */}
+                            <div className="border-t border-[#FFFFFF]/10 px-6 py-3 bg-[#000000] flex items-center gap-6">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-1 h-1 bg-[#001F3F]" aria-hidden="true" />
+                                    <span className="text-[9px] font-mono text-[#FFFFFF]/50 font-bold tracking-widest uppercase">
+                                        Keine echten API-Tokens — nur Platzhalter
+                                    </span>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                    <div className="w-1 h-1 bg-[#FFFFFF]/30" aria-hidden="true" />
+                                    <span className="text-[9px] font-mono text-[#FFFFFF]/35 tracking-widest uppercase">
+                                        Production-Grade Pattern
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <p className="text-[14px] leading-relaxed text-[#000000]/55 mt-6 max-w-3xl">
+                            Dieser Code zeigt, wie die Edge-Runtime von Next.js genutzt wird, um
+                            Rate-Limiting, Authentifizierung und Security Headers auf globaler
+                            Ebene zu implementieren — mit einer Ausführungszeit von unter 10
+                            Millisekunden. Das ist kein theoretisches Konzept, sondern
+                            Production-Code, wie wir ihn in jeder modernen Webanwendung einsetzen.
+                        </p>
+                    </div>
+                </ScrollReveal>
 
             </div>
         </section>
