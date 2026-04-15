@@ -11,48 +11,48 @@ const CAPABILITIES = [
         category: "ARCHITEKTUR",
         title: "Dashboard Architecture",
         description:
-            "Nested Layout-System mit persistenter Navigation, kontextbewusstem Sidebar-State und responsiven Breakpoints. React Query als Data-Fetching-Layer — kein inkonsistenter Ladezustand.",
-        specs: ["Nested Layouts", "React Query", "Sidebar State"],
+            "Nested Layout-System mit persistenter Navigation, kontextbewusstem Sidebar-State und responsiven Breakpoints. React Query als Data-Fetching-Layer mit Stale-While-Revalidate — kein inkonsistenter Ladezustand, keine redundanten API-Calls. Konzipiert für Enterprise-Teams, die schnelle Entscheidungen auf Basis aktueller Daten treffen.",
+        specs: ["Nested Layouts", "React Query", "Sidebar State", "RSC-First"],
     },
     {
         id: "MUI-02",
         category: "DATA",
         title: "Advanced Data Tables",
         description:
-            "MUI DataGrid mit Server-Side Pagination, Multi-Column-Sort, Column-Resize und Virtual Scrolling für Millionen von Zeilen. Export zu CSV/XLSX als Standard-Feature.",
-        specs: ["Virtual Scroll", "Server Pagination", "CSV Export"],
+            "MUI DataGrid Pro mit Server-Side Pagination, Multi-Column-Sort, Column-Resize und Virtual Scrolling für über 100.000 Zeilen bei stabilen 60fps. Export zu CSV/XLSX als Standard-Feature. Die DOM-Größe bleibt durch Row-Virtualisierung konstant — unabhängig von der Datenmenge.",
+        specs: ["Virtual Scroll", "Server Pagination", "CSV Export", "100K+ Rows"],
     },
     {
         id: "MUI-03",
         category: "ANALYTICS",
         title: "Charts & Visualisierung",
         description:
-            "Recharts-Integration für Line-, Bar-, Area- und Pie-Charts mit Echtzeit-Datenupdates via WebSocket. Responsiv auf allen Breakpoints — keine fixed-width SVG-Probleme.",
-        specs: ["Real-Time Charts", "WebSocket Updates", "Responsive SVG"],
+            "Recharts-Integration für Line-, Bar-, Area- und Pie-Charts mit Echtzeit-Datenupdates via WebSocket. Charts werden erst bei Sichtbarkeit im Viewport initialisiert — kein Main-Thread-Blocking beim initialen Laden. Responsiv auf allen Breakpoints ohne fixed-width SVG-Probleme.",
+        specs: ["Real-Time Charts", "WebSocket Updates", "Lazy Init", "Responsive SVG"],
     },
     {
         id: "MUI-04",
         category: "FORMS",
         title: "Enterprise Form Systems",
         description:
-            "React Hook Form mit Zod-Schema-Validierung, Multi-Step-Wizards und dynamischen Feldern. Auto-Save, Offline-Draft-Support und optimistische Updates für kritische Formularflüsse.",
-        specs: ["Zod Validation", "Multi-Step", "Auto Save"],
+            "React Hook Form mit Zod-Schema-Validierung, Multi-Step-Wizards und dynamischen Feldern. Auto-Save, Offline-Draft-Support und optimistische Updates für kritische Formularflüsse. Barrierefreie Formulare mit korrekten aria-Labels und Tastaturnavigation als Standard.",
+        specs: ["Zod Validation", "Multi-Step", "Auto Save", "WCAG 2.1 AA"],
     },
     {
         id: "MUI-05",
         category: "ACCESS",
         title: "Role-Based UI",
         description:
-            "Komponent-Level RBAC: Felder, Aktionen und Seiten werden per Rolle ein- und ausgeblendet. Permission-Gates als Higher-Order-Components — kein Sicherheits-Bypass durch URL-Manipulation.",
-        specs: ["Component Gates", "Per-Role Visibility", "HOC Pattern"],
+            "Komponent-Level RBAC: Felder, Aktionen und Seiten werden per Rolle ein- und ausgeblendet. Permission-Gates als Higher-Order-Components mit serverseitiger Validierung — kein Sicherheits-Bypass durch URL-Manipulation. Rollen-Definitionen sind für Unternehmen in Düsseldorf und der DACH-Region auf gängige Organisationsstrukturen abgestimmt.",
+        specs: ["Component Gates", "Per-Role Visibility", "HOC Pattern", "Server Validation"],
     },
     {
         id: "MUI-06",
         category: "THEMING",
         title: "MUI Theme Engine",
         description:
-            "Custom MUI Theme mit Brand-Tokens ersetzt alle default Styles. Component-Overrides für konsistentes Look-and-Feel — das Material-Look wird vollständig eliminiert, das Brand dominiert.",
-        specs: ["Brand Tokens", "Component Override", "No Material Look"],
+            "Custom MUI Theme mit Brand-Token-System als Single Source of Truth. Alle Material-Defaults werden vollständig durch Ihre Unternehmensidentität ersetzt — Typografie, Spacing, Farben und Component-Overrides. Das Material-Look wird eliminiert, Ihr Brand dominiert. Konzipiert für langfristige Skalierbarkeit der Benutzeroberfläche.",
+        specs: ["Brand Tokens", "Component Override", "No Material Look", "Dark Mode Ready"],
     },
 ];
 
@@ -85,7 +85,9 @@ export default function DashCapabilities() {
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
                             Sechs Engineering-Disziplinen für
                             Enterprise-Dashboards, die unter realer
-                            Hochlast performant und sicher bleiben.
+                            Hochlast performant und sicher bleiben —
+                            für Unternehmen, die ihre Business-Software
+                            in Düsseldorf und der DACH-Region modernisieren.
                         </p>
                     </div>
                 </ScrollReveal>

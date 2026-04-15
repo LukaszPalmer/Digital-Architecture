@@ -10,6 +10,8 @@ const DASH_SPECS = [
     { label: "Data Layer", value: "React Query v5" },
     { label: "Render Rate", value: "60fps Garantiert" },
     { label: "Access Control", value: "Component RBAC" },
+    { label: "Standort", value: "Düsseldorf, DE" },
+    { label: "DOM Budget", value: "< 600 Elemente" },
 ];
 
 export default function DashCTA() {
@@ -48,10 +50,12 @@ export default function DashCTA() {
                                 </span>
                             </h2>
                             <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wir definieren deine Requirements, bauen das
-                                Custom MUI Theme und liefern ein produktionsreifes
-                                Dashboard-System mit RBAC, Echtzeit-Daten
-                                und 60fps-Performance.
+                                Von Düsseldorf aus entwickeln wir Enterprise-Dashboard-Systeme
+                                für Unternehmen in ganz Deutschland. Wir definieren Ihre
+                                Requirements, bauen das Custom MUI Theme mit Brand-Token-System
+                                und liefern ein produktionsreifes Dashboard mit RBAC,
+                                Echtzeit-Daten und 60fps-Performance — konzipiert für eine
+                                langfristige Skalierbarkeit der Benutzeroberfläche.
                             </p>
                         </div>
 
@@ -86,7 +90,7 @@ export default function DashCTA() {
 
                 {/* ── DASH SPEC BAR ── */}
                 <ScrollReveal delay={160}>
-                    <div className="mt-20 md:mt-28 pt-8 border-t border-[#FFFFFF]/10 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="mt-20 md:mt-28 pt-8 border-t border-[#FFFFFF]/10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                         {DASH_SPECS.map((item) => (
                             <div key={item.label} className="flex flex-col gap-1">
                                 <span className="text-[9px] font-mono text-[#FFFFFF]/35 tracking-[0.4em] uppercase">

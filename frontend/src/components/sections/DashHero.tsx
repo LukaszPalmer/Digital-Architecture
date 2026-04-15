@@ -61,10 +61,12 @@ export default function DashHero() {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
                             Enterprise-Dashboards sind die Schaltzentrale
-                            kritischer Geschäftsprozesse. Material UI als
-                            Komponentengrundlage kombiniert mit präziser
-                            Datenschicht-Architektur — 60fps-Performance
-                            auch bei Echtzeit-Updates aus tausenden Quellen.
+                            kritischer Geschäftsprozesse — von Düsseldorf
+                            bis in die gesamte DACH-Region. Material UI Logic
+                            als Komponentengrundlage kombiniert mit präziser
+                            Datenschicht-Architektur: 60fps-Performance
+                            auch bei Echtzeit-Updates aus tausenden Quellen,
+                            DOM-Elemente unter 600 und TBT unter 50ms auf Mobile.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
@@ -72,7 +74,7 @@ export default function DashHero() {
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[12px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
-                                    60fps // RBAC-READY
+                                    60fps // RBAC-READY // DÜSSELDORF
                                 </span>
                             </div>
                         </div>
