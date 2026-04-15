@@ -9,7 +9,7 @@ const METRICS = [
     { value: "−40%", label: "Bounce Rate" },
     { value: "+120%", label: "Conversion Rate" },
     { value: "AAA", label: "WCAG Konformität" },
-    { value: "95%", label: "User Satisfaction" },
+    { value: "0", label: "CLS Score" },
 ];
 
 export default function UXHero() {
@@ -60,11 +60,12 @@ export default function UXHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Interface-Design ist keine Dekoration —
-                            es ist die Sprache zwischen Produkt und Nutzer.
-                            Jede Entscheidung in Hierarchy, Spacing und
-                            Interaction Pattern wird aus Nutzerdaten
-                            abgeleitet. Schönheit folgt Funktion.
+                            Minimalist Interface Construction aus Duesseldorf —
+                            wir entfernen den visuellen Laerm und fokussieren
+                            uns auf die User-Intention. Jede Entscheidung in
+                            Hierarchy, Spacing und Interaction Pattern wird
+                            aus Nutzerdaten abgeleitet. Klares Design fuehrt
+                            zu klaren Entscheidungen.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">

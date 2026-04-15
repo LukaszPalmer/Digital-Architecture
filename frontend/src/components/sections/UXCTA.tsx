@@ -48,10 +48,11 @@ export default function UXCTA() {
                                 </span>
                             </h2>
                             <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wir beginnen mit deinen Nutzerdaten, validieren
+                                Wir beginnen mit Ihren Nutzerdaten, validieren
                                 jede Design-Entscheidung durch Research und
                                 liefern einen Developer-Handoff, der keine
-                                Fragen offen lässt.
+                                Fragen offen laesst. UX Design Agentur
+                                Duesseldorf — Antwort innerhalb von 24h.
                             </p>
                         </div>
 
@@ -63,7 +64,7 @@ export default function UXCTA() {
                                 href="/contact"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#FFFFFF]/90 transition-colors duration-300"
                             >
-                                <span>Design Sprint starten</span>
+                                <span>Jetzt Design-Audit anfordern</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </Link>
 
