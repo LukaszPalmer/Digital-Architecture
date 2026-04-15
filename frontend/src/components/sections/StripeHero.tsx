@@ -6,10 +6,10 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import RevealGrid from "@/components/ui/RevealGrid";
 
 const METRICS = [
-    { value: "PCI DSS", label: "Compliance Standard" },
-    { value: "< 2s", label: "Checkout Completion" },
-    { value: "99.99%", label: "API Reliability" },
-    { value: "135+", label: "Akzeptierte Währungen" },
+    { value: "20+", label: "Zahlungsarten" },
+    { value: "< 2s", label: "Checkout-Zeit" },
+    { value: "99.99 %", label: "Verfuegbarkeit" },
+    { value: "135+", label: "Waehrungen" },
 ];
 
 export default function StripeHero() {
@@ -36,7 +36,7 @@ export default function StripeHero() {
                         <div className="h-px w-10 bg-[#001F3F]" aria-hidden="true" />
                         <div className="bg-[#001F3F] px-3 py-1.5">
                             <span className="text-[10px] font-mono font-black tracking-[0.4em] text-[#FFFFFF] uppercase">
-                                SRV_03 // STRIPE FINTECH
+                                E-Commerce Zahlungen // Duesseldorf
                             </span>
                         </div>
                     </div>
@@ -48,10 +48,10 @@ export default function StripeHero() {
                         id="stripe-hero-heading"
                         className="text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-12 text-[#000000]"
                     >
-                        Automated
+                        Alle Zahlungsarten.
                         <br />
                         <span className="italic font-normal text-[#001F3F]">
-                            Payment Infrastructure.
+                            Ein System.
                         </span>
                     </h1>
                 </ScrollReveal>
@@ -60,19 +60,20 @@ export default function StripeHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Zahlungsinfrastruktur ist kritische Produktions-
-                            infrastruktur. Stripe-Integrationen werden mit
-                            Idempotenz, Webhook-Resilienz und PCI-konformem
-                            Datenfluss konstruiert — kein Payment-Feature
-                            verlässt das System ohne Fallback-Logik.
+                            Kreditkarte, SEPA-Lastschrift, Klarna, Zahlung auf
+                            Rechnung — ueber 20 Zahlungsmoeglichkeiten in einem
+                            einzigen Checkout. Wir integrieren Stripe in Ihren
+                            Onlineshop, damit Ihre Kunden so bezahlen koennen,
+                            wie sie es erwarten. Professionelles Webdesign aus
+                            Duesseldorf, das verkauft.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
-                                Payment Engineering Standard
+                                Ihr Zahlungsanbieter-Experte
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[12px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
-                                    PCI DSS // IDEMPOTENT DESIGN
+                                    PCI DSS // DSGVO-KONFORM
                                 </span>
                             </div>
                         </div>

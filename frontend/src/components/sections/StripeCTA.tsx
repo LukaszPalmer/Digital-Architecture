@@ -6,10 +6,10 @@ import Link from "next/link";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 const PAYMENT_SPECS = [
-    { label: "Payment API", value: "Stripe v2024" },
-    { label: "Compliance", value: "PCI DSS Level 1" },
-    { label: "Währungen", value: "135+ Supported" },
-    { label: "Reliability", value: "99.99% Uptime" },
+    { label: "Zahlungsarten", value: "20+ integriert" },
+    { label: "Sicherheit", value: "PCI DSS Level 1" },
+    { label: "Waehrungen", value: "135+ weltweit" },
+    { label: "Verfuegbarkeit", value: "99,99 % Uptime" },
 ];
 
 export default function StripeCTA() {
@@ -24,7 +24,7 @@ export default function StripeCTA() {
                 className="pointer-events-none absolute inset-0 flex items-center justify-start overflow-hidden pl-0"
             >
                 <span className="text-[clamp(5rem,16vw,16rem)] font-black uppercase tracking-[-0.04em] text-[#FFFFFF] opacity-[0.03] select-none whitespace-nowrap leading-none -translate-x-8">
-                    FINTECH
+                    ZAHLUNGEN
                 </span>
             </div>
 
@@ -35,23 +35,25 @@ export default function StripeCTA() {
                         {/* LEFT: Copy */}
                         <div className="max-w-2xl">
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/40 uppercase block mb-8">
-                                [ Payment Pipeline initiieren ]
+                                [ Jetzt Zahlungssystem modernisieren ]
                             </span>
                             <h2
                                 id="stripe-cta-heading"
                                 className="text-[clamp(2.8rem,7vw,6rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase text-[#FFFFFF] mb-10"
                             >
-                                Bereit für
+                                Bereit fuer
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/40">
-                                    automatisierte Zahlungen?
+                                    mehr Umsatz im Onlineshop?
                                 </span>
                             </h2>
                             <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wir analysieren deine bestehenden Zahlungsströme,
-                                definieren die optimale Stripe-Architektur und
-                                implementieren eine PCI-konforme Integration —
-                                von Payment Intents bis zu automatisierten Payouts.
+                                Wir analysieren Ihre bestehenden Zahlungsablaeufe,
+                                finden heraus, wo Kunden abspringen, und richten ein
+                                modernes Stripe-Zahlungssystem ein — mit allen
+                                Zahlungsarten, automatischer Rechnungsstellung und
+                                maximalem Betrugsschutz. Aus Duesseldorf, fuer
+                                Unternehmen in ganz Deutschland.
                             </p>
                         </div>
 
@@ -63,8 +65,8 @@ export default function StripeCTA() {
                                 href="/contact"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#FFFFFF]/90 transition-colors duration-300"
                             >
-                                <span>Payment Audit starten</span>
-                                <span aria-hidden="true" className="arrow-icon">→</span>
+                                <span>Kostenlose Zahlungs-Analyse</span>
+                                <span aria-hidden="true" className="arrow-icon">&rarr;</span>
                             </Link>
 
                             {/* Secondary */}
@@ -72,12 +74,12 @@ export default function StripeCTA() {
                                 href="/services/nodejs-core"
                                 className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
                             >
-                                <span>Node.js Backend Core</span>
-                                <span aria-hidden="true">→</span>
+                                <span>Onlineshop erstellen lassen</span>
+                                <span aria-hidden="true">&rarr;</span>
                             </Link>
 
                             <span className="text-[10px] font-mono text-[#FFFFFF]/35 tracking-[0.25em] uppercase text-center pt-1">
-                                Antwort innerhalb von 24h garantiert
+                                Antwort innerhalb von 24h
                             </span>
 
                         </div>

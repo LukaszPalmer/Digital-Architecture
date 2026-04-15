@@ -9,54 +9,54 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const PAYMENT_FLOW = [
     {
         step: "01",
-        label: "CLIENT",
-        desc: "Stripe.js + Elements",
-        note: "PCI-Scope minimiert",
+        label: "KUNDE",
+        desc: "Waehlt Zahlungsart",
+        note: "Sichere Eingabe",
         bg: "bg-[#FFFFFF]",
         textColor: "text-[#000000]",
         subColor: "text-[#000000]/55",
     },
     {
         step: "02",
-        label: "PAYMENT INTENT",
-        desc: "Server-Side Creation",
-        note: "Client Secret zurück",
+        label: "CHECKOUT",
+        desc: "Zahlungsseite wird erstellt",
+        note: "Alle Zahlungsarten",
         bg: "bg-[#001F3F]",
         textColor: "text-[#FFFFFF]",
         subColor: "text-[#FFFFFF]/65",
     },
     {
         step: "03",
-        label: "STRIPE API",
-        desc: "3DS2 + SCA Check",
-        note: "Fraud-Scoring via Radar",
+        label: "PRUEFUNG",
+        desc: "Sicherheitscheck & Betrugsschutz",
+        note: "3D Secure & KI-Analyse",
         bg: "bg-[#000000]",
         textColor: "text-[#FFFFFF]",
         subColor: "text-[#FFFFFF]/55",
     },
     {
         step: "04",
-        label: "WEBHOOK",
-        desc: "payment_intent.succeeded",
-        note: "Idempotency verified",
+        label: "BESTAETIGUNG",
+        desc: "Zahlung erfolgreich",
+        note: "Automatische Benachrichtigung",
         bg: "bg-[#001F3F]",
         textColor: "text-[#FFFFFF]",
         subColor: "text-[#FFFFFF]/65",
     },
     {
         step: "05",
-        label: "DATABASE",
-        desc: "Order Status Update",
-        note: "Atomare Transaktion",
+        label: "VERARBEITUNG",
+        desc: "Bestellung wird gespeichert",
+        note: "Rechnung wird erstellt",
         bg: "bg-[#FFFFFF]",
         textColor: "text-[#000000]",
         subColor: "text-[#000000]/55",
     },
     {
         step: "06",
-        label: "FULFILLMENT",
-        desc: "Email + Access Grant",
-        note: "Resend API + Auth",
+        label: "LIEFERUNG",
+        desc: "Versandbestaetigung & Zugang",
+        note: "E-Mail an Kunde",
         bg: "bg-[#000000]",
         textColor: "text-[#FFFFFF]",
         subColor: "text-[#FFFFFF]/55",
@@ -64,34 +64,34 @@ const PAYMENT_FLOW = [
 ];
 
 const WEBHOOK_EVENTS = [
-    { event: "payment_intent.succeeded", action: "Order confirmed, access granted", critical: true },
-    { event: "payment_intent.payment_failed", action: "Retry logic, failure email", critical: true },
-    { event: "customer.subscription.created", action: "Welcome flow, feature unlock", critical: false },
-    { event: "customer.subscription.deleted", action: "Downgrade, access revoked", critical: true },
-    { event: "invoice.payment_failed", action: "Dunning sequence initiated", critical: false },
-    { event: "charge.dispute.created", action: "Alert ops team, evidence prep", critical: true },
+    { event: "Zahlung erfolgreich", action: "Bestellung bestaetigt, Zugang freigeschaltet", critical: true },
+    { event: "Zahlung fehlgeschlagen", action: "Kunde wird benachrichtigt, erneuter Versuch", critical: true },
+    { event: "Neues Abonnement", action: "Willkommens-E-Mail, Funktionen freigeschaltet", critical: false },
+    { event: "Abonnement gekuendigt", action: "Zugang wird entzogen, Bestaetigung gesendet", critical: true },
+    { event: "Rechnung unbezahlt", action: "Automatische Zahlungserinnerung gestartet", critical: false },
+    { event: "Rueckbuchung gemeldet", action: "Team wird alarmiert, Nachweis vorbereitet", critical: true },
 ];
 
 const INTEGRATION_SPECS = [
     {
         id: "STR-INT-01",
-        title: "Next.js Server Actions",
+        title: "Sichere Zahlungsverarbeitung",
         description:
-            "Payment Intent Creation als typisierte Server Action — kein separater API-Route-Layer notwendig. Stripe Secret Key bleibt serverseitig, Client erhält nur den Client Secret.",
-        spec: "ZERO SECRET EXPOSURE",
+            "Kreditkartendaten werden nie auf Ihrem Server gespeichert. Die gesamte Zahlungsverarbeitung laeuft ueber Stripes sichere Infrastruktur — Ihr Onlineshop ist automatisch PCI-konform, ohne zusaetzlichen Aufwand.",
+        spec: "KEINE KARTENDATEN AUF IHREM SERVER",
     },
     {
         id: "STR-INT-02",
-        title: "Webhook Handler",
+        title: "Automatische Benachrichtigungen",
         description:
-            "Stripe-Webhook-Signatur wird mit `stripe.webhooks.constructEvent` verifiziert. Idempotency via Event-ID in MongoDB — jedes Event wird genau einmal verarbeitet, auch bei Duplikaten.",
-        spec: "EXACTLY-ONCE DELIVERY",
+            "Bei jeder Zahlung wird Ihr System automatisch informiert. Bestellungen werden bestaetigt, Rechnungen erstellt und Kunden benachrichtigt — auch wenn tausende Bestellungen gleichzeitig eingehen.",
+        spec: "VOLLAUTOMATISCH",
     },
     {
         id: "STR-INT-03",
-        title: "Subscription Management",
+        title: "Kunden-Selbstverwaltung",
         description:
-            "Stripe Customer Portal für Self-Service-Upgrades, Downgrades und Kündigungen. Keine eigene UI notwendig — Stripe hostet das Portal, wir verarbeiten die resultierenden Webhooks.",
+            "Ihre Kunden koennen Abos, Zahlungsarten und Rechnungen selbst verwalten — ueber ein von Stripe bereitgestelltes Portal. Sie muessen keine eigene Verwaltungsoberflaeche bauen oder pflegen.",
         spec: "SELF-SERVICE PORTAL",
     },
 ];
@@ -109,23 +109,23 @@ export default function StripeArchitecture() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Payment Flow & Webhook Blueprint ]
+                                [ So funktioniert eine Stripe-Zahlung ]
                             </span>
                             <h2
                                 id="stripe-arch-heading"
                                 className="text-[clamp(2.6rem,6vw,5rem)] font-black text-[#000000] tracking-[-0.025em] uppercase leading-[0.92]"
                             >
-                                Architektur
+                                Der Ablauf
                                 <br />
                                 <span className="italic font-normal text-[#001F3F]">
-                                    im Detail.
+                                    Schritt fuer Schritt.
                                 </span>
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Der vollständige Payment-Lifecycle — vom
-                            Browser bis zur Fulfillment-Pipeline — und
-                            die kritischen Webhook-Events im Überblick.
+                            Vom Klick auf &quot;Jetzt bezahlen&quot; bis zur
+                            Versandbestaetigung — so laeuft eine Zahlung
+                            in Ihrem Onlineshop ab. Vollautomatisch und sicher.
                         </p>
                     </div>
                 </ScrollReveal>
@@ -134,25 +134,25 @@ export default function StripeArchitecture() {
                 <ScrollReveal delay={80}>
                     <div className="mb-16 md:mb-24">
                         <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                            [ Payment Lifecycle — 6 Stage Flow ]
+                            [ Der Zahlungsablauf — 6 Schritte ]
                         </span>
                         <div className="border border-[#000000]">
                             <div className="bg-[#000000] px-6 md:px-8 py-4 flex items-center justify-between">
                                 <div className="flex items-center gap-3">
                                     <div className="w-2 h-2 bg-[#FFFFFF]" aria-hidden="true" />
                                     <span className="text-[11px] font-black font-mono tracking-[0.25em] text-[#FFFFFF] uppercase">
-                                        Stripe Payment Intent Pipeline
+                                        Stripe Zahlungsablauf
                                     </span>
                                 </div>
                                 <span className="text-[9px] font-mono text-[#FFFFFF]/40 tracking-widest uppercase">
-                                    PCI DSS Compliant
+                                    PCI DSS konform
                                 </span>
                             </div>
                             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-y lg:divide-y-0 divide-[#000000]">
                                 {PAYMENT_FLOW.map((stage) => (
                                     <div key={stage.step} className={`${stage.bg} p-5 md:p-6 flex flex-col gap-2`}>
                                         <span className={`text-[9px] font-mono font-black tracking-[0.3em] uppercase ${stage.subColor}`}>
-                                            STEP {stage.step}
+                                            SCHRITT {stage.step}
                                         </span>
                                         <p className={`text-[12px] font-black tracking-tight uppercase leading-tight ${stage.textColor}`}>
                                             {stage.label}
@@ -170,13 +170,13 @@ export default function StripeArchitecture() {
                                 <div className="flex items-center gap-2">
                                     <div className="w-1 h-1 bg-[#001F3F]" aria-hidden="true" />
                                     <span className="text-[9px] font-mono text-[#001F3F] font-bold tracking-widest uppercase">
-                                        Idempotent End-to-End
+                                        Vollautomatisch
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-1 h-1 bg-[#000000]/30" aria-hidden="true" />
                                     <span className="text-[9px] font-mono text-[#000000]/55 tracking-widest uppercase">
-                                        Automatischer Retry bei Fehler
+                                        Automatischer Wiederholungsversuch bei Fehler
                                     </span>
                                 </div>
                             </div>
@@ -188,30 +188,30 @@ export default function StripeArchitecture() {
                 <ScrollReveal delay={120}>
                     <div className="mb-16 md:mb-24">
                         <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                            [ Webhook Events — Critical Handler Map ]
+                            [ Was passiert bei jeder Zahlung automatisch ]
                         </span>
                         <div className="border border-[#000000]">
                             <div className="bg-[#001F3F] px-6 md:px-8 py-4 flex items-center justify-between">
                                 <span className="text-[11px] font-black font-mono tracking-[0.25em] text-[#FFFFFF] uppercase">
-                                    Stripe Event Handler Registry
+                                    Automatische Aktionen
                                 </span>
                                 <span className="text-[9px] font-mono text-[#FFFFFF]/40 tracking-widest uppercase">
-                                    6 Critical Events
+                                    6 Automatisierungen
                                 </span>
                             </div>
                             <div className="divide-y divide-[#000000]">
                                 {WEBHOOK_EVENTS.map((ev) => (
                                     <div key={ev.event} className="flex items-center gap-4 px-6 py-4 hover:bg-[#001F3F]/5 transition-colors">
                                         <div className={`w-1.5 h-1.5 shrink-0 ${ev.critical ? "bg-[#001F3F]" : "bg-[#000000]/30"}`} aria-hidden="true" />
-                                        <code className="text-[11px] font-mono font-bold text-[#001F3F] tracking-tight flex-1 min-w-0">
+                                        <span className="text-[11px] font-mono font-bold text-[#001F3F] tracking-tight flex-1 min-w-0">
                                             {ev.event}
-                                        </code>
+                                        </span>
                                         <span className="text-[11px] text-[#000000]/65 text-right hidden md:block">
                                             {ev.action}
                                         </span>
                                         {ev.critical && (
                                             <span className="bg-[#001F3F] px-2 py-0.5 text-[8px] font-mono font-black tracking-widest text-[#FFFFFF] uppercase shrink-0">
-                                                CRITICAL
+                                                WICHTIG
                                             </span>
                                         )}
                                     </div>
@@ -221,13 +221,13 @@ export default function StripeArchitecture() {
                                 <div className="flex items-center gap-2">
                                     <div className="w-1 h-1 bg-[#001F3F]" aria-hidden="true" />
                                     <span className="text-[9px] font-mono text-[#001F3F] font-bold tracking-widest uppercase">
-                                        Signature-Verifikation auf jedem Handler
+                                        Jede Aktion wird sicher verifiziert
                                     </span>
                                 </div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-1 h-1 bg-[#000000]/30" aria-hidden="true" />
                                     <span className="text-[9px] font-mono text-[#000000]/55 tracking-widest uppercase">
-                                        Event-ID Deduplication
+                                        Keine Zahlung geht verloren
                                     </span>
                                 </div>
                             </div>

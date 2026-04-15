@@ -8,51 +8,51 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const CAPABILITIES = [
     {
         id: "STR-01",
-        category: "PAYMENT",
-        title: "Payment Intents API",
+        category: "CHECKOUT",
+        title: "Alle Zahlungsarten in einem Checkout",
         description:
-            "3D Secure 2.0 mit automatischer SCA-Compliance. Card Network Optimization wählt die günstigste Route pro Transaktion. Idempotency Keys verhindern Doppelbelastungen bei Netzwerkfehlern.",
-        specs: ["3DS2 SCA", "Network Optimization", "Idempotency Keys"],
+            "Kreditkarte, SEPA, Klarna, Apple Pay, Google Pay und Zahlung auf Rechnung — alles in einer einzigen, uebersichtlichen Zahlungsseite. Ihre Kunden waehlen ihre bevorzugte Zahlungsart und bezahlen mit wenigen Klicks.",
+        specs: ["Kreditkarte & SEPA", "Klarna / Rechnung", "Apple Pay / Google Pay"],
     },
     {
         id: "STR-02",
-        category: "BILLING",
-        title: "Subscription Billing",
+        category: "ABO-SYSTEM",
+        title: "Automatische Abo-Zahlungen",
         description:
-            "Tiered Pricing, Usage-Based Billing und Trial Periods als konfigurierbare Parameter. Automatische Proration bei Planwechsel — kein manueller Eingriff in Billing-Logik notwendig.",
-        specs: ["Usage-Based", "Trial Periods", "Auto Proration"],
+            "Monatliche oder jaehrliche Abonnements, die sich selbst verwalten. Ihre Kunden melden sich an, die Zahlungen laufen automatisch. Bei Planwechseln wird der Preis anteilig berechnet — ohne manuellen Aufwand fuer Sie.",
+        specs: ["Monatlich / Jaehrlich", "Automatische Abrechnung", "Selbstverwaltung"],
     },
     {
         id: "STR-03",
-        category: "WEBHOOKS",
-        title: "Webhook Architecture",
+        category: "SICHERHEIT",
+        title: "Automatische Zahlungsbestaetigung",
         description:
-            "Idempotente Webhook-Handler mit Stripe-Signatur-Verifikation. Retry-Queue mit exponential Backoff für Ausfallresilienz — kein Payment-Event geht verloren, auch bei Serverausfall.",
-        specs: ["Signature Verify", "Retry Queue", "Event Idempotency"],
+            "Sobald ein Kunde bezahlt, wird Ihr System automatisch benachrichtigt. Die Bestellung wird bestaetigt, die Rechnung erstellt und der Kunde per E-Mail informiert — alles ohne Ihr Zutun. Auch bei Serverausfaellen geht keine Zahlung verloren.",
+        specs: ["Sofort-Bestaetigung", "Automatische Rechnung", "Ausfallsicher"],
     },
     {
         id: "STR-04",
-        category: "PLATFORM",
-        title: "Stripe Connect",
+        category: "MARKTPLATZ",
+        title: "Zahlungen fuer Marktplaetze",
         description:
-            "Marketplace-Architektur mit Express- und Custom-Accounts. Automatisierte Payouts, Platform-Fee-Logik und per-Country Onboarding-Flows — skaliert von 10 auf 10.000 Connected Accounts.",
-        specs: ["Express Accounts", "Auto Payouts", "Platform Fees"],
+            "Betreiben Sie einen Marktplatz mit mehreren Verkaeufer? Stripe teilt Zahlungen automatisch auf: Sie erhalten Ihre Provision, der Verkaeufer seinen Anteil. Das funktioniert fuer 10 oder 10.000 Verkaeufer — weltweit.",
+        specs: ["Automatische Aufteilung", "Weltweite Auszahlung", "Skalierbar"],
     },
     {
         id: "STR-05",
-        category: "INVOICING",
-        title: "Invoice Automation",
+        category: "RECHNUNGEN",
+        title: "Automatische Rechnungsstellung",
         description:
-            "Automatische Steuerberechnung via Stripe Tax für 30+ Länder, PDF-Generierung und Dunning-Management bei fehlgeschlagenen Zahlungen — keine manuelle Rechnungsstellung ab Tag 1.",
-        specs: ["Stripe Tax", "PDF Generation", "Dunning Mgmt"],
+            "Keine manuellen Rechnungen mehr. Stripe berechnet die Steuern automatisch fuer ueber 30 Laender, erstellt professionelle PDF-Rechnungen und kuemmert sich um unbezahlte Rechnungen mit automatischen Zahlungserinnerungen.",
+        specs: ["Auto-Steuerberechnung", "PDF-Rechnungen", "Mahnwesen"],
     },
     {
         id: "STR-06",
-        category: "SICHERHEIT",
-        title: "Fraud Protection",
+        category: "BETRUGSSCHUTZ",
+        title: "Intelligenter Betrugsschutz",
         description:
-            "Stripe Radar mit Machine Learning klassifiziert jede Transaktion in Echtzeit. Custom Rules blockieren Muster ohne Reibungsverlust für legitime Kunden — Chargeback-Rate unter 0.1%.",
-        specs: ["ML Radar", "Custom Rules", "< 0.1% Chargeback"],
+            "Stripe analysiert jede Transaktion automatisch mit kuenstlicher Intelligenz und erkennt betruegerische Zahlungsversuche in Echtzeit. Echte Kunden merken nichts davon — Betrueger werden blockiert, bevor Schaden entsteht.",
+        specs: ["KI-Erkennung", "Echtzeit-Analyse", "Unter 0,1 % Betrug"],
     },
 ];
 
@@ -69,23 +69,23 @@ export default function StripeCapabilities() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Payment Capabilities ]
+                                [ E-Commerce Zahlungsmoeglichkeiten ]
                             </span>
                             <h2
                                 id="stripe-cap-heading"
                                 className="text-[clamp(2.6rem,6vw,5rem)] font-black text-[#000000] tracking-[-0.025em] uppercase leading-[0.92]"
                             >
-                                Was Stripe
+                                Was Stripe fuer
                                 <br />
                                 <span className="italic font-normal text-[#001F3F]">
-                                    beherrscht.
+                                    Ihren Onlineshop leistet.
                                 </span>
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Sechs Zahlungs-Disziplinen, die zusammen eine
-                            lückenlose Fintech-Infrastruktur für jede
-                            Umsatzstufe und Geschäftsform ergeben.
+                            Sechs Bereiche, die zusammen ein komplettes
+                            Zahlungssystem fuer Ihren Onlineshop ergeben —
+                            vom ersten Klick bis zur automatischen Rechnung.
                         </p>
                     </div>
                 </ScrollReveal>

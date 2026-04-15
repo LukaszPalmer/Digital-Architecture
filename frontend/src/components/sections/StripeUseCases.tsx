@@ -8,51 +8,51 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const USE_CASES = [
     {
         id: "UC-01",
-        segment: "SAAS",
-        title: "Subscription Plattformen",
+        segment: "ONLINESHOP",
+        title: "E-Commerce Checkout",
         description:
-            "Monatliche und jährliche Pläne mit Usage-Based Billing-Komponenten. Trial Periods, Upgrade/Downgrade-Flows und automatische Proration — vollständig über Stripe Customer Portal verwaltet.",
-        metrics: ["Usage-Based Billing", "Auto Proration", "Self-Service Portal"],
+            "Der klassische Onlineshop: Ihre Kunden legen Produkte in den Warenkorb und bezahlen mit ihrer bevorzugten Zahlungsart — Kreditkarte, Klarna, SEPA oder Zahlung auf Rechnung. Ein schneller, uebersichtlicher Checkout, der fuer weniger Kaufabbrueche optimiert ist.",
+        metrics: ["Alle Zahlungsarten", "Weniger Abbrueche", "Sofortige Bestaetigung"],
     },
     {
         id: "UC-02",
-        segment: "MARKETPLACE",
-        title: "Plattform Payouts",
+        segment: "MARKTPLATZ",
+        title: "Plattform mit mehreren Verkaeufer",
         description:
-            "Stripe Connect für Zwei-Parteien-Transaktionen: Plattform erhält automatisch Platform Fee, Seller erhält seinen Anteil. Onboarding-Flow für Connected Accounts in 30+ Ländern.",
-        metrics: ["Stripe Connect", "Auto Platform Fee", "Multi-Country"],
+            "Sie betreiben eine Plattform, auf der andere Haendler verkaufen? Stripe teilt jede Zahlung automatisch auf: Ihre Plattform-Gebuehr wird abgezogen, der Rest geht an den Verkaeufer. Das funktioniert fuer Haendler in ueber 30 Laendern.",
+        metrics: ["Automatische Aufteilung", "Weltweite Verkaeufer", "Transparente Gebuehren"],
     },
     {
         id: "UC-03",
-        segment: "E-COMMERCE",
-        title: "High-Conversion Checkout",
+        segment: "ABO-MODELL",
+        title: "Mitgliedschaften & Software-Abos",
         description:
-            "Payment Element mit 20+ Zahlungsmethoden in einer UI. Link für One-Click-Checkout für wiederkehrende Kunden — Conversion-Steigerung durch Reibungsminimierung im kritischsten Moment.",
-        metrics: ["Payment Element", "Link One-Click", "+35% Conversion"],
+            "Monatliche Mitgliedsbeitraege, jaehrliche Software-Lizenzen oder nutzungsbasierte Abrechnung — alles wird automatisch eingezogen. Ihre Kunden koennen Abos selbst verwalten, hoch- oder herunterstufen, und Sie muessen sich um nichts kuemmern.",
+        metrics: ["Automatische Abrechnung", "Selbstverwaltung", "Flexible Preismodelle"],
     },
     {
         id: "UC-04",
-        segment: "INVOICING",
-        title: "Automatisierte Rechnungen",
+        segment: "RECHNUNGEN",
+        title: "Automatische Rechnungsstellung",
         description:
-            "Stripe Invoicing mit automatischer Steuerberechnung, PDF-Generierung und Dunning-Management. Manuelle Rechnungsstellung wird vollständig eliminiert — vom Angebot bis zur Buchung.",
-        metrics: ["Auto Tax Calc", "PDF Generation", "Dunning Flows"],
+            "Schluss mit manuellen Rechnungen in Excel. Stripe erstellt professionelle PDF-Rechnungen, berechnet die Steuern automatisch und verschickt Zahlungserinnerungen bei offenen Betraegen — vom Angebot bis zur Buchhaltung.",
+        metrics: ["PDF-Rechnungen", "Automatische Steuer", "Zahlungserinnerungen"],
     },
     {
         id: "UC-05",
-        segment: "FINTECH",
-        title: "Compliance-kritische Flows",
+        segment: "LOKAL",
+        title: "Onlineshop erstellen in Duesseldorf",
         description:
-            "SCA-konforme Payment Intents für europäische Märkte, PSD2-compliant Authentication Flows. KYC-Integration via Stripe Identity für regulierte Finanzdienstleistungen.",
-        metrics: ["SCA / PSD2", "Stripe Identity", "DSGVO-Konform"],
+            "Sie moechten einen professionellen Onlineshop erstellen lassen — mit allen Zahlungsmoeglichkeiten, die deutsche Kunden erwarten? Wir sind Ihre Webdesign-Agentur in Duesseldorf und bauen Ihren Shop mit Stripe von Anfang an richtig auf. DSGVO-konform und rechtsicher.",
+        metrics: ["Webdesign Duesseldorf", "DSGVO-konform", "Persoenliche Beratung"],
     },
     {
         id: "UC-06",
-        segment: "ENTERPRISE",
-        title: "Refund & Dispute Mgmt",
+        segment: "SICHERHEIT",
+        title: "Rueckerstattungen & Streitfaelle",
         description:
-            "Automatisiertes Refund-Handling für Kundenservice-Workflows, Evidence-Submission für Dispute-Management und Chargeback-Alerts mit Ops-Team-Notification via Webhook.",
-        metrics: ["Auto Refunds", "Evidence Mgmt", "< 0.1% Chargeback"],
+            "Kunden moechten ihr Geld zurueck? Unser System verarbeitet Rueckerstattungen automatisch. Bei Streitfaellen (Chargebacks) werden alle Nachweise automatisch vorbereitet und Ihr Team wird sofort benachrichtigt.",
+        metrics: ["Automatische Rueckerstattung", "Nachweis-Vorbereitung", "Sofort-Benachrichtigung"],
     },
 ];
 
@@ -69,23 +69,24 @@ export default function StripeUseCases() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Production Use Cases ]
+                                [ Fuer wen ist das gedacht? ]
                             </span>
                             <h2
                                 id="stripe-uc-heading"
                                 className="text-[clamp(2.6rem,6vw,5rem)] font-black text-[#000000] tracking-[-0.025em] uppercase leading-[0.92]"
                             >
-                                Wo Stripe
+                                Stripe fuer
                                 <br />
                                 <span className="italic font-normal text-[#001F3F]">
-                                    unersetzlich ist.
+                                    jedes Geschaeftsmodell.
                                 </span>
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Sechs Produktionsszenarien, in denen eine
-                            professionelle Stripe-Integration den
-                            Unterschied zwischen Wachstum und Stillstand macht.
+                            Egal ob Sie einen Onlineshop erstellen, ein
+                            Abo-Modell betreiben oder einen Marktplatz
+                            aufbauen — hier sehen Sie, wie Stripe
+                            fuer Ihr Unternehmen arbeitet.
                         </p>
                     </div>
                 </ScrollReveal>

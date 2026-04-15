@@ -8,33 +8,33 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const PROCESS_STEPS = [
     {
         step: "01",
-        title: "Payment Audit",
+        title: "Zahlungs-Analyse",
         description:
-            "Analyse bestehender Zahlungsströme: Fehlerquoten, Chargeback-Rate, Conversion-Drop-offs im Checkout und fehlende SCA-Compliance. Vollständige Webhook-Coverage wird überprüft.",
+            "Wir schauen uns an, wie Ihr Onlineshop aktuell Zahlungen abwickelt: Welche Zahlungsarten bieten Sie an? Wo brechen Kunden den Kauf ab? Welche Zahlungsmoeglichkeiten fehlen? Am Ende wissen Sie genau, wo Umsatz verloren geht.",
         duration: "TAG 1",
         tag: "ANALYSE",
     },
     {
         step: "02",
-        title: "Stripe Configuration",
+        title: "Stripe einrichten",
         description:
-            "Setup von Products, Prices und Tax Rates in Stripe Dashboard. Webhook-Endpoints werden registriert, Radar-Rules konfiguriert und Customer-Portal für Self-Service aktiviert.",
+            "Wir richten Stripe fuer Ihren Onlineshop ein: Alle gewuenschten Zahlungsarten, automatische Steuerberechnung, Betrugsschutz-Regeln und — falls gewuenscht — ein Kunden-Portal, ueber das Ihre Kaeufer Rechnungen und Abos selbst verwalten koennen.",
         duration: "TAGE 2–3",
-        tag: "KONFIGURATION",
+        tag: "EINRICHTUNG",
     },
     {
         step: "03",
-        title: "Integration Development",
+        title: "Integration entwickeln",
         description:
-            "Payment Intent Flow als Server Action, Webhook Handler mit Idempotenz-Layer, Subscription-Management und Connect-Payout-Logik. Vollständige TypeScript-Typisierung aller Stripe-Objekte.",
+            "Wir verbinden Stripe mit Ihrem Onlineshop: Der Checkout wird integriert, automatische Bestellbestaetigung eingerichtet, Rechnungen werden automatisch erstellt und bei Abo-Zahlungen laeuft alles im Hintergrund — ohne manuellen Eingriff.",
         duration: "TAGE 4–8",
         tag: "ENTWICKLUNG",
     },
     {
         step: "04",
-        title: "Testing & Go-Live",
+        title: "Testen & Live-Schaltung",
         description:
-            "Umfangreiches Testing im Stripe Test Mode: alle Kartennummern, SCA-Szenarien, Webhook-Failures und Refund-Flows. Load-Test der Webhook-Infrastruktur, dann Go-Live mit Live-Mode.",
+            "Bevor echtes Geld fliesst, testen wir jeden Zahlungsablauf gruendlich: Alle Zahlungsarten, fehlgeschlagene Zahlungen, Rueckerstattungen und Abo-Kuendigungen. Erst wenn alles einwandfrei funktioniert, schalten wir Ihren Onlineshop live.",
         duration: "TAGE 9–10",
         tag: "GO-LIVE",
     },
@@ -53,23 +53,24 @@ export default function StripeProcess() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/50 uppercase block mb-8">
-                                [ Integration Protocol ]
+                                [ Unser Prozess — Von der Analyse bis zum Live-Shop ]
                             </span>
                             <h2
                                 id="stripe-process-heading"
                                 className="text-[clamp(2.6rem,6vw,5rem)] font-black text-[#FFFFFF] tracking-[-0.025em] uppercase leading-[0.92]"
                             >
-                                Von Audit zu
+                                In 10 Tagen zu
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/50">
-                                    Live Payment Flow.
+                                    professionellen Zahlungen.
                                 </span>
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-sm border-l-2 border-[#FFFFFF]/25 pl-6">
-                            Vier präzise Schritte vom Payment-Audit bis
-                            zur produktiven, PCI-konformen Stripe-
-                            Integration mit vollständigem Webhook-Handling.
+                            Vier klare Schritte von der ersten Analyse bis
+                            zum fertigen Zahlungssystem — damit Ihr
+                            Onlineshop alle Zahlungsarten anbietet, die
+                            Ihre Kunden erwarten.
                         </p>
                     </div>
                 </ScrollReveal>
