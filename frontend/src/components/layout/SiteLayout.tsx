@@ -6,6 +6,7 @@
 import { usePathname } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { FloatingActions } from "@/components/layout/FloatingActions";
 import { CookieBanner }    from "@/components/cookie/CookieBanner";
 import { TrackingProvider } from "@/components/providers/TrackingProvider";
 
@@ -22,6 +23,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
                 {children}
             </main>
             <Footer />
+            <FloatingActions />
             <CookieBanner />
             <TrackingProvider />
         </>
