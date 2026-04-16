@@ -171,6 +171,52 @@ fieldset.MuiOutlinedInput-notchedOutline {
         animation: stat-pulse 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
+    /* ── INFINITE MARQUEE (dual-axis) ── */
+    /* Tracks must contain children TWICE; -50% loops seamlessly. */
+    @keyframes marquee-x-left {
+        from { transform: translate3d(0, 0, 0); }
+        to   { transform: translate3d(-50%, 0, 0); }
+    }
+    @keyframes marquee-x-right {
+        from { transform: translate3d(-50%, 0, 0); }
+        to   { transform: translate3d(0, 0, 0); }
+    }
+
+    .animate-marquee-left {
+        animation: marquee-x-left var(--marquee-duration, 48s) linear infinite;
+        will-change: transform;
+    }
+    .animate-marquee-right {
+        animation: marquee-x-right var(--marquee-duration, 56s) linear infinite;
+        will-change: transform;
+    }
+
+    /* Pause beim Hover über die ganze Lane */
+    .marquee-lane:hover .animate-marquee-left,
+    .marquee-lane:hover .animate-marquee-right,
+    .marquee-lane:focus-within .animate-marquee-left,
+    .marquee-lane:focus-within .animate-marquee-right {
+        animation-play-state: paused;
+    }
+
+    /* Edge-Fade beidseitig — Premium-Ticker-Optik */
+    .marquee-mask {
+        -webkit-mask-image: linear-gradient(
+            to right,
+            transparent 0,
+            #000 6%,
+            #000 94%,
+            transparent 100%
+        );
+        mask-image: linear-gradient(
+            to right,
+            transparent 0,
+            #000 6%,
+            #000 94%,
+            transparent 100%
+        );
+    }
+
     /* Respect prefers-reduced-motion */
     @media (prefers-reduced-motion: reduce) {
         .reveal-item,
@@ -181,6 +227,11 @@ fieldset.MuiOutlinedInput-notchedOutline {
         }
         .stat-reveal {
             animation: none;
+        }
+        .animate-marquee-left,
+        .animate-marquee-right {
+            animation: none;
+            transform: translate3d(0, 0, 0);
         }
     }
 }
