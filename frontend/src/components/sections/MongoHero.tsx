@@ -36,9 +36,12 @@ export default function MongoHero() {
                         <div className="h-px w-10 bg-[#001F3F]" aria-hidden="true" />
                         <div className="bg-[#001F3F] px-3 py-1.5">
                             <span className="text-[10px] font-mono font-black tracking-[0.4em] text-[#FFFFFF] uppercase">
-                                SYS_INF_03 // MONGODB ATLAS
+                                SYS_INF_03 // MONGODB CLOUD BACKBONE
                             </span>
                         </div>
+                        <span className="hidden md:inline text-[10px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
+                            Data Pipeline & Cluster Ops — Duesseldorf / NRW
+                        </span>
                     </div>
                 </ScrollReveal>
 
@@ -48,10 +51,10 @@ export default function MongoHero() {
                         id="mongo-hero-heading"
                         className="text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-12 text-[#000000]"
                     >
-                        Distributed
+                        Kugelsicheres
                         <br />
                         <span className="italic font-normal text-[#001F3F]">
-                            Data
+                            Cloud
                         </span>
                         <br />
                         Backbone.
@@ -62,11 +65,12 @@ export default function MongoHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            MongoDB Atlas ist die zentrale Datenschicht aller
-                            PDA-Infrastrukturen. Global verteilte Cluster mit
-                            automatisiertem Sharding, Aggregation-Pipeline-Optimierung
-                            und ACID-Garantien — konstruiert für unbegrenzte Last
-                            ohne Single-Point-of-Failure.
+                            Wir bauen ausfallsichere MongoDB-Atlas-Cluster fuer
+                            Onlineshops, SaaS-Plattformen und Daten-Pipelines aus
+                            Duesseldorf. Dokumentenbasiert statt starrer Tabellen —
+                            Ihre Daten wachsen organisch mit Ihrem Erfolg mit,
+                            ohne das System zu sprengen. Sharding, Aggregation,
+                            ACID-Garantien und EU-Hosting in einer Architektur.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
@@ -74,7 +78,7 @@ export default function MongoHero() {
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[12px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
-                                    99.99% UPTIME // GLOBAL SHARDING
+                                    99.99% UPTIME // DSGVO-READY
                                 </span>
                             </div>
                         </div>
