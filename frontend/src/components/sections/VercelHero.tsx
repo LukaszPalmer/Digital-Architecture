@@ -24,7 +24,7 @@ export default function VercelHero() {
                 className="pointer-events-none absolute inset-0 flex items-center justify-end overflow-hidden"
             >
                 <span className="text-[clamp(7rem,20vw,20rem)] font-black uppercase tracking-[-0.04em] text-[#000000] opacity-[0.03] select-none whitespace-nowrap leading-none translate-x-8">
-                    VERCEL
+                    EDGE
                 </span>
             </div>
 
@@ -39,6 +39,9 @@ export default function VercelHero() {
                                 SYS_INF_01 // VERCEL EDGE
                             </span>
                         </div>
+                        <span className="hidden md:inline text-[10px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
+                            Global High-Speed Deployment — Duesseldorf / NRW
+                        </span>
                     </div>
                 </ScrollReveal>
 
@@ -62,10 +65,13 @@ export default function VercelHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Vercel ist die Deployment-Plattform für PDA-Frontends.
-                            Next.js 15 auf dem Edge-Netzwerk — Partial Prerendering,
-                            Zero-Config TLS und weltweite Auslieferung in unter
-                            0.8 Sekunden. Lighthouse 100 ist der Standard, kein Ziel.
+                            Wir deployen Next.js-Anwendungen, Onlineshops und
+                            SaaS-Plattformen aus Duesseldorf auf das Vercel Edge
+                            Network — statt eines fernen Servers kommt Ihre Webseite
+                            direkt zu Ihren Kunden, an jeden Ort der Welt
+                            gleichzeitig. Partial Prerendering, Edge Runtime ohne
+                            Cold Starts und TTFB unter 10ms. Lighthouse 100 ist der
+                            Standard, kein Ziel.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">

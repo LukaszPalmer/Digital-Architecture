@@ -28,23 +28,24 @@ export default function VercelCTA() {
                         {/* LEFT: Copy */}
                         <div className="max-w-2xl">
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/40 uppercase block mb-8">
-                                [ Performance initiieren ]
+                                [ Performance initiieren — Duesseldorf / NRW ]
                             </span>
                             <h2
                                 id="vercel-cta-heading"
                                 className="text-[clamp(2.8rem,7vw,6rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase text-[#FFFFFF] mb-10"
                             >
-                                Bereit für
+                                Bereit fuer
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/40">
-                                    Lighthouse 100?
+                                    globale Geschwindigkeit?
                                 </span>
                             </h2>
                             <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wir optimieren dein Vercel-Setup von Grund auf —
-                                Rendering-Strategie, Edge-Konfiguration und
-                                Performance-Metriken bis Lighthouse 100 dokumentiert
-                                und verifiziert ist.
+                                Wir heben die geografischen Grenzen Ihrer Webseite
+                                auf — Rendering-Strategie, Edge-Konfiguration,
+                                Middleware und Cache-Header bis Lighthouse 100
+                                dokumentiert und weltweit verifiziert ist. Globaler
+                                Erfolg braucht globale Geschwindigkeit.
                             </p>
                         </div>
 
@@ -56,11 +57,20 @@ export default function VercelCTA() {
                                 href="/contact"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#FFFFFF]/90 transition-colors duration-300"
                             >
-                                <span>Performance planen</span>
+                                <span>Globalen Speed-Check anfordern</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </Link>
 
-                            {/* Secondary: Railway */}
+                            {/* Secondary CTA */}
+                            <Link
+                                href="/contact"
+                                className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
+                            >
+                                <span>Jetzt auf Edge upgraden</span>
+                                <span aria-hidden="true">→</span>
+                            </Link>
+
+                            {/* Tertiary: Railway */}
                             <Link
                                 href="/railway"
                                 className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
