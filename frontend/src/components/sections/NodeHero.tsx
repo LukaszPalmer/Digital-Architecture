@@ -1,15 +1,16 @@
 // src/components/sections/NodeHero.tsx
 // Server Component — RSC-First, 0 TBT.
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
+// StoryBrand-Hook: Der "Scalable Backend Core" — Fundament fuer wachsende Systeme.
 
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RevealGrid from "@/components/ui/RevealGrid";
 
 const METRICS = [
+    { value: "<50ms", label: "TTFB Edge global" },
     { value: ">50k", label: "Requests / Minute" },
-    { value: "< 5ms", label: "P99 Latenz" },
+    { value: "99.99%", label: "Verfuegbarkeit SLA" },
     { value: "Zero", label: "Downtime Deployments" },
-    { value: "100%", label: "TypeScript Coverage" },
 ];
 
 export default function NodeHero() {
@@ -36,7 +37,7 @@ export default function NodeHero() {
                         <div className="h-px w-10 bg-[#001F3F]" aria-hidden="true" />
                         <div className="bg-[#001F3F] px-3 py-1.5">
                             <span className="text-[10px] font-mono font-black tracking-[0.4em] text-[#FFFFFF] uppercase">
-                                SRV_06 // NODE.JS CORE
+                                SRV_06 // NODE.JS CORE — DUESSELDORF
                             </span>
                         </div>
                     </div>
@@ -51,7 +52,7 @@ export default function NodeHero() {
                         Scalable
                         <br />
                         <span className="italic font-normal text-[#001F3F]">
-                            Backend Infrastructure.
+                            Backend Core.
                         </span>
                     </h1>
                 </ScrollReveal>
@@ -60,19 +61,21 @@ export default function NodeHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Ein Backend ist kein Glue-Code — es ist eine
-                            Infrastruktur mit Skalierungsgrenzen, Sicherheits-
-                            anforderungen und Latenz-SLAs. Node.js-Systeme
-                            werden mit klaren Service-Boundaries, typsicheren
-                            APIs und operativer Beobachtbarkeit konstruiert.
+                            Wenn Ihre Webseite bei vielen Besuchern abstuerzt,
+                            ist das kein Hosting-Problem — es ist ein
+                            Architektur-Problem. Wir bauen{" "}
+                            <strong className="text-[#000000]">Node.js-Backends mit
+                            Microservice-Architektur</strong>, Vercel Edge
+                            Functions und Redis-Caching. Backends, die mit dem
+                            Erfolg mitwachsen — bei minimalen Serverkosten.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
-                                Backend Engineering Standard
+                                Backend Agentur Duesseldorf // NRW
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[12px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
-                                    &gt;50k RPM // TYPE-SAFE API
+                                    EVENT-LOOP // EDGE // SUB-50MS TTFB
                                 </span>
                             </div>
                         </div>

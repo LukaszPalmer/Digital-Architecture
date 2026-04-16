@@ -1,6 +1,7 @@
 // src/components/sections/NodeCapabilities.tsx
 // Server Component — RSC-First, 0 TBT.
 // Design-Dogma: AUSSCHLIESSLICH #001F3F / #FFFFFF / #000000, 0px border-radius.
+// SEO-Cluster: Event Loop, Non-blocking I/O, Microservices, Edge, Caching, Worker Threads.
 
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import RevealGrid from "@/components/ui/RevealGrid";
@@ -8,51 +9,51 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const CAPABILITIES = [
     {
         id: "NOD-01",
-        category: "API",
-        title: "REST API Architecture",
+        category: "EVENT LOOP",
+        title: "Non-blocking I/O Engine",
         description:
-            "Express/Fastify-basierte REST-Endpoints mit OpenAPI-Schema-Validierung. Rate-Limiting, Request-Validation mit Zod und automatische Error-Normalisierung — API-Contracts werden nicht angenommen, sie werden erzwungen.",
-        specs: ["OpenAPI Schema", "Zod Validation", "Rate Limiting"],
+            "Der Node.js Event Loop ist die Geheimwaffe moderner Apps: Ein einziger Prozess verwaltet zehntausende parallele Verbindungen, weil er waehrend Datenbank-Wartezeiten schon den naechsten Request annimmt. Klassische Server brauchen pro Nutzer einen eigenen Thread — Node.js erledigt mehr Aufgaben gleichzeitig mit einem Bruchteil der Ressourcen.",
+        specs: ["libuv Thread Pool", "Async/Await native", "Single-Process Power"],
     },
     {
         id: "NOD-02",
-        category: "GRAPHQL",
-        title: "GraphQL Layer",
+        category: "ARCHITEKTUR",
+        title: "Microservices vs. Monolith",
         description:
-            "Schema-First GraphQL mit Apollo Server oder Pothos. DataLoader eliminiert N+1-Query-Probleme, Subscriptions via WebSocket für Echtzeit-Daten — typsicherer Graph von Schema bis zum MongoDB-Query.",
-        specs: ["DataLoader N+1", "Schema-First", "Subscriptions"],
+            "Service-Boundaries nach Domain-Driven Design — jeder Microservice ist eigenstaendig deploybar, eigenstaendig skalierbar und fachlich klar abgegrenzt. Wachsende Unternehmen skalieren so ohne komplettes Re-Design: Auth-Service, Core-API und Worker laufen unabhaengig, kommunizieren via Redis Pub/Sub und teilen keinen monolithischen Codepfad.",
+        specs: ["DDD Boundaries", "Independent Deploy", "No Distributed Monolith"],
     },
     {
         id: "NOD-03",
-        category: "ARCHITEKTUR",
-        title: "Microservice Design",
+        category: "EDGE",
+        title: "Vercel Edge Functions",
         description:
-            "Service-Boundaries nach Domain-Driven Design. Inter-Service-Communication via HTTP oder Message-Queue (Redis Pub/Sub). Jeder Service ist eigenständig deploybar — kein distributed monolith.",
-        specs: ["DDD Boundaries", "Message Queue", "Independent Deploy"],
+            "Backend-Logik laeuft in 30+ Regionen weltweit — naeher beim Nutzer, niedrigere Time-to-First-Byte. Cold Starts werden durch V8 Isolates (statt Container) eliminiert, TTFB-Werte unter 50ms sind global realistisch. Ideal fuer Auth, Geo-Routing, A/B-Tests und latenzkritische API-Antworten.",
+        specs: ["Sub-50ms TTFB", "Zero Cold Start", "Global Replication"],
     },
     {
         id: "NOD-04",
-        category: "SECURITY",
-        title: "Auth & Security",
+        category: "CACHING",
+        title: "Redis Caching Strategien",
         description:
-            "JWT mit Refresh-Token-Rotation, RBAC-Middleware und Helmet-Integration für HTTP-Security-Headers. bcrypt für Password-Hashing, CSRF-Protection und Input-Sanitization als Standard, nicht als Option.",
-        specs: ["JWT + Refresh", "RBAC Middleware", "Helmet + CSRF"],
+            "Die teuerste Operation ist die, die nicht stattfinden muss. Redis als Cache-Layer reduziert Datenbank-Last um 80–95 %: Response-Caching mit TTL, Cache-Aside-Pattern fuer Lookups und Pub/Sub-basierte Cache-Invalidierung. API-Antworten in unter 5ms, ohne MongoDB/Postgres zu beruehren.",
+        specs: ["Cache-Aside Pattern", "Pub/Sub Invalidation", "Sub-5ms Hits"],
     },
     {
         id: "NOD-05",
-        category: "MEDIA",
-        title: "File & Media Processing",
+        category: "DATABASE",
+        title: "Connection Pooling & Read-Replicas",
         description:
-            "Multer-basierter Upload mit Sharp für Image-Optimierung und Thumbnail-Generierung. S3-kompatible Storage-Integration — Dateien werden nie auf dem App-Server gespeichert, immer auf Object Storage.",
-        specs: ["Sharp Processing", "S3 Integration", "Stream Pipeline"],
+            "Bei Lastspitzen erschoepfen ungepoolte Datenbank-Verbindungen den Server in Sekunden. Wir konfigurieren strikte Pool-Limits, nutzen Read-Replicas fuer Lese-Workloads und setzen pessimistisches Locking fuer race-condition-freie Bestandsoperationen. Datenbank-Performance verbessern heisst: Flaschenhaelse architektonisch eliminieren, nicht ueberdecken.",
+        specs: ["maxPoolSize Tuning", "Read-Replica Routing", "Query Plan Audit"],
     },
     {
         id: "NOD-06",
-        category: "JOBS",
-        title: "Background Jobs & Queues",
+        category: "SCALING",
+        title: "Horizontal Scaling — Docker & K8s",
         description:
-            "BullMQ auf Redis für zuverlässige Job-Queues mit Prioritäten, Retries und Deadletter-Queues. Cron-Scheduling via `node-cron`, Worker-Threads für CPU-intensive Operationen ohne Event-Loop-Blocking.",
-        specs: ["BullMQ + Redis", "Cron Scheduling", "Worker Threads"],
+            "Zustandslose API-Server skalieren linear: mehr Container, mehr Throughput. Docker Compose fuer Staging, Kubernetes oder Railway fuer Production — Auto-Scaling auf CPU/RAM-Metriken, Worker Threads fuer CPU-intensive Tasks, BullMQ fuer asynchrone Jobs. Backend-Wartung wird zum Auto-Pilot, nicht zum Daueraufwand.",
+        specs: ["docker-compose v3", "Worker Threads", "BullMQ + Redis"],
     },
 ];
 
@@ -69,23 +70,24 @@ export default function NodeCapabilities() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Backend Capabilities ]
+                                [ Engineering Capabilities ]
                             </span>
                             <h2
                                 id="node-cap-heading"
                                 className="text-[clamp(2.6rem,6vw,5rem)] font-black text-[#000000] tracking-[-0.025em] uppercase leading-[0.92]"
                             >
-                                Was das Backend
+                                Sechs Disziplinen
                                 <br />
                                 <span className="italic font-normal text-[#001F3F]">
-                                    beherrscht.
+                                    fuer Hochlast-Backends.
                                 </span>
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Sechs Engineering-Disziplinen für eine
-                            Backend-Infrastruktur, die unter produktionsrealer
-                            Last sicher, schnell und skalierbar bleibt.
+                            Vom Event Loop ueber Microservices bis zu Edge
+                            Functions: Was Ihr Backend technisch koennen muss,
+                            damit es bei 1.000 oder 100.000 gleichzeitigen
+                            Nutzern dieselbe Performance liefert.
                         </p>
                     </div>
                 </ScrollReveal>
