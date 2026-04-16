@@ -10,38 +10,7 @@ import { cn } from "@/lib/utils";
 import { sendContactEmail } from "@/lib/actions/sendContactEmail";
 import { track } from "@/lib/tracker";
 
-type FieldId = "name" | "email" | "service" | "phone" | "message";
-
-const SERVICES = [
-    "Software-Entwicklung",
-    "E-Commerce System",
-    "Cloud-Infrastruktur",
-    "UI/UX & Branding",
-    "KI-Assistent / Chatbot",
-    "Socket.IO Real-Time",
-    "Google Analytics",
-    "Google Indexierung",
-    "Strategie & Beratung",
-    "Mehrere Leistungen",
-];
-
-function ChevronDown() {
-    return (
-        <svg
-            width="11"
-            height="11"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.5"
-            strokeLinecap="square"
-            strokeLinejoin="miter"
-            aria-hidden="true"
-        >
-            <path d="M6 9l6 6 6-6" />
-        </svg>
-    );
-}
+type FieldId = "name" | "email" | "phone" | "message";
 
 function ArrowRight() {
     return (
@@ -81,7 +50,6 @@ function LockIcon() {
 }
 
 export function ContactForm() {
-    const [selectedService, setSelectedService] = useState("");
     const [focused, setFocused]     = useState<FieldId | null>(null);
     const formStartedRef            = useRef(false);
     const [callbackWanted, setCallbackWanted] = useState(false);
@@ -90,16 +58,19 @@ export function ContactForm() {
 
     const labelCn = (id: FieldId) =>
         cn(
-            "block text-[9.5px] font-mono font-bold tracking-[0.4em] uppercase mb-3 transition-colors duration-200",
+            "block text-[10px] font-mono font-bold tracking-[0.32em] uppercase mb-3 transition-colors duration-200",
             focused === id ? "text-[#001F3F]" : "text-[#000000]/70"
         );
 
+    // Bordered, professional input boxes — keine Unterstriche.
     const inputCn = (id: FieldId) =>
         cn(
-            "w-full bg-transparent py-3.5 text-[16px] outline-none transition-all duration-200 font-medium text-[#000000] placeholder:text-[#000000]/65",
+            "w-full bg-[#FFFFFF] px-4 py-3.5 text-[15px] outline-none transition-colors duration-200",
+            "font-medium text-[#000000] placeholder:text-[#000000]/40",
+            "border-2",
             focused === id
-                ? "border-b-2 border-[#001F3F]"
-                : "border-b border-[#000000]/30"
+                ? "border-[#001F3F]"
+                : "border-[#000000]/15 hover:border-[#000000]/35"
         );
 
     const onFocus = (id: FieldId) => () => {
@@ -119,10 +90,9 @@ export function ContactForm() {
         startTransition(async () => {
             const result = await sendContactEmail(formData);
             if (result.success) {
-                track("form_submit", selectedService || "unknown");
+                track("form_submit", "contact");
                 form.reset();
                 setCallbackWanted(false);
-                setSelectedService("");
                 formStartedRef.current = false;
                 setStatus("success");
                 setTimeout(() => setStatus("idle"), 4000);
@@ -134,7 +104,7 @@ export function ContactForm() {
 
     return (
         <form
-            className="flex flex-col gap-10"
+            className="flex flex-col gap-8"
             aria-label="Kontaktformular Palmer Digital"
             noValidate
             onSubmit={handleSubmit}
@@ -150,7 +120,7 @@ export function ContactForm() {
             </div>
 
             {/* Row 1: Name + E-Mail */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                     <label htmlFor="contact-name" className={labelCn("name")}>
                         Ihr Name{" "}
@@ -187,41 +157,8 @@ export function ContactForm() {
                 </div>
             </div>
 
-            {/* Row 2: Service — full width, required */}
-            <div>
-                <label htmlFor="contact-service" className={labelCn("service")}>
-                    Gewünschte Leistung{" "}
-                    <span className="text-[#001F3F]" aria-hidden="true">*</span>
-                </label>
-                <div className="relative">
-                    <select
-                        id="contact-service"
-                        name="service"
-                        value={selectedService}
-                        required
-                        className={cn(
-                            inputCn("service"),
-                            "appearance-none cursor-pointer pr-7"
-                        )}
-                        onChange={(e) => setSelectedService(e.target.value)}
-                        onFocus={onFocus("service")}
-                        onBlur={onBlur}
-                    >
-                        <option value="" disabled>
-                            Bitte wählen …
-                        </option>
-                        {SERVICES.map((s) => (
-                            <option key={s} value={s}>{s}</option>
-                        ))}
-                    </select>
-                    <div className="pointer-events-none absolute right-1 top-1/2 -translate-y-1/2 text-[#000000]/65">
-                        <ChevronDown />
-                    </div>
-                </div>
-            </div>
-
-            {/* Row 3: Telefon + Rückruf — optional */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 items-end">
+            {/* Row 2: Telefon + Rückruf — optional */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-end">
                 <div>
                     <label htmlFor="contact-phone" className={labelCn("phone")}>
                         Telefonnummer{" "}
@@ -249,7 +186,7 @@ export function ContactForm() {
                         />
                         <div
                             className={cn(
-                                "w-4 h-4 shrink-0 border transition-colors duration-200 flex items-center justify-center",
+                                "w-5 h-5 shrink-0 border-2 transition-colors duration-200 flex items-center justify-center",
                                 callbackWanted
                                     ? "bg-[#001F3F] border-[#001F3F]"
                                     : "border-[#000000]/30 group-hover:border-[#001F3F]"
@@ -258,8 +195,8 @@ export function ContactForm() {
                         >
                             {callbackWanted && (
                                 <svg
-                                    width="10"
-                                    height="10"
+                                    width="12"
+                                    height="12"
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     stroke="#FFFFFF"
@@ -278,19 +215,19 @@ export function ContactForm() {
                 </div>
             </div>
 
-            {/* Row 4: Nachricht — required */}
+            {/* Row 3: Nachricht — required, freier Text statt Dropdown */}
             <div>
                 <label htmlFor="contact-message" className={labelCn("message")}>
-                    Ihr Projektbriefing{" "}
+                    Worum geht es?{" "}
                     <span className="text-[#001F3F]" aria-hidden="true">*</span>
                 </label>
                 <textarea
                     id="contact-message"
                     name="message"
-                    rows={5}
+                    rows={7}
                     required
-                    placeholder="Beschreiben Sie kurz Ihr Vorhaben, Ihre Ziele und einen groben Zeitplan …"
-                    className={cn(inputCn("message"), "resize-none leading-relaxed")}
+                    placeholder="Beschreiben Sie frei, was Sie sich vorstellen — ein Projekt, eine Idee, eine konkrete Anforderung oder einfach nur eine erste Frage. Schreiben Sie so detailliert oder so knapp, wie Sie möchten."
+                    className={cn(inputCn("message"), "resize-none leading-relaxed py-4")}
                     onFocus={onFocus("message")}
                     onBlur={onBlur}
                 />

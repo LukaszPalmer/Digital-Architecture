@@ -32,7 +32,6 @@ import TechnicalDNA from "@/components/sections/TechnicalDNA";
 import Pricing from "@/components/sections/Pricing";
 import BlogTeaser from "@/components/sections/BlogTeaser";
 import Careers from "@/components/sections/Careers";
-import Contact from "@/components/sections/Contact";
 
 export default function Home() {
     return (
@@ -45,7 +44,6 @@ export default function Home() {
             <Pricing />
             <BlogTeaser />
             <Careers />
-            <Contact />
         </div>
     );
 }

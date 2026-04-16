@@ -85,7 +85,7 @@ export function FloatingActions() {
         <div
             aria-label="Schnellzugriff"
             className={cn(
-                "fixed z-40 right-4 md:right-6 bottom-4 md:bottom-6",
+                "fixed z-40 right-0 bottom-4 md:bottom-6",
                 "flex flex-col gap-2.5",
                 // Safe-Area für Geräte mit Notch / Home-Indicator
                 "pb-[env(safe-area-inset-bottom)] pr-[env(safe-area-inset-right)]"

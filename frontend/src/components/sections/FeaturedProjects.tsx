@@ -209,7 +209,7 @@ function Lane({
 /* ────────────────────────────────────────────────────────────────────
  * LaneTile — eine einzelne Stack-Kachel.
  *   • Logo + Name + Tag, vertikal gestackt.
- *   • Hover: invertiert auf navy/weiß, Logo wechselt von dezent zu solid.
+ *   • Logo wird stets in Originalfarbe und voller Deckkraft gerendert.
  *   • Klick führt auf die zugehörige Service-Detail-Seite.
  * ─────────────────────────────────────────────────────────────────── */
 function LaneTile({ item }: { item: StackItem }) {
@@ -218,72 +218,32 @@ function LaneTile({ item }: { item: StackItem }) {
             <Link
                 href={item.href}
                 className="
-                    group/tile relative flex flex-col items-center justify-center
+                    relative flex flex-col items-center justify-center
                     h-[140px] md:h-[160px] w-[180px] md:w-[220px]
                     border-r border-[#000000]/10
                     px-6 py-5
-                    transition-colors duration-300 ease-out
-                    hover:bg-[#001F3F] focus-visible:bg-[#001F3F]
                     focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#001F3F] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FFFFFF]
                 "
             >
-                {/* Eckmarken — Blueprint-Akzent (nur beim Hover) */}
-                <CornerMarks />
-
-                {/* Logo */}
+                {/* Logo — Originalfarbe, volle Deckkraft, keine Hover-States */}
                 <div className="relative h-12 md:h-14 flex items-center justify-center mb-4">
                     <Image
                         src={item.icon}
-                        alt=""
+                        alt={item.name}
                         width={item.width}
                         height={item.height}
-                        aria-hidden="true"
-                        className="
-                            object-contain max-h-full w-auto
-                            opacity-60 group-hover/tile:opacity-0
-                            transition-opacity duration-300
-                        "
-                    />
-                    {/* Hover-Variante: gleiches Bild, voll deckend (CSS-Filter sorgt für Brand-Treue auf navy BG)
-                        Wir nutzen eine White-Inversion via filter: brightness(0) invert(1).
-                        Dadurch ist KEIN zweites Asset nötig — und auch farbige Logos werden konsistent weiß. */}
-                    <Image
-                        src={item.icon}
-                        alt=""
-                        width={item.width}
-                        height={item.height}
-                        aria-hidden="true"
-                        className="
-                            absolute inset-0 m-auto
-                            object-contain max-h-full w-auto
-                            opacity-0 group-hover/tile:opacity-100
-                            transition-opacity duration-300
-                            [filter:brightness(0)_invert(1)]
-                        "
+                        className="object-contain max-h-full w-auto"
                     />
                 </div>
 
                 {/* Name + Tag */}
-                <span className="text-[12px] font-black uppercase tracking-[0.05em] text-[#000000] group-hover/tile:text-[#FFFFFF] transition-colors duration-300">
+                <span className="text-[12px] font-black uppercase tracking-[0.05em] text-[#000000]">
                     {item.name}
                 </span>
-                <span className="mt-1 text-[9px] font-mono font-bold tracking-[0.3em] uppercase text-[#001F3F]/70 group-hover/tile:text-[#FFFFFF]/70 transition-colors duration-300">
+                <span className="mt-1 text-[9px] font-mono font-bold tracking-[0.3em] uppercase text-[#001F3F]/70">
                     {item.tag}
                 </span>
             </Link>
         </li>
-    );
-}
-
-function CornerMarks() {
-    const tick =
-        "absolute h-2 w-2 border-[#001F3F] group-hover/tile:border-[#FFFFFF] transition-colors duration-300 opacity-0 group-hover/tile:opacity-100";
-    return (
-        <span aria-hidden="true" className="pointer-events-none absolute inset-2">
-            <span className={`${tick} left-0 top-0 border-l border-t`} />
-            <span className={`${tick} right-0 top-0 border-r border-t`} />
-            <span className={`${tick} left-0 bottom-0 border-l border-b`} />
-            <span className={`${tick} right-0 bottom-0 border-r border-b`} />
-        </span>
     );
 }
