@@ -10,7 +10,7 @@ const PROCESS_STEPS = [
         step: "01",
         title: "Project & Environment Setup",
         description:
-            "Repository-Verbindung, Branch-Strategie und Environment-Variablen werden in Railway konfiguriert. Staging und Production laufen strikt isoliert.",
+            "Repository-Verbindung, Branch-Strategie und Environment-Variablen werden in Railway konfiguriert. Staging, QA und Production laufen strikt isoliert mit separaten Secrets und Datenbank-Instanzen.",
         duration: "TAG 1",
         tag: "KONFIGURATION",
     },
@@ -18,7 +18,7 @@ const PROCESS_STEPS = [
         step: "02",
         title: "Service Architecture Design",
         description:
-            "Definition aller Services: API-Server, Worker, Cron-Jobs und deren private Netzwerk-Topologie. Private Networking zwischen Services wird aktiviert.",
+            "Definition aller Services: API-Server, Worker, Cron-Jobs, WebSocket-Layer und deren private Netzwerk-Topologie. Dockerfiles oder Nixpacks-Config werden als Infrastructure as Code ins Repository eingecheckt.",
         duration: "TAGE 2–3",
         tag: "ARCHITEKTUR",
     },
@@ -26,7 +26,7 @@ const PROCESS_STEPS = [
         step: "03",
         title: "Pipeline & Health Checks",
         description:
-            "Build-Pipelines mit automatisierten Tests, Health-Check-Endpoints und Rollback-Strategie. Kein Service geht live ohne validierte Health-Probe.",
+            "Build-Pipelines mit automatisierten Tests, Liveness- und Readiness-Probes sowie Blue-Green-Rollback-Strategie. Kein Service geht live, bevor der Health-Check 200 OK antwortet.",
         duration: "TAGE 3–5",
         tag: "CI/CD",
     },
@@ -34,7 +34,7 @@ const PROCESS_STEPS = [
         step: "04",
         title: "Production Go-Live",
         description:
-            "Zero-Downtime-Deployment in Production mit Active Monitoring. Echtzeit-Logs, CPU/Memory-Metriken und Auto-Scaling sind sofort aktiv.",
+            "Zero-Downtime-Deployment in Production mit Active Monitoring. Echtzeit-Logs, CPU/Memory-Metriken, Auto-Scaling-Regeln und Alerting via Slack oder Webhook sind ab dem ersten Request aktiv.",
         duration: "TAG 5",
         tag: "DEPLOYMENT",
     },
@@ -67,9 +67,10 @@ export default function RailwayProcess() {
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-sm border-l-2 border-[#FFFFFF]/25 pl-6">
-                            Vier präzise Schritte von der Repository-Verbindung
-                            bis zum produktionsreifen, überwachten Deployment —
-                            typisch in unter fünf Tagen abgeschlossen.
+                            Vier praezise Schritte von der Repository-Verbindung
+                            bis zum produktionsreifen, ueberwachten Deployment —
+                            typisch in unter fuenf Tagen abgeschlossen, fuer
+                            Unternehmen in Duesseldorf und NRW.
                         </p>
                     </div>
                 </ScrollReveal>

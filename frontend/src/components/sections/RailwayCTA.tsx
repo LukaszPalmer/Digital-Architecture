@@ -28,23 +28,25 @@ export default function RailwayCTA() {
                         {/* LEFT: Copy */}
                         <div className="max-w-2xl">
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/40 uppercase block mb-8">
-                                [ Infrastructure initiieren ]
+                                [ Infrastruktur initiieren — Duesseldorf / NRW ]
                             </span>
                             <h2
                                 id="railway-cta-heading"
                                 className="text-[clamp(2.8rem,7vw,6rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase text-[#FFFFFF] mb-10"
                             >
-                                Bereit für
+                                Bereit fuer
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/40">
-                                    Production?
+                                    skalierbares Hosting?
                                 </span>
                             </h2>
                             <p className="text-[15px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5">
-                                Wir designen und deployen deine Railway-Infrastruktur
-                                von Grund auf — mit dem gleichen Standard, den wir
-                                für jedes unserer Projekte anlegen. Kein Overhead,
-                                keine Kompromisse.
+                                Wir bauen Ihre Backend-Infrastruktur so, dass sie
+                                mit Ihrem Business mitwaechst — containerisiert,
+                                privat vernetzt und automatisch skaliert. Kein
+                                Server-Stress, keine schlaflosen Naechte bei
+                                Traffic-Peaks. Fokus auf Code, nicht auf
+                                Konfiguration.
                             </p>
                         </div>
 
@@ -56,16 +58,25 @@ export default function RailwayCTA() {
                                 href="/contact"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#001F3F] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#FFFFFF]/90 transition-colors duration-300"
                             >
-                                <span>Infrastruktur planen</span>
+                                <span>Infrastruktur-Audit vereinbaren</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </Link>
 
-                            {/* Secondary: Back to services */}
+                            {/* Secondary CTA */}
                             <Link
-                                href="/services/cloud-infrastructure"
+                                href="/contact"
                                 className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
                             >
-                                <span>MongoDB Cloud Backbone</span>
+                                <span>Jetzt skalierbar hosten</span>
+                                <span aria-hidden="true">→</span>
+                            </Link>
+
+                            {/* Tertiary: Sister Service */}
+                            <Link
+                                href="/vercel"
+                                className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
+                            >
+                                <span>Vercel Edge Frontend</span>
                                 <span aria-hidden="true">→</span>
                             </Link>
 

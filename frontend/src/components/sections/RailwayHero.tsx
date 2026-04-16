@@ -8,8 +8,8 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const METRICS = [
     { value: "99.99%", label: "Uptime SLA" },
     { value: "< 30s", label: "Deploy Time" },
-    { value: "0", label: "Config Overhead" },
-    { value: "∞", label: "Service Scale" },
+    { value: "0ms", label: "Private Mesh Latency" },
+    { value: "∞", label: "Horizontal Scale" },
 ];
 
 export default function RailwayHero() {
@@ -39,6 +39,9 @@ export default function RailwayHero() {
                                 SYS_INF_02 // RAILWAY CLOUD
                             </span>
                         </div>
+                        <span className="hidden md:inline text-[10px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
+                            Scalable Microservice Hosting — Duesseldorf / NRW
+                        </span>
                     </div>
                 </ScrollReveal>
 
@@ -48,13 +51,13 @@ export default function RailwayHero() {
                         id="railway-hero-heading"
                         className="text-[clamp(3rem,8.5vw,8rem)] font-black tracking-[-0.03em] leading-[0.88] uppercase mb-12 text-[#000000]"
                     >
-                        Zero-Config
+                        Scalable
                         <br />
                         <span className="italic font-normal text-[#001F3F]">
                             Microservice
                         </span>
                         <br />
-                        Orchestration.
+                        Hosting.
                     </h1>
                 </ScrollReveal>
 
@@ -62,9 +65,13 @@ export default function RailwayHero() {
                 <ScrollReveal delay={200}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-10 border-t border-[#000000]/10 pt-10 mb-0">
                         <p className="text-[17px] md:text-[19px] leading-relaxed text-[#000000]/70 border-l-2 border-[#001F3F] pl-6 max-w-lg">
-                            Railway ist die operative Produktions-Plattform für PDA-Backends.
-                            Kein Kubernetes-Overhead, keine DevOps-Last — nur Deployment-Automatisierung
-                            auf Enterprise-Niveau, ab dem ersten Git-Push.
+                            Wir deployen Node.js-, Python- und Go-Backends aus
+                            Duesseldorf auf Railway Cloud — containerisiert,
+                            automatisch skaliert und privat vernetzt. Wenn ein Teil
+                            Ihrer App gewartet wird, laeuft der Rest einfach weiter.
+                            Keine Totalausfaelle mehr, keine 502-Errors bei
+                            Traffic-Peaks und kein DevOps-Overhead — nur Code und
+                            Git-Push.
                         </p>
                         <div className="flex flex-col justify-center md:items-end gap-2">
                             <span className="text-[9.5px] font-mono font-bold tracking-[0.4em] text-[#000000]/45 uppercase">
@@ -72,7 +79,7 @@ export default function RailwayHero() {
                             </span>
                             <div className="bg-[#001F3F] px-5 py-2.5 inline-block">
                                 <span className="text-[12px] font-black font-mono tracking-widest uppercase text-[#FFFFFF]">
-                                    99.99% UPTIME // CI/CD ZERO-CONFIG
+                                    99.99% UPTIME // ZERO-DOWNTIME DEPLOYS
                                 </span>
                             </div>
                         </div>

@@ -11,7 +11,7 @@ const CAPABILITIES = [
         category: "DEPLOYMENT",
         title: "Git-Native CI/CD",
         description:
-            "Jeder Push auf den konfigurierten Branch triggert einen automatisierten Build- und Deployment-Zyklus. Keine Pipelines konfigurieren, kein YAML schreiben.",
+            "Jeder Push auf main, develop oder einen Feature-Branch triggert automatisch Build, Test und Deploy in einer isolierten Environment. Kein YAML-Engineering, keine Pipeline-Wartung — Konfiguration passiert im Git-Repo als Infrastructure as Code.",
         specs: ["Auto-Build on Push", "Branch Environments", "Instant Rollback"],
     },
     {
@@ -19,7 +19,7 @@ const CAPABILITIES = [
         category: "ISOLATION",
         title: "Microservice Environments",
         description:
-            "Jeder Service läuft in einem vollständig isolierten Container. Node.js-Backends, Worker-Prozesse und Cron-Jobs koexistieren ohne Abhängigkeitskonflikte.",
+            "Jeder Service laeuft in einem isolierten Docker-Container. Node.js-APIs, Python-Worker, Go-Proxies und Cron-Jobs koexistieren ohne Abhaengigkeitskonflikte — wenn ein Service abstuerzt, bleibt der Rest verfuegbar.",
         specs: ["Container Isolation", "Shared Private Network", "Service Discovery"],
     },
     {
@@ -27,7 +27,7 @@ const CAPABILITIES = [
         category: "SKALIERUNG",
         title: "Auto-Scaling Logic",
         description:
-            "Railway skaliert Replicas automatisch auf Basis von CPU- und Memory-Metriken. Traffic-Spitzen werden absorbiert ohne manuelle Eingriffe.",
+            "Railway skaliert Replicas horizontal auf Basis von CPU-, Memory- und Request-Metriken. Traffic-Peaks bei TV-Auftritten, Sales oder viralen Events werden absorbiert — und ausserhalb der Spitze sinken die Kosten automatisch wieder.",
         specs: ["Horizontal Scaling", "CPU / Memory Triggers", "Scale to Zero"],
     },
     {
@@ -35,7 +35,7 @@ const CAPABILITIES = [
         category: "NETZWERK",
         title: "Private Networking",
         description:
-            "Services kommunizieren intern über ein privates Railway-Netzwerk ohne externen Traffic. Latenz zwischen Services: submillisekunden.",
+            "Services kommunizieren intern ueber Railways verschluesseltes Private-Network — nie ueber das oeffentliche Internet. Submillisekunden-Latenz, kein Egress-Traffic-Kostenfaktor und eine dramatisch reduzierte Angriffsflaeche.",
         specs: ["Private DNS", "Internal TCP/UDP", "Zero External Exposure"],
     },
     {
@@ -43,15 +43,15 @@ const CAPABILITIES = [
         category: "PERSISTENCE",
         title: "Volume & Database Layer",
         description:
-            "Persistente Volumes für stateful Services, direkte PostgreSQL/Redis-Instanzen oder externe MongoDB Atlas-Anbindung als primäre Datenschicht.",
-        specs: ["Persistent Volumes", "Native Databases", "External DB Connect"],
+            "Persistente Volumes fuer stateful Services, Managed PostgreSQL/Redis/MongoDB mit Point-in-Time-Recovery oder private Anbindung an externe Provider wie MongoDB Atlas in der EU-Region fuer DSGVO-Compliance.",
+        specs: ["Persistent Volumes", "Managed Databases", "EU-Region DSGVO"],
     },
     {
         id: "RW-06",
         category: "OBSERVABILITY",
         title: "Health Checks & Alerts",
         description:
-            "Konfigurierbare Health-Check-Endpoints mit automatisiertem Restart-Mechanismus und Echtzeit-Alerting bei Anomalien.",
+            "Konfigurierbare Liveness- und Readiness-Probes, Auto-Restart bei Crashes, strukturierte Echtzeit-Logs und Alerting via Slack, Discord oder Webhook. Jede Anomalie ist sichtbar, bevor Ihre Kunden sie spueren.",
         specs: ["HTTP Health Probes", "Auto-Restart Policy", "Real-time Logs"],
     },
 ];
@@ -69,7 +69,7 @@ export default function RailwayCapabilities() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#001F3F] uppercase block mb-8">
-                                [ Platform Capabilities ]
+                                [ Platform Capabilities — Solution & Bridge ]
                             </span>
                             <h2
                                 id="capabilities-heading"
@@ -83,9 +83,10 @@ export default function RailwayCapabilities() {
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Sechs Kernsysteme, die zusammen eine vollständige
-                            Backend-Infrastruktur ohne DevOps-Overhead ergeben.
-                            Konstruiert für Hochlast und Skalierbarkeit.
+                            Sechs Kernsysteme, die zusammen eine vollstaendige
+                            Backend-Infrastruktur ohne DevOps-Overhead ergeben —
+                            containerisiert, privat vernetzt und automatisch
+                            skaliert fuer Hochlast und Wachstum.
                         </p>
                     </div>
                 </ScrollReveal>

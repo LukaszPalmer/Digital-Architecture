@@ -11,7 +11,7 @@ const USE_CASES = [
         segment: "API-FIRST",
         title: "Node.js Microservice APIs",
         description:
-            "REST- und GraphQL-APIs, die unter Hochlast stabil laufen. Railway isoliert jeden Service, skaliert automatisch und gewährleistet Zero-Downtime-Releases.",
+            "REST- und GraphQL-APIs fuer Web- und Mobile-Backends, die unter Hochlast stabil bleiben. Railway isoliert jeden Service, skaliert horizontal bei Last und garantiert Zero-Downtime-Releases ueber Health-Check-basiertes Rollout.",
         metrics: ["< 10ms Latenz intern", "Auto-Scale bei Last", "Private Endpoints"],
     },
     {
@@ -19,7 +19,7 @@ const USE_CASES = [
         segment: "FULLSTACK",
         title: "Vercel + Railway Stack",
         description:
-            "Next.js-Frontend auf Vercel, Node.js-Backend auf Railway — verbunden über private Netzwerktunnel. Der PDA-Standard-Stack für Hochperformanz-Projekte.",
+            "Next.js-Frontend auf Vercel Edge, Node.js- oder Python-Backend auf Railway — verbunden ueber private Netzwerktunnel. Der Standard-Stack fuer Hochperformanz-Anwendungen mit globaler Auslieferung und skalierbarer Business-Logik.",
         metrics: ["Private Network Routing", "Shared Secrets", "Unified CI/CD"],
     },
     {
@@ -27,7 +27,7 @@ const USE_CASES = [
         segment: "BACKGROUND JOBS",
         title: "Worker & Cron Infrastruktur",
         description:
-            "Asynchrone Verarbeitung, E-Mail-Queues und Scheduled-Jobs laufen auf isolierten Railway-Workern — ohne den Hauptservice zu belasten.",
+            "Asynchrone Verarbeitung, E-Mail-Queues, Image-Processing, Scheduled Reports und Python-Scripts laufen auf isolierten Railway-Workern — ohne den Hauptservice zu belasten oder bei einem Fehler mitzureissen.",
         metrics: ["Queue-Isolation", "Cron-Scheduling", "Failure Resilience"],
     },
     {
@@ -35,15 +35,15 @@ const USE_CASES = [
         segment: "REALTIME",
         title: "WebSocket-Server",
         description:
-            "Echtzeit-Kommunikationsserver für Live-Dashboards, Chat-Systeme und kollaborative Anwendungen auf dedizierten Railway-Services mit persistenter Verbindung.",
+            "Echtzeit-Kommunikation fuer Live-Dashboards, Chat-Systeme, Kollaborations-Tools und Multiplayer-Features auf dedizierten Railway-Services mit persistenter TCP-Verbindung und horizontalem Sticky-Session-Routing.",
         metrics: ["Persistent Connections", "Horizontal Scaling", "Low Latency"],
     },
     {
         id: "UC-05",
         segment: "FINTECH",
-        title: "Stripe Webhook-Handler",
+        title: "Stripe & Payment Webhooks",
         description:
-            "Dedizierter Webhook-Empfänger für Stripe-Events auf Railway. Idempotente Verarbeitung, Retry-Logic und sofortige Antwortzeiten — PCI-DSS konform.",
+            "Dedizierter Webhook-Empfaenger fuer Stripe-, PayPal- oder Klarna-Events auf Railway. Idempotente Verarbeitung, Retry-Logic und sofortige Antwortzeiten — PCI-DSS-konform durch isolierte Umgebung ohne Kartendaten-Speicherung.",
         metrics: ["0ms Webhook Lag", "Idempotenz-Garantie", "PCI-DSS Compliant"],
     },
     {
@@ -51,7 +51,7 @@ const USE_CASES = [
         segment: "DATA PIPELINE",
         title: "ETL & Aggregation Services",
         description:
-            "Batch-Prozesse für Datentransformation und MongoDB-Aggregation-Pipelines laufen auf Railway ohne das produktive System zu beeinträchtigen.",
+            "Batch-Prozesse fuer Datentransformation, Python-Analytics und MongoDB-Aggregation-Pipelines laufen auf Railway ohne das produktive System zu beeintraechtigen. Ideal fuer BI-Datenaufbereitung und KI-Trainings-Pipelines.",
         metrics: ["Isolated Execution", "MongoDB Direct Connect", "Scheduled Runs"],
     },
 ];
@@ -83,8 +83,10 @@ export default function RailwayUseCases() {
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Sechs reale Einsatzszenarien aus PDA-Projekten —
-                            Railway als Rückgrat für jede Art von Backend-Anforderung.
+                            Sechs reale Einsatzszenarien — Railway als Rueckgrat
+                            fuer jede Art von Backend-Anforderung, vom ersten
+                            Startup-Prototyp bis zur etablierten Multi-Service-
+                            Produktion.
                         </p>
                     </div>
                 </ScrollReveal>

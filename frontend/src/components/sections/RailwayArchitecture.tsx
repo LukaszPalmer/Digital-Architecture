@@ -46,21 +46,21 @@ const INTEGRATION_SPECS = [
         id: "INT-01",
         title: "Vercel → Railway",
         description:
-            "Next.js Server Actions und API-Routes proxieren auf Railway-Backend-Services über sichere, private Endpunkte.",
+            "Next.js Server Actions und API-Routes proxieren auf Railway-Backend-Services ueber sichere, private Endpunkte — kein oeffentlicher Traffic zwischen Frontend und Backend.",
         spec: "PRIVATE NETWORK TUNNEL",
     },
     {
         id: "INT-02",
         title: "Railway → MongoDB",
         description:
-            "Backend-Services verbinden sich mit MongoDB Atlas via Connection Pooling für minimale Latenz und maximale Transaktions-Throughput.",
+            "Backend-Services verbinden sich mit MongoDB Atlas via Connection Pooling fuer minimale Latenz und maximale Transaktions-Throughput. EU-Region fuer DSGVO-Compliance.",
         spec: "CONNECTION POOLING",
     },
     {
         id: "INT-03",
         title: "CI/CD Pipeline",
         description:
-            "Jeder Git-Merge löst einen automatisierten Build aus. Tests, Health-Checks und Zero-Downtime-Rollout sind Teil des Pipeline-Standards.",
+            "Jeder Git-Merge loest einen automatisierten Build aus. Tests, Health-Checks und Zero-Downtime-Rollout sind Teil des Pipeline-Standards — kein Deploy ohne validierte Liveness-Probe.",
         spec: "ZERO-DOWNTIME DEPLOY",
     },
 ];
@@ -92,9 +92,10 @@ export default function RailwayArchitecture() {
                             </h2>
                         </div>
                         <p className="text-[15px] text-[#000000]/70 leading-relaxed max-w-sm border-l-2 border-[#001F3F] pl-6">
-                            Railway ist nicht isoliert — es ist das Rückgrat
+                            Railway ist nicht isoliert — es ist das Rueckgrat
                             zwischen Vercel-Edge-Delivery und MongoDB-Datenschicht.
-                            Jeder Layer hat eine definierte Rolle.
+                            Jeder Layer hat eine definierte Rolle in einer
+                            skalierbaren Multi-Service-Topologie.
                         </p>
                     </div>
                 </ScrollReveal>
