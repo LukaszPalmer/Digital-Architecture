@@ -43,7 +43,6 @@ const SERVICES: StackItem[] = [
     { name: "Google Analytics", tag: "SYS_10 · DATA",       icon: "/media/GoogleAnalytics.svg", href: "/services/google-analytics",   width: 56, height: 56 },
     { name: "Search Console",   tag: "SYS_11 · SEO",        icon: "/media/GoogleSearch.svg",    href: "/services/google-indexing",    width: 56, height: 56 },
     { name: "Lighthouse",       tag: "PERF · AUDIT",        icon: "/media/GoogleLighthouse.svg",href: "/services/google-indexing",    width: 56, height: 56 },
-    { name: "Semrush",          tag: "SEO · INTEL",         icon: "/media/Semrush.svg",         href: "/services/google-indexing",    width: 56, height: 56 },
 ];
 
 /* ── LANE 02 · INFRASTRUKTUR (läuft nach RECHTS) ───────────────────── */
