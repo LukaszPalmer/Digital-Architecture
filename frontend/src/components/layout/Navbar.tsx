@@ -55,7 +55,7 @@ export default function Navbar() {
                     <div className="flex items-center gap-x-4 xl:gap-x-6">
                         <SearchInput />
                         <Link
-                            href="/#contact"
+                            href="/contact"
                             className="flex items-center gap-2 bg-[#001F3F] text-[#FFFFFF] px-6 py-2.5 text-[11.5px] font-bold tracking-[0.2em] uppercase hover:bg-[#000000] transition-colors duration-200"
                         >
                             Anfrage
