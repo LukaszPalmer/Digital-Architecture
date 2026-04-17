@@ -50,7 +50,7 @@ function ArrowRight() {
     );
 }
 
-export default function Footer() {
+export default function Footer({ hideSignature = false }: { hideSignature?: boolean }) {
     const year = new Date().getFullYear();
 
     return (
@@ -60,6 +60,7 @@ export default function Footer() {
         >
 
             {/* ── ZONE 1: SIGNATURE STATEMENT ── */}
+            {!hideSignature && (
             <div className="relative border-b border-[#000000]/10">
 
                 {/* Ghost Wordmark — typografisches Designelement */}
@@ -106,6 +107,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
+            )}
 
             {/* ── ZONE 2: NAVIGATION GRID ── */}
             <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-16 md:py-24 border-b border-[#000000]/10">

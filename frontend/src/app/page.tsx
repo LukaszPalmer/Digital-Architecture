@@ -31,8 +31,6 @@ import FeaturedProjects from "@/components/sections/FeaturedProjects";
 import TechnicalDNA from "@/components/sections/TechnicalDNA";
 import Pricing from "@/components/sections/Pricing";
 import BlogTeaser from "@/components/sections/BlogTeaser";
-import Careers from "@/components/sections/Careers";
-
 export default function Home() {
     return (
         <div className="flex flex-col w-full">
@@ -43,7 +41,6 @@ export default function Home() {
             <TechnicalDNA />
             <Pricing />
             <BlogTeaser />
-            <Careers />
         </div>
     );
 }

@@ -22,7 +22,7 @@ export function SiteLayout({ children }: { children: React.ReactNode }) {
             <main id="main-content" className="flex-grow pt-[70px] md:pt-[90px]">
                 {children}
             </main>
-            <Footer />
+            <Footer hideSignature={pathname === "/contact"} />
             <FloatingActions />
             <CookieBanner />
             <TrackingProvider />
