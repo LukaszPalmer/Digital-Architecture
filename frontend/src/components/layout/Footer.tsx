@@ -9,7 +9,6 @@ const FOOTER_NAV = [
     { label: "Infrastruktur", href: "/services/cloud-infrastructure" },
     { label: "Engineering", href: "/services/nextjs-elite-core" },
     { label: "Blog", href: "/blog" },
-    { label: "Portfolio", href: "/portfolio" },
     { label: "Strategie", href: "/strategy" },
     { label: "Karriere", href: "/careers" },
 ];
