@@ -196,29 +196,37 @@ export default function Footer() {
             </div>
 
             {/* ── ZONE 3: COPYRIGHT BAR ── */}
-            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-6 md:py-7">
-                <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div className="max-w-360 mx-auto px-4 md:px-8 lg:px-12 py-5 md:py-6">
+                <div className="flex flex-col md:flex-row items-center justify-between gap-5 md:gap-8">
+
+                    {/* Copyright */}
                     <span className="text-[10.5px] font-mono text-[#000000]/55 tracking-[0.35em] uppercase">
                         © {year} Palmer Digital
                     </span>
-                    <div className="flex items-center gap-4 text-[10px] font-mono text-[#000000]/50 tracking-[0.25em] uppercase">
+
+                    {/* Legal Links */}
+                    <div className="flex items-center gap-6 text-[10px] font-mono text-[#000000]/50 tracking-[0.25em] uppercase">
                         <Link href="/impressum" className="hover:text-[#001F3F] transition-colors duration-200">
                             Impressum
                         </Link>
+                        <span className="text-[#000000]/20">|</span>
                         <Link href="/datenschutz" className="hover:text-[#001F3F] transition-colors duration-200">
                             Datenschutz
                         </Link>
-                        <div className="flex items-center gap-2">
-                            <span>Built with</span>
-                            <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-1.5 py-0.5">
-                                Next.js
-                            </span>
-                            <span>&</span>
-                            <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-1.5 py-0.5">
-                                Vercel
-                            </span>
-                        </div>
                     </div>
+
+                    {/* Built with */}
+                    <div className="flex items-center gap-2.5 text-[10px] font-mono text-[#000000]/50 tracking-[0.25em] uppercase">
+                        <span>Built with</span>
+                        <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-2 py-0.5">
+                            Next.js
+                        </span>
+                        <span>&</span>
+                        <span className="text-[#FFFFFF] font-bold bg-[#001F3F] px-2 py-0.5">
+                            Vercel
+                        </span>
+                    </div>
+
                 </div>
             </div>
 
