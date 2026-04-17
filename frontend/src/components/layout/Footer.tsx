@@ -96,7 +96,7 @@ export default function Footer({ hideSignature = false }: { hideSignature?: bool
                                 Bereit für ein Projekt auf Elite-Niveau?
                             </p>
                             <Link
-                                href="/#contact"
+                                href="/contact"
                                 className="inline-flex items-center gap-3 bg-[#001F3F] text-[#FFFFFF] px-8 py-4 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-[#000000] transition-colors duration-300 min-h-13"
                             >
                                 Projekt starten

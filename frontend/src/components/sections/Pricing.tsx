@@ -83,7 +83,7 @@ export default function Pricing() {
                             </span>
                         </p>
                         <Link
-                            href="/#contact"
+                            href="/contact"
                             className="shrink-0 inline-flex items-center gap-3 bg-[#FFFFFF] text-[#000000] px-10 py-5 text-[11px] font-black tracking-[0.3em] uppercase hover:bg-[#000000] hover:text-[#FFFFFF] transition-colors duration-300"
                         >
                             Anfrage stellen
@@ -122,7 +122,7 @@ export default function Pricing() {
                         Erstes Gespräch — kostenfrei & unverbindlich
                     </p>
                     <Link
-                        href="/#contact"
+                        href="/contact"
                         className="text-[11px] font-mono font-bold text-[#001F3F] hover:text-[#000000] transition-colors duration-200 tracking-wide underline underline-offset-4"
                     >
                         Jetzt Kontakt aufnehmen →
