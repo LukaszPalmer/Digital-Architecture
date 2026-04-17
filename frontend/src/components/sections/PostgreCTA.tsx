@@ -63,14 +63,23 @@ export default function PostgreCTA() {
                                 href="/contact"
                                 className="arrow-hover flex items-center justify-between gap-6 bg-[#FFFFFF] text-[#000000] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:bg-[#FFFFFF]/90 transition-colors duration-300"
                             >
-                                <span>Schema planen</span>
+                                <span>Datenstruktur-Audit buchen</span>
                                 <span aria-hidden="true" className="arrow-icon">→</span>
                             </Link>
 
-                            {/* Secondary: Node.js */}
+                            {/* Secondary: Migration */}
+                            <Link
+                                href="/contact"
+                                className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
+                            >
+                                <span>Jetzt auf PostgreSQL umsteigen</span>
+                                <span aria-hidden="true">→</span>
+                            </Link>
+
+                            {/* Tertiary: Node.js */}
                             <Link
                                 href="/services/nodejs-core"
-                                className="flex items-center justify-between gap-6 border border-[#FFFFFF]/20 text-[#FFFFFF] px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/50 transition-colors duration-300"
+                                className="flex items-center justify-between gap-6 border border-[#FFFFFF]/10 text-[#FFFFFF]/60 px-8 py-5 text-[12px] font-black tracking-[0.15em] uppercase hover:border-[#FFFFFF]/30 hover:text-[#FFFFFF] transition-colors duration-300"
                             >
                                 <span>Node.js Backend</span>
                                 <span aria-hidden="true">→</span>
