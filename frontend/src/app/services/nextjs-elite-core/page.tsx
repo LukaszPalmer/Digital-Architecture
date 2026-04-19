@@ -16,7 +16,7 @@ import NextCTA from "@/components/sections/NextCTA";
 export const metadata: Metadata = {
     title: "Professionelle Website erstellen lassen | Next.js Webentwicklung",
     description:
-        "Professionelle Website erstellen lassen mit Next.js — Ladezeit optimieren, Lighthouse 100 und messbar mehr Umsatz. Ihre Webagentur für moderne Webentwicklung.",
+        "Professionelle Website erstellen lassen mit Next.js — Ladezeit optimieren, grüne Core Web Vitals und messbar mehr Umsatz. Ihre Webagentur für moderne Webentwicklung.",
     keywords: [
         "Professionelle Website erstellen lassen",
         "Next.js Webentwicklung",
@@ -30,7 +30,8 @@ export const metadata: Metadata = {
         "React Server Components",
         "Next.js App Router",
         "Performance Optimierung Website",
-        "Lighthouse 100",
+        "Core Web Vitals Optimierung",
+        "Google Search Console Performance",
         "Server Side Rendering",
         "Static Site Generation",
         "Edge-Runtime",
@@ -40,7 +41,7 @@ export const metadata: Metadata = {
     openGraph: {
         title: "Professionelle Website erstellen lassen — Next.js Elite Core | Palmer Digital",
         description:
-            "Ihre Website lädt zu langsam? Wir optimieren Ladezeiten mit Next.js — Server Components, Edge-Runtime und Lighthouse 100 als Standard.",
+            "Ihre Website lädt zu langsam? Wir optimieren Ladezeiten mit Next.js — Server Components, Edge-Runtime und Core Web Vitals, die bei echten Nutzern in der Google Search Console grün werden.",
         url: "https://palmer-digital.de/services/nextjs-elite-core",
         type: "website",
     },
@@ -58,7 +59,7 @@ const jsonLd = {
     "@type": "ProfessionalService",
     name: "Palmer Digital — Next.js Elite Core",
     description:
-        "Professionelle Website erstellen lassen mit Next.js. Wir sind Ihre Webagentur für moderne Webanwendungen — Ladezeit optimieren, Lighthouse 100 und messbar mehr Umsatz durch Server-First Architektur.",
+        "Professionelle Website erstellen lassen mit Next.js. Wir sind Ihre Webagentur für moderne Webanwendungen — Ladezeit optimieren, Core Web Vitals im grünen Bereich und messbar mehr Umsatz durch Server-First Architektur.",
     url: "https://palmer-digital.de/services/nextjs-elite-core",
     provider: {
         "@type": "Organization",
@@ -84,7 +85,7 @@ const jsonLd = {
                     "@type": "Service",
                     name: "Next.js Elite Core — Professionelle Website erstellen lassen",
                     description:
-                        "Moderne Webanwendung programmieren mit Next.js App Router, React Server Components und Edge-Runtime. Ladezeit optimieren auf Lighthouse 100.",
+                        "Moderne Webanwendung programmieren mit Next.js App Router, React Server Components und Edge-Runtime. Ladezeit optimieren und Core Web Vitals bei echten Nutzern nachhaltig verbessern.",
                 },
             },
             {
@@ -119,7 +120,8 @@ const jsonLd = {
         "Static Site Generation",
         "Incremental Static Regeneration",
         "Core Web Vitals",
-        "Lighthouse Optimierung",
+        "Google Search Console Performance Report",
+        "Real User Monitoring",
         "TypeScript",
     ],
 };
@@ -141,7 +143,7 @@ const faqJsonLd = {
             name: "Warum ist meine Website zu langsam und wie kann ich die Ladezeit optimieren?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Häufige Ursachen für langsame Websites sind zu viel Client-side JavaScript, nicht optimierte Bilder, fehlende Server-Side Rendering und schlechtes Caching. Mit Next.js und React Server Components reduzieren wir das JavaScript-Bundle um bis zu 90% und optimieren LCP auf unter 0,8 Sekunden.",
+                text: "Häufige Ursachen für langsame Websites sind zu viel Client-side JavaScript, nicht optimierte Bilder, fehlende Server-Side Rendering und schlechtes Caching. Mit Next.js und React Server Components reduzieren wir das JavaScript-Bundle um bis zu 90% und optimieren LCP auf unter 0,8 Sekunden — messbar im Labor und bei echten Nutzern in der Google Search Console.",
             },
         },
         {
@@ -154,10 +156,10 @@ const faqJsonLd = {
         },
         {
             "@type": "Question",
-            name: "Was bedeutet Lighthouse Score 100 und warum ist das wichtig?",
+            name: "Warum reicht ein Lighthouse-Score allein nicht aus?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Der Google Lighthouse Score bewertet Performance, Barrierefreiheit, Best Practices und SEO einer Website auf einer Skala von 0 bis 100. Ein Score von 100/100/100/100 bedeutet perfekte Werte in allen Kategorien — das verbessert Ihr Google-Ranking, die User Experience und damit direkt Ihre Conversion-Rate.",
+                text: "Lighthouse ist ein Labortest, der unter idealisierten Bedingungen misst. Ein perfekter Score ist möglich, aber in der Praxis schwer konstant zu halten — schon ein zusätzliches Drittanbieter-Skript, ein unoptimiertes Bild oder ein Traffic-Spike kann den Wert kippen. Entscheidend für Google-Ranking und Conversion sind nicht Lab-Werte, sondern die Core Web Vitals echter Nutzer. Diese Felddaten (LCP, INP, CLS) erscheinen im Performance-Report der Google Search Console und sind der Ranking-Faktor. Wir optimieren gezielt für diese Realität — nicht für einen einmaligen Screenshot.",
             },
         },
         {
@@ -165,7 +167,7 @@ const faqJsonLd = {
             name: "Wie lange dauert es, eine moderne Webanwendung programmieren zu lassen?",
             acceptedAnswer: {
                 "@type": "Answer",
-                text: "Eine professionelle Next.js-Website kann je nach Umfang in 2 bis 8 Wochen fertiggestellt werden. Der Prozess umfasst Performance-Audit, Architektur-Design, Implementierung mit React Server Components und eine abschließende Lighthouse-Verifikation mit garantierten Scores.",
+                text: "Eine professionelle Next.js-Website kann je nach Umfang in 2 bis 8 Wochen fertiggestellt werden. Der Prozess umfasst Performance-Audit, Architektur-Design, Implementierung mit React Server Components und eine abschließende Performance-Verifikation mit Lab-Tests sowie fortlaufendem Felddaten-Monitoring in der Google Search Console.",
             },
         },
     ],

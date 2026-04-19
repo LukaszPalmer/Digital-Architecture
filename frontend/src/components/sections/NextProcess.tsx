@@ -32,17 +32,17 @@ const PROCESS_STEPS = [
         description:
             "Systematische Entwicklung mit React Server Components. Bundle-Analyse nach jeder Iteration — jedes überflüssige Kilobyte wird eliminiert. Server Actions ersetzen API-Routes, Edge Middleware übernimmt Auth und Rate-Limiting. TypeScript-First für maximale Code-Qualität.",
         details:
-            "Hier entsteht Ihre professionelle Website. Wir programmieren jede Komponente als Server Component, sofern keine Client-seitige Interaktivität erforderlich ist. Das Ergebnis: 90 % weniger JavaScript im Browser, sofortige Sichtbarkeit und ein Lighthouse Score, der bei 100 beginnt — nicht endet.",
+            "Hier entsteht Ihre professionelle Website. Wir programmieren jede Komponente als Server Component, sofern keine Client-seitige Interaktivität erforderlich ist. Das Ergebnis: 90 % weniger JavaScript im Browser, sofortige Sichtbarkeit und Performance-Werte, die nicht nur im Lab-Test glänzen, sondern bei echten Nutzern belastbar bleiben.",
         duration: "TAGE 4–8",
         tag: "IMPLEMENTIERUNG",
     },
     {
         step: "04",
-        title: "Lighthouse 100 Verification",
+        title: "Performance Verification & Field Data Monitoring",
         description:
-            "Automatisiertes Testing in der CI/CD-Pipeline mit Lighthouse CI. Performance-Budgets als Gating-Kriterium — kein Deploy, wenn ein Score unter 95 fällt. Kontinuierliches Monitoring stellt sicher, dass die Performance-Garantie auch nach Go-Live gehalten wird.",
+            "Automatisiertes Testing in der CI/CD-Pipeline mit Lighthouse CI als Frühwarnsystem — kein Deploy, wenn Performance-Budgets gerissen werden. Parallel dazu beobachten wir die Core Web Vitals Ihrer echten Nutzer über die Google Search Console. Lab-Werte sagen nichts aus, wenn die Felddaten nicht folgen.",
         details:
-            "Die Verifikation ist nicht optional — sie ist der Beweis, dass unsere Arbeit den versprochenen Standard erfüllt. Jeder Build wird automatisch gegen Lighthouse-Budgets geprüft. Wenn die Performance sinkt, wird das Deployment gestoppt. So garantieren wir, dass Ihre Website nie wieder zu langsam sein wird.",
+            "Ein Lab-Score ist ein Screenshot unter Idealbedingungen — schön, aber nicht die Wahrheit. Die Wahrheit liegt in den Felddaten: LCP, INP und CLS, gemessen auf den Geräten und Netzen Ihrer tatsächlichen Besucher. Erst wenn diese Werte im Performance-Report der Google Search Console über 28 Tage hinweg grün bleiben, ist unsere Arbeit verifiziert.",
         duration: "TAG 9–10",
         tag: "VERIFIKATION",
     },
@@ -61,7 +61,7 @@ export default function NextProcess() {
                     <div className="mb-16 md:mb-24 flex flex-col md:flex-row justify-between items-start md:items-end gap-10">
                         <div>
                             <span className="text-[10px] font-mono font-bold tracking-[0.5em] text-[#FFFFFF]/50 uppercase block mb-8">
-                                [ Engineering Protocol — Ihr Weg zu Lighthouse 100 ]
+                                [ Engineering Protocol — Ihr Weg zu messbar schnellen Seiten ]
                             </span>
                             <h2
                                 id="next-process-heading"
@@ -70,7 +70,7 @@ export default function NextProcess() {
                                 Von langsam zu
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/50">
-                                    Lighthouse 100.
+                                    messbar schnell.
                                 </span>
                             </h2>
                         </div>
@@ -96,7 +96,8 @@ export default function NextProcess() {
                         <p className="text-[15px] leading-relaxed text-[#FFFFFF]/45">
                             Was unterscheidet uns von einer typischen <strong>Webagentur</strong>? Wir liefern
                             keine Versprechen, sondern Metriken. Jeder Schritt wird dokumentiert,
-                            jede Verbesserung gemessen, jeder Lighthouse-Score verifiziert.
+                            jede Verbesserung im Lab geprüft und anschließend durch die Felddaten
+                            echter Nutzer in der Google Search Console bestätigt.
                         </p>
                     </div>
                 </ScrollReveal>

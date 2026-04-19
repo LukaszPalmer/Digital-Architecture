@@ -11,13 +11,13 @@ const FAQ_ITEMS = [
         id: "FAQ-01",
         question: "Was kostet es, eine professionelle Website erstellen zu lassen?",
         answer:
-            "Die Kosten für eine professionelle Website mit Next.js richten sich nach dem Projektumfang. Eine statische Corporate-Website mit 5–10 Seiten, optimierter Ladezeit und Lighthouse 100 liegt in einem anderen Bereich als eine komplexe Webanwendung mit Datenbank-Anbindung, Authentifizierung und Echtzeit-Features. Wir erstellen ein transparentes, detailliertes Angebot nach einem kostenlosen Erstgespräch — ohne versteckte Kosten, ohne Überraschungen. Was Sie in jedem Fall erhalten: eine Website, die technisch auf dem höchsten Niveau ist und sich durch messbar bessere Performance von günstigeren Alternativen unterscheidet.",
+            "Die Kosten für eine professionelle Website mit Next.js richten sich nach dem Projektumfang. Eine statische Corporate-Website mit 5–10 Seiten, optimierter Ladezeit und grünen Core Web Vitals liegt in einem anderen Bereich als eine komplexe Webanwendung mit Datenbank-Anbindung, Authentifizierung und Echtzeit-Features. Wir erstellen ein transparentes, detailliertes Angebot nach einem kostenlosen Erstgespräch — ohne versteckte Kosten, ohne Überraschungen. Was Sie in jedem Fall erhalten: eine Website, die technisch auf dem höchsten Niveau ist und sich durch messbar bessere Performance — im Labor und bei echten Nutzern — von günstigeren Alternativen unterscheidet.",
     },
     {
         id: "FAQ-02",
         question: "Warum ist meine Website zu langsam und wie kann ich die Ladezeit optimieren?",
         answer:
-            "Die häufigsten Ursachen für langsame Websites sind: zu viel Client-side JavaScript (oft durch veraltete Frameworks wie jQuery oder reine React-SPAs), nicht optimierte Bilder ohne next/image, fehlende Server-Side Rendering, kein CDN-Caching und blockierende Drittanbieter-Skripte. Mit Next.js und React Server Components reduzieren wir das JavaScript-Bundle um bis zu 90 %. Static Site Generation und Edge-Runtime sorgen dafür, dass Ihre Seite in unter einer Sekunde lädt. Das Ergebnis: LCP unter 0,8 Sekunden, 0ms Total Blocking Time und ein Lighthouse Score von 100 — messbar und reproduzierbar.",
+            "Die häufigsten Ursachen für langsame Websites sind: zu viel Client-side JavaScript (oft durch veraltete Frameworks wie jQuery oder reine React-SPAs), nicht optimierte Bilder ohne next/image, fehlende Server-Side Rendering, kein CDN-Caching und blockierende Drittanbieter-Skripte. Mit Next.js und React Server Components reduzieren wir das JavaScript-Bundle um bis zu 90 %. Static Site Generation und Edge-Runtime sorgen dafür, dass Ihre Seite in unter einer Sekunde lädt. Das Ergebnis: LCP unter 0,8 Sekunden, 0ms Total Blocking Time und grüne Core Web Vitals — messbar im Lab-Test und, was wirklich zählt, in den Felddaten echter Nutzer in Ihrer Google Search Console.",
     },
     {
         id: "FAQ-03",
@@ -27,9 +27,9 @@ const FAQ_ITEMS = [
     },
     {
         id: "FAQ-04",
-        question: "Was bedeutet Lighthouse Score 100 und warum ist das wichtig?",
+        question: "Warum versprechen Sie keinen Lighthouse-Score von 100?",
         answer:
-            "Google Lighthouse bewertet vier Kategorien Ihrer Website auf einer Skala von 0 bis 100: Performance, Barrierefreiheit, Best Practices und SEO. Ein Score von 100/100/100/100 bedeutet perfekte Werte in allen Bereichen. Warum das wichtig ist: Google nutzt Core Web Vitals (die Lighthouse misst) als direkten Ranking-Faktor. Websites mit besseren Scores werden in den Suchergebnissen bevorzugt. Gleichzeitig korreliert ein hoher Performance-Score direkt mit besserer User Experience — und bessere User Experience bedeutet höhere Conversion-Rates. Studien zeigen: Jede Sekunde weniger Ladezeit steigert die Conversion um bis zu 7 %.",
+            "Weil ein perfekter Lighthouse-Score ein Laborwert ist — aufgenommen auf einem simulierten Gerät, in einer simulierten Netzwerkumgebung, zu einem einzigen Zeitpunkt. In der Realität schwanken Lab-Werte bereits durch kleine Einflüsse: ein neues Marketing-Pixel, ein größeres Hero-Bild, ein Analytics-Skript, ein CDN-Umschalter. Ein Score von 100 konstant zu halten ist sehr schwer — und für sich allein genommen auch nicht das, worauf Google Ihr Ranking stützt. Was tatsächlich zählt, sind die Core Web Vitals Ihrer echten Besucher: LCP, INP und CLS, gemessen über 28 Tage auf deren Geräten. Diese Felddaten (CrUX) erscheinen im Performance-Report der Google Search Console und sind der eigentliche Ranking-Faktor. Unser Versprechen lautet deshalb nicht 'Lighthouse 100', sondern: Ihre Core Web Vitals landen im grünen Bereich — dort, wo Google sie bewertet und Ihre Nutzer sie spüren.",
     },
     {
         id: "FAQ-05",
@@ -41,7 +41,7 @@ const FAQ_ITEMS = [
         id: "FAQ-06",
         question: "Was ist eine Webagentur und warum sollte ich eine spezialisierte Agentur wählen?",
         answer:
-            "Eine Webagentur ist ein Dienstleister, der Unternehmen bei der Konzeption, Gestaltung und technischen Umsetzung von Websites und Webanwendungen unterstützt. Der entscheidende Unterschied liegt in der Spezialisierung: Während eine Generalist-Agentur Websites mit WordPress, Shopify oder Baukasten-Systemen erstellt, setzen wir ausschließlich auf Next.js — das Framework, das von Netflix, TikTok und Nike eingesetzt wird. Diese Spezialisierung ermöglicht es uns, Performance-Garantien zu geben, die eine Generalist-Agentur nicht bieten kann: Lighthouse 100, LCP unter 0,8 Sekunden und 0ms Total Blocking Time.",
+            "Eine Webagentur ist ein Dienstleister, der Unternehmen bei der Konzeption, Gestaltung und technischen Umsetzung von Websites und Webanwendungen unterstützt. Der entscheidende Unterschied liegt in der Spezialisierung: Während eine Generalist-Agentur Websites mit WordPress, Shopify oder Baukasten-Systemen erstellt, setzen wir ausschließlich auf Next.js — das Framework, das von Netflix, TikTok und Nike eingesetzt wird. Diese Spezialisierung ermöglicht es uns, Performance-Ziele zu setzen, die eine Generalist-Agentur nicht bieten kann: LCP unter 0,8 Sekunden, 0ms Total Blocking Time und Core Web Vitals, die bei echten Nutzern in der Google Search Console im grünen Bereich landen.",
     },
     {
         id: "FAQ-07",

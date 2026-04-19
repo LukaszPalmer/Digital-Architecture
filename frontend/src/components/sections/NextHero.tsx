@@ -9,7 +9,7 @@ import RevealGrid from "@/components/ui/RevealGrid";
 const METRICS = [
     { value: "< 0.8s", label: "LCP Target" },
     { value: "0ms", label: "Total Blocking Time" },
-    { value: "100", label: "Lighthouse Score" },
+    { value: "Grün", label: "Core Web Vitals (Field Data)" },
     { value: "RSC", label: "Server-First Architektur" },
 ];
 
@@ -61,7 +61,7 @@ export default function NextHero() {
                 <ScrollReveal delay={150}>
                     <p className="text-[clamp(1.1rem,2.5vw,1.6rem)] font-black tracking-tight leading-tight uppercase text-[#000000]/80 mb-12 max-w-3xl">
                         Professionelle Website erstellen lassen mit Next.js —
-                        blitzschnelle Ladezeiten, Lighthouse 100 und messbar mehr Umsatz.
+                        blitzschnelle Ladezeiten, grüne Core Web Vitals und messbar mehr Umsatz.
                     </p>
                 </ScrollReveal>
 
@@ -75,8 +75,10 @@ export default function NextHero() {
                                 als 3&nbsp;Sekunden lädt. Mit <strong>Next.js Webentwicklung</strong> und
                                 React Server Components eliminieren wir jedes überflüssige
                                 JavaScript-Byte — das Ergebnis ist kein Kompromiss,
-                                sondern eine Architektur, in der Lighthouse&nbsp;100 der
-                                einzige akzeptable Zustand ist.
+                                sondern eine Architektur, deren Geschwindigkeit nicht nur
+                                im Labor messbar ist, sondern auch dort, wo es zählt:
+                                in den Core Web Vitals Ihrer echten Nutzer, sichtbar
+                                im Performance-Report der Google Search Console.
                             </p>
                             <p className="text-[15px] leading-relaxed text-[#000000]/55 pl-6 max-w-lg">
                                 Als spezialisierte <strong>Webagentur für Webdesign</strong> und

@@ -40,7 +40,7 @@ const PAIN_POINTS = [
 const LEGACY_PROBLEMS = [
     {
         label: "WordPress / PHP-CMS",
-        problem: "Jeder Seitenaufruf führt Server-seitigen PHP-Code aus. Kein Edge-Caching möglich, keine Server Components. Plugins blähen das JavaScript-Bundle auf — typischer Lighthouse Score: 30–50.",
+        problem: "Jeder Seitenaufruf führt Server-seitigen PHP-Code aus. Kein Edge-Caching möglich, keine Server Components. Plugins blähen das JavaScript-Bundle auf — typische Core Web Vitals liegen tief im roten Bereich der Google Search Console.",
     },
     {
         label: "React SPA (Create React App)",

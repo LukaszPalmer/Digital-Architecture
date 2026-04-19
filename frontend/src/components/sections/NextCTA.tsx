@@ -10,14 +10,14 @@ const PERF_SPECS = [
     { label: "Rendering", value: "RSC + PPR + SSG" },
     { label: "LCP Target", value: "< 0.8s" },
     { label: "TBT", value: "0ms Garantiert" },
-    { label: "Lighthouse", value: "100 / 100 / 100 / 100" },
+    { label: "Core Web Vitals", value: "Grün — Field Data" },
     { label: "Edge-Runtime", value: "< 10ms Global" },
 ];
 
 const TRUST_SIGNALS = [
     "Kostenlose Erstberatung",
     "Transparente Festpreise",
-    "Lighthouse-Garantie",
+    "CWV-Monitoring inklusive",
     "Antwort in 24h",
 ];
 
@@ -55,7 +55,7 @@ export default function NextCTA() {
                                 Bereit für
                                 <br />
                                 <span className="italic font-normal text-[#FFFFFF]/40">
-                                    Lighthouse 100?
+                                    echte Geschwindigkeit?
                                 </span>
                             </h2>
                             <p className="text-[17px] text-[#FFFFFF]/65 leading-relaxed max-w-lg border-l-2 border-[#FFFFFF]/20 pl-5 mb-6">
@@ -66,11 +66,11 @@ export default function NextCTA() {
                                 die jede Performance-Metrik auf das Maximum treibt.
                             </p>
                             <p className="text-[15px] text-[#FFFFFF]/50 leading-relaxed max-w-lg pl-5">
-                                Als spezialisierte <strong>Webagentur für Next.js Webentwicklung</strong> garantieren
-                                wir Ihnen nicht nur schnelle Ladezeiten, sondern ein
-                                vollständiges Performance-System: von der Architektur
-                                über die Implementierung bis zum automatisierten
-                                Lighthouse-Monitoring in der CI/CD-Pipeline.
+                                Als spezialisierte <strong>Webagentur für Next.js Webentwicklung</strong> liefern
+                                wir Ihnen nicht nur schnelle Ladezeiten im Labor, sondern ein
+                                vollständiges Performance-System: von der Architektur über die
+                                Implementierung bis zum fortlaufenden Monitoring der Core Web Vitals
+                                Ihrer echten Nutzer — sichtbar in der Google Search Console.
                             </p>
                         </div>
 
