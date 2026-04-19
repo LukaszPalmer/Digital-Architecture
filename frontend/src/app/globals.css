@@ -161,6 +161,17 @@ fieldset.MuiOutlinedInput-notchedOutline {
         animation: arrow-slide 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
+    /* ── LIVE STATUS PULSE DOT ── */
+    @keyframes pulse-dot {
+        0%, 100% { opacity: 1;   transform: scale(1); }
+        50%      { opacity: 0.35; transform: scale(1.6); }
+    }
+
+    .animate-pulse-dot {
+        animation: pulse-dot 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        transform-origin: center;
+    }
+
     /* ── STAT NUMBER HIGHLIGHT ── */
     @keyframes stat-pulse {
         0%   { opacity: 0; transform: translateY(12px) scale(0.95); }
@@ -232,6 +243,9 @@ fieldset.MuiOutlinedInput-notchedOutline {
         .animate-marquee-right {
             animation: none;
             transform: translate3d(0, 0, 0);
+        }
+        .animate-pulse-dot {
+            animation: none;
         }
     }
 }
